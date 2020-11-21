@@ -5,17 +5,21 @@
  */
 package userinterface.TransporterRole;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class TransporterWorkAreaJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
     /**
      * Creates new form TransporterWorkAreaJPanel
      */
-    public TransporterWorkAreaJPanel() {
+    public TransporterWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**

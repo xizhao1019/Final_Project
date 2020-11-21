@@ -5,17 +5,21 @@
  */
 package userinterface.CatVetRole;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class CatVetWorkAreaJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
     /**
      * Creates new form CatVetWorkAreaJPanel
      */
-    public CatVetWorkAreaJPanel() {
+    public CatVetWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**
