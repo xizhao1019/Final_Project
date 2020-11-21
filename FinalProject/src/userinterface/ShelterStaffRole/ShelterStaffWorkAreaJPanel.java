@@ -5,17 +5,21 @@
  */
 package userinterface.ShelterStaffRole;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
     /**
      * Creates new form ShelterStaffWorkAreaJPanel
      */
-    public ShelterStaffWorkAreaJPanel() {
+    public ShelterStaffWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**

@@ -5,17 +5,21 @@
  */
 package userinterface.RegisteredReporterRole;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class RegisteredReporterWorkAreaJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
     /**
      * Creates new form RegisteredReporterJPanel
      */
-    public RegisteredReporterWorkAreaJPanel() {
+    public RegisteredReporterWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**

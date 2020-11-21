@@ -5,17 +5,21 @@
  */
 package userinterface.DogVetRole;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class DogVetWorkAreaJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
     /**
      * Creates new form DogVetWorkAreaJPanel
      */
-    public DogVetWorkAreaJPanel() {
+    public DogVetWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**

@@ -5,17 +5,22 @@
  */
 package userinterface.AdopterRole;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
     /**
      * Creates new form AdopterWorkAreaJPanel
      */
-    public AdopterWorkAreaJPanel() {
+    public AdopterWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
+        
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**

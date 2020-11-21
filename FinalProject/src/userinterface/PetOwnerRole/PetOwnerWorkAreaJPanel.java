@@ -5,17 +5,22 @@
  */
 package userinterface.PetOwnerRole;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
     /**
      * Creates new form PetOwnerWorkAreaJPanel
      */
-    public PetOwnerWorkAreaJPanel() {
+    public PetOwnerWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
+        
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**

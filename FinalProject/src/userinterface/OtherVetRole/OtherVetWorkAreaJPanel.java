@@ -5,17 +5,21 @@
  */
 package userinterface.OtherVetRole;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class OtherVetWorkAreaJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
     /**
      * Creates new form OtherVetWorkAreaJPanel
      */
-    public OtherVetWorkAreaJPanel() {
+    public OtherVetWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**
