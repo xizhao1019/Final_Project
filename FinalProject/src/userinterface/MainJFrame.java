@@ -29,7 +29,8 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         system = dB4OUtil.retrieveSystem();
-        this.setSize(1680, 1050);
+        this.setSize(1300, 780);
+        this.setLocation(100, 40);
     }
 
     /**
