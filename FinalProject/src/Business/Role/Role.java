@@ -19,16 +19,17 @@ public abstract class Role {
     public enum RoleType{
         SystemAdmin("SystemAdmin"),
         EnterpriseAdmin("EnterpriseAdmin"),
-        Adopter("Adopter"),
-        CatVet("CatVet"),
-        Coordinator("Coordinator"),
-        DogVet("DogVet"),
-        OtherVet("OtherVet"),
-        PetOwner("PetOwner"),
-        RandomReporter("RandomReporter"),
+        
         RegisteredReporter("RegisteredReporter"),
-        ShelterStaff("ShelterStaff"),
-        Transporter("Transporter");
+        Volunteer("Volunteer"),
+        HospitalAdmin("HospitalAdmin"),
+        Vet("Vet"),
+        ShelterAdmin("ShelterAdmin"),
+        ShelterAssistant("ShelterAssistant"),
+        Adopter("Adopter"),      
+        PetOwner("PetOwner"),
+        CoordinatorAdmin("CoordinatorAdmin"),
+        Coordinator("Coordinator");
         
         
         private String value;
