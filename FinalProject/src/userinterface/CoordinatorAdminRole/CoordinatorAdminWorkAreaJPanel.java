@@ -5,6 +5,8 @@
  */
 package userinterface.CoordinatorAdminRole;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
@@ -14,7 +16,7 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CoordinatorAdminWorkAreaJPanel
      */
-    public CoordinatorAdminWorkAreaJPanel() {
+    public CoordinatorAdminWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
     }
 

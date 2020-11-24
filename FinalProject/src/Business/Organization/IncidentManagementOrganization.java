@@ -6,7 +6,7 @@
 package Business.Organization;
 
 import Business.Role.CoordinatorRole;
-import Business.Role.EnterpriseAdminRole;
+import Business.Role.IncidentEnterpriseAdminRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 
