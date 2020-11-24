@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class AnimalHospitalOrganization extends Organization {
     
     public AnimalHospitalOrganization() {
-        super(Type.Admin.getValue());
+        super(Type.AnimalHospital.getValue());
     }
     
     @Override

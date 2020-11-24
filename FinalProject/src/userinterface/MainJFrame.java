@@ -25,7 +25,11 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
-
+    UserAccount userAccount;
+    Enterprise inEnterprise;
+    Organization inOrganization;
+    Network network;
+    
     public MainJFrame() {
         initComponents();
         system = dB4OUtil.retrieveSystem();
@@ -122,6 +126,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+        
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         // Get user name
@@ -130,11 +135,12 @@ public class MainJFrame extends javax.swing.JFrame {
         char[] passwordCharArray = passwordField.getPassword();
         String password = String.valueOf(passwordCharArray);
         
+        inEnterprise = null;
+        inOrganization = null;
+        network = null;
         //Step1: Check in the system admin user account directory if you have the user
-        UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
+        userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
         
-        Enterprise inEnterprise=null;
-        Organization inOrganization=null;
         
         if(userAccount==null){
             //Step 2: Go inside each network and check each enterprise
@@ -174,7 +180,7 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         else{
             CardLayout layout=(CardLayout)container.getLayout();
-            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
+            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, network, system));
             layout.next(container);
         }
         

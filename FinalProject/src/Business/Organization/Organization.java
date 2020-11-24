@@ -24,17 +24,19 @@ public abstract class Organization {
     private static int counter=0;
     
     public enum Type{
-        Admin("Admin Organization"), // system admin org?
-                                       // need a enterprise admin org?
+        //Incident Enterprise
+        IncidentReporting("Incident Reporting Organization"), 
         
-        IncidentReport("IncidentReporting Organization"), 
-        DogVet("DogVet Organization"),
-        CatVet("CatVet Organization"),
-        OtherVet("OtherVet Organization"),
-        Transportation("Transportation Organization"),
-        ShelterStaff("ShelterStaff Organization"),
+        //Rescue Enterprise
+        Volunteer("Volunteer Organization"),
+        AnimalHospital("Animal Hospital Organization"),
+        AnimalShelter("Animal Shelter Organization"),
+        
+        //Adoption Enterprise
         Adopter("Adopter Organization"),
-        FindMyLostPet("FindMyLostPet Organization"),
+        PetOwner("PetOwner Organization"),
+        
+        //Operation Enterprise
         IncidentManagement("Incident Management Organization");
         
         private String value;
