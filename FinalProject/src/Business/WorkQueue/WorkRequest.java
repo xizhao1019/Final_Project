@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public abstract class WorkRequest {
 
+    
     private String message;
     private UserAccount sender;
     private UserAccount receiver;
@@ -20,10 +21,12 @@ public abstract class WorkRequest {
     private Date requestDate;
     private Date resolveDate;
     
+
+    
     public WorkRequest(){
         requestDate = new Date();
     }
-
+    
     public String getMessage() {
         return message;
     }
