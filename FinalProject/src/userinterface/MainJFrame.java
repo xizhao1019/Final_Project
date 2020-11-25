@@ -11,6 +11,7 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+//import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -35,6 +36,9 @@ public class MainJFrame extends javax.swing.JFrame {
         system = dB4OUtil.retrieveSystem();
         this.setSize(1300, 780);
         this.setLocation(100, 40);
+        
+        //ImageIcon icon = new ImageIcon("2.png");
+        //container.setIcon(icon);
     }
 
     /**
@@ -121,6 +125,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         container.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(container);
+        container.getAccessibleContext().setAccessibleParent(container);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
