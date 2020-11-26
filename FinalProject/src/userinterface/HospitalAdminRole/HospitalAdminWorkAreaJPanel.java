@@ -69,7 +69,7 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85)
                         .addComponent(jLabel6)))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +85,7 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jButton5)
                 .addGap(24, 24, 24)
                 .addComponent(jButton4)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(136, 136, 136))
         );
     }// </editor-fold>//GEN-END:initComponents
 

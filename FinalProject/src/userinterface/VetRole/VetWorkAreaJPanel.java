@@ -38,7 +38,7 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        jLabel1.setText("Dog Vet Work Area");
+        jLabel1.setText("Vet Work Area");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

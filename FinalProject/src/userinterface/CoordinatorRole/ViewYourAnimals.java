@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.CoordinatorAdminRole;
+package userinterface.CoordinatorRole;
+
+import userinterface.CoordinatorAdminRole.*;
 
 /**
  *
  * @author suoxiyue
  */
-public class ViewAllAnimals extends javax.swing.JPanel {
+public class ViewYourAnimals extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewAllAnimals
      */
-    public ViewAllAnimals() {
+    public ViewYourAnimals() {
         initComponents();
     }
 
