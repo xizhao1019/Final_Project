@@ -9,12 +9,12 @@ package userinterface.CoordinatorRole;
  *
  * @author zhaoxi
  */
-public class AssignCarrierJPanel extends javax.swing.JPanel {
+public class AssignVolunteerJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form AssignCarreirJPanel
      */
-    public AssignCarrierJPanel() {
+    public AssignVolunteerJPanel() {
         initComponents();
     }
 
@@ -58,7 +58,7 @@ public class AssignCarrierJPanel extends javax.swing.JPanel {
 
         jButton3.setText("Back");
 
-        jButton1.setText("Assgin Carrier");
+        jButton1.setText("Assgin Volunteer");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,7 +76,7 @@ public class AssignCarrierJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addComponent(jButton1)
-                                .addGap(78, 78, 78)
+                                .addGap(53, 53, 53)
                                 .addComponent(jButton2)))))
                 .addGap(62, 62, 62))
         );
