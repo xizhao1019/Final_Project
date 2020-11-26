@@ -36,7 +36,6 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -51,16 +50,14 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Role: Shelter Admin");
 
-        jButton3.setText("Manage Request From Shelter Staff");
-
-        jButton4.setText("Manage Request From Adopter");
+        jButton4.setText("Manage Request From Adopter/Pet Owner");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Manage Request From Pet Owner");
+        jButton5.setText("Manage Staff");
 
         jButton6.setText("Manage Animals");
 
@@ -83,12 +80,11 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(249, 249, 249)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
                             .addComponent(jButton1)
                             .addComponent(jButton4)
                             .addComponent(jButton5)
                             .addComponent(jButton6))))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,15 +98,13 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(71, 71, 71)
                 .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -121,7 +115,6 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
