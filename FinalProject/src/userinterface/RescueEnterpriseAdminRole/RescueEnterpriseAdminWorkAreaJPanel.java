@@ -35,6 +35,7 @@ public class RescueEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
         manageOrganizationJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -69,6 +70,9 @@ public class RescueEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         valueLabel.setText("<RescueEnterpriseAdmin>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 180, 30));
+
+        jLabel1.setText("Role: Rescue Enterprise Admin");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
@@ -101,6 +105,7 @@ public class RescueEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton manageEmployeeJButton;
     private javax.swing.JButton manageOrganizationJButton;
     private javax.swing.JButton userJButton;
