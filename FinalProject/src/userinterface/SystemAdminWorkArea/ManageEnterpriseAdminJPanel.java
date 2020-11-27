@@ -8,7 +8,10 @@ import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Role.AdoptionEnterpriseAdminRole;
 import Business.Role.IncidentEnterpriseAdminRole;
+import Business.Role.OperationEnterpriseAdminRole;
+import Business.Role.RescueEnterpriseAdminRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -44,10 +47,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         for (Network network : system.getNetworkList()) {
             for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
                 for (UserAccount userAccount : enterprise.getUserAccountDirectory().getUserAccountList()) {
-                    Object[] row = new Object[3];
+                    Object[] row = new Object[4];
                     row[0] = enterprise.getName();
                     row[1] = network.getName();
                     row[2] = userAccount.getUsername();
+                    row[3] = userAccount.getPassword();
 
                     model.addRow(row);
                 }
@@ -247,7 +251,18 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         
         Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
         
-        UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());
+        if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Incident Enterprise")) {
+            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
+        } else if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Rescue Enterprise")) {
+            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new RescueEnterpriseAdminRole());
+        } else if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Operation Enterprise")) {
+            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new OperationEnterpriseAdminRole()); 
+        } else if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Adoption Enterprise")) {
+            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new AdoptionEnterpriseAdminRole()); 
+        } else {
+            System.out.println("something wrong: creating enterprise admin");
+        }
+        
         populateTable();
         
     }//GEN-LAST:event_submitJButtonActionPerformed

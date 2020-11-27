@@ -23,6 +23,9 @@ public abstract class Organization {
     private int organizationID;
     private static int counter=0;
     
+    private Type type;
+    public ArrayList<Role> roles;
+    
     public enum Type{
         //Incident Enterprise
         IncidentReporting("Incident Reporting Organization"), 
@@ -46,6 +49,10 @@ public abstract class Organization {
         public String getValue() {
             return value;
         }
+    }
+    
+    public Type getType() {
+        return type;
     }
 
     public Organization(String name) {

@@ -23,16 +23,16 @@ public class OrganizationDirectory {
         return organizationList;
     }
     
-//    public Organization createOrganization(Type type){
-//        Organization organization = null;
-//        if (type.getValue().equals(Type.Doctor.getValue())){
-//            organization = new DoctorOrganization();
-//            organizationList.add(organization);
-//        }
-//        else if (type.getValue().equals(Type.Lab.getValue())){
-//            organization = new LabOrganization();
-//            organizationList.add(organization);
-//        }
-//        return organization;
-//    }
+    public Organization createOrganization(Type type){
+        Organization organization = null;
+        if (type.getValue().equals(Type.IncidentReporting.getValue())){
+            organization = new IncidentReportingOrganization();
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Type.Volunteer.getValue())){
+            organization = new VolunteerOrganization();
+            organizationList.add(organization);
+        }
+        return organization;
+    }
 }

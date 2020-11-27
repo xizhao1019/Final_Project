@@ -6,6 +6,7 @@
 package Business.Enterprise;
 
 import Business.Role.Role;
+import Business.Role.WitnessRole;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +21,9 @@ public class IncidentEnterprise extends Enterprise {
     
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return null;
+        roles = new ArrayList<Role>();
+        roles.add(new WitnessRole());
+        return roles;
     }
     
 }
