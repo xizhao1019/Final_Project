@@ -42,7 +42,7 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Shelter Admin Work Area");
 
-        jButton1.setText("Manage Request From Vet/Hospital");
+        jButton1.setText("Manage Request From Hospitals");
 
         jTextField1.setText("<value>");
 
@@ -50,7 +50,7 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Role: Shelter Admin");
 
-        jButton4.setText("Manage Request From Adopter/Pet Owner");
+        jButton4.setText("Manage Request From Adopters/Pet Owners");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -84,7 +84,7 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(jButton4)
                             .addComponent(jButton5)
                             .addComponent(jButton6))))
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,15 +96,15 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel1)
-                .addGap(71, 71, 71)
-                .addComponent(jButton1)
+                .addGap(58, 58, 58)
+                .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
