@@ -48,7 +48,7 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Request", "Vet", "Status"
+                "Case ID", "Animal Type", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {

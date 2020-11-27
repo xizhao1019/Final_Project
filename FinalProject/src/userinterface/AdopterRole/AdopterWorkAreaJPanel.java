@@ -47,7 +47,7 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Animal No.", "Type", "Information", "Status"
+                "Animal ID", "Type", "Information", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
