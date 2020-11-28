@@ -12,6 +12,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.AdopterRole.AdopterWorkAreaJPanel;
+import userinterface.ShelterAdminRole.ProcessAdoptionRequest.ProcessAdopterRequestJPanel;
 
 /**
  *
@@ -28,6 +29,16 @@ public class AdopterRole extends Role {
             Network network,
             EcoSystem business) {
         return new AdopterWorkAreaJPanel(userProcessContainer);
+    }
+    
+    public JPanel processAdoptionRequestWorkArea(
+            JPanel userProcessContainer, 
+            UserAccount account, 
+            Organization organization, 
+            Enterprise enterprise, 
+            Network network,
+            EcoSystem business) {
+        return new ProcessAdopterRequestJPanel(userProcessContainer);
     }
     
 }

@@ -12,6 +12,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.PetOwnerRole.PetOwnerWorkAreaJPanel;
+import userinterface.ShelterAdminRole.ProcessAdoptionRequest.ProcessPetOwnerRequestJPanel;
 
 /**
  *
@@ -27,6 +28,16 @@ public class PetOwnerRole extends Role {
             Network network,
             EcoSystem business) {
         return new PetOwnerWorkAreaJPanel(userProcessContainer);
+    }
+    
+    public JPanel processAdoptionRequestWorkArea(
+            JPanel userProcessContainer, 
+            UserAccount account, 
+            Organization organization, 
+            Enterprise enterprise, 
+            Network network,
+            EcoSystem business) {
+        return new ProcessPetOwnerRequestJPanel(userProcessContainer);
     }
     
 }
