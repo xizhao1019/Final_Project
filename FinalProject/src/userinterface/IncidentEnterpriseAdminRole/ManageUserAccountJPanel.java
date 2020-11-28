@@ -70,9 +70,12 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
-                Object row[] = new Object[2];
+                Object row[] = new Object[5];
                 row[0] = ua;
-                row[1] = ua.getRole();
+                row[1] = ua.getEmployee().getId();
+                row[2] = ua.getRole();
+                row[3] = ua.getUsername();
+                row[4] = ua.getPassword();
                 ((DefaultTableModel) userJTable.getModel()).addRow(row);
             }
         }
@@ -177,9 +180,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                         .addGap(21, 21, 21)
                         .addComponent(backjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
@@ -199,8 +199,11 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                             .addComponent(passwordJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(311, 311, 311)
-                        .addComponent(createUserJButton)))
-                .addGap(101, 101, 101))
+                        .addComponent(createUserJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

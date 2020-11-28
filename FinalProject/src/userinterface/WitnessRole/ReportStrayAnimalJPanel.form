@@ -20,7 +20,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="85" max="-2" attributes="0"/>
+                      <Component id="btnBack" min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
@@ -30,11 +30,11 @@
               <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="85" max="-2" attributes="0"/>
+                      <Component id="btnReport" min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
@@ -47,7 +47,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jButton1" max="32767" attributes="0"/>
                               <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="comboAnimalType" alignment="0" max="32767" attributes="0"/>
                               <Component id="label1" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -62,7 +62,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jScrollPane1" alignment="1" pref="0" max="32767" attributes="0"/>
-                              <Component id="jTextField4" alignment="0" pref="139" max="32767" attributes="0"/>
+                              <Component id="txtCity" alignment="0" pref="139" max="32767" attributes="0"/>
                               <Component id="stateComboBox" alignment="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -76,7 +76,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCity" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -96,7 +96,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboAnimalType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -112,7 +112,7 @@
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+              <Component id="btnReport" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -124,7 +124,7 @@
         <Property name="text" type="java.lang.String" value="Additional Message:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="comboAnimalType">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -156,7 +156,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="txtMessage">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -164,18 +164,21 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnBack">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btnReport">
       <Properties>
         <Property name="text" type="java.lang.String" value="Report"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportActionPerformed"/>
+      </Events>
     </Component>
     <Component class="java.awt.Label" name="label1">
       <Properties>
@@ -211,7 +214,7 @@
         <Property name="text" type="java.lang.String" value="City:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
+    <Component class="javax.swing.JTextField" name="txtCity">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>

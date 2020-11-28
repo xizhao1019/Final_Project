@@ -28,4 +28,9 @@ public class CoordinatorRole extends Role {
             EcoSystem business) {
         return new CoordinatorWorkAreaJPanel(userProcessContainer);
     }
+    
+    @Override
+    public String toString(){
+        return (RoleType.Coordinator.getValue());
+    }
 }

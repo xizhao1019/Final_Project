@@ -26,6 +26,11 @@ public class WitnessRole extends Role{
             Enterprise enterprise, 
             Network network,
             EcoSystem business) {
-        return new WitnessWorkAreaJPanel(userProcessContainer);
+        return new WitnessWorkAreaJPanel(userProcessContainer, account, organization);
+    }
+    
+    @Override
+    public String toString(){
+        return (RoleType.Witness.getValue());
     }
 }
