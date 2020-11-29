@@ -5,6 +5,7 @@
  */
 package Business.WorkQueue;
 
+import Business.Location.LocationPoint;
 import Business.Organization.Organization;
 
 /**
@@ -14,6 +15,7 @@ import Business.Organization.Organization;
 public class ShelterRequest extends WorkRequest{
     
     private Organization shelterOrg;
+    private LocationPoint hospitalLocationPoint;
 
     public Organization getShelterOrg() {
         return shelterOrg;
@@ -21,6 +23,14 @@ public class ShelterRequest extends WorkRequest{
 
     public void setShelterOrg(Organization shelterOrg) {
         this.shelterOrg = shelterOrg;
+    }
+
+    public LocationPoint getHospitalLocationPoint() {
+        return hospitalLocationPoint;
+    }
+
+    public void setHospitalLocationPoint(LocationPoint hospitalLocationPoint) {
+        this.hospitalLocationPoint = hospitalLocationPoint;
     }
     
 }

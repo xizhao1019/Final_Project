@@ -49,7 +49,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Managed Animals");
+        jLabel8.setText("Manage Animals");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

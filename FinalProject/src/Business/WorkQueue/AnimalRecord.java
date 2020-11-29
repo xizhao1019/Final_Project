@@ -16,7 +16,9 @@ public class AnimalRecord extends WorkRequest{
     private AnimalReportingRequest reportingRequest;
     private VolunteerRequest volunteerRequest;
     private HospitalRequest hospitalRequest;
+    private VetRequest vetRequest;
     private ShelterRequest shelterRequest;
+    private ShelterStaffRequest shelterStaffRequest;
             
     private LocationPoint shelterLocationPoint;
     private String petName;
@@ -42,12 +44,28 @@ public class AnimalRecord extends WorkRequest{
         this.hospitalRequest = hospitalRequest;
     }
 
+    public VetRequest getVetRequest() {
+        return vetRequest;
+    }
+
+    public void setVetRequest(VetRequest vetRequest) {
+        this.vetRequest = vetRequest;
+    }
+
     public ShelterRequest getShelterRequest() {
         return shelterRequest;
     }
 
     public void setShelterRequest(ShelterRequest shelterRequest) {
         this.shelterRequest = shelterRequest;
+    }
+
+    public ShelterStaffRequest getShelterStaffRequest() {
+        return shelterStaffRequest;
+    }
+
+    public void setShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) {
+        this.shelterStaffRequest = shelterStaffRequest;
     }
 
     public String getPetName() {
