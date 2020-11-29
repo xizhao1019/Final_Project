@@ -44,9 +44,9 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jButton2.setText("Manage Vets");
 
-        jButton4.setText("Process Request From Vet");
+        jButton4.setText("Process Requests");
 
-        jButton5.setText("Assign Task From Coordinator");
+        jButton5.setText("Assign Tasks");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -62,13 +62,14 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85)
-                        .addComponent(jLabel6)))
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
@@ -79,13 +80,13 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
+                .addGap(107, 107, 107)
                 .addComponent(jButton5)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addGap(136, 136, 136))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

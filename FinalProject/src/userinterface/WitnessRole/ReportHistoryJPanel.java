@@ -119,7 +119,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
                 row[0] = ((AnimalReportingRequest) wq).getCaseID();
                 row[1] = "";
                 row[2] = ((AnimalReportingRequest) wq).getAnimalType();
-                row[3] = wq.getMessage();
+                //row[3] = wq.getMessage();
                 
                 model.addRow(row);
                 

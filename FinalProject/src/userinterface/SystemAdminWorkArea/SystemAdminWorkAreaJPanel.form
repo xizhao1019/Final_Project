@@ -59,6 +59,11 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JTree" name="jTree">
+                  <Properties>
+                    <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
+                      <TreeModel code="FindaPet&#xa; colors&#xa;  blue&#xa;  violet&#xa;  red&#xa;  yellow&#xa; sports&#xa;  basketball&#xa;  soccer&#xa;  football&#xa;  hockey&#xa; food&#xa;  hot dogs&#xa;  pizza&#xa;  ravioli&#xa;  bananas"/>
+                    </Property>
+                  </Properties>
                   <Events>
                     <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="jTreeValueChanged"/>
                   </Events>
