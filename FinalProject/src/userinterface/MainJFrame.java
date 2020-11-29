@@ -61,11 +61,12 @@ public class MainJFrame extends javax.swing.JFrame {
         userNameJTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
-        loginJButton = new javax.swing.JButton();
-        btnAdopterRegister = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         btnOwnerRegister = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        btnWitnessRegister = new javax.swing.JButton();
+        btnAdopterRegister = new javax.swing.JButton();
+        loginJButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,7 +86,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(659, Short.MAX_VALUE)
+                .addContainerGap(1033, Short.MAX_VALUE)
                 .addComponent(logoutJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -103,26 +104,19 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("User Name");
+        loginjPanel.add(jLabel1);
+        loginjPanel.add(userNameJTextField);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Password");
+        loginjPanel.add(jLabel2);
 
-        loginJButton.setText("Login");
-        loginJButton.addActionListener(new java.awt.event.ActionListener() {
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginJButtonActionPerformed(evt);
+                passwordFieldActionPerformed(evt);
             }
         });
-
-        btnAdopterRegister.setText("Adopter Registration");
-        btnAdopterRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdopterRegisterActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Try to find your missing pet?");
+        loginjPanel.add(passwordField);
 
         btnOwnerRegister.setText("Pet Owner Registeration");
         btnOwnerRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -130,65 +124,39 @@ public class MainJFrame extends javax.swing.JFrame {
                 btnOwnerRegisterActionPerformed(evt);
             }
         });
+        loginjPanel.add(btnOwnerRegister);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Want to adopt a pet?");
+        loginjPanel.add(jLabel5);
 
-        javax.swing.GroupLayout loginjPanelLayout = new javax.swing.GroupLayout(loginjPanel);
-        loginjPanel.setLayout(loginjPanelLayout);
-        loginjPanelLayout.setHorizontalGroup(
-            loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loginjPanelLayout.createSequentialGroup()
-                .addGroup(loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(loginjPanelLayout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addGroup(loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(loginjPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, 0)
-                                .addComponent(btnOwnerRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(loginjPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAdopterRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginjPanelLayout.createSequentialGroup()
-                            .addGap(244, 244, 244)
-                            .addComponent(loginJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(loginjPanelLayout.createSequentialGroup()
-                            .addGap(219, 219, 219)
-                            .addGroup(loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(234, 234, 234))
-        );
-        loginjPanelLayout.setVerticalGroup(
-            loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loginjPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(loginJButton)
-                .addGap(54, 54, 54)
-                .addGroup(loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(btnAdopterRegister))
-                .addGap(36, 36, 36)
-                .addGroup(loginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(btnOwnerRegister))
-                .addContainerGap())
-        );
+        btnWitnessRegister.setText("Witness Registeration");
+        btnWitnessRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWitnessRegisterActionPerformed(evt);
+            }
+        });
+        loginjPanel.add(btnWitnessRegister);
+
+        btnAdopterRegister.setText("Adopter Registration");
+        btnAdopterRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdopterRegisterActionPerformed(evt);
+            }
+        });
+        loginjPanel.add(btnAdopterRegister);
+
+        loginJButton.setText("Login");
+        loginJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginJButtonActionPerformed(evt);
+            }
+        });
+        loginjPanel.add(loginJButton);
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Try to find your missing pet?");
+        loginjPanel.add(jLabel4);
 
         container.add(loginjPanel, "card2");
 
@@ -295,6 +263,14 @@ public class MainJFrame extends javax.swing.JFrame {
         layout.next(container);
     }//GEN-LAST:event_btnOwnerRegisterActionPerformed
 
+    private void btnWitnessRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWitnessRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnWitnessRegisterActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -333,6 +309,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdopterRegister;
     private javax.swing.JButton btnOwnerRegister;
+    private javax.swing.JButton btnWitnessRegister;
     private javax.swing.JPanel container;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
