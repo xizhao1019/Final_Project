@@ -114,7 +114,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
         networkJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel2.setText("Name");
+        jLabel2.setText("Enterprise Name");
 
         jLabel3.setText("Enterprise Type");
 

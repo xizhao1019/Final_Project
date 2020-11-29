@@ -5,34 +5,38 @@
 package Business.WorkQueue;
 
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author raunak
- */
-public abstract class WorkRequest {
 
+public abstract class WorkRequest {
     
-    private String message;
+    private String latestMessage;
     private UserAccount sender;
     private UserAccount receiver;
     private String status;
     private Date requestDate;
     private Date resolveDate;
-    
+    private ArrayList<String> msgList;
 
     
     public WorkRequest(){
         requestDate = new Date();
-    }
-    
-    public String getMessage() {
-        return message;
+        msgList = new ArrayList<String>();
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getLatestMessage() {
+        return latestMessage;
+    }
+
+    public void setLatestMessage(String latestMessage) {
+        this.latestMessage = latestMessage;
+    }
+    
+    public void addMessage(String message){
+        Date time = new Date();
+        message = time + " " + message;
+        msgList.add(message);
     }
 
     public UserAccount getSender() {
@@ -74,4 +78,9 @@ public abstract class WorkRequest {
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
     }
+
+    public ArrayList<String> getMsgList() {
+        return msgList;
+    }
+
 }
