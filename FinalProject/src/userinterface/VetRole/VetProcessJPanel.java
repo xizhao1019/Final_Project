@@ -5,17 +5,23 @@
  */
 package userinterface.VetRole;
 
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class VetProcessJPanel extends javax.swing.JPanel {
 
+    private JPanel  container;
     /**
      * Creates new form VetProcessJPanel
      */
-    public VetProcessJPanel() {
+    public VetProcessJPanel(JPanel container) {
         initComponents();
+        this.container = container;
     }
 
     /**
@@ -192,13 +198,13 @@ public class VetProcessJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
-//        userProcessContainer.remove(this);
-//        Component[] componentArray = userProcessContainer.getComponents();
-//        Component component = componentArray[componentArray.length - 1];
-//        SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-//        sysAdminwjp.populateTree();
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.previous(userProcessContainer);
+        container.remove(this);
+        Component[] componentArray = container.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        VetWorkAreaJPanel jp = (VetWorkAreaJPanel) component;
+//        jp.populatetable();
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
     }//GEN-LAST:event_backJButtonActionPerformed
 
 

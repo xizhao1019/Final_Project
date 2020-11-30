@@ -5,6 +5,7 @@
  */
 package userinterface.ShelterStaffRole;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -13,11 +14,13 @@ import javax.swing.JPanel;
  */
 public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
 
+    private JPanel container;
     /**
      * Creates new form ShelterAssistantWorkAreaJPanel
      */
-    public ShelterStaffWorkAreaJPanel(JPanel userProcessContainer) {
+    public ShelterStaffWorkAreaJPanel(JPanel container) {
         initComponents();
+        this.container = container;
     }
 
     /**
@@ -36,7 +39,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnUpdateInfo = new javax.swing.JButton();
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -82,7 +85,12 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
             jTable2.getColumnModel().getColumn(7).setResizable(false);
         }
 
-        jButton2.setText("Update Information");
+        btnUpdateInfo.setText("Update Information");
+        btnUpdateInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateInfoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -108,7 +116,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(240, 240, 240)
-                        .addComponent(jButton2)))
+                        .addComponent(btnUpdateInfo)))
                 .addGap(499, 499, 499))
         );
         layout.setVerticalGroup(
@@ -129,14 +137,22 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43)
-                .addComponent(jButton2)
+                .addComponent(btnUpdateInfo)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUpdateInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateInfoActionPerformed
+        // TODO add your handling code here:
+        UpdateInfoJPanel jp = new UpdateInfoJPanel(container);
+        container.add("UpdateInfoJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnUpdateInfoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnUpdateInfo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
