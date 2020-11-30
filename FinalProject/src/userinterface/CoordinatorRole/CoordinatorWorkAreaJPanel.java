@@ -5,6 +5,8 @@
  */
 package userinterface.CoordinatorRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -15,12 +17,16 @@ import javax.swing.JPanel;
 public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    EcoSystem system;
+    UserAccount userAccount;
     /**
      * Creates new form CoordinatorWorkAreaJPanel
      */
-    public CoordinatorWorkAreaJPanel(JPanel container) {
+    public CoordinatorWorkAreaJPanel(JPanel container, EcoSystem sys, UserAccount ua) {
         initComponents();
         this.container = container;
+        this.system = sys;
+        this.userAccount = ua;
     }
 
     /**
@@ -83,7 +89,7 @@ public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnNewAssignedCasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAssignedCasesActionPerformed
         // TODO add your handling code here:
-        NewAssignedCaseJPanel jp = new NewAssignedCaseJPanel(container);
+        NewAssignedCaseJPanel jp = new NewAssignedCaseJPanel(container, system, userAccount);
         container.add("NewAssignedCaseJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);

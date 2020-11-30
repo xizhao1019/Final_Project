@@ -71,7 +71,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
                 Object row[] = new Object[5];
-                row[0] = ua;
+                row[0] = ua.getEmployee();
                 row[1] = ua.getEmployee().getId();
                 row[2] = ua.getRole();
                 row[3] = ua.getUsername();
@@ -120,7 +120,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Employee ID", "Employee", "Role", "User Name", "Password"
+                "Employee", "Employee ID", "Role", "User Name", "Password"
             }
         ) {
             boolean[] canEdit = new boolean [] {

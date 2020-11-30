@@ -5,6 +5,7 @@
  */
 package Business.Organization;
 
+import Business.Role.CoordinatorAdminRole;
 import Business.Role.CoordinatorRole;
 import Business.Role.IncidentEnterpriseAdminRole;
 import Business.Role.Role;
@@ -24,7 +25,13 @@ public class IncidentManagementOrganization extends Organization {
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
         roles.add(new CoordinatorRole());
+        roles.add(new CoordinatorAdminRole());
         return roles;
+    }
+    
+     @Override
+    public Type getType() {
+        return Organization.Type.IncidentManagement;
     }
     
 }

@@ -4,6 +4,7 @@ package userinterface.IncidentEnterpriseAdminRole;
 
 import userinterface.RescueEnterpriseAdminRole.*;
 import Business.Enterprise.Enterprise;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -15,12 +16,15 @@ public class IncidentEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
     Enterprise enterprise;
+    UserAccount userAccount;
     /** Creates new form AdminWorkAreaJPanel */
-    public IncidentEnterpriseAdminWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise) {
+    public IncidentEnterpriseAdminWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
-        valueLabel.setText(enterprise.getName());
+        this.userAccount = userAccount;
+        valueLabel.setText(userAccount.getEmployee().getName());
+        
     }
     
     /** This method is called from within the constructor to

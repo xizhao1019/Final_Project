@@ -5,6 +5,11 @@
  */
 package userinterface.CoordinatorAdminRole;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import static java.time.Clock.system;
 import javax.swing.JPanel;
@@ -16,12 +21,35 @@ import javax.swing.JPanel;
 public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    Enterprise enterprise;
+    UserAccount userAccount;
+    Network network;
+    Organization organization;
+    EcoSystem system;
     /**
      * Creates new form CoordinatorAdminWorkAreaJPanel
      */
-    public CoordinatorAdminWorkAreaJPanel(JPanel container) {
+    public CoordinatorAdminWorkAreaJPanel(JPanel container, Enterprise enterprise, 
+                                    UserAccount ua, Network network, Organization org, EcoSystem system) {
         initComponents();
         this.container = container;
+        this.enterprise = enterprise;
+        this.userAccount = ua;
+        this.network = network;
+        this.organization = org;
+        this.system = system;
+        System.out.println("network size in current network = " + system.getNetworkList().size());
+        
+        for (Network n : system.getNetworkList()) {
+            System.out.println(n.getName());
+            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+                System.out.println(e.getName());
+            }
+        }
+        //System.out.println("enterprise size in current network :" + network.getEnterpriseDirectory().getEnterpriseList().size());
+        
+        valueLabel.setText(userAccount.getEmployee().getName());
+        
     }
 
     /**
@@ -35,15 +63,13 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         btnNewReportedCases = new javax.swing.JButton();
         btnViewAllAnimals = new javax.swing.JButton();
+        valueLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Hello,");
 
         jLabel2.setText("Role: Coordinator Administrator");
-
-        jTextField1.setText("<value>");
 
         btnNewReportedCases.setText("New Reported Cases");
         btnNewReportedCases.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +85,8 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        valueLabel.setText("<CoordinatorAdmin>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,29 +94,29 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(jLabel1)
-                        .addGap(35, 35, 35)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(201, 201, 201)
                         .addComponent(btnViewAllAnimals))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(188, 188, 188)
-                        .addComponent(btnNewReportedCases)))
-                .addGap(21, 21, 21))
+                        .addComponent(btnNewReportedCases))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel2)))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
+                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73)
                 .addComponent(btnNewReportedCases)
                 .addGap(36, 36, 36)
                 .addComponent(btnViewAllAnimals)
@@ -98,7 +126,7 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnNewReportedCasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewReportedCasesActionPerformed
         // TODO add your handling code here:
-        NewReportedCasesJPanel jp = new NewReportedCasesJPanel(container);
+        NewReportedCasesJPanel jp = new NewReportedCasesJPanel(container, enterprise, organization, system);
         container.add("NewReportedCasesJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -118,6 +146,6 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnViewAllAnimals;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }
