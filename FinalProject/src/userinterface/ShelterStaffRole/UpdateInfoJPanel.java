@@ -5,17 +5,23 @@
  */
 package userinterface.ShelterStaffRole;
 
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JPanel;
+
 /**
  *
  * @author suoxiyue
  */
 public class UpdateInfoJPanel extends javax.swing.JPanel {
 
+    private JPanel container;
     /**
      * Creates new form UpdateInfoJPanel
      */
-    public UpdateInfoJPanel() {
+    public UpdateInfoJPanel(JPanel container) {
         initComponents();
+        this.container = container;
     }
 
     /**
@@ -251,13 +257,13 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
-        //        userProcessContainer.remove(this);
-        //        Component[] componentArray = userProcessContainer.getComponents();
-        //        Component component = componentArray[componentArray.length - 1];
-        //        SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
-        //        sysAdminwjp.populateTree();
-        //        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        //        layout.previous(userProcessContainer);
+        container.remove(this);
+        Component[] componentArray = container.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ShelterStaffWorkAreaJPanel jp = (ShelterStaffWorkAreaJPanel) component;
+//        jp.populatetable();
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
     }//GEN-LAST:event_backJButtonActionPerformed
 
 

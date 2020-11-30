@@ -32,6 +32,9 @@ public class OrganizationDirectory {
         else if (type.getValue().equals(Type.Volunteer.getValue())){
             organization = new VolunteerOrganization();
             organizationList.add(organization);
+        } else if (type.getValue().equals(Type.IncidentManagement.getValue())) {
+            organization = new IncidentManagementOrganization();
+            organizationList.add(organization);          
         }
         return organization;
     }

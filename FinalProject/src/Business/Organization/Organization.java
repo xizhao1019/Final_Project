@@ -41,6 +41,7 @@ public abstract class Organization {
         
         //Operation Enterprise
         IncidentManagement("Incident Management Organization");
+
         
         private String value;
         private Type(String value) {

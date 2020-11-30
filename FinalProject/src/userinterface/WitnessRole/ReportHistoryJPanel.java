@@ -6,6 +6,7 @@
 package userinterface.WitnessRole;
 
 import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AnimalReportingRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
@@ -20,14 +21,16 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
 
     private JPanel container;
     private Organization organization;
+    private UserAccount userAccount;
     /**
      * Creates new form ReportHistoryJPanel
      */
-    public ReportHistoryJPanel(JPanel userProcessContainer, Organization org) {
+    public ReportHistoryJPanel(JPanel userProcessContainer, Organization org, UserAccount ua) {
         initComponents();
         
         this.container = userProcessContainer;
         this.organization = org;
+        this.userAccount = ua;
         
         populateTable();
     }
@@ -52,17 +55,17 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
 
         tblHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Case ID", "Report Date", "Animal Type", "Additional Message", "Status"
+                "Case ID", "City", "Report Date", "Animal Type", "Additional Message", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -88,12 +91,11 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
                         .addGap(265, 265, 265)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,8 +105,8 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -113,16 +115,18 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)tblHistory.getModel();
         model.setRowCount(0);
         System.out.println(organization.getWorkQueue().getWorkRequestList().size());
-        for (WorkRequest wq : organization.getWorkQueue().getWorkRequestList()) {
+        System.out.println(userAccount.getWorkQueue().getWorkRequestList().size());
+        for (WorkRequest wq : userAccount.getWorkQueue().getWorkRequestList()) {
             if (wq instanceof AnimalReportingRequest) {
-                Object[] row = new Object[5];
-                row[0] = ((AnimalReportingRequest) wq).getCaseID();
-                row[1] = "";
-                row[2] = ((AnimalReportingRequest) wq).getAnimalType();
-                //row[3] = wq.getMessage();
-                
-                model.addRow(row);
-                
+                    Object[] row = new Object[6];
+                    row[0] = ((AnimalReportingRequest) wq).getCaseID();
+                    row[1] = ((AnimalReportingRequest) wq).getCity();
+                    row[2] = wq.getRequestDate();
+                    row[3] = ((AnimalReportingRequest) wq).getAnimalType();
+                    row[4] = wq.getLatestMessage();
+                    row[5] = wq.getStatus();
+
+                    model.addRow(row);
             }
             
         }

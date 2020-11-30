@@ -5,6 +5,7 @@
  */
 package userinterface.AdopterRole;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -13,14 +14,14 @@ import javax.swing.JPanel;
  */
 public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
 
-    JPanel userProcessContainer;
+    private JPanel container;
     /**
      * Creates new form AdopterWorkAreaJPanel
      */
     public AdopterWorkAreaJPanel(JPanel userProcessContainer) {
         initComponents();
         
-        this.userProcessContainer = userProcessContainer;
+        this.container = userProcessContainer;
     }
 
     /**
@@ -33,14 +34,24 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnViewAnimals = new javax.swing.JButton();
+        btnYourRequests = new javax.swing.JButton();
 
         jLabel1.setText("Adopter Work Area");
 
-        jButton2.setText("View Animals");
+        btnViewAnimals.setText("View Animals");
+        btnViewAnimals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewAnimalsActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Your Requests");
+        btnYourRequests.setText("Your Requests");
+        btnYourRequests.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYourRequestsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -49,8 +60,8 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(258, 258, 258)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
+                    .addComponent(btnYourRequests)
+                    .addComponent(btnViewAnimals)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(268, 268, 268))
         );
@@ -60,17 +71,33 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(70, 70, 70)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addComponent(jButton2)
+                .addComponent(btnViewAnimals)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnYourRequests)
                 .addGap(119, 119, 119))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnViewAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAnimalsActionPerformed
+        // TODO add your handling code here:
+        ViewAnimalsJPanel jp = new ViewAnimalsJPanel(container);
+        container.add("ViewAnimalsJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnViewAnimalsActionPerformed
+
+    private void btnYourRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYourRequestsActionPerformed
+        // TODO add your handling code here:
+        YourRequestsJPanel jp = new YourRequestsJPanel(container);
+        container.add("YourRequestsJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnYourRequestsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnViewAnimals;
+    private javax.swing.JButton btnYourRequests;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,6 +32,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
         populateTable();
         populateComboBox();
+        
     }
 
     private void populateTable() {

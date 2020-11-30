@@ -8,6 +8,7 @@ import Business.Employee.Employee;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -213,6 +214,10 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         
         Organization organization = (Organization) organizationEmpJComboBox.getSelectedItem();
         String name = nameJTextField.getText();
+        if (name.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(null, "Invalid Employee Name");
+            return;
+        }
         
         organization.getEmployeeDirectory().createEmployee(name);
         populateTable(organization);

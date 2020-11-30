@@ -108,7 +108,7 @@ public class WitnessWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnReportHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportHistoryActionPerformed
         // TODO add your handling code here:
-        ReportHistoryJPanel rhjp = new ReportHistoryJPanel(userProcessContainer, organization);
+        ReportHistoryJPanel rhjp = new ReportHistoryJPanel(userProcessContainer, organization, userAccount);
         userProcessContainer.add("ReportStrayAnimalJPanel", rhjp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -116,7 +116,7 @@ public class WitnessWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnReportNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportNewActionPerformed
         // TODO add your handling code here:
-        ReportStrayAnimalJPanel rsajp = new ReportStrayAnimalJPanel(userProcessContainer, organization);
+        ReportStrayAnimalJPanel rsajp = new ReportStrayAnimalJPanel(userProcessContainer, organization, userAccount);
         userProcessContainer.add("ReportStrayAnimalJPanel", rsajp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -26,6 +26,11 @@ public class CoordinatorAdminRole extends Role {
             Enterprise enterprise, 
             Network network,
             EcoSystem business) {
-        return new CoordinatorAdminWorkAreaJPanel(userProcessContainer);
+        return new CoordinatorAdminWorkAreaJPanel(userProcessContainer, enterprise, account, network, organization, business);
+    }
+    
+    @Override
+    public String toString(){
+        return (RoleType.CoordinatorAdmin.getValue());
     }
 }
