@@ -5,6 +5,7 @@
  */
 package userinterface.PetOwnerRole;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -13,14 +14,14 @@ import javax.swing.JPanel;
  */
 public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
 
-    JPanel userProcessContainer;
+    JPanel container;
     /**
      * Creates new form PetOwnerWorkAreaJPanel
      */
-    public PetOwnerWorkAreaJPanel(JPanel userProcessContainer) {
+    public PetOwnerWorkAreaJPanel(JPanel container) {
         initComponents();
         
-        this.userProcessContainer = userProcessContainer;
+        this.container = container;
     }
 
     /**
@@ -34,14 +35,24 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnFindPet = new javax.swing.JButton();
+        btnYourRequest = new javax.swing.JButton();
 
         jLabel1.setText("Pet Owner Work Area");
 
-        jButton2.setText("Find My Missing Pet");
+        btnFindPet.setText("Find My Missing Pet");
+        btnFindPet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindPetActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Your Requests");
+        btnYourRequest.setText("Your Requests");
+        btnYourRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYourRequestActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,10 +68,10 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(263, 263, 263)
-                        .addComponent(jButton2))
+                        .addComponent(btnFindPet))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(283, 283, 283)
-                        .addComponent(jButton3)))
+                        .addComponent(btnYourRequest)))
                 .addGap(309, 309, 309))
         );
         layout.setVerticalGroup(
@@ -69,19 +80,35 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addGap(93, 93, 93)
-                .addComponent(jButton2)
+                .addComponent(btnFindPet)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnYourRequest)
                 .addGap(71, 71, 71)
                 .addComponent(jLabel5)
                 .addGap(90, 90, 90))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnFindPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindPetActionPerformed
+        // TODO add your handling code here:
+        FindMyMissingPetJPanel jp = new FindMyMissingPetJPanel(container);
+        container.add("FindMyMissingPetJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnFindPetActionPerformed
+
+    private void btnYourRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYourRequestActionPerformed
+        // TODO add your handling code here:
+        YourRequestsJPanel jp = new YourRequestsJPanel(container);
+        container.add("YourRequestsJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnYourRequestActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnFindPet;
+    private javax.swing.JButton btnYourRequest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables

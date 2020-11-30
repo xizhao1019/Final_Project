@@ -5,6 +5,7 @@
  */
 package userinterface.HospitalAdminRole;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -13,11 +14,13 @@ import javax.swing.JPanel;
  */
 public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
 
+    private JPanel container;
     /**
      * Creates new form RandomReporterWorkAreaJPanel
      */
-    public HospitalAdminWorkAreaJPanel(JPanel userProcessContainer) {
+    public HospitalAdminWorkAreaJPanel(JPanel  container) {
         initComponents();
+        this.container = container;
     }
 
     /**
@@ -32,9 +35,9 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnManageVets = new javax.swing.JButton();
+        btnProcessRequests = new javax.swing.JButton();
+        btnAssignTasks = new javax.swing.JButton();
 
         jTextField1.setText("<value>");
 
@@ -42,14 +45,24 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Role: Hospital Administrator");
 
-        jButton2.setText("Manage Vets");
-
-        jButton4.setText("Process Requests");
-
-        jButton5.setText("Assign Tasks");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnManageVets.setText("Manage Vets");
+        btnManageVets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnManageVetsActionPerformed(evt);
+            }
+        });
+
+        btnProcessRequests.setText("Process Requests");
+        btnProcessRequests.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessRequestsActionPerformed(evt);
+            }
+        });
+
+        btnAssignTasks.setText("Assign Tasks");
+        btnAssignTasks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignTasksActionPerformed(evt);
             }
         });
 
@@ -67,9 +80,9 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(85, 85, 85)
                         .addComponent(jLabel6))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnAssignTasks, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnManageVets, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnProcessRequests, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
@@ -81,24 +94,44 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(107, 107, 107)
-                .addComponent(jButton5)
+                .addComponent(btnAssignTasks)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
+                .addComponent(btnProcessRequests)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(btnManageVets)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnAssignTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignTasksActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        AssignTaskFromCoordJPanel jp = new AssignTaskFromCoordJPanel(container);
+        container.add("AssignTaskFromCoordJPanel", jp);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnAssignTasksActionPerformed
+
+    private void btnProcessRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessRequestsActionPerformed
+        // TODO add your handling code here:
+        ProcessRequestFromVet jp = new ProcessRequestFromVet(container);
+        container.add("ProcessRequestFromVet", jp);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnProcessRequestsActionPerformed
+
+    private void btnManageVetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVetsActionPerformed
+        // TODO add your handling code here:
+        ManageVetJPanel jp = new ManageVetJPanel(container);
+        container.add("ManageVetJPanel", jp);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnManageVetsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnAssignTasks;
+    private javax.swing.JButton btnManageVets;
+    private javax.swing.JButton btnProcessRequests;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextField1;

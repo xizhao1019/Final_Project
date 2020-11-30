@@ -5,6 +5,8 @@
  */
 package userinterface.CoordinatorAdminRole;
 
+import java.awt.CardLayout;
+import static java.time.Clock.system;
 import javax.swing.JPanel;
 
 /**
@@ -13,11 +15,13 @@ import javax.swing.JPanel;
  */
 public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
+    private JPanel container;
     /**
      * Creates new form CoordinatorAdminWorkAreaJPanel
      */
-    public CoordinatorAdminWorkAreaJPanel(JPanel userProcessContainer) {
+    public CoordinatorAdminWorkAreaJPanel(JPanel container) {
         initComponents();
+        this.container = container;
     }
 
     /**
@@ -32,8 +36,8 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnNewReportedCases = new javax.swing.JButton();
+        btnViewAllAnimals = new javax.swing.JButton();
 
         jLabel1.setText("Hello,");
 
@@ -41,31 +45,40 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jTextField1.setText("<value>");
 
-        jButton1.setText("New Reported Cases");
+        btnNewReportedCases.setText("New Reported Cases");
+        btnNewReportedCases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewReportedCasesActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("View All Animals");
+        btnViewAllAnimals.setText("View All Animals");
+        btnViewAllAnimals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewAllAnimalsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jLabel1)
-                .addGap(35, 35, 35)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel1)
+                        .addGap(35, 35, 35)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addComponent(btnViewAllAnimals))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(btnNewReportedCases)))
                 .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jButton1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,21 +88,34 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(136, 136, 136))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jButton1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(75, 75, 75)
+                .addComponent(btnNewReportedCases)
+                .addGap(36, 36, 36)
+                .addComponent(btnViewAllAnimals)
+                .addGap(96, 96, 96))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNewReportedCasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewReportedCasesActionPerformed
+        // TODO add your handling code here:
+        NewReportedCasesJPanel jp = new NewReportedCasesJPanel(container);
+        container.add("NewReportedCasesJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnNewReportedCasesActionPerformed
+
+    private void btnViewAllAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAllAnimalsActionPerformed
+        // TODO add your handling code here:
+        ViewAllAnimals jp = new ViewAllAnimals(container);
+        container.add("ViewAllAnimals",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnViewAllAnimalsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnNewReportedCases;
+    private javax.swing.JButton btnViewAllAnimals;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;

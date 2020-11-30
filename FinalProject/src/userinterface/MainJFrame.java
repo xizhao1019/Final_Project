@@ -13,9 +13,9 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 //import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import userinterface.AdopterRole.AdopterRegistrationJPanel;
 import userinterface.PetOwnerRole.PetOwnerRegistrationJPanel;
+import userinterface.WitnessRole.WitnessRegisterJPanel;
 
 /**
  *
@@ -326,6 +326,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnWitnessRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWitnessRegisterActionPerformed
         // TODO add your handling code here:
+        WitnessRegisterJPanel jp = new WitnessRegisterJPanel(container, system);
+        container.add("WitnessRegistrationJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
     }//GEN-LAST:event_btnWitnessRegisterActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed

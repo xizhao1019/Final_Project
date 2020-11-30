@@ -5,17 +5,21 @@
  */
 package userinterface.CoordinatorRole;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class NewAssignedCaseJPanel extends javax.swing.JPanel {
-
+    private JPanel container;
     /**
      * Creates new form AssignTransporterJPanel
      */
-    public NewAssignedCaseJPanel() {
+    public NewAssignedCaseJPanel(JPanel container) {
         initComponents();
+        this.container = container;
     }
 
     /**
@@ -29,10 +33,10 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnAssignVolunteer = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnAssignHospital = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -50,7 +54,7 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btnAssignShelter = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -74,15 +78,30 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Assgin A Volunteer");
+        btnAssignVolunteer.setText("Assgin A Volunteer");
+        btnAssignVolunteer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignVolunteerActionPerformed(evt);
+            }
+        });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Animal Picture");
         jLabel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton3.setText("Back");
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Assign A Hospital");
+        btnAssignHospital.setText("Assign A Hospital");
+        btnAssignHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignHospitalActionPerformed(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Case ID");
@@ -112,10 +131,10 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Message");
 
-        jButton5.setText("Assign A Shelter");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnAssignShelter.setText("Assign A Shelter");
+        btnAssignShelter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnAssignShelterActionPerformed(evt);
             }
         });
 
@@ -129,7 +148,7 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jButton3))
+                        .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -172,18 +191,18 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(jButton1)
+                        .addComponent(btnAssignVolunteer)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAssignHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(jButton5)))
+                        .addComponent(btnAssignShelter)))
                 .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jButton3)
+                .addComponent(btnBack)
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -218,24 +237,52 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
                     .addComponent(jButton2))
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(btnAssignVolunteer)
+                    .addComponent(btnAssignHospital)
+                    .addComponent(btnAssignShelter))
+                .addGap(36, 36, 36))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnAssignShelterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignShelterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        AssignShelterJPanel jp = new AssignShelterJPanel(container);
+        container.add("AssignShelterJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnAssignShelterActionPerformed
+
+    private void btnAssignVolunteerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignVolunteerActionPerformed
+        // TODO add your handling code here:
+        AssignVolunteerJPanel jp = new AssignVolunteerJPanel(container);
+        container.add("AssignVolunteerJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnAssignVolunteerActionPerformed
+
+    private void btnAssignHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignHospitalActionPerformed
+        // TODO add your handling code here:
+        AssignHospitalJPanel jp = new AssignHospitalJPanel(container);
+        container.add("AssignHospitalJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnAssignHospitalActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+        
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAssignHospital;
+    private javax.swing.JButton btnAssignShelter;
+    private javax.swing.JButton btnAssignVolunteer;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
