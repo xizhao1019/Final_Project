@@ -28,6 +28,10 @@ public class OperationEnterpriseAdminRole extends Role{
         return new OperationEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise);
     }
 
+    @Override
+    public String toString(){
+        return (RoleType.OperationEnterpriseAdmin.getValue());
+    }
     
     
 }

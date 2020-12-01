@@ -5,8 +5,11 @@
  */
 package userinterface.CoordinatorRole;
 
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,14 +18,19 @@ import javax.swing.JPanel;
 public class AssignVolunteerJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    
     /**
      * Creates new form AssignCarreirJPanel
      */
     public AssignVolunteerJPanel(JPanel container) {
         initComponents();
         this.container = container;
+        populateVolunteer();
     }
 
+    public void populateVolunteer(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,12 +41,12 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        volunteerTable = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        volunteerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -57,7 +65,7 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(volunteerTable);
 
         jButton2.setText("View on Map");
 
@@ -118,6 +126,6 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable volunteerTable;
     // End of variables declaration//GEN-END:variables
 }

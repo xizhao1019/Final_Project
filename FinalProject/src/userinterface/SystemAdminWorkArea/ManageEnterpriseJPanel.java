@@ -199,7 +199,10 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         }
 
         String name = nameJTextField.getText();
-
+        if (name.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Invalid Input!");
+            return;
+        }
         Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
 
         populateTable();

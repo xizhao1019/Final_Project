@@ -11,8 +11,13 @@ import Business.Enterprise.IncidentEnterprise;
 import Business.Network.Network;
 import Business.Organization.IncidentReportingOrganization;
 import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AnimalRecord;
 import Business.WorkQueue.AnimalReportingRequest;
+import Business.WorkQueue.HospitalRequest;
+import Business.WorkQueue.ShelterRequest;
+import Business.WorkQueue.VolunteerRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Image;
@@ -30,6 +35,7 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
     private JPanel container;
     EcoSystem system;
     UserAccount userAccount;
+    
     /**
      * Creates new form AssignTransporterJPanel
      */
@@ -226,7 +232,7 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(btnBack)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,19 +297,19 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
                     for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
                         if (org instanceof IncidentReportingOrganization) {
                             for (WorkRequest wq : org.getWorkQueue().getWorkRequestList()) {
-                                if (wq instanceof AnimalReportingRequest) {
+                                if (wq instanceof AnimalRecord) {
                                     
-                                    if (((AnimalReportingRequest) wq).getAssignedCoordinator() == userAccount) {
+                                    if (((AnimalRecord)wq).getReportingRequest().getAssignedCoordinator() == userAccount) {
                                         Object row[] = new Object[9];
                                         row[0] = wq;
-                                        row[1] = ((AnimalReportingRequest) wq).getAnimalType();
+                                        row[1] = ((AnimalRecord)wq).getReportingRequest().getAnimalType();
                                         row[2] = "";
-                                        row[3] = wq.getRequestDate();
-                                        row[4] = "";
-                                        row[5] = "";
-                                        row[6] = "";
-                                        row[7] = wq.getLatestMessage();
-                                        row[8] = wq.getStatus();
+                                        row[3] = ((AnimalRecord)wq).getReportingRequest().getRequestDate();
+                                        row[4] = ((AnimalRecord)wq).getVolunteerRequest()==null ? "--":((AnimalRecord)wq).getVolunteerRequest().getReceiver();
+                                        row[5] = ((AnimalRecord)wq).getHospitalRequest()==null ? "--" :((AnimalRecord)wq).getHospitalRequest().getHospitalOrg();
+                                        row[6] = ((AnimalRecord)wq).getShelterRequest()==null? "--" : ((AnimalRecord)wq).getShelterRequest().getShelterOrg();
+                                        row[7] = ((AnimalRecord)wq).getReportingRequest().getLatestMessage();
+                                        row[8] = ((AnimalRecord)wq).getReportingRequest().getStatus();
                                         ((DefaultTableModel) tblNewAssigned.getModel()).addRow(row);
                                     }
                                     

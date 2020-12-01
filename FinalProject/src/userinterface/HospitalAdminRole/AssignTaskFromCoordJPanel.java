@@ -5,6 +5,10 @@
  */
 package userinterface.HospitalAdminRole;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -15,13 +19,74 @@ import javax.swing.JPanel;
 public class AssignTaskFromCoordJPanel extends javax.swing.JPanel {
     
     private JPanel container;
+    Enterprise enterprise;
+    Organization organization;
+    EcoSystem system;
     /**
      * Creates new form TaskFromCoordJPanel
      */
-    public AssignTaskFromCoordJPanel(JPanel container) {
+    public AssignTaskFromCoordJPanel(JPanel container, Enterprise enterprise, Organization org, EcoSystem sys) {
         initComponents();
         this.container = container;
+        this.enterprise = enterprise;
+        this.organization = org;
+        this.system = sys;
+        popTable();
+        popVetComboBox();
+        
     }
+    
+    public void popTable() {
+
+//        DefaultTableModel model = (DefaultTableModel) tblNewCase.getModel();
+//
+//        model.setRowCount(0);
+//        for (Network n : system.getNetworkList()) {        
+//        
+//            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+//                //System.out.println(e.getWorkQueue().getWorkRequestList().size());
+//                if (e instanceof IncidentEnterprise) {
+//                    for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
+//                        if (org instanceof IncidentReportingOrganization) {
+//                            for (WorkRequest wq : org.getWorkQueue().getWorkRequestList()) {
+//                                if (wq instanceof AnimalReportingRequest) {
+//                                    
+//                                    if (((AnimalReportingRequest) wq).isIsNewReported()) {
+//                                        Object row[] = new Object[8];
+//                                        row[0] = wq;
+//                                        row[1] = ((AnimalReportingRequest) wq).getAnimalType();
+//                                        row[2] = "no";
+//                                        row[3] = wq.getRequestDate();
+//                                        row[4] = ((AnimalReportingRequest) wq).getWitness();
+//                                        row[5] = wq.getLatestMessage();
+//                                        row[6] = ((AnimalReportingRequest) wq).getAssignedCoordinator();
+//                                        row[7] = wq.getStatus();
+//                                        ((DefaultTableModel) tblNewCase.getModel()).addRow(row);
+//                                    }
+//                                    
+//                                }
+//
+//                            }
+//                        }
+//                    }
+//                }
+//
+//            }
+//            
+//        }
+    }
+    
+    
+    public void popVetComboBox() {
+        
+        vetCombo.removeAllItems();
+        
+        for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
+            if (ua.getRole().toString().equalsIgnoreCase("Vet") ) {
+                vetCombo.addItem(ua);
+            }
+        }         
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,9 +103,9 @@ public class AssignTaskFromCoordJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        vetCombo = new javax.swing.JComboBox();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,39 +141,39 @@ public class AssignTaskFromCoordJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Vet:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Message:");
+
+        vetCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 47, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(147, 147, 147)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(vetCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(200, 200, 200)))
                 .addGap(41, 41, 41))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110)
+                .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,7 +188,7 @@ public class AssignTaskFromCoordJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vetCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -145,12 +210,12 @@ public class AssignTaskFromCoordJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox vetCombo;
     // End of variables declaration//GEN-END:variables
 }

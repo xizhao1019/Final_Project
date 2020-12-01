@@ -86,7 +86,7 @@ public class WitnessWorkAreaJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnReportNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnReportHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addGap(255, 255, 255))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +102,7 @@ public class WitnessWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnReportNew)
                 .addGap(18, 18, 18)
                 .addComponent(btnReportHistory)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(151, 151, 151))
         );
     }// </editor-fold>//GEN-END:initComponents
 

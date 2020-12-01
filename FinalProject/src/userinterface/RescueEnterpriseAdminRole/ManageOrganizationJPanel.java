@@ -8,6 +8,7 @@ import Business.Organization.Organization;
 import Business.Organization.Organization.Type;
 import Business.Organization.OrganizationDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,9 +35,9 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     
     private void populateCombo(){
         organizationJComboBox.removeAllItems();
-        for (Type type : Organization.Type.values()){
-             organizationJComboBox.addItem(type);
-        }
+        organizationJComboBox.addItem(Type.Volunteer);
+        organizationJComboBox.addItem(Type.AnimalHospital);
+        organizationJComboBox.addItem(Type.AnimalShelter);
     }
 
     private void populateTable(){
@@ -45,10 +46,10 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for (Organization organization : directory.getOrganizationList()){
-            Object[] row = new Object[2];
+            Object[] row = new Object[3];
             row[0] = organization.getOrganizationID();
             row[1] = organization.getName();
-            
+            row[2] = "Nor finish yet";
             model.addRow(row);
         }
     }
@@ -68,7 +69,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         organizationJTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        orgNameTextField = new javax.swing.JTextField();
+        txtOrgName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         orgLocation = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -125,13 +126,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Organization Name");
 
-        orgNameTextField.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        orgNameTextField.setForeground(new java.awt.Color(25, 56, 82));
-        orgNameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                orgNameTextFieldFocusLost(evt);
-            }
-        });
+        txtOrgName.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        txtOrgName.setForeground(new java.awt.Color(25, 56, 82));
 
         jLabel2.setText("Location");
 
@@ -176,7 +172,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton1))
                                     .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(orgNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtOrgName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(38, 38, 38)))))
                 .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -198,7 +194,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(orgNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOrgName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -214,20 +210,20 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
 
         Type type = (Type) organizationJComboBox.getSelectedItem();
-//        directory.createOrganization(type);
+        if (txtOrgName.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter organization name!");
+            return;
+        }
+        Organization org = directory.createOrganization(type);
+        org.setName(txtOrgName.getText());
         populateTable();
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
-
         userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
-
-    private void orgNameTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_orgNameTextFieldFocusLost
-
-    }//GEN-LAST:event_orgNameTextFieldFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -247,8 +243,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField orgLocation;
-    private javax.swing.JTextField orgNameTextField;
     private javax.swing.JComboBox organizationJComboBox;
     private javax.swing.JTable organizationJTable;
+    private javax.swing.JTextField txtOrgName;
     // End of variables declaration//GEN-END:variables
 }

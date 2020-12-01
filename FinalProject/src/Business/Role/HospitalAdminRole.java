@@ -26,6 +26,11 @@ public class HospitalAdminRole extends Role {
             Enterprise enterprise, 
             Network network,
             EcoSystem business) {
-        return new HospitalAdminWorkAreaJPanel(userProcessContainer);
+        return new HospitalAdminWorkAreaJPanel(userProcessContainer, enterprise, account, network, organization, business);
+    }
+    
+    @Override
+    public String toString(){
+        return (RoleType.HospitalAdmin.getValue());
     }
 }
