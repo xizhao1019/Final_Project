@@ -28,4 +28,8 @@ public class SystemAdminRole extends Role{
         return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
     }
     
+    @Override
+    public String toString(){
+        return (RoleType.SystemAdmin.getValue());
+    }
 }

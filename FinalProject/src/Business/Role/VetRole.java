@@ -29,4 +29,9 @@ public class VetRole extends Role {
         return new VetWorkAreaJPanel(userProcessContainer);
     }
     
+    @Override
+    public String toString(){
+        return (RoleType.Vet.getValue());
+    }
+    
 }

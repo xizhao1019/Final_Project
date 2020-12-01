@@ -7,6 +7,7 @@ package Business.WorkQueue;
 
 import Business.Location.LocationPoint;
 import Business.Network.Network;
+import Business.UserAccount.UserAccount;
 import java.util.Random;
 
 /**
@@ -23,10 +24,32 @@ public class AnimalReportingRequest extends WorkRequest{
     private LocationPoint animalLocationPoint;
     private String animalType;
     private String imagePath;
+    private UserAccount AssignedCoordinator;
+    private boolean isNewReported;
+    private UserAccount witness;
 
     public AnimalReportingRequest() {
         CaseID = String.format("%04d", random.nextInt(10000));
+        isNewReported = true;
     }
+
+    public boolean isIsNewReported() {
+        return isNewReported;
+    }
+
+    public void setIsNewReported(boolean isNewReported) {
+        this.isNewReported = isNewReported;
+    }
+
+    public UserAccount getAssignedCoordinator() {
+        return AssignedCoordinator;
+    }
+
+    public void setAssignedCoordinator(UserAccount AssignedCoordinator) {
+        this.AssignedCoordinator = AssignedCoordinator;
+    }
+    
+    
 
     public String getCaseID() {
         return CaseID;
@@ -71,6 +94,18 @@ public class AnimalReportingRequest extends WorkRequest{
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
+
+    public UserAccount getWitness() {
+        return witness;
+    }
+
+    public void setWitness(UserAccount witness) {
+        this.witness = witness;
+    }
     
+        @Override
+    public String toString() {
+       return CaseID;   
+    }
     
 }

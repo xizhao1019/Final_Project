@@ -29,4 +29,9 @@ public class VolunteerRole extends Role {
         return new VolunteerWorkAreaJPanel(userProcessContainer);
     }
     
+    @Override
+    public String toString(){
+        return (RoleType.Volunteer.getValue());
+    }
+    
 }

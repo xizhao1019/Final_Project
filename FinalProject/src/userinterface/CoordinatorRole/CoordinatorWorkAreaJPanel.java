@@ -5,6 +5,9 @@
  */
 package userinterface.CoordinatorRole;
 
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -13,14 +16,18 @@ import javax.swing.JPanel;
  */
 public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
 
-    JPanel userProcessContainer;
+    private JPanel container;
+    EcoSystem system;
+    UserAccount userAccount;
     /**
      * Creates new form CoordinatorWorkAreaJPanel
      */
-    public CoordinatorWorkAreaJPanel(JPanel userProcessContainer) {
+    public CoordinatorWorkAreaJPanel(JPanel container, EcoSystem sys, UserAccount ua) {
         initComponents();
-        
-        this.userProcessContainer = userProcessContainer;
+        this.container = container;
+        this.system = sys;
+        this.userAccount = ua;
+        valueLabel.setText(userAccount.getEmployee().getName());
     }
 
     /**
@@ -33,14 +40,33 @@ public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnNewAssignedCases = new javax.swing.JButton();
+        btnViewYourAnimals = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        valueLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setText("Coordinator Work Area");
 
-        jButton1.setText("New Assigned Cases");
+        btnNewAssignedCases.setText("New Assigned Cases");
+        btnNewAssignedCases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewAssignedCasesActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("View Your Animals");
+        btnViewYourAnimals.setText("View Your Animals");
+        btnViewYourAnimals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewYourAnimalsActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Hello,");
+
+        valueLabel.setText("<Coordinator>");
+
+        jLabel3.setText("Role: Coordinator");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -49,32 +75,63 @@ public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(268, 268, 268)
+                        .addGap(90, 90, 90)
+                        .addComponent(btnNewAssignedCases)
+                        .addGap(170, 170, 170)
+                        .addComponent(btnViewYourAnimals))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(272, 272, 272)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(jButton1)
-                        .addGap(170, 170, 170)
-                        .addComponent(jButton4)))
-                .addGap(120, 120, 120))
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel3)))
+                .addGap(99, 99, 99))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addComponent(jLabel1)
-                .addGap(101, 101, 101)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4))
+                    .addComponent(btnNewAssignedCases)
+                    .addComponent(btnViewYourAnimals))
                 .addGap(174, 174, 174))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNewAssignedCasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAssignedCasesActionPerformed
+        // TODO add your handling code here:
+        NewAssignedCaseJPanel jp = new NewAssignedCaseJPanel(container, system, userAccount);
+        container.add("NewAssignedCaseJPanel",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnNewAssignedCasesActionPerformed
+
+    private void btnViewYourAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewYourAnimalsActionPerformed
+        // TODO add your handling code here:
+        ViewYourAnimals jp = new ViewYourAnimals(container);
+        container.add("ViewYourAnimals",jp);
+        CardLayout layout = (CardLayout)container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnViewYourAnimalsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnNewAssignedCases;
+    private javax.swing.JButton btnViewYourAnimals;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }

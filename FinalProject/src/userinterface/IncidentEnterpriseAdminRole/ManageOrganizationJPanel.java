@@ -4,7 +4,6 @@
  */
 package userinterface.IncidentEnterpriseAdminRole;
 
-import userinterface.RescueEnterpriseAdminRole.*;
 import Business.Organization.Organization;
 import Business.Organization.Organization.Type;
 import Business.Organization.OrganizationDirectory;
@@ -152,7 +151,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         });
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel4.setText("Manage Incident Reporting Organization");
+        jLabel4.setText("Manage Incident Organization");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -221,7 +220,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
         Type type = (Type) organizationJComboBox.getSelectedItem();
         if (txtOrgName.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Enter organization name!");
+            JOptionPane.showMessageDialog(null, "Please enter organization name!");
+            return;
         }
         Organization org = directory.createOrganization(type);
         org.setName(txtOrgName.getText());

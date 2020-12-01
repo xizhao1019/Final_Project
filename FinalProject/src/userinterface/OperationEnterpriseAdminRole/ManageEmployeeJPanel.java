@@ -8,6 +8,7 @@ import Business.Employee.Employee;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -146,6 +147,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         jLabel4.setText("Organization Employee Table:");
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Manage Operation Organization Employee");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -176,9 +178,9 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                             .addComponent(addJButton)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel5)))
-                .addGap(28, 28, 28))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +215,10 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         
         Organization organization = (Organization) organizationEmpJComboBox.getSelectedItem();
         String name = nameJTextField.getText();
-        
+        if (name.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(null, "Invalid Employee Name");
+            return;
+        }
         organization.getEmployeeDirectory().createEmployee(name);
         populateTable(organization);
         

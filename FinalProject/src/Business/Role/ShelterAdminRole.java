@@ -29,4 +29,9 @@ public class ShelterAdminRole extends Role {
         return new ShelterAdminWorkAreaJPanel(userProcessContainer);
     }
     
+    @Override
+    public String toString(){
+        return (RoleType.ShelterAdmin.getValue());
+    }
+    
 }
