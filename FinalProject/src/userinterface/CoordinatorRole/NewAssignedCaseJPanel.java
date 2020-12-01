@@ -35,6 +35,7 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
     private JPanel container;
     EcoSystem system;
     UserAccount userAccount;
+    //AnimalRecord record;
     
     /**
      * Creates new form AssignTransporterJPanel
@@ -70,13 +71,13 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
         txtAnimalType = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtShelter = new javax.swing.JTextField();
+        txtHospital = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtVolunteer = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMessage = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
@@ -205,9 +206,9 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
                                                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                                                    .addComponent(txtVolunteer, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                                    .addComponent(txtHospital, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                                    .addComponent(txtShelter, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
                                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE))
                                         .addGap(18, 18, 18))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -250,7 +251,7 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtVolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
@@ -258,13 +259,13 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtAnimalType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtShelter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,18 +295,20 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
             for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
                 //System.out.println(e.getWorkQueue().getWorkRequestList().size());
                 if (e instanceof IncidentEnterprise) {
+                    //System.out.println("in enterprise"); //test
                     for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
                         if (org instanceof IncidentReportingOrganization) {
                             for (WorkRequest wq : org.getWorkQueue().getWorkRequestList()) {
+                                //System.out.println("in workrequest"); //test
                                 if (wq instanceof AnimalRecord) {
-                                    
+                                    //System.out.println("in animal record"); //test
                                     if (((AnimalRecord)wq).getReportingRequest().getAssignedCoordinator() == userAccount) {
                                         Object row[] = new Object[9];
                                         row[0] = wq;
                                         row[1] = ((AnimalRecord)wq).getReportingRequest().getAnimalType();
                                         row[2] = "";
                                         row[3] = ((AnimalRecord)wq).getReportingRequest().getRequestDate();
-                                        row[4] = ((AnimalRecord)wq).getVolunteerRequest()==null ? "--":((AnimalRecord)wq).getVolunteerRequest().getReceiver();
+                                        row[4] = ((AnimalRecord)wq).getVolunteerRequest()==null ? "--":((AnimalRecord)wq).getReportingRequest().getVolunteer();
                                         row[5] = ((AnimalRecord)wq).getHospitalRequest()==null ? "--" :((AnimalRecord)wq).getHospitalRequest().getHospitalOrg();
                                         row[6] = ((AnimalRecord)wq).getShelterRequest()==null? "--" : ((AnimalRecord)wq).getShelterRequest().getShelterOrg();
                                         row[7] = ((AnimalRecord)wq).getReportingRequest().getLatestMessage();
@@ -328,7 +331,14 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
     
     private void btnAssignShelterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignShelterActionPerformed
         // TODO add your handling code here:
-        AssignShelterJPanel jp = new AssignShelterJPanel(container);
+        int row = tblNewAssigned.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a case from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
+        
+        AssignShelterJPanel jp = new AssignShelterJPanel(container, system, ar);
         container.add("AssignShelterJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -336,7 +346,14 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
 
     private void btnAssignVolunteerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignVolunteerActionPerformed
         // TODO add your handling code here:
-        AssignVolunteerJPanel jp = new AssignVolunteerJPanel(container);
+        int row = tblNewAssigned.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a case from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
+        
+        AssignVolunteerJPanel jp = new AssignVolunteerJPanel(container, system, ar);
         container.add("AssignVolunteerJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -344,7 +361,14 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
 
     private void btnAssignHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignHospitalActionPerformed
         // TODO add your handling code here:
-        AssignHospitalJPanel jp = new AssignHospitalJPanel(container);
+        int row = tblNewAssigned.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a case from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
+        
+        AssignHospitalJPanel jp = new AssignHospitalJPanel(container, system, ar);
         container.add("AssignHospitalJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -365,15 +389,18 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        AnimalReportingRequest wq = (AnimalReportingRequest)tblNewAssigned.getValueAt(row, 0);
-        txtAnimalType.setText(wq.getAnimalType());
-        txtID.setText(wq.getCaseID());
-        txtReportDate.setText(wq.getRequestDate().toString());
-        for (String s : wq.getMsgList()) {
+        AnimalRecord ar = (AnimalRecord)tblNewAssigned.getValueAt(row, 0);
+        txtAnimalType.setText(ar.getReportingRequest().getAnimalType());
+        txtID.setText(ar.getReportingRequest().getCaseID());
+        txtReportDate.setText(ar.getReportingRequest().getRequestDate().toString());
+        txtVolunteer.setText(ar.getReportingRequest().getVolunteer()==null ? "--":ar.getReportingRequest().getVolunteer().getEmployee().getName());
+        txtHospital.setText(ar.getHospitalRequest() ==null ? "--": ar.getHospitalRequest().getHospitalOrg().getName());
+        txtShelter.setText(ar.getShelterRequest() ==null ? "--": ar.getShelterRequest().getShelterOrg().getName());
+        for (String s : ar.getReportingRequest().getMsgList()) {
             txtMessage.setText(s);
         }
         
-        String imagePath = wq.getImagePath();
+        String imagePath = ar.getReportingRequest().getImagePath();
         Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
         im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon ii = new ImageIcon(im);
@@ -403,15 +430,15 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lblPicture;
     private javax.swing.JTable tblNewAssigned;
     private javax.swing.JTextField txtAnimalType;
+    private javax.swing.JTextField txtHospital;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextArea txtMessage;
     private javax.swing.JTextField txtReportDate;
+    private javax.swing.JTextField txtShelter;
+    private javax.swing.JTextField txtVolunteer;
     // End of variables declaration//GEN-END:variables
 }

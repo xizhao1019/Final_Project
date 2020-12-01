@@ -7,6 +7,7 @@ package userinterface.WitnessRole;
 
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AnimalRecord;
 import Business.WorkQueue.AnimalReportingRequest;
 import java.awt.CardLayout;
 import java.awt.Image;
@@ -27,6 +28,7 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
     private Organization organization;
     private String imagePath;
     private AnimalReportingRequest reportRequest;
+    private AnimalRecord animalRecord;
     private UserAccount userAccount;
     /**
      * Creates new form ReportStrayAnimalJPanel
@@ -37,6 +39,9 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         this.organization = org;
         this.userAccount = ua;
         this.reportRequest = new AnimalReportingRequest();
+        this.animalRecord = new AnimalRecord();
+        
+        //popStateCombo();
                    
     }
 
@@ -117,6 +122,11 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         jLabel7.setText("Report A Stray Animal");
 
         stateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virgin Islands", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" }));
+        stateComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stateComboBoxActionPerformed(evt);
+            }
+        });
 
         lblPath.setText("<Image Path>");
 
@@ -218,6 +228,10 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
+    //public void popStateCombo() {
+
+    //}
+    
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         container.remove(this);
@@ -238,8 +252,12 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         reportRequest.setStatus("Witness Reported");
         reportRequest.setWitness(userAccount);
         
-        organization.getWorkQueue().getWorkRequestList().add(reportRequest);     
+        animalRecord.setReportingRequest(reportRequest);
+        
+        organization.getWorkQueue().getWorkRequestList().add(reportRequest); 
+        organization.getWorkQueue().getWorkRequestList().add(animalRecord);
         userAccount.getWorkQueue().getWorkRequestList().add(reportRequest);
+        //userAccount.getWorkQueue().getWorkRequestList().add(animalRecord);
         
         JOptionPane.showMessageDialog(null, "Report Successfully");
     }//GEN-LAST:event_btnReportActionPerformed
@@ -263,6 +281,10 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_btnUploadActionPerformed
+
+    private void stateComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stateComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stateComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -15,7 +15,22 @@ public class VolunteerRequest extends WorkRequest {
     
     private LocationPoint volunteerLocationPoint;
     private LocationPoint hospitalLocationPoint;
+    
+    private String status;
+    
+    public VolunteerRequest() {
+        
+    }
 
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     public LocationPoint getVolunteerLocationPoint() {
         return volunteerLocationPoint;
     }
