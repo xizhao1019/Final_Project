@@ -124,5 +124,9 @@ public class AnimalRecord extends WorkRequest{
         this.reportingRequest = reportingRequest;
     }
     
+    @Override
+    public String toString() {
+       return reportingRequest.getCaseID();   
+    }
     
 }

@@ -5,8 +5,20 @@
  */
 package userinterface.VolunteerRole;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.RescueEnterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.VolunteerOrganization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AnimalRecord;
+import Business.WorkQueue.AnimalReportingRequest;
+import Business.WorkQueue.VolunteerRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,12 +27,20 @@ import javax.swing.JPanel;
 public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    EcoSystem system;
+    UserAccount userAccount;
     /**
      * Creates new form TransporterWorkAreaJPanel
      */
-    public VolunteerWorkAreaJPanel(JPanel container) {
+    public VolunteerWorkAreaJPanel(JPanel container, EcoSystem sys, UserAccount ua) {
         initComponents();
         this.container = container;
+        this.system = sys;
+        this.userAccount = ua;
+        
+        valueLabel.setText(userAccount.getEmployee().getName());
+        
+        popTable();
     }
 
     /**
@@ -34,45 +54,37 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblVolunteerCase = new javax.swing.JTable();
         btnAccept = new javax.swing.JButton();
         btnDecline = new javax.swing.JButton();
         btnProcess = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        valueLabel = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Volunteer Work Area");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblVolunteerCase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Case ID", "Location", "Animal Type", "Destination", "Message", "Status"
+                "Case ID", "Animal Type", "Location", "Destination", "Witness", "Message", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-        }
+        jScrollPane1.setViewportView(tblVolunteerCase);
 
         btnAccept.setText("Accept");
 
@@ -87,59 +99,84 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Role: Volunteer");
 
-        jTextField1.setText("<value>");
-
         jLabel3.setText("Hello,");
+
+        valueLabel.setText("<Coordinator>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel3)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(btnAccept)
-                            .addGap(28, 28, 28)
-                            .addComponent(btnDecline)
-                            .addGap(28, 28, 28)
-                            .addComponent(btnProcess)
-                            .addGap(75, 75, 75))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(195, 195, 195)
-                        .addComponent(jLabel2)))
-                .addGap(98, 98, 98))
             .addGroup(layout.createSequentialGroup()
-                .addGap(224, 224, 224)
-                .addComponent(jLabel1)
-                .addGap(0, 0, 0))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(224, 224, 224)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(173, 173, 173))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAccept)
-                    .addComponent(btnDecline)
-                    .addComponent(btnProcess))
-                .addGap(70, 70, 70))
+                    .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void popTable() {
+        DefaultTableModel model = (DefaultTableModel) tblVolunteerCase.getModel();
+        model.setRowCount(0);
+        for (WorkRequest wq : userAccount.getWorkQueue().getWorkRequestList() ) {
+           System.out.println("in workrequest");
+           if (wq instanceof AnimalRecord) {
+                Object row[] = new Object[7]; 
+                row[0] = wq;
+                row[1] = ((AnimalRecord) wq).getReportingRequest().getAnimalType();
+                row[2] = "no";
+                row[3] = ((AnimalRecord) wq).getHospitalRequest() ==null ? "--": ((AnimalRecord) wq).getHospitalRequest().getHospitalOrg().getName();
+                row[4] = ((AnimalRecord) wq).getReportingRequest().getWitness();
+                row[5] = ((AnimalRecord) wq).getReportingRequest().getLatestMessage();
+                row[6] = ((AnimalRecord) wq).getVolunteerRequest().getStatus();
+                ((DefaultTableModel) tblVolunteerCase.getModel()).addRow(row);
+           }
+           
+        }       
+   
+    }
+    
+    
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
         VolunteerProcessJPanel jp = new VolunteerProcessJPanel(container);
@@ -157,7 +194,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblVolunteerCase;
+    private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }

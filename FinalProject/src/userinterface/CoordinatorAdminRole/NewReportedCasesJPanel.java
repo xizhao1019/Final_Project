@@ -204,7 +204,6 @@ public class NewReportedCasesJPanel extends javax.swing.JPanel {
     public void popTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblNewCase.getModel();
-
         model.setRowCount(0);
         for (Network n : system.getNetworkList()) {        
         

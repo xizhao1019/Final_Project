@@ -5,8 +5,22 @@
  */
 package userinterface.CoordinatorRole;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.RescueEnterprise;
+import Business.Network.Network;
+import Business.Organization.AnimalHospitalOrganization;
+import Business.Organization.AnimalShelterOrganization;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AnimalRecord;
+import Business.WorkQueue.HospitalRequest;
+import Business.WorkQueue.ShelterRequest;
 import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,12 +29,18 @@ import javax.swing.JPanel;
 public class AssignShelterJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    EcoSystem system;
+    AnimalRecord animalRecord;
     /**
      * Creates new form AssignShelterJPanel
      */
-    public AssignShelterJPanel(JPanel container) {
+    public AssignShelterJPanel(JPanel container, EcoSystem sys, AnimalRecord ar) {
         initComponents();
         this.container = container;
+        this.system = sys;
+        this.animalRecord = ar;
+        
+        popTable();
     }
 
     /**
@@ -34,9 +54,11 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
 
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tblShelter = new javax.swing.JTable();
+        btnAssign = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnAdmin = new javax.swing.JButton();
+        comboAdmin = new javax.swing.JComboBox();
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -45,30 +67,42 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblShelter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Organization ID", "Animal Shelter"
+                "Animal Shelter", "Organization ID", "Shelter Admin", "# of Task"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblShelter);
 
-        jButton1.setText("Assgin Shelter");
+        btnAssign.setText("Assgin Shelter");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("View on Map");
+
+        btnAdmin.setText("Shelter Admin");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -81,13 +115,19 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
                         .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jButton1)
-                        .addGap(64, 64, 64)
-                        .addComponent(jButton2)))
-                .addGap(26, 26, 26))
+                        .addGap(138, 138, 138)
+                        .addComponent(btnAssign)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(btnAdmin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(186, 186, 186))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,28 +135,111 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(btnBack)
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(43, 43, 43))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdmin)
+                            .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(btnAssign)
+                .addGap(71, 71, 71))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+        public void popTable(){
+        DefaultTableModel model = (DefaultTableModel)tblShelter.getModel();
+        model.setRowCount(0);
+        
+        for (Network n : system.getNetworkList()) {        
+        
+            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+                //System.out.println(e.getWorkQueue().getWorkRequestList().size());
+                if (e instanceof RescueEnterprise) {
+                    //System.out.println("in rescue enterprise"); //test
+                    for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
+                        if (org instanceof AnimalShelterOrganization) {                             
+                                        Object row[] = new Object[5];
+                                        row[0] = org;
+                                        row[1] = org.getOrganizationID();
+                                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+                                            //System.out.println("ua role: " + ua.getRole()); //test
+                                            if (ua.getRole().toString().equals("ShelterAdmin") ) {
+                                                row[2] = ua;
+                                                break;
+                                            } else {
+                                                row[2] = "Shelter has no administrator";
+                                            }
+                                        }
+                                        row[3] = org.getWorkQueue().getWorkRequestList().size();
+                                        ((DefaultTableModel)tblShelter.getModel()).addRow(row);
+                        }
+                    }
+                }
+            }
+        }
+    }
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         container.remove(this);
+        Component[] componentArray = container.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        NewAssignedCaseJPanel nacjp = (NewAssignedCaseJPanel) component;
+        nacjp.popTable();
+        
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        // TODO add your handling code here:
+        int row = tblShelter.getSelectedRow();
+        if(row<0) {
+            JOptionPane.showMessageDialog(null, "Please select a volunteer from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Organization org = (Organization)tblShelter.getValueAt(row, 0);
+        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+            //System.out.println("combo role: " + ua.getRole()); //test
+            if (ua.getRole().toString().equals("ShelterAdmin") ) {
+                comboAdmin.addItem(ua);
+            }
+        }
+    }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+        // TODO add your handling code here:
+        int row = tblShelter.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a shelter from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Organization org = (Organization)tblShelter.getValueAt(row, 0);        
+        UserAccount ua = (UserAccount)comboAdmin.getSelectedItem();
+        
+        ShelterRequest sr = new ShelterRequest();
+        sr.setShelterOrg(org);
+        ua.getWorkQueue().getWorkRequestList().add(sr);
+        animalRecord.setShelterRequest(sr);
+        org.getWorkQueue().getWorkRequestList().add(sr);
+        
+        JOptionPane.showMessageDialog(null, "Request sent to Shelter Administrator !");
+        popTable();
+    }//GEN-LAST:event_btnAssignActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdmin;
+    private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox comboAdmin;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblShelter;
     // End of variables declaration//GEN-END:variables
 }

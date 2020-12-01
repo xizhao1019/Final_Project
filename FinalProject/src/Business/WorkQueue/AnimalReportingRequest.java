@@ -27,6 +27,8 @@ public class AnimalReportingRequest extends WorkRequest{
     private UserAccount AssignedCoordinator;
     private boolean isNewReported;
     private UserAccount witness;
+    
+    private UserAccount volunteer;
 
     public AnimalReportingRequest() {
         CaseID = String.format("%04d", random.nextInt(10000));
@@ -48,6 +50,15 @@ public class AnimalReportingRequest extends WorkRequest{
     public void setAssignedCoordinator(UserAccount AssignedCoordinator) {
         this.AssignedCoordinator = AssignedCoordinator;
     }
+
+    public UserAccount getVolunteer() {
+        return volunteer;
+    }
+
+    public void setVolunteer(UserAccount volunteer) {
+        this.volunteer = volunteer;
+    }
+    
     
     
 
