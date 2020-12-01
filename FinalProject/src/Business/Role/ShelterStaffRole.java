@@ -29,4 +29,9 @@ public class ShelterStaffRole extends Role {
         return new ShelterStaffWorkAreaJPanel(userProcessContainer);
     }
     
+    @Override
+    public String toString(){
+        return (RoleType.ShelterStaff.getValue());
+    }
+    
 }

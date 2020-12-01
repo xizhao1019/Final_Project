@@ -28,6 +28,9 @@ public class RescueEnterpriseAdminRole extends Role{
         return new RescueEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise);
     }
 
-    
+    @Override
+    public String toString(){
+        return (RoleType.RescueEnterpriseAdmin.getValue());
+    }
     
 }

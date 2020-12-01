@@ -28,6 +28,10 @@ public class IncidentEnterpriseAdminRole extends Role{
         return new IncidentEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise, account);
     }
 
+    @Override
+    public String toString(){
+        return (RoleType.IncidentEnterpriseAdmin.getValue());
+    }
     
     
 }

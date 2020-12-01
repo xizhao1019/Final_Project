@@ -24,7 +24,11 @@ public class AdoptionEnterpriseAdminRole extends Role{
             EcoSystem business) {
         return new AdoptionEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise);
     }
-
+    
+    @Override
+    public String toString(){
+        return (RoleType.AdoptionEnterpriseAdmin.getValue());
+    }
     
     
 }

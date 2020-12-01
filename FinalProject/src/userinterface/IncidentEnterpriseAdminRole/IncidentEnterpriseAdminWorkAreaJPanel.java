@@ -76,7 +76,7 @@ public class IncidentEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel.setText("<IncidentEnterpriseAdmin>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 180, 30));
 
-        jLabel1.setText("Role: Incident Reporting Enterprise Admin");
+        jLabel1.setText("Role: Incident Enterprise Admin");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 

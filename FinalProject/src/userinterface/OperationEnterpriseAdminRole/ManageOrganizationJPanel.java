@@ -222,6 +222,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         Type type = (Type) organizationJComboBox.getSelectedItem();
         if (txtOrgName.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Invalid organization name!");
+            return;
         }
         Organization org = enterprise.getOrganizationDirectory().createOrganization(type);
         org.setName(txtOrgName.getText());

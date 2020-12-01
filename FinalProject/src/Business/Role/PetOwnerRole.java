@@ -40,4 +40,8 @@ public class PetOwnerRole extends Role {
         return new ProcessPetOwnerRequestJPanel(userProcessContainer);
     }
     
+    @Override
+    public String toString(){
+        return (RoleType.PetOwner.getValue());
+    }
 }
