@@ -12,7 +12,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.AdopterRole.AdopterWorkAreaJPanel;
-import userinterface.ShelterAdminRole.ProcessAdoptionRequest.ProcessAdopterRequestJPanel;
+import userinterface.ShelterAdminRole.ProcessAdopterRequestJPanel;
 
 /**
  *
