@@ -26,7 +26,7 @@ public class VetRole extends Role {
             Enterprise enterprise, 
             Network network,
             EcoSystem business) {
-        return new VetWorkAreaJPanel(userProcessContainer);
+        return new VetWorkAreaJPanel(userProcessContainer, account);
     }
     
     @Override

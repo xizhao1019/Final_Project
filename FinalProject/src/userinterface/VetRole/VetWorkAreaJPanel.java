@@ -5,8 +5,13 @@
  */
 package userinterface.VetRole;
 
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AnimalRecord;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,12 +20,17 @@ import javax.swing.JPanel;
 public class VetWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel  container;
+    UserAccount userAccount;;
     /**
      * Creates new form DogVetWorkAreaJPanel
      */
-    public VetWorkAreaJPanel(JPanel container) {
+    public VetWorkAreaJPanel(JPanel container, UserAccount ua) {
         initComponents();
         this.container = container;
+        this.userAccount = ua;
+        
+        valueLabel.setText(ua.getEmployee().getName());
+        popTable();
     }
 
     /**
@@ -34,19 +44,17 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblVetWork = new javax.swing.JTable();
         btnAccept = new javax.swing.JButton();
         btnProcess = new javax.swing.JButton();
         btnDecline = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        valueLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Vet Work Area");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblVetWork.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,9 +73,14 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblVetWork);
 
         btnAccept.setText("Accept");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptActionPerformed(evt);
+            }
+        });
 
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
@@ -77,82 +90,138 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnDecline.setText("Decline");
-
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("Message:");
+        btnDecline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeclineActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Hello,");
 
-        jTextField2.setText("<value>");
-
         jLabel2.setText("Role: Veterinarian");
+
+        valueLabel.setText("<Vet>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addComponent(jLabel1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(172, 172, 172))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(246, 246, 246))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(127, 127, 127))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(jLabel3)
-                .addGap(26, 26, 26)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(jLabel2)
-                .addGap(0, 0, 0))
+                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(109, 109, 109))
+                .addGap(137, 137, 137))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void popTable(){
+        DefaultTableModel model = (DefaultTableModel) tblVetWork.getModel();
+        model.setRowCount(0);
+        
+        for (WorkRequest wr : userAccount.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof AnimalRecord) {                             
+                Object row[] = new Object[4];
+                row[0] = wr;
+                row[1] = ((AnimalRecord) wr).getReportingRequest().getAnimalType();
+                if (((AnimalRecord) wr).getVetRequest().getLatestMessage() == null) {
+                    row[2] = ((AnimalRecord) wr).getHospitalRequest().getLatestMessage();
+                } else {
+                    row[2] = ((AnimalRecord) wr).getVetRequest().getLatestMessage();
+                }
+                
+                if (((AnimalRecord) wr).getVetRequest().getStatus() == null) {
+                    row[3] = ((AnimalRecord) wr).getHospitalRequest().getStatus();
+                } else {
+                    row[3] = ((AnimalRecord) wr).getVetRequest().getStatus();
+                }
+          
+                ((DefaultTableModel) tblVetWork.getModel()).addRow(row);
+            }
+        }
+    }
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
-        VetProcessJPanel jp = new VetProcessJPanel(container);
+        int row = tblVetWork.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a task from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord)tblVetWork.getValueAt(row, 0);
+        if (ar.getVetRequest().getStatus() == ("Vet Declined")) {
+            JOptionPane.showMessageDialog(null, "You cannot handle this declined task!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        VetProcessJPanel jp = new VetProcessJPanel(container, ar);
         container.add("VetProcessJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
     }//GEN-LAST:event_btnProcessActionPerformed
+
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+        // TODO add your handling code here:
+        int row = tblVetWork.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a task from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord)tblVetWork.getValueAt(row, 0);
+        //System.out.println(ar.getHospitalRequest().getStatus()); // test
+        ar.getVetRequest().setStatus("Vet Accepted");
+        JOptionPane.showMessageDialog(null, "Task accepted");
+        popTable();
+    }//GEN-LAST:event_btnAcceptActionPerformed
+
+    private void btnDeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineActionPerformed
+        // TODO add your handling code here:
+        int row = tblVetWork.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a task from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord)tblVetWork.getValueAt(row, 0);
+        ar.getVetRequest().setStatus("Vet Declined");
+        JOptionPane.showMessageDialog(null, "Task declined");
+        popTable();
+    }//GEN-LAST:event_btnDeclineActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -162,10 +231,8 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tblVetWork;
+    private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -92,17 +92,17 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
 
         tblNewAssigned.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Case ID", "Animal Type", "Location", "Report Date", "Volunteer", "Hospital", "Shelter", "Message"
+                "Case ID", "Animal Type", "Location", "Report Date", "Volunteer", "Hospital", "Shelter", "Message", "Statusl"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -310,11 +310,11 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
                                         row[1] = ((AnimalRecord)wq).getReportingRequest().getAnimalType();
                                         row[2] = "";
                                         row[3] = ((AnimalRecord)wq).getReportingRequest().getRequestDate();
-                                        row[4] = ((AnimalRecord)wq).getVolunteerRequest()==null ? "--":((AnimalRecord)wq).getVolunteerRequest().getVolunteer();
-                                        row[5] = ((AnimalRecord)wq).getHospitalRequest()==null ? "--" :((AnimalRecord)wq).getHospitalRequest().getHospitalOrg();
-                                        row[6] = ((AnimalRecord)wq).getShelterRequest()==null? "--" : ((AnimalRecord)wq).getShelterRequest().getShelterOrg();
-                                        row[7] = ((AnimalRecord)wq).getReportingRequest().getLatestMessage();
-                                        row[8] = ((AnimalRecord)wq).getReportingRequest().getStatus();
+                                        row[4] = ((AnimalRecord)wq).getVolunteerRequest().getVolunteer()==null ? "--":((AnimalRecord)wq).getVolunteerRequest().getVolunteer();
+                                        row[5] = ((AnimalRecord)wq).getHospitalRequest().getHospitalOrg()==null ? "--" :((AnimalRecord)wq).getHospitalRequest().getHospitalOrg();
+                                        row[6] = ((AnimalRecord)wq).getShelterRequest().getShelterOrg()==null? "--" : ((AnimalRecord)wq).getShelterRequest().getShelterOrg();
+                                        row[7] = ((AnimalRecord)wq).getLatestMessage();
+                                        row[8] = ((AnimalRecord)wq).getStatus();
                                         ((DefaultTableModel) tblNewAssigned.getModel()).addRow(row);
                                     }
                                     
@@ -339,11 +339,11 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
-        if (ar.getShelterRequest()==null) {
-        AssignShelterJPanel jp = new AssignShelterJPanel(container, system, ar);
-        container.add("AssignShelterJPanel",jp);
-        CardLayout layout = (CardLayout)container.getLayout();
-        layout.next(container);
+        if (ar.getShelterRequest().getShelterOrg()==null) {
+            AssignShelterJPanel jp = new AssignShelterJPanel(container, system, ar);
+            container.add("AssignShelterJPanel",jp);
+            CardLayout layout = (CardLayout)container.getLayout();
+            layout.next(container);
         }
         else
             JOptionPane.showMessageDialog(null, "Shelter already assigned!", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -359,11 +359,11 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
         
-        if (ar.getVolunteerRequest()==null) {
-        AssignVolunteerJPanel jp = new AssignVolunteerJPanel(container, system, ar);
-        container.add("AssignVolunteerJPanel",jp);
-        CardLayout layout = (CardLayout)container.getLayout();
-        layout.next(container);
+        if (ar.getVolunteerRequest().getVolunteer()==null) {
+            AssignVolunteerJPanel jp = new AssignVolunteerJPanel(container, system, ar);
+            container.add("AssignVolunteerJPanel",jp);
+            CardLayout layout = (CardLayout)container.getLayout();
+            layout.next(container);
         }
         else
             JOptionPane.showMessageDialog(null, "Volunteer already assigned!", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -379,7 +379,7 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
         
-        if (ar.getHospitalRequest()==null) {
+        if (ar.getHospitalRequest().getHospitalOrg()==null) {
         AssignHospitalJPanel jp = new AssignHospitalJPanel(container, system, ar);
         container.add("AssignHospitalJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
@@ -410,9 +410,9 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
         txtID.setText(ar.getID());
         txtReportDate.setText(ar.getReportingRequest().getRequestDate().toString());
         txtVolunteer.setText(ar.getVolunteerRequest().getVolunteer()==null ? "--":ar.getVolunteerRequest().getVolunteer().getEmployee().getName());
-        txtHospital.setText(ar.getHospitalRequest() ==null ? "--": ar.getHospitalRequest().getHospitalOrg().getName());
-        txtShelter.setText(ar.getShelterRequest() ==null ? "--": ar.getShelterRequest().getShelterOrg().getName());
-        for (String s : ar.getReportingRequest().getMsgList()) {
+        txtHospital.setText(ar.getHospitalRequest().getHospitalOrg() ==null ? "--": ar.getHospitalRequest().getHospitalOrg().getName());
+        txtShelter.setText(ar.getShelterRequest().getShelterOrg() ==null ? "--": ar.getShelterRequest().getShelterOrg().getName());
+        for (String s : ar.getMsgList()) {
             txtMessage.setText(s);
         }
         

@@ -6,6 +6,7 @@
 package Business.WorkQueue;
 
 import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 
 /**
  *
@@ -14,6 +15,7 @@ import Business.Organization.Organization;
 public class HospitalRequest extends WorkRequest{
     
     private Organization hospitalOrg;
+    private UserAccount assignedVet;
 
     public Organization getHospitalOrg() {
         return hospitalOrg;
@@ -22,5 +24,15 @@ public class HospitalRequest extends WorkRequest{
     public void setHospitalOrg(Organization hospitalOrg) {
         this.hospitalOrg = hospitalOrg;
     }
+
+    public UserAccount getAssignedVet() {
+        return assignedVet;
+    }
+
+    public void setAssignedVet(UserAccount assignedVet) {
+        this.assignedVet = assignedVet;
+    }
+    
+    
     
 }

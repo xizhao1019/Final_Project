@@ -17,6 +17,7 @@ import Business.WorkQueue.AnimalReportingRequest;
 import Business.WorkQueue.VolunteerRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -67,17 +68,17 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
 
         tblVolunteerCase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Case ID", "Animal Type", "Location", "Destination", "Witness", "Message", "Status"
+                "Case ID", "Animal Type", "Location", "Destination", "Witness", "Message", "Volunteer Status", "Hospital Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -87,8 +88,18 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblVolunteerCase);
 
         btnAccept.setText("Accept");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptActionPerformed(evt);
+            }
+        });
 
         btnDecline.setText("Decline");
+        btnDecline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeclineActionPerformed(evt);
+            }
+        });
 
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
@@ -110,9 +121,6 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(224, 224, 224)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(jLabel3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,12 +135,14 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(173, 173, 173))
+                                .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addGap(224, 224, 224)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +161,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -161,14 +171,15 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         for (WorkRequest wq : userAccount.getWorkQueue().getWorkRequestList() ) {
            System.out.println("in workrequest");
            if (wq instanceof AnimalRecord) {
-                Object row[] = new Object[7]; 
+                Object row[] = new Object[8]; 
                 row[0] = wq;
                 row[1] = ((AnimalRecord) wq).getReportingRequest().getAnimalType();
-                row[2] = "no";
+                row[2] = "-no";
                 row[3] = ((AnimalRecord) wq).getHospitalRequest() ==null ? "--": ((AnimalRecord) wq).getHospitalRequest().getHospitalOrg().getName();
                 row[4] = ((AnimalRecord) wq).getReportingRequest().getWitness();
-                row[5] = ((AnimalRecord) wq).getReportingRequest().getLatestMessage();
-                row[6] = ((AnimalRecord) wq).getVolunteerRequest().getStatus();
+                row[5] = ((AnimalRecord) wq).getLatestMessage();
+                row[6] = ((AnimalRecord) wq).getStatus();
+                row[7] = ((AnimalRecord) wq).getHospitalRequest().getStatus();
                 ((DefaultTableModel) tblVolunteerCase.getModel()).addRow(row);
            }
            
@@ -179,11 +190,56 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
     
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
-        VolunteerProcessJPanel jp = new VolunteerProcessJPanel(container);
-        container.add("VolunteerProcessJPanel",jp);
-        CardLayout layout = (CardLayout)container.getLayout();
-        layout.next(container);
+        int row = tblVolunteerCase.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord)tblVolunteerCase.getValueAt(row, 0);
+        if (ar.getVolunteerRequest().getStatus() == "Volunteer Declined") {
+            JOptionPane.showMessageDialog(null, "You cannot handle a rejected case");
+        } else if (!(ar.getVolunteerRequest().getStatus() == "Volunteer Accepted")) {
+            JOptionPane.showMessageDialog(null, "Please accept case first");
+        } else {
+            VolunteerProcessJPanel jp = new VolunteerProcessJPanel(container, ar);
+            container.add("VolunteerProcessJPanel",jp);
+            CardLayout layout = (CardLayout)container.getLayout();
+            layout.next(container);
+        }
+        
     }//GEN-LAST:event_btnProcessActionPerformed
+
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+        // TODO add your handling code here:
+        
+        int row = tblVolunteerCase.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord)tblVolunteerCase.getValueAt(row, 0);
+        System.out.println(ar.getHospitalRequest().getStatus()); // test
+        if ((ar.getHospitalRequest().getStatus().equals("Hospital Accepted")) || (ar.getHospitalRequest().getStatus().equals("Vet Assigned") )) {
+            ar.getVolunteerRequest().setStatus("Volunteer Accepted");
+            JOptionPane.showMessageDialog(null, "Accept case, please go pick up animal");
+            popTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Wait for hospital administrator accept");
+        }
+    }//GEN-LAST:event_btnAcceptActionPerformed
+
+    private void btnDeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineActionPerformed
+        // TODO add your handling code here:
+        int row = tblVolunteerCase.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord)tblVolunteerCase.getValueAt(row, 0);
+        ar.getVolunteerRequest().setStatus("Volunteer Declined");
+        JOptionPane.showMessageDialog(null, "Request Declined");
+        popTable();
+    }//GEN-LAST:event_btnDeclineActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
