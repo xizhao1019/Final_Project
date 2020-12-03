@@ -27,4 +27,10 @@ public class AnimalHospitalOrganization extends Organization {
         return roles;
     }
     
+    @Override
+    public Type getType() {
+        return Organization.Type.AnimalHospital;
+    }
+    
+    
 }

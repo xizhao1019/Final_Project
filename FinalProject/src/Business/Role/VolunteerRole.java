@@ -26,7 +26,7 @@ public class VolunteerRole extends Role {
             Enterprise enterprise, 
             Network network,
             EcoSystem business) {
-        return new VolunteerWorkAreaJPanel(userProcessContainer);
+        return new VolunteerWorkAreaJPanel(userProcessContainer, business, account);
     }
     
     @Override

@@ -5,6 +5,9 @@
 package Business.UserAccount;
 
 import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.WorkQueue.WorkQueue;
 
@@ -19,12 +22,14 @@ public class UserAccount {
     private Employee employee;
     private Role role;
     private WorkQueue workQueue;
+    private Network state;
+//    private Enterprise enterprise;
+//    private Organization org;
 
+    
     public UserAccount() {
         workQueue = new WorkQueue();
     }
-    
-    
     
     public String getUsername() {
         return username;
@@ -61,6 +66,30 @@ public class UserAccount {
     public WorkQueue getWorkQueue() {
         return workQueue;
     }
+
+    public Network getState() {
+        return state;
+    }
+
+    public void setState(Network state) {
+        this.state = state;
+    }
+//
+//    public Enterprise getEnterprise() {
+//        return enterprise;
+//    }
+//
+//    public void setEnterprise(Enterprise enterprise) {
+//        this.enterprise = enterprise;
+//    }
+//
+//    public Organization getOrg() {
+//        return org;
+//    }
+//
+//    public void setOrg(Organization org) {
+//        this.org = org;
+//    }
 
     
     

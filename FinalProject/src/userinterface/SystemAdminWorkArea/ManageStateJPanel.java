@@ -5,9 +5,12 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -143,20 +146,47 @@ public class ManageStateJPanel extends javax.swing.JPanel {
                 .addGap(36, 36, 36))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public boolean isDuplicatedState(String state){
+        for (Network network : system.getNetworkList()) {
+            if (network.getName().equals(state)) 
+                return true;
+        }   
+        return false;
+    }
+    
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
-
+        
         String name = (String) stateComboBox.getSelectedItem();
-
-        Network network = system.createAndAddNetwork();
-        network.setName(name);
-
+        
+        if (isDuplicatedState(name)) {
+            JOptionPane.showMessageDialog(null, "State already exist!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Network state = system.createAndAddNetwork();
+        state.setName(name);
         populateNetworkTable();
+        
+//        //initialize incident incidentEnterprise and the only incident reporting incidentOrg
+//        String incidentEnterprise = name + "_incident";
+//        Enterprise incident = state.getEnterpriseDirectory().createAndAddEnterprise(incidentEnterprise, Enterprise.EnterpriseType.Incident);
+//        String incidentOrg = name + "_IncidentReportingOrg";
+//        incident.getOrganizationDirectory().createOrganization(Organization.Type.IncidentReporting).setName(incidentOrg);
+//        
+//        //initialize adoption incidentEnterprise and the only adopter incidentOrg and the only petowner incidentOrg
+//        String adoptionEnterprise = name + "_adoption";
+//        Enterprise adoption = state.getEnterpriseDirectory().createAndAddEnterprise(adoptionEnterprise, Enterprise.EnterpriseType.Adoption);
+//        String adopterOrg = name + "_AdopterOrg";
+//        adoption.getOrganizationDirectory().createOrganization(Organization.Type.Adopter).setName(adopterOrg);
+//        String petownerOrg = name + "_PetownerOrg";
+//        adoption.getOrganizationDirectory().createOrganization(Organization.Type.PetOwner).setName(petownerOrg);
+//        
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
-         Component[] componentArray = userProcessContainer.getComponents();
+        Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         SystemAdminWorkAreaJPanel sysAdminwjp = (SystemAdminWorkAreaJPanel) component;
         sysAdminwjp.populateTree();

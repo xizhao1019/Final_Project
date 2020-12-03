@@ -7,7 +7,7 @@ package userinterface.WitnessRole;
 
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.AnimalReportingRequest;
+import Business.WorkQueue.AnimalRecord;
 import java.awt.CardLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -26,8 +26,8 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
     private JPanel container;
     private Organization organization;
     private String imagePath;
-    private AnimalReportingRequest reportRequest;
     private UserAccount userAccount;
+    private AnimalRecord animalRecord;
     /**
      * Creates new form ReportStrayAnimalJPanel
      */
@@ -36,8 +36,10 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         this.container = userProcessContainer;
         this.organization = org;
         this.userAccount = ua;
-        this.reportRequest = new AnimalReportingRequest();
-                   
+        this.animalRecord = new AnimalRecord();
+        
+        txtState.setText(userAccount.getState().toString());
+        txtState.setEditable(false);
     }
 
     /**
@@ -59,14 +61,14 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         btnReport = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtLocation = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        stateComboBox = new javax.swing.JComboBox<>();
         lblPath = new javax.swing.JLabel();
         lblPicture = new javax.swing.JLabel();
+        txtState = new javax.swing.JTextField();
 
         jLabel1.setText("Additional Message:");
 
@@ -116,8 +118,6 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Report A Stray Animal");
 
-        stateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virgin Islands", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" }));
-
         lblPath.setText("<Image Path>");
 
         lblPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -133,23 +133,23 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCity)
-                            .addComponent(stateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
-                            .addComponent(comboAnimalType, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboAnimalType, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
@@ -177,7 +177,7 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addComponent(jLabel7)
@@ -194,20 +194,20 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboAnimalType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(85, 85, 85)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -218,6 +218,7 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
+    
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         container.remove(this);
@@ -227,21 +228,32 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-//        if (imagePath!=null && ) {
-//            
-//        }
-        reportRequest.setCity(txtCity.getText());
-        reportRequest.setAnimalType(comboAnimalType.getSelectedItem().toString());
+        if (imagePath.isBlank() && txtCity.getText().isBlank() && txtLocation.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);  
+            return;
+        }
+        animalRecord.getReportingRequest().setCity(txtCity.getText());
+        animalRecord.getReportingRequest().setAnimalType(comboAnimalType.getSelectedItem().toString());
         String message = txtMessage.getText();
-        reportRequest.setLatestMessage(message);
-        reportRequest.addMessage(message);
-        reportRequest.setStatus("Witness Reported");
-        reportRequest.setWitness(userAccount);
+        animalRecord.setLatestMessage(message);
+        animalRecord.getMsgList().add(message);
+        animalRecord.getReportingRequest().setWitness(userAccount);
+        animalRecord.setStatus("Witness Reported");
         
-        organization.getWorkQueue().getWorkRequestList().add(reportRequest);     
-        userAccount.getWorkQueue().getWorkRequestList().add(reportRequest);
+        organization.getWorkQueue().getWorkRequestList().add(animalRecord);
+//        userAccount.getWorkQueue().getWorkRequestList().add(animalRecord.getReportingRequest());
+        userAccount.getWorkQueue().getWorkRequestList().add(animalRecord);
         
         JOptionPane.showMessageDialog(null, "Report Successfully");
+        
+        txtState.setEnabled(false);
+        txtCity.setEnabled(false);
+        txtLocation.setEnabled(false);
+        comboAnimalType.setEnabled(false);
+        btnUpload.setEnabled(false);
+        txtMessage.setEnabled(false);
+        
+        btnReport.setEnabled(false);
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
@@ -253,13 +265,13 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
             imagePath = selectedFile.getAbsolutePath();
             lblPath.setText("Image Path: " + imagePath);
             
-            reportRequest.setImagePath(imagePath);
+            animalRecord.getReportingRequest().setImagePath(imagePath);
                    
             Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
             im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon ii = new ImageIcon(im);
             lblPicture.setIcon(ii);
-            JOptionPane.showMessageDialog(null, "Scene Picture Uploaded Successfully");
+            JOptionPane.showMessageDialog(null, "Animal Picture Uploaded Successfully");
 
         }
     }//GEN-LAST:event_btnUploadActionPerformed
@@ -278,11 +290,11 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblPath;
     private javax.swing.JLabel lblPicture;
-    private javax.swing.JComboBox<String> stateComboBox;
     private javax.swing.JTextField txtCity;
+    private javax.swing.JTextField txtLocation;
     private javax.swing.JTextArea txtMessage;
+    private javax.swing.JTextField txtState;
     // End of variables declaration//GEN-END:variables
 }

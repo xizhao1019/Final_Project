@@ -8,16 +8,12 @@ package Business.WorkQueue;
 import Business.Location.LocationPoint;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
-import java.util.Random;
 
 /**
  *
  * @author zhaoxi
  */
 public class AnimalReportingRequest extends WorkRequest{
-    
-    private String CaseID;
-    private Random random = new Random();
     
     private Network state;
     private String city;
@@ -27,9 +23,10 @@ public class AnimalReportingRequest extends WorkRequest{
     private UserAccount AssignedCoordinator;
     private boolean isNewReported;
     private UserAccount witness;
+    
+    
 
     public AnimalReportingRequest() {
-        CaseID = String.format("%04d", random.nextInt(10000));
         isNewReported = true;
     }
 
@@ -48,13 +45,7 @@ public class AnimalReportingRequest extends WorkRequest{
     public void setAssignedCoordinator(UserAccount AssignedCoordinator) {
         this.AssignedCoordinator = AssignedCoordinator;
     }
-    
-    
 
-    public String getCaseID() {
-        return CaseID;
-    }
-    
     public Network getState() {
         return state;
     }
@@ -101,11 +92,6 @@ public class AnimalReportingRequest extends WorkRequest{
 
     public void setWitness(UserAccount witness) {
         this.witness = witness;
-    }
-    
-        @Override
-    public String toString() {
-       return CaseID;   
     }
     
 }

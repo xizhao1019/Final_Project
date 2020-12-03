@@ -6,6 +6,7 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.IncidentEnterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -25,7 +26,8 @@ public class IncidentEnterpriseAdminRole extends Role{
             Enterprise enterprise, 
             Network network, 
             EcoSystem business) {
-        return new IncidentEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise, account);
+        return new IncidentEnterpriseAdminWorkAreaJPanel(userProcessContainer,account, 
+                (IncidentEnterprise) enterprise);
     }
 
     @Override

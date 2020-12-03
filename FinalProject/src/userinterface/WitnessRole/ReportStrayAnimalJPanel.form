@@ -22,16 +22,16 @@
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtCity" alignment="0" max="32767" attributes="0"/>
-                          <Component id="stateComboBox" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtCity" min="-2" pref="139" max="-2" attributes="0"/>
+                          <Component id="txtState" min="-2" pref="139" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -39,10 +39,10 @@
                           <Component id="jLabel4" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="comboAnimalType" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="comboAnimalType" min="-2" pref="139" max="-2" attributes="0"/>
+                          <Component id="txtLocation" min="-2" pref="139" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -83,7 +83,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Component id="btnBack" min="-2" pref="61" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -102,9 +102,9 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="stateComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtState" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtCity" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" pref="20" max="-2" attributes="0"/>
@@ -112,7 +112,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtLocation" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -121,7 +121,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -212,7 +212,7 @@
         <Property name="text" type="java.lang.String" value="Location(Map):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
+    <Component class="javax.swing.JTextField" name="txtLocation">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -237,73 +237,6 @@
         <Property name="text" type="java.lang.String" value="Report A Stray Animal"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="stateComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="56">
-            <StringItem index="0" value="Alabama"/>
-            <StringItem index="1" value="Alaska"/>
-            <StringItem index="2" value="American Samoa"/>
-            <StringItem index="3" value="Arizona"/>
-            <StringItem index="4" value="Arkansas"/>
-            <StringItem index="5" value="California"/>
-            <StringItem index="6" value="Colorado"/>
-            <StringItem index="7" value="Connecticut"/>
-            <StringItem index="8" value="Delaware"/>
-            <StringItem index="9" value="District of Columbia"/>
-            <StringItem index="10" value="Florida"/>
-            <StringItem index="11" value="Georgia"/>
-            <StringItem index="12" value="Guam"/>
-            <StringItem index="13" value="Hawaii"/>
-            <StringItem index="14" value="Idaho"/>
-            <StringItem index="15" value="Illinois"/>
-            <StringItem index="16" value="Indiana"/>
-            <StringItem index="17" value="Iowa"/>
-            <StringItem index="18" value="Kansas"/>
-            <StringItem index="19" value="Kentucky"/>
-            <StringItem index="20" value="Louisiana"/>
-            <StringItem index="21" value="Maine"/>
-            <StringItem index="22" value="Maryland"/>
-            <StringItem index="23" value="Massachusetts"/>
-            <StringItem index="24" value="Michigan"/>
-            <StringItem index="25" value="Minnesota"/>
-            <StringItem index="26" value="Mississippi"/>
-            <StringItem index="27" value="Missouri"/>
-            <StringItem index="28" value="Montana"/>
-            <StringItem index="29" value="Nebraska"/>
-            <StringItem index="30" value="Nevada"/>
-            <StringItem index="31" value="New Hampshire"/>
-            <StringItem index="32" value="New Jersey"/>
-            <StringItem index="33" value="New Mexico"/>
-            <StringItem index="34" value="New York"/>
-            <StringItem index="35" value="North Carolina"/>
-            <StringItem index="36" value="North Dakota"/>
-            <StringItem index="37" value="Northern Mariana Islands"/>
-            <StringItem index="38" value="Ohio"/>
-            <StringItem index="39" value="Oklahoma"/>
-            <StringItem index="40" value="Oregon"/>
-            <StringItem index="41" value="Pennsylvania"/>
-            <StringItem index="42" value="Puerto Rico"/>
-            <StringItem index="43" value="Rhode Island"/>
-            <StringItem index="44" value="South Carolina"/>
-            <StringItem index="45" value="South Dakota"/>
-            <StringItem index="46" value="Tennessee"/>
-            <StringItem index="47" value="Texas"/>
-            <StringItem index="48" value="Utah"/>
-            <StringItem index="49" value="Vermont"/>
-            <StringItem index="50" value="Virgin Islands"/>
-            <StringItem index="51" value="Virginia"/>
-            <StringItem index="52" value="Washington"/>
-            <StringItem index="53" value="West Virginia"/>
-            <StringItem index="54" value="Wisconsin"/>
-            <StringItem index="55" value="Wyoming"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblPath">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;Image Path&gt;"/>
@@ -319,6 +252,8 @@
           </Border>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtState">
     </Component>
   </SubComponents>
 </Form>
