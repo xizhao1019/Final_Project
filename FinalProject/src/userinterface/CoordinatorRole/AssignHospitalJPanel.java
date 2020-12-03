@@ -11,11 +11,9 @@ import Business.Enterprise.RescueEnterprise;
 import Business.Network.Network;
 import Business.Organization.AnimalHospitalOrganization;
 import Business.Organization.Organization;
-import Business.Organization.VolunteerOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AnimalRecord;
 import Business.WorkQueue.HospitalRequest;
-import Business.WorkQueue.VolunteerRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -164,7 +162,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(26, 26, 26)
@@ -183,7 +181,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                     .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(92, 92, 92))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(18, 18, 18)
@@ -204,23 +202,6 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        // TODO add your handling code here:
-        int row = tblHospital.getSelectedRow();
-        if(row<0) {
-             JOptionPane.showMessageDialog(null, "Please select a volunteer from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        Organization org = (Organization)tblHospital.getValueAt(row, 0);
-        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
-               System.out.println("combo role: " + ua.getRole()); //test
-               if (ua.getRole().toString().equals("HospitalAdmin") ) {
-                   comboAdmin.addItem(ua);
-                }
-        }
-    }//GEN-LAST:event_btnAdminActionPerformed
-
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
         int row = tblHospital.getSelectedRow();
@@ -240,6 +221,23 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Request sent to Hospital Administrator !");
         popTable();
     }//GEN-LAST:event_btnAssignActionPerformed
+
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        // TODO add your handling code here:
+        int row = tblHospital.getSelectedRow();
+        if(row<0) {
+            JOptionPane.showMessageDialog(null, "Please select a volunteer from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Organization org = (Organization)tblHospital.getValueAt(row, 0);
+        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+            System.out.println("combo role: " + ua.getRole()); //test
+            if (ua.getRole().toString().equals("HospitalAdmin") ) {
+                comboAdmin.addItem(ua);
+            }
+        }
+    }//GEN-LAST:event_btnAdminActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

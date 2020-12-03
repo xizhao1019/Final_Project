@@ -26,4 +26,10 @@ public class VolunteerOrganization extends Organization  {
         return roles;
     }
     
+    @Override
+    public Type getType() {
+        return Organization.Type.Volunteer;
+    }
+    
+    
 }

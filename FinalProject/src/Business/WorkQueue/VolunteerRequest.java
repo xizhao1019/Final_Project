@@ -6,6 +6,7 @@
 package Business.WorkQueue;
 
 import Business.Location.LocationPoint;
+import Business.UserAccount.UserAccount;
 
 /**
  *
@@ -16,19 +17,10 @@ public class VolunteerRequest extends WorkRequest {
     private LocationPoint volunteerLocationPoint;
     private LocationPoint hospitalLocationPoint;
     
-    private String status;
+    private UserAccount volunteer;
     
     public VolunteerRequest() {
         
-    }
-
-    
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
     
     public LocationPoint getVolunteerLocationPoint() {
@@ -46,5 +38,15 @@ public class VolunteerRequest extends WorkRequest {
     public void setHospitalLocationPoint(LocationPoint hospitalLocationPoint) {
         this.hospitalLocationPoint = hospitalLocationPoint;
     }
+
+    public UserAccount getVolunteer() {
+        return volunteer;
+    }
+
+    public void setVolunteer(UserAccount volunteer) {
+        this.volunteer = volunteer;
+    }
+    
+    
     
 }

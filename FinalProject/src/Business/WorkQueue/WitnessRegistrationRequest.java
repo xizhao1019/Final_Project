@@ -69,5 +69,10 @@ public class WitnessRegistrationRequest extends WorkRequest{
         this.zipCode = zipCode;
     }
     
+    @Override
+    public String toString(){
+        return witnessAccount.toString();
+    }
+    
     
 }

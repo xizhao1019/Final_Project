@@ -43,11 +43,10 @@ public class NewReportedCasesJPanel extends javax.swing.JPanel {
     public NewReportedCasesJPanel(JPanel container, Enterprise enterprise, Organization org, EcoSystem sys) {
         initComponents();
         this.container = container;
-
         this.enterprise = enterprise;
         this.organization = org;
         this.system = sys;
-        
+        txtMessage.setEditable(false);
         popTable();
         popCoordinatorComboBox();
         
@@ -266,11 +265,11 @@ public class NewReportedCasesJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalReportingRequest wq = (AnimalReportingRequest)tblNewCase.getValueAt(row, 0);
+        if (wq.getAssignedCoordinator()==null) {
         UserAccount ua = (UserAccount)comboCoordinator.getSelectedItem();
         
         wq.setAssignedCoordinator(ua);
         wq.setStatus("Coordinator Assigned");
-        
         //set animal record
         AnimalRecord animalrecord = new AnimalRecord();
         animalrecord.setReportingRequest(wq);
@@ -281,6 +280,9 @@ public class NewReportedCasesJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Coordinator assigned!");
         
         popTable();
+        }
+        else 
+            JOptionPane.showMessageDialog(null, "Coordinator already assigned!", "Warning", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_btnAssignCoordActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed

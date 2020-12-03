@@ -47,7 +47,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         
         for (Organization organization : directory.getOrganizationList()){
             Object[] row = new Object[3];
-            row[0] = organization;
+            row[0] = organization.getType();
             row[1] = organization.getName();
             row[2] = "Nor finish yet";
             model.addRow(row);
@@ -167,14 +167,11 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                                 .addComponent(txtOrgName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(106, 106, 106))
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(271, 271, 271)
-                                    .addComponent(addJButton))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(86, 86, 86)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addGap(271, 271, 271)
+                            .addComponent(addJButton))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(86, 86, 86)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -184,7 +181,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                                 .addGap(151, 151, 151)
                                 .addComponent(jLabel4)))
                         .addGap(68, 68, 68)))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

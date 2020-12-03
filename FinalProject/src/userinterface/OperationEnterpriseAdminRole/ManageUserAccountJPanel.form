@@ -50,7 +50,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" pref="339" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" pref="371" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
@@ -246,7 +246,7 @@
           <Font name="Lucida Grande" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Manage Operation Users"/>
+        <Property name="text" type="java.lang.String" value="Manage Users in Operation Enterprise"/>
       </Properties>
     </Component>
   </SubComponents>

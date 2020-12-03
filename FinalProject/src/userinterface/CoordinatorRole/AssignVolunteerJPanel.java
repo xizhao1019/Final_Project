@@ -10,14 +10,12 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.RescueEnterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
-import Business.Organization.OrganizationDirectory;
 import Business.Organization.VolunteerOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AnimalRecord;
 import Business.WorkQueue.VolunteerRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
-import static java.time.Clock.system;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -88,7 +86,7 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVolunteer = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnViewOnMap = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnAssign = new javax.swing.JButton();
 
@@ -113,7 +111,7 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblVolunteer);
 
-        jButton2.setText("View on Map");
+        btnViewOnMap.setText("View on Map");
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +137,7 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
                         .addGap(147, 147, 147)
                         .addComponent(btnAssign)
                         .addGap(53, 53, 53)
-                        .addComponent(jButton2))
+                        .addComponent(btnViewOnMap))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -155,10 +153,10 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAssign)
-                    .addComponent(jButton2))
+                    .addComponent(btnViewOnMap))
                 .addGap(91, 91, 91))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -184,24 +182,24 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
         }
         
         UserAccount ua = (UserAccount)tblVolunteer.getValueAt(row, 0);
-        VolunteerRequest vr = new VolunteerRequest();
         
         String status = "Waiting for Volunteer";
         animalRecord.getMsgList().add(status);
-        vr.setStatus(status);
-        animalRecord.getReportingRequest().setVolunteer(ua);
-        animalRecord.setVolunteerRequest(vr);
+        animalRecord.setStatus(status);
+        animalRecord.getVolunteerRequest().setVolunteer(ua);
         ua.getWorkQueue().getWorkRequestList().add(animalRecord);
         
         JOptionPane.showMessageDialog(null, "Request sent to volunteer !");
         popTable();
+        btnAssign.setEnabled(false);
+        btnViewOnMap.setEnabled(false);
     }//GEN-LAST:event_btnAssignActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnViewOnMap;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblVolunteer;
     // End of variables declaration//GEN-END:variables

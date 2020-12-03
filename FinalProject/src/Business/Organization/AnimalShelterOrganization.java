@@ -26,4 +26,10 @@ public class AnimalShelterOrganization extends Organization {
         return roles;
     }
     
+    @Override
+    public Type getType() {
+        return Organization.Type.AnimalShelter;
+    }
+    
+    
 }

@@ -7,6 +7,7 @@ package userinterface.WitnessRole;
 
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AnimalRecord;
 import Business.WorkQueue.AnimalReportingRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
@@ -95,7 +96,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,12 +118,12 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         System.out.println(organization.getWorkQueue().getWorkRequestList().size());
         System.out.println(userAccount.getWorkQueue().getWorkRequestList().size());
         for (WorkRequest wq : userAccount.getWorkQueue().getWorkRequestList()) {
-            if (wq instanceof AnimalReportingRequest) {
+            if (wq instanceof AnimalRecord) {
                     Object[] row = new Object[6];
-                    row[0] = ((AnimalReportingRequest) wq).getCaseID();
-                    row[1] = ((AnimalReportingRequest) wq).getCity();
+                    row[0] = ((AnimalRecord) wq).getID();
+                    row[1] = ((AnimalReportingRequest) ((AnimalRecord) wq).getReportingRequest()).getCity();
                     row[2] = wq.getRequestDate();
-                    row[3] = ((AnimalReportingRequest) wq).getAnimalType();
+                    row[3] = ((AnimalReportingRequest) ((AnimalRecord) wq).getReportingRequest()).getAnimalType();
                     row[4] = wq.getLatestMessage();
                     row[5] = wq.getStatus();
 

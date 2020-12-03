@@ -5,13 +5,13 @@
 package Business.WorkQueue;
 
 import Business.Location.LocationPoint;
+import java.util.Random;
 
 /**
  *
  * @author zhaoxi
  */
 public class AnimalRecord extends WorkRequest{
-    
     
     private AnimalReportingRequest reportingRequest;
     private VolunteerRequest volunteerRequest;
@@ -26,6 +26,21 @@ public class AnimalRecord extends WorkRequest{
     private String age;
     private String healthCondition;
     private String imagePath;
+    private String ID;
+    private String id;
+    private Random random = new Random();
+    
+    public AnimalRecord() {
+        this.reportingRequest = new AnimalReportingRequest();
+        this.volunteerRequest = new VolunteerRequest();
+        this.hospitalRequest = new HospitalRequest();
+        this.vetRequest = new VetRequest();
+        this.shelterRequest = new ShelterRequest();
+        this.shelterStaffRequest = new ShelterStaffRequest();
+        this.shelterLocationPoint = new LocationPoint();
+        id = String.format("%04d",random.nextInt(10000));
+        ID = "A" + id;
+    }
             
     
     public VolunteerRequest getVolunteerRequest() {
@@ -123,10 +138,14 @@ public class AnimalRecord extends WorkRequest{
     public void setReportingRequest(AnimalReportingRequest reportingRequest) {
         this.reportingRequest = reportingRequest;
     }
+
+    public String getID() {
+        return ID;
+    }
     
     @Override
     public String toString() {
-       return reportingRequest.getCaseID();   
+       return ID;   
     }
     
 }

@@ -11,15 +11,15 @@ package Business.Employee;
 public class Employee {
     
     private String name;
-    private int id;
+    private String id;
     private static int count = 1;
 
     public Employee() {
-        id = count;
+        id = "E"+count;
         count++;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
