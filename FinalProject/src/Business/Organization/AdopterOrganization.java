@@ -26,4 +26,9 @@ public class AdopterOrganization extends Organization {
         return roles;
     }
     
+    @Override
+    public Type getType() {
+        return Organization.Type.Adopter;
+    }
+    
 }

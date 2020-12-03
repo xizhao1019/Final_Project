@@ -5,6 +5,8 @@
  */
 package Business.WorkQueue;
 
+import java.util.Random;
+
 /**
  *
  * @author zhaoxi
@@ -13,6 +15,18 @@ public class AdopterAdoptionRequest extends WorkRequest{
     
     private AdopterRegistrationRequest adopter;
     private AnimalRecord animal;
+    private String ID;
+    private Random random;
+    private String id;
+
+    public AdopterAdoptionRequest() {
+        id = String.format("%04d", random.nextInt(10000));
+        ID = "R" + id ;
+    }
+
+    public String getID() {
+        return ID;
+    }
 
     public AdopterRegistrationRequest getArr() {
         return adopter;

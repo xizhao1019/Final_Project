@@ -148,7 +148,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Manage Operation Organization Employee");
+        jLabel5.setText("Manage Employee in Operation Enterprise");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -178,7 +178,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                             .addComponent(addJButton)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(49, 49, 49)
                         .addComponent(jLabel5)))
                 .addContainerGap())
         );
@@ -215,8 +215,8 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         
         Organization organization = (Organization) organizationEmpJComboBox.getSelectedItem();
         String name = nameJTextField.getText();
-        if (name.equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(null, "Invalid Employee Name");
+        if (name.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Invalid Employee Name!");
             return;
         }
         organization.getEmployeeDirectory().createEmployee(name);
