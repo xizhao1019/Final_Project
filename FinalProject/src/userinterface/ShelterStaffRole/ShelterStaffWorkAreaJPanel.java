@@ -5,8 +5,13 @@
  */
 package userinterface.ShelterStaffRole;
 
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AnimalRecord;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,12 +20,17 @@ import javax.swing.JPanel;
 public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    UserAccount userAccount;
     /**
      * Creates new form ShelterAssistantWorkAreaJPanel
      */
-    public ShelterStaffWorkAreaJPanel(JPanel container) {
+    public ShelterStaffWorkAreaJPanel(JPanel container, UserAccount ua) {
         initComponents();
         this.container = container;
+        this.userAccount = ua;
+        
+        valueLabel.setText(ua.getEmployee().getName());
+        popTable();
     }
 
     /**
@@ -33,18 +43,16 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblAnimals = new javax.swing.JTable();
         btnUpdateInfo = new javax.swing.JButton();
+        valueLabel = new javax.swing.JLabel();
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        jTextField1.setText("<value>");
 
         jLabel3.setText("Hello,");
 
@@ -54,7 +62,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Manage Animals");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblAnimals.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -73,16 +81,16 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
-            jTable2.getColumnModel().getColumn(4).setResizable(false);
-            jTable2.getColumnModel().getColumn(5).setResizable(false);
-            jTable2.getColumnModel().getColumn(6).setResizable(false);
-            jTable2.getColumnModel().getColumn(7).setResizable(false);
+        jScrollPane2.setViewportView(tblAnimals);
+        if (tblAnimals.getColumnModel().getColumnCount() > 0) {
+            tblAnimals.getColumnModel().getColumn(0).setResizable(false);
+            tblAnimals.getColumnModel().getColumn(1).setResizable(false);
+            tblAnimals.getColumnModel().getColumn(2).setResizable(false);
+            tblAnimals.getColumnModel().getColumn(3).setResizable(false);
+            tblAnimals.getColumnModel().getColumn(4).setResizable(false);
+            tblAnimals.getColumnModel().getColumn(5).setResizable(false);
+            tblAnimals.getColumnModel().getColumn(6).setResizable(false);
+            tblAnimals.getColumnModel().getColumn(7).setResizable(false);
         }
 
         btnUpdateInfo.setText("Update Information");
@@ -91,6 +99,8 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                 btnUpdateInfoActionPerformed(evt);
             }
         });
+
+        valueLabel.setText("<Shelter Staff>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -110,9 +120,9 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addGap(26, 26, 26)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(97, 97, 97)
                                 .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(240, 240, 240)
@@ -122,11 +132,11 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(112, 112, 112)
@@ -142,9 +152,37 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void popTable(){
+        DefaultTableModel model = (DefaultTableModel) tblAnimals.getModel();
+        model.setRowCount(0);
+        
+        for (WorkRequest wr : userAccount.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof AnimalRecord) {                             
+                Object row[] = new Object[8];
+                row[0] = wr;
+                row[1] = ((AnimalRecord) wr).getReportingRequest().getAnimalType();
+                row[2] = ((AnimalRecord) wr).getBreed() ==null?"--": ((AnimalRecord) wr).getBreed();
+                row[3] = ((AnimalRecord) wr).getAge() ==null?"--": ((AnimalRecord) wr).getAge();
+                row[4] = ((AnimalRecord) wr).getPetName() ==null?"--": ((AnimalRecord) wr).getPetName();
+                row[5] = ((AnimalRecord) wr).getHealthCondition() ==null?"--": ((AnimalRecord) wr).getHealthCondition();
+                row[6] = ((AnimalRecord) wr).getShelterRequest().getStatus() ==null?"--": ((AnimalRecord) wr).getShelterRequest().getStatus();             
+                row[7] = ((AnimalRecord) wr).getShelterRequest().getLatestMessage()==null?"--": ((AnimalRecord) wr).getShelterRequest().getLatestMessage();
+                         
+                ((DefaultTableModel) tblAnimals.getModel()).addRow(row);
+            }
+        }
+    }
+    
     private void btnUpdateInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateInfoActionPerformed
         // TODO add your handling code here:
-        UpdateInfoJPanel jp = new UpdateInfoJPanel(container);
+        int row = tblAnimals.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a task from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord)tblAnimals.getValueAt(row, 0);
+        
+        UpdateInfoJPanel jp = new UpdateInfoJPanel(container, ar);
         container.add("UpdateInfoJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -158,7 +196,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblAnimals;
+    private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }

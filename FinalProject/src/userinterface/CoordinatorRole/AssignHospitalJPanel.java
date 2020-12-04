@@ -212,11 +212,19 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         Organization org = (Organization)tblHospital.getValueAt(row, 0);        
         UserAccount ua = (UserAccount)comboAdmin.getSelectedItem();
         
-        HospitalRequest hr = new HospitalRequest();
-        hr.setHospitalOrg(org);
-        ua.getWorkQueue().getWorkRequestList().add(hr);
-        animalRecord.setHospitalRequest(hr);
-        org.getWorkQueue().getWorkRequestList().add(hr);
+        if (ua == null) {
+            JOptionPane.showMessageDialog(null, "Please select an hospital admin", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        //HospitalRequest hr = new HospitalRequest();
+        //hr.setHospitalOrg(org);
+        //ua.getWorkQueue().getWorkRequestList().add(hr);       
+        
+        animalRecord.getHospitalRequest().setHospitalOrg(org);
+        animalRecord.getHospitalRequest().setStatus("Hospital Assigned");
+        ua.getWorkQueue().getWorkRequestList().add(animalRecord);
+        org.getWorkQueue().getWorkRequestList().add(animalRecord);
         
         JOptionPane.showMessageDialog(null, "Request sent to Hospital Administrator !");
         popTable();

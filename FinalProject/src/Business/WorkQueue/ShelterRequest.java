@@ -7,6 +7,7 @@ package Business.WorkQueue;
 
 import Business.Location.LocationPoint;
 import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 
 /**
  *
@@ -16,6 +17,29 @@ public class ShelterRequest extends WorkRequest{
     
     private Organization shelterOrg;
     private LocationPoint hospitalLocationPoint;
+    private UserAccount assignedStaff;
+    private boolean post;
+    
+    public ShelterRequest() {
+        this.post = false;
+    }
+
+    public boolean isPost() {
+        return post;
+    }
+
+    public void setPost(boolean post) {
+        this.post = post;
+    }
+
+    
+    public UserAccount getAssignedStaff() {
+        return assignedStaff;
+    }
+
+    public void setAssignedStaff(UserAccount assignedStaff) {
+        this.assignedStaff = assignedStaff;
+    }
 
     public Organization getShelterOrg() {
         return shelterOrg;

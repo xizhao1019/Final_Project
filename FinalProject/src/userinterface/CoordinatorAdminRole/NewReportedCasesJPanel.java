@@ -205,27 +205,28 @@ public class NewReportedCasesJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblNewCase.getModel();
         model.setRowCount(0);
         for (Network n : system.getNetworkList()) {        
-        
+            System.out.println("in network");
             for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
-                //System.out.println(e.getWorkQueue().getWorkRequestList().size());
+                System.out.println(e.getWorkQueue().getWorkRequestList().size()); // test
                 if (e instanceof IncidentEnterprise) {
+                    System.out.println("in incident enterprise");
                     for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
                         if (org instanceof IncidentReportingOrganization) {
                             for (WorkRequest wq : org.getWorkQueue().getWorkRequestList()) {
-                                if (wq instanceof AnimalReportingRequest) {
+                                if (wq instanceof AnimalRecord) {
                                     
-                                    if (((AnimalReportingRequest) wq).isIsNewReported()) {
+                                    //if (((AnimalReportingRequest) wq).isIsNewReported()) {
                                         Object row[] = new Object[8];
                                         row[0] = wq;
-                                        row[1] = ((AnimalReportingRequest) wq).getAnimalType();
+                                        row[1] = ((AnimalRecord) wq).getReportingRequest().getAnimalType();
                                         row[2] = "no";
                                         row[3] = wq.getRequestDate();
-                                        row[4] = ((AnimalReportingRequest) wq).getWitness();
+                                        row[4] = ((AnimalRecord) wq).getReportingRequest().getWitness();
                                         row[5] = wq.getLatestMessage();
-                                        row[6] = ((AnimalReportingRequest) wq).getAssignedCoordinator();
+                                        row[6] = ((AnimalRecord) wq).getReportingRequest().getAssignedCoordinator();
                                         row[7] = wq.getStatus();
                                         ((DefaultTableModel) tblNewCase.getModel()).addRow(row);
-                                    }
+                                    //}
                                     
                                 }
 
@@ -264,22 +265,24 @@ public class NewReportedCasesJPanel extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        AnimalReportingRequest wq = (AnimalReportingRequest)tblNewCase.getValueAt(row, 0);
-        if (wq.getAssignedCoordinator()==null) {
-        UserAccount ua = (UserAccount)comboCoordinator.getSelectedItem();
-        
-        wq.setAssignedCoordinator(ua);
-        wq.setStatus("Coordinator Assigned");
-        //set animal record
-        AnimalRecord animalrecord = new AnimalRecord();
-        animalrecord.setReportingRequest(wq);
-        
-        //add animal record to workqueue
-        organization.getWorkQueue().getWorkRequestList().add(animalrecord);
-        
-        JOptionPane.showMessageDialog(null, "Coordinator assigned!");
-        
-        popTable();
+        AnimalRecord ar = (AnimalRecord)tblNewCase.getValueAt(row, 0);
+        if (ar.getReportingRequest().getAssignedCoordinator()==null) {
+            UserAccount ua = (UserAccount)comboCoordinator.getSelectedItem();
+
+            ar.getReportingRequest().setAssignedCoordinator(ua);
+            ar.setStatus("Coordinator Assigned");
+            
+            //set animal record
+            // delete on 12/04, b/c animal record added in reporting step
+            //AnimalRecord animalrecord = new AnimalRecord();
+            //animalrecord.setReportingRequest(wq);
+
+            //add animal record to workqueue
+            //organization.getWorkQueue().getWorkRequestList().add(animalrecord);
+
+            JOptionPane.showMessageDialog(null, "Coordinator assigned!");
+
+            popTable();
         }
         else 
             JOptionPane.showMessageDialog(null, "Coordinator already assigned!", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -292,12 +295,12 @@ public class NewReportedCasesJPanel extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        AnimalReportingRequest wq = (AnimalReportingRequest)tblNewCase.getValueAt(row, 0);
-        for (String s : wq.getMsgList()) {
+        AnimalRecord ar = (AnimalRecord)tblNewCase.getValueAt(row, 0);
+        for (String s : ar.getMsgList()) {
             txtMessage.setText(s);
         }
         
-        String imagePath = wq.getImagePath();
+        String imagePath = ar.getReportingRequest().getImagePath();
         Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
         im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon ii = new ImageIcon(im);
