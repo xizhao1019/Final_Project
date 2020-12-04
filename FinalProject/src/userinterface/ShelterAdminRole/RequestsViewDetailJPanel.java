@@ -266,7 +266,7 @@ public class RequestsViewDetailJPanel extends javax.swing.JPanel {
         container.remove(this);
         Component[] componentArray = container.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ProcessStaffRequestsJPanel jp = (ProcessStaffRequestsJPanel) component;
+        ProcessCoordinatorRequestsJPanel jp = (ProcessCoordinatorRequestsJPanel) component;
 //        jp.populateTree();
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);

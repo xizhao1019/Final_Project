@@ -26,7 +26,7 @@ public class ShelterAdminRole extends Role {
             Enterprise enterprise, 
             Network network,
             EcoSystem business) {
-        return new ShelterAdminWorkAreaJPanel(userProcessContainer);
+        return new ShelterAdminWorkAreaJPanel(userProcessContainer, account, organization);
     }
     
     @Override

@@ -162,6 +162,7 @@ public class ProcessRequestFromVet extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
         ar.getHospitalRequest().setStatus("Hospital Accepted");
+        JOptionPane.showMessageDialog(null, "Task Accepted, Animal will arrive soon");
         popTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 

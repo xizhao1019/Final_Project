@@ -59,6 +59,8 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         btnAdmin = new javax.swing.JButton();
         comboAdmin = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        txtMessage = new javax.swing.JTextField();
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +106,8 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("Message to Shelter");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,17 +121,24 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
                         .addGap(22, 22, 22)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
+                        .addGap(272, 272, 272)
                         .addComponent(btnAssign)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(btnAdmin)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(btnAdmin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(186, 186, 186))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(186, 186, 186))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,9 +156,13 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAdmin)
                             .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(btnAssign)
-                .addGap(71, 71, 71))
+                .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,13 +235,12 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
             return;
         }
         Organization org = (Organization)tblShelter.getValueAt(row, 0);        
-        UserAccount ua = (UserAccount)comboAdmin.getSelectedItem();
+        UserAccount ua = (UserAccount)comboAdmin.getSelectedItem();      
         
-        ShelterRequest sr = new ShelterRequest();
-        sr.setShelterOrg(org);
-        ua.getWorkQueue().getWorkRequestList().add(sr);
-        animalRecord.setShelterRequest(sr);
-        org.getWorkQueue().getWorkRequestList().add(sr);
+        animalRecord.getShelterRequest().setShelterOrg(org);
+        animalRecord.getShelterRequest().setLatestMessage(txtMessage.getText());
+        org.getWorkQueue().getWorkRequestList().add(animalRecord);
+        ua.getWorkQueue().getWorkRequestList().add(animalRecord);
         
         JOptionPane.showMessageDialog(null, "Request sent to Shelter Administrator !");
         popTable();
@@ -239,7 +253,9 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JComboBox comboAdmin;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblShelter;
+    private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 }

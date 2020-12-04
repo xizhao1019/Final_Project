@@ -138,11 +138,13 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         String status = (String)comboStatus.getSelectedItem();
-        animalRecord.getVolunteerRequest().setStatus("Volunteer " + status); // == Volunteer Completed
+        animalRecord.getVolunteerRequest().setStatus(status); // == Volunteer Completed
         
         String message = txtMessage.getText();
         animalRecord.setLatestMessage(message);
         animalRecord.getVolunteerRequest().setLatestMessage(message);
+        animalRecord.setStatus("Volunteer " + status);
+        animalRecord.getVolunteerRequest().setStatus("Volunteer " + status);
         
         JOptionPane.showMessageDialog(null, "Thank you for your effort in saving life");
     }//GEN-LAST:event_btnSubmitActionPerformed

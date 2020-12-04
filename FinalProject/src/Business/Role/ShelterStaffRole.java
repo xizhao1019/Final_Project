@@ -26,7 +26,7 @@ public class ShelterStaffRole extends Role {
             Enterprise enterprise, 
             Network network,
             EcoSystem business) {
-        return new ShelterStaffWorkAreaJPanel(userProcessContainer);
+        return new ShelterStaffWorkAreaJPanel(userProcessContainer, account);
     }
     
     @Override
