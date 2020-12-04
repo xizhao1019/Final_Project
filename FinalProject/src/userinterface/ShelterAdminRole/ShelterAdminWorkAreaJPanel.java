@@ -5,6 +5,9 @@
  */
 package userinterface.ShelterAdminRole;
 
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -15,12 +18,19 @@ import javax.swing.JPanel;
 public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    UserAccount userAccount;
+    Organization organization;
+    
     /**
      * Creates new form ShelterStaffWorkAreaJPanel
      */
-    public ShelterAdminWorkAreaJPanel(JPanel container) {
+    public ShelterAdminWorkAreaJPanel(JPanel container, UserAccount ua, Organization org) {
         initComponents();
         this.container = container;
+        this.userAccount = ua;
+        this.organization = org;
+        
+        valueLabel.setText(ua.getEmployee().getName());
     }
 
     /**
@@ -33,18 +43,15 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnManageAdoptions = new javax.swing.JButton();
         btnManageStaff = new javax.swing.JButton();
         btnViewAnimals = new javax.swing.JButton();
-        btnAssignAnimals = new javax.swing.JButton();
         btnProcessRequests = new javax.swing.JButton();
+        valueLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Shelter Admin Work Area");
-
-        jTextField1.setText("<value>");
 
         jLabel3.setText("Hello,");
 
@@ -71,19 +78,14 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnAssignAnimals.setText("Assign Animals");
-        btnAssignAnimals.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignAnimalsActionPerformed(evt);
-            }
-        });
-
-        btnProcessRequests.setText("Process Staff Requests");
+        btnProcessRequests.setText("Process Requests");
         btnProcessRequests.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProcessRequestsActionPerformed(evt);
             }
         });
+
+        valueLabel.setText("<Hospital Admin>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -93,44 +95,44 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(167, 167, 167)
-                        .addComponent(jLabel3)
-                        .addGap(26, 26, 26)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(247, 247, 247)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAssignAnimals, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnManageAdoptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnManageStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnViewAnimals, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1)
-                            .addComponent(btnProcessRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, 0))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(232, 232, 232)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnManageAdoptions, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnManageStaff, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnViewAnimals, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnProcessRequests, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(46, 46, 46)
+                    .addComponent(jLabel2)
+                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addComponent(btnViewAnimals)
+                .addGap(72, 72, 72)
+                .addComponent(btnProcessRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnViewAnimals, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnManageAdoptions, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAssignAnimals)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProcessRequests)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnManageAdoptions)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnManageStaff)
-                .addGap(15, 15, 15))
+                .addComponent(btnManageStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -142,14 +144,6 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(container);
     }//GEN-LAST:event_btnManageAdoptionsActionPerformed
 
-    private void btnAssignAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignAnimalsActionPerformed
-        // TODO add your handling code here:
-        AssignAnimalsJPanel jp = new AssignAnimalsJPanel(container);
-        container.add("AssignAnimalsJPanel",jp);
-        CardLayout layout = (CardLayout)container.getLayout();
-        layout.next(container);
-    }//GEN-LAST:event_btnAssignAnimalsActionPerformed
-
     private void btnViewAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAnimalsActionPerformed
         // TODO add your handling code here:
         ViewAnimalsJPanel jp = new ViewAnimalsJPanel(container);
@@ -160,7 +154,7 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnProcessRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessRequestsActionPerformed
         // TODO add your handling code here:
-        ProcessStaffRequestsJPanel jp = new ProcessStaffRequestsJPanel(container);
+        ProcessCoordinatorRequestsJPanel jp = new ProcessCoordinatorRequestsJPanel(container, userAccount, organization);
         container.add("ProcessStaffRequestsJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -168,7 +162,7 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStaffActionPerformed
         // TODO add your handling code here:
-        ManageStaffJPanel jp = new ManageStaffJPanel(container);
+        ManageStaffJPanel jp = new ManageStaffJPanel(container, organization);
         container.add("ManageStaffJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -176,7 +170,6 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAssignAnimals;
     private javax.swing.JButton btnManageAdoptions;
     private javax.swing.JButton btnManageStaff;
     private javax.swing.JButton btnProcessRequests;
@@ -184,6 +177,6 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }

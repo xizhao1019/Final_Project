@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class VetWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel  container;
-    UserAccount userAccount;;
+    UserAccount userAccount;
     /**
      * Creates new form DogVetWorkAreaJPanel
      */
@@ -178,6 +178,7 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
             }
         }
     }
+    
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
         int row = tblVetWork.getSelectedRow();
@@ -188,6 +189,14 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
         AnimalRecord ar = (AnimalRecord)tblVetWork.getValueAt(row, 0);
         if (ar.getVetRequest().getStatus() == ("Vet Declined")) {
             JOptionPane.showMessageDialog(null, "You cannot handle this declined task!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!(ar.getVetRequest().getStatus().equals("Vet Accepted")) || !(ar.getVetRequest().getStatus().equals("Vet Completed"))) {
+            JOptionPane.showMessageDialog(null, " Accept task first!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!(ar.getVolunteerRequest().getStatus().equals("Volunteer Completed"))) {
+            JOptionPane.showMessageDialog(null, " Pls wait for volunteer takes animal here!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         VetProcessJPanel jp = new VetProcessJPanel(container, ar);

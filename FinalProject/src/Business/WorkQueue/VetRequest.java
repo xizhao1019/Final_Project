@@ -14,6 +14,19 @@ import Business.Organization.Organization;
 public class VetRequest extends WorkRequest{
     
     private Organization hospitalOrg;
+    private boolean ableForShelter;
+    
+    public VetRequest() {
+        this.ableForShelter = false;
+    }
+
+    public boolean isAbleForShelter() {
+        return ableForShelter;
+    }
+
+    public void setAbleForShelter(boolean ableForShelter) {
+        this.ableForShelter = ableForShelter;
+    }
 
     public Organization getHospitalOrg() {
         return hospitalOrg;
