@@ -22,7 +22,7 @@ public class AdoptionEnterpriseAdminRole extends Role{
             Enterprise enterprise, 
             Network network, 
             EcoSystem business) {
-        return new AdoptionEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise);
+        return new AdoptionEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise, account);
     }
     
     @Override

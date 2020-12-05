@@ -6,6 +6,8 @@
 package Business.WorkQueue;
 
 import Business.Network.Network;
+import Business.UserAccount.UserAccount;
+import java.util.Random;
 
 /**
  *
@@ -13,7 +15,9 @@ import Business.Network.Network;
  */
 public class AdopterRegistrationRequest extends WorkRequest{
     
-    
+    private UserAccount adopterAccount;
+    private String ID;
+    private Random random = new Random();
     private String firstName;
     private String lastName;
     private String doB;
@@ -26,6 +30,18 @@ public class AdopterRegistrationRequest extends WorkRequest{
     private String apt;
     private String zipCode;
 
+    public AdopterRegistrationRequest() {
+        String s = String.format("%04d", random.nextInt(10000));
+        ID = "D"+ s;
+    }
+    
+    public UserAccount getAdopterAccount() {
+        return adopterAccount;
+    }
+
+    public void setAdopterAccount(UserAccount adopterAccount) {
+        this.adopterAccount = adopterAccount;
+    }
 
     public String getFirstName() {
         return firstName;
