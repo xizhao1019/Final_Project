@@ -409,7 +409,7 @@ public class PetOwnerRegistrationJPanel extends javax.swing.JPanel {
                 && !imagePath.isBlank()){
             
             Employee employee = new Employee();
-            String name = firstName + lastName;
+            String name = firstName + " " + lastName;
             employee.setName(name);
             
         for (Network state : system.getNetworkList()) {
