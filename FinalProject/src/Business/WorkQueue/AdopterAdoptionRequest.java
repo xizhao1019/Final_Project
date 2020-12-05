@@ -18,15 +18,25 @@ public class AdopterAdoptionRequest extends WorkRequest{
     private String ID;
     private Random random;
     private String id;
+    private boolean adopted;
 
     public AdopterAdoptionRequest() {
-        id = String.format("%04d", random.nextInt(10000));
-        ID = "R" + id ;
+        this.id = String.format("%04d", random.nextInt(10000));
+        this.ID = "R" + id ;
+        this.adopted = false;
     }
 
     public String getID() {
         return ID;
     }
+
+    public boolean isAdopted() {
+        return adopted;
+    }
+
+    public void setAdopted(boolean adopted) {
+        this.adopted = adopted;
+    } 
 
     public AdopterRegistrationRequest getArr() {
         return adopter;

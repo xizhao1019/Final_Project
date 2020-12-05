@@ -412,9 +412,11 @@ public class NewAssignedCaseJPanel extends javax.swing.JPanel {
         txtVolunteer.setText(ar.getVolunteerRequest().getVolunteer()==null ? "--":ar.getVolunteerRequest().getVolunteer().getEmployee().getName());
         txtHospital.setText(ar.getHospitalRequest().getHospitalOrg() ==null ? "--": ar.getHospitalRequest().getHospitalOrg().getName());
         txtShelter.setText(ar.getShelterRequest().getShelterOrg() ==null ? "--": ar.getShelterRequest().getShelterOrg().getName());
-        for (String s : ar.getMsgList()) {
-            txtMessage.setText(s);
+        String message = "";
+        for (int i = 0; i < ar.getMsgList().size()-1; i++) {
+            message += ar.getMsgList().get(i) + "/n";
         }
+        txtMessage.setText(message);
         
         String imagePath = ar.getReportingRequest().getImagePath();
         Image im = Toolkit.getDefaultToolkit().createImage(imagePath);

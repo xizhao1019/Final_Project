@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.VolunteerRole;
+package userinterface.ShelterStaffRole;
 
 import Business.WorkQueue.AnimalRecord;
 import java.awt.CardLayout;
@@ -15,14 +15,14 @@ import javax.swing.JPanel;
  *
  * @author suoxiyue
  */
-public class VolunteerProcessJPanel extends javax.swing.JPanel {
+public class StaffProcessJPanel extends javax.swing.JPanel {
 
-     private JPanel container;
+    private JPanel container;
      AnimalRecord animalRecord;
     /**
-     * Creates new form TransporterProcessJPanel
+     * Creates new form StaffProcessJPanel
      */
-    public VolunteerProcessJPanel(JPanel container, AnimalRecord ar) {
+    public StaffProcessJPanel(JPanel container, AnimalRecord ar) {
         initComponents();
         this.container = container;
         this.animalRecord = ar;
@@ -37,25 +37,14 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        comboStatus = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMessage = new javax.swing.JTextArea();
-
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel1.setText("Volunteer Process");
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Status:");
-
-        comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Completed" }));
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Additional Message:");
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        comboStatus = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +64,17 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
         txtMessage.setRows(5);
         jScrollPane1.setViewportView(txtMessage);
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel1.setText("Shelter Staff Process (Pick up animal)");
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Status:");
+
+        comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pet transferred to shelter" }));
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Additional Message:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,12 +93,12 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
-                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(292, Short.MAX_VALUE))
+                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,35 +120,32 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        String status = (String)comboStatus.getSelectedItem();
+        animalRecord.getShelterRequest().setStatus(status);
+
+        String message = txtMessage.getText();
+        animalRecord.setLatestMessage(message);
+        animalRecord.setStatus("Animal arrived shelter");
+        animalRecord.addMessage("Shelter Staff completed the task. __Message: " + message);
+        JOptionPane.showMessageDialog(null, "Thank you, process completed");
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         container.remove(this);
         Component[] componentArray = container.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        VolunteerWorkAreaJPanel jp = (VolunteerWorkAreaJPanel) component;
+        ShelterStaffWorkAreaJPanel jp = (ShelterStaffWorkAreaJPanel) component;
         jp.popTable();
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
-
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        // TODO add your handling code here:
-        String status = (String)comboStatus.getSelectedItem();
-        animalRecord.getVolunteerRequest().setStatus(status); // == Volunteer Completed
-        
-        String message = txtMessage.getText();
-        animalRecord.setLatestMessage(message);
-        animalRecord.addMessage("Volunteer " + status + message);
-        animalRecord.getVolunteerRequest().setLatestMessage(message);
-        animalRecord.setStatus("Volunteer " + status);
-        animalRecord.getVolunteerRequest().setStatus("Volunteer " + status);
-        animalRecord.addMessage("Vet completed the task.");
-        JOptionPane.showMessageDialog(null, "Thank you for your effort in saving life");
-    }//GEN-LAST:event_btnSubmitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

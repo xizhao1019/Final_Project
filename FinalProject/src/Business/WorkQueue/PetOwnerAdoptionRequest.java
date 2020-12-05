@@ -18,14 +18,24 @@ public class PetOwnerAdoptionRequest extends WorkRequest{
     private String ID;
     private Random random;
     private String id;
+    private boolean adopted;
 
     public PetOwnerAdoptionRequest() {
         id = String.format("%04d", random.nextInt(10000));
         ID = "R" + id ;
+        this.adopted = false;
     }
 
     public String getID() {
         return ID;
+    }
+
+    public boolean isAdopted() {
+        return adopted;
+    }
+
+    public void setAdopted(boolean adopted) {
+        this.adopted = adopted;
     }
 
     public PetOwnerRegistrationRequest getArr() {
