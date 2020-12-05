@@ -6,6 +6,7 @@
 package Business.WorkQueue;
 
 import Business.Network.Network;
+import Business.UserAccount.UserAccount;
 import java.util.Random;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Random;
  */
 public class PetOwnerRegistrationRequest extends WorkRequest{
     
+    private UserAccount petOwnerAccount;
     private String ID;
     private Random random = new Random();
     private String firstName;
@@ -35,8 +37,18 @@ public class PetOwnerRegistrationRequest extends WorkRequest{
     private String petName;
 
     public PetOwnerRegistrationRequest() {
-         ID = String.format("%04d", random.nextInt(10000));
+        String s = String.format("%04d", random.nextInt(10000));
+         ID = "P"+ s;
     }
+    
+    public UserAccount getPetOwnerAccount() {
+        return petOwnerAccount;
+    }
+
+    public void setPetOwnerAccount(UserAccount petOwnerAccount) {
+        this.petOwnerAccount = petOwnerAccount;
+    }
+    
 
     public String getID() {
         return ID;

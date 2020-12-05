@@ -3,6 +3,7 @@
 package userinterface.AdoptionEnterpriseAdminRole;
 
 import Business.Enterprise.Enterprise;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -14,11 +15,13 @@ public class AdoptionEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
     Enterprise enterprise;
+    UserAccount ua;
     /** Creates new form AdminWorkAreaJPanel */
-    public AdoptionEnterpriseAdminWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise) {
+    public AdoptionEnterpriseAdminWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise, UserAccount ua) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
+        this.ua = ua;
         valueLabel.setText(enterprise.getName());
     }
     
@@ -68,7 +71,7 @@ public class AdoptionEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
         // TODO add your handling code here:
-        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, enterprise);
+        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, enterprise, ua);
         userProcessContainer.add("ManageUserAccountJPanel", muajp);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
