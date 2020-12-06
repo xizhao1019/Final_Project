@@ -322,8 +322,6 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
                             if (org instanceof AdopterOrganization) {
                                 UserAccount ua = org.getUserAccountDirectory().createUserAccount(userName, password, employee, new AdopterRole());
                                 ua.setState(state);
-//                                ua.setEnterprise(enterprise);
-//                                ua.setOrg(org);
 
                                 adopter.setAdopterAccount(ua);
                                 adopter.setFirstName(firstName);
@@ -338,6 +336,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
                                 adopter.setZipCode(zipcode);
                                 
                                 org.getWorkQueue().getWorkRequestList().add(adopter);
+                                ua.getWorkQueue().getWorkRequestList().add(adopter);
                         }
                     }
                 }
