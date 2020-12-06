@@ -41,4 +41,8 @@ public class AdopterRole extends Role {
         return new ProcessAdopterRequestJPanel(userProcessContainer);
     }
     
+    @Override
+    public String toString(){
+        return (RoleType.Adopter.getValue());
+    }
 }

@@ -421,8 +421,6 @@ public class PetOwnerRegistrationJPanel extends javax.swing.JPanel {
                                 UserAccount ua = org.getUserAccountDirectory()
                                         .createUserAccount(userName, password, employee, new PetOwnerRole());
                                 ua.setState(state);
-//                                ua.setEnterprise(enterprise);
-//                                ua.setOrg(org);
 
                                 petOwner.setPetOwnerAccount(ua);
                                 petOwner.setFirstName(firstName);
@@ -440,10 +438,10 @@ public class PetOwnerRegistrationJPanel extends javax.swing.JPanel {
                                 petOwner.setBreed(breed);
                                 petOwner.setAge(age);
                                 petOwner.setPetName(petName);
-                                
                                 petOwner.setImagePath(imagePath);
                                 
                                 org.getWorkQueue().getWorkRequestList().add(petOwner);
+                                ua.getWorkQueue().getWorkRequestList().add(petOwner);
                             }
                         }
                     }
