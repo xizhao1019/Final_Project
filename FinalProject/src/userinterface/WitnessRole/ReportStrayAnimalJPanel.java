@@ -236,7 +236,8 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         animalRecord.getReportingRequest().setAnimalType(comboAnimalType.getSelectedItem().toString());
         String message = txtMessage.getText();
         animalRecord.setLatestMessage(message);
-        animalRecord.getMsgList().add(message);
+        //animalRecord.getMsgList().add(message);
+        animalRecord.addMessage(message);
         animalRecord.getReportingRequest().setWitness(userAccount);
         animalRecord.setStatus("Witness Reported");
         

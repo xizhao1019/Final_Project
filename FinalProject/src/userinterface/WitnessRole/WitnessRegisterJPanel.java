@@ -249,7 +249,6 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
 //                                ua.setEnterprise(enterprise);
 //                                ua.setOrg(org);
 
-                                witness = new WitnessRegistrationRequest();
                                 witness.setWitnessAccount(ua);
                                 witness.setCity(city);
                                 witness.setStreetLine(streetline);

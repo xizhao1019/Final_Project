@@ -18,7 +18,8 @@ public class AnimalRecord extends WorkRequest{
     private HospitalRequest hospitalRequest;
     private VetRequest vetRequest;
     private ShelterRequest shelterRequest;
-    private ShelterStaffRequest shelterStaffRequest;
+    private AdopterAdoptionRequest adopterAdoptionRequest;
+    private PetOwnerAdoptionRequest petOwnerAdoptionRequest;
             
     private LocationPoint shelterLocationPoint;
     private String petName;
@@ -29,6 +30,7 @@ public class AnimalRecord extends WorkRequest{
     private String ID;
     private String id;
     private Random random = new Random();
+    private boolean adopted;
     
     public AnimalRecord() {
         this.reportingRequest = new AnimalReportingRequest();
@@ -36,10 +38,35 @@ public class AnimalRecord extends WorkRequest{
         this.hospitalRequest = new HospitalRequest();
         this.vetRequest = new VetRequest();
         this.shelterRequest = new ShelterRequest();
-        this.shelterStaffRequest = new ShelterStaffRequest();
+        //this.shelterStaffRequest = new ShelterStaffRequest();
         this.shelterLocationPoint = new LocationPoint();
         id = String.format("%04d",random.nextInt(10000));
         ID = "A" + id;
+        this.adopted = false;
+    }
+
+    public boolean isAdopted() {
+        return adopted;
+    }
+
+    public void setAdopted(boolean adopted) {
+        this.adopted = adopted;
+    }
+
+    public AdopterAdoptionRequest getAdopterAdoptionRequest() {
+        return adopterAdoptionRequest;
+    }
+
+    public void setAdopterAdoptionRequest(AdopterAdoptionRequest adopterAdoptionRequest) {
+        this.adopterAdoptionRequest = adopterAdoptionRequest;
+    }
+
+    public PetOwnerAdoptionRequest getPetOwnerAdoptionRequest() {
+        return petOwnerAdoptionRequest;
+    }
+
+    public void setPetOwnerAdoptionRequest(PetOwnerAdoptionRequest petOwnerAdoptionRequest) {
+        this.petOwnerAdoptionRequest = petOwnerAdoptionRequest;
     }
             
     
@@ -73,14 +100,6 @@ public class AnimalRecord extends WorkRequest{
 
     public void setShelterRequest(ShelterRequest shelterRequest) {
         this.shelterRequest = shelterRequest;
-    }
-
-    public ShelterStaffRequest getShelterStaffRequest() {
-        return shelterStaffRequest;
-    }
-
-    public void setShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) {
-        this.shelterStaffRequest = shelterStaffRequest;
     }
 
     public String getPetName() {

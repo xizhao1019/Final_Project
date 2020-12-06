@@ -282,8 +282,9 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
         ar.getShelterRequest().setAssignedStaff(ua);
         ar.getShelterRequest().setStatus("Staff Assigned");
         ua.getWorkQueue().getWorkRequestList().add(ar); // add animalrecord to staff's work list
+        txtMessage.setEnabled(false);
         JOptionPane.showMessageDialog(null, "Staff assigned");
-        popTable();
+        popTable();        
     }//GEN-LAST:event_btnAssignActionPerformed
 
 

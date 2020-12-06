@@ -279,7 +279,8 @@ public class NewReportedCasesJPanel extends javax.swing.JPanel {
 
             //add animal record to workqueue
             //organization.getWorkQueue().getWorkRequestList().add(animalrecord);
-
+            String message = "Coordinator Admin assign case to coordinator " + ua;
+            ar.addMessage(message);
             JOptionPane.showMessageDialog(null, "Coordinator assigned!");
 
             popTable();

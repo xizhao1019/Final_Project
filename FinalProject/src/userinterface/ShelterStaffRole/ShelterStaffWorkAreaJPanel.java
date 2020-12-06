@@ -50,6 +50,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         tblAnimals = new javax.swing.JTable();
         btnUpdateInfo = new javax.swing.JButton();
         valueLabel = new javax.swing.JLabel();
+        btnProcess = new javax.swing.JButton();
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -82,16 +83,6 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblAnimals);
-        if (tblAnimals.getColumnModel().getColumnCount() > 0) {
-            tblAnimals.getColumnModel().getColumn(0).setResizable(false);
-            tblAnimals.getColumnModel().getColumn(1).setResizable(false);
-            tblAnimals.getColumnModel().getColumn(2).setResizable(false);
-            tblAnimals.getColumnModel().getColumn(3).setResizable(false);
-            tblAnimals.getColumnModel().getColumn(4).setResizable(false);
-            tblAnimals.getColumnModel().getColumn(5).setResizable(false);
-            tblAnimals.getColumnModel().getColumn(6).setResizable(false);
-            tblAnimals.getColumnModel().getColumn(7).setResizable(false);
-        }
 
         btnUpdateInfo.setText("Update Information");
         btnUpdateInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +93,13 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
 
         valueLabel.setText("<Shelter Staff>");
 
+        btnProcess.setText("Process");
+        btnProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,7 +108,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                 .addGap(151, 151, 151))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,8 +124,10 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(240, 240, 240)
-                        .addComponent(btnUpdateInfo)))
-                .addGap(499, 499, 499))
+                        .addComponent(btnUpdateInfo)
+                        .addGap(39, 39, 39)
+                        .addComponent(btnProcess)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +147,9 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43)
-                .addComponent(btnUpdateInfo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdateInfo)
+                    .addComponent(btnProcess))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -188,8 +190,32 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(container);
     }//GEN-LAST:event_btnUpdateInfoActionPerformed
 
+    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
+        // TODO add your handling code here:
+        int row = tblAnimals.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a task from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord)tblAnimals.getValueAt(row, 0);
+        
+        if (ar.getVetRequest().isAbleForShelter() == false) {
+            JOptionPane.showMessageDialog(null, "Pls wait for vet to complete treat process.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else if (ar.getShelterRequest().getStatus().equals("Pet transferred to shelter")) {
+             JOptionPane.showMessageDialog(null, "Staff pick up process already completed", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            StaffProcessJPanel jp = new StaffProcessJPanel(container, ar);
+            container.add("VetProcessJPanel",jp);
+            CardLayout layout = (CardLayout)container.getLayout();
+            layout.next(container);
+        }
+    }//GEN-LAST:event_btnProcessActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnProcess;
     private javax.swing.JButton btnUpdateInfo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

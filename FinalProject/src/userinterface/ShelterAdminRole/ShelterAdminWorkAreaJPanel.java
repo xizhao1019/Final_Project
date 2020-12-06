@@ -146,7 +146,7 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnViewAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAnimalsActionPerformed
         // TODO add your handling code here:
-        ViewAnimalsJPanel jp = new ViewAnimalsJPanel(container);
+        ViewAnimalsJPanel jp = new ViewAnimalsJPanel(container, userAccount);
         container.add("ViewAnimalsJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);

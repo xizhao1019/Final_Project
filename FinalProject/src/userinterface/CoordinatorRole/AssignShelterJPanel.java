@@ -238,6 +238,7 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
         UserAccount ua = (UserAccount)comboAdmin.getSelectedItem();      
         
         animalRecord.getShelterRequest().setShelterOrg(org);
+        animalRecord.addMessage("Message to shelter: " + txtMessage.getText());
         animalRecord.getShelterRequest().setLatestMessage(txtMessage.getText());
         org.getWorkQueue().getWorkRequestList().add(animalRecord);
         ua.getWorkQueue().getWorkRequestList().add(animalRecord);

@@ -178,7 +178,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                 row[3] = ((AnimalRecord) wq).getHospitalRequest() ==null ? "--": ((AnimalRecord) wq).getHospitalRequest().getHospitalOrg().getName();
                 row[4] = ((AnimalRecord) wq).getReportingRequest().getWitness();
                 row[5] = ((AnimalRecord) wq).getLatestMessage();
-                row[6] = ((AnimalRecord) wq).getStatus();
+                row[6] = ((AnimalRecord) wq).getVolunteerRequest().getStatus();
                 row[7] = ((AnimalRecord) wq).getHospitalRequest().getStatus();
                 ((DefaultTableModel) tblVolunteerCase.getModel()).addRow(row);
            }
@@ -196,9 +196,9 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblVolunteerCase.getValueAt(row, 0);
-        if (ar.getVolunteerRequest().getStatus() == "Volunteer Declined") {
+        if (ar.getVolunteerRequest().getStatus().equals("Volunteer Declined")) {
             JOptionPane.showMessageDialog(null, "You cannot handle a rejected case");
-        } else if (!(ar.getVolunteerRequest().getStatus() == "Volunteer Accepted")) {
+        } else if (!(ar.getVolunteerRequest().getStatus().equals("Volunteer Accepted"))) {
             JOptionPane.showMessageDialog(null, "Please accept case first");
         } else {
             VolunteerProcessJPanel jp = new VolunteerProcessJPanel(container, ar);

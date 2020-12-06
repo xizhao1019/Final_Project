@@ -142,10 +142,11 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
         
         String message = txtMessage.getText();
         animalRecord.setLatestMessage(message);
+        animalRecord.addMessage("Volunteer " + status + message);
         animalRecord.getVolunteerRequest().setLatestMessage(message);
         animalRecord.setStatus("Volunteer " + status);
         animalRecord.getVolunteerRequest().setStatus("Volunteer " + status);
-        
+        animalRecord.addMessage("Vet completed the task.");
         JOptionPane.showMessageDialog(null, "Thank you for your effort in saving life");
     }//GEN-LAST:event_btnSubmitActionPerformed
 

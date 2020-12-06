@@ -172,8 +172,7 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
                     row[3] = ((AnimalRecord) wr).getHospitalRequest().getStatus();
                 } else {
                     row[3] = ((AnimalRecord) wr).getVetRequest().getStatus();
-                }
-          
+                }          
                 ((DefaultTableModel) tblVetWork.getModel()).addRow(row);
             }
         }
@@ -187,22 +186,24 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblVetWork.getValueAt(row, 0);
-        if (ar.getVetRequest().getStatus() == ("Vet Declined")) {
+        
+        
+        if (ar.getVetRequest().getStatus().equals("Vet Declined")) {
             JOptionPane.showMessageDialog(null, "You cannot handle this declined task!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        }
-        if (!(ar.getVetRequest().getStatus().equals("Vet Accepted")) || !(ar.getVetRequest().getStatus().equals("Vet Completed"))) {
-            JOptionPane.showMessageDialog(null, " Accept task first!", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if (!(ar.getVolunteerRequest().getStatus().equals("Volunteer Completed"))) {
+        } else if ( !(ar.getVolunteerRequest().getStatus().equals("Volunteer Completed"))) {
             JOptionPane.showMessageDialog(null, " Pls wait for volunteer takes animal here!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
+        } else if ( !(ar.getVetRequest().getStatus().equals("Vet Accepted")) && !(ar.getVetRequest().getStatus().equals("Vet Completed"))) {
+            JOptionPane.showMessageDialog(null, " Accept task first!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+        
+            VetProcessJPanel jp = new VetProcessJPanel(container, ar);
+            container.add("VetProcessJPanel",jp);
+            CardLayout layout = (CardLayout)container.getLayout();
+            layout.next(container);
         }
-        VetProcessJPanel jp = new VetProcessJPanel(container, ar);
-        container.add("VetProcessJPanel",jp);
-        CardLayout layout = (CardLayout)container.getLayout();
-        layout.next(container);
     }//GEN-LAST:event_btnProcessActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
@@ -214,7 +215,12 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblVetWork.getValueAt(row, 0);
         //System.out.println(ar.getHospitalRequest().getStatus()); // test
+        if (ar.getVetRequest().getStatus() != null && ar.getVetRequest().getStatus().equals("Vet Completed")) {
+            JOptionPane.showMessageDialog(null, "Already completed!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         ar.getVetRequest().setStatus("Vet Accepted");
+        ar.addMessage("Vet accepted task.");
         JOptionPane.showMessageDialog(null, "Task accepted");
         popTable();
     }//GEN-LAST:event_btnAcceptActionPerformed
@@ -227,7 +233,11 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblVetWork.getValueAt(row, 0);
+        if (ar.getVetRequest().getStatus().equals("Vet Completed")) {
+            JOptionPane.showMessageDialog(null, "Already completed!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
         ar.getVetRequest().setStatus("Vet Declined");
+        ar.addMessage("Vet rejected the task.");
         JOptionPane.showMessageDialog(null, "Task declined");
         popTable();
     }//GEN-LAST:event_btnDeclineActionPerformed
