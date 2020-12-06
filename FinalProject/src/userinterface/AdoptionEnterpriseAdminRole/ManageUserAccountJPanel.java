@@ -26,8 +26,6 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -78,14 +76,16 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     public void popComboBox(){
         roleComboBox.removeAllItems();
         orgComboBox.removeAllItems();
-        orgComboBox.addItem(Organization.Type.Adopter);
-        orgComboBox.addItem(Organization.Type.PetOwner);
+        orgComboBox.addItem(adopterOrg);
+        orgComboBox.addItem(petOwnerOrg);
+        orgComboBox.setSelectedItem(petOwnerOrg);
         
         orgComboBox.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(final ActionEvent e) {
-               Organization.Type org = (Organization.Type) orgComboBox.getSelectedItem();
-               if (org == Organization.Type.Adopter) {
+               Organization org = (Organization) orgComboBox.getSelectedItem();
+               if (org.equals(adopterOrg)) {
+                    roleComboBox.removeAllItems();
                     roleComboBox.addItem(Role.RoleType.Adopter);
                     
                     typeComboBox.setEnabled(false);
@@ -93,9 +93,16 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                     txtAge.setEnabled(false);
                     txtPetName.setEnabled(false);
                     btnUpload.setEnabled(false);
-            
-               }else {
+               }
+               if(org.equals(petOwnerOrg)) {
+                    roleComboBox.removeAllItems();
                     roleComboBox.addItem(Role.RoleType.PetOwner);
+                    
+                    typeComboBox.setEnabled(true);
+                    txtBreed.setEnabled(true);
+                    txtAge.setEnabled(true);
+                    txtPetName.setEnabled(true);
+                    btnUpload.setEnabled(true);
                }
            }
        });
@@ -110,9 +117,12 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
-                Object row[] = new Object[2];
+                Object row[] = new Object[5];
                 row[0] = ua;
-                row[1] = ua.getRole();
+                row[1] = ua.getEmployee().getId();
+                row[2] = ua.getRole();
+                row[3] = ua.getUsername();
+                row[4] = ua.getPassword();
                 ((DefaultTableModel) userJTable.getModel()).addRow(row);
             }
         }
@@ -176,7 +186,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         btnReset = new javax.swing.JButton();
         roleComboBox = new javax.swing.JComboBox();
         orgComboBox = new javax.swing.JComboBox();
-        txtPetName1 = new javax.swing.JTextField();
 
         btnCreatAdopter.setText("Create Adopter");
         btnCreatAdopter.addActionListener(new java.awt.event.ActionListener() {
@@ -355,10 +364,10 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                                 .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtState, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                                .addComponent(orgComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(txtCity, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                                .addComponent(roleComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(orgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +375,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtLastName)
+                                                .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
@@ -379,7 +388,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(typeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtBreed, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,10 +399,11 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addComponent(txtStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -401,7 +411,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                             .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                .addComponent(txtAge, javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(txtAge, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addComponent(txtZipCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                         .addGap(84, 84, 84)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,11 +422,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtPetName, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txtPetName1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(txtPetName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -427,7 +433,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(84, 84, Short.MAX_VALUE))
+                .addGap(84, 84, 84))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,25 +447,48 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(38, 38, 38)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(orgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel5)
+                                            .addComponent(txtCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel7)
+                                            .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtApt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(97, 97, 97))
+                                    .addComponent(jLabel16)
+                                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(pictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUpload))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -467,60 +496,30 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(38, 38, 38)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(orgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(jLabel5)
-                                                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(jLabel7)
-                                                    .addComponent(roleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel16)
-                                            .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel18)
-                                            .addComponent(txtPetName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(pictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnUpload)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel18))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel17)
-                                    .addComponent(txtBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel20)
-                                    .addComponent(txtPetName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)))
+                                    .addComponent(txtStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtApt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(txtBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20)
+                            .addComponent(txtPetName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -556,6 +555,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
         
+        Role role = (Role) roleComboBox.getSelectedItem();
         
         if(!userName.isBlank() && !password.isBlank() && !city.isBlank() &&  
                 !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank()){
@@ -566,10 +566,12 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
          
             for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
                 if (org instanceof AdopterOrganization) {
+                    if (!role.equals(Role.RoleType.Adopter)) {
+                        JOptionPane.showMessageDialog(null, "Please select the correct role!", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
                     UserAccount ua = org.getUserAccountDirectory().createUserAccount(userName, password, employee, new AdopterRole());
                     ua.setState(userAccount.getState());
-//                                ua.setEnterprise(enterprise);
-//                                ua.setOrg(org);
                     adopter.setAdopterAccount(ua);
                     adopter.setFirstName(firstName);
                     adopter.setLastName(lastName);
@@ -583,6 +585,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                     adopter.setZipCode(zipcode);
 
                     org.getWorkQueue().getWorkRequestList().add(adopter);
+                    ua.getWorkQueue().getWorkRequestList().add(adopter);
             }
         }
             JOptionPane.showMessageDialog(null, "Register successfully!");
@@ -627,8 +630,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUploadActionPerformed
 
     private void btnCreatePetOwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatePetOwnerActionPerformed
-        // TODO add your handling code here:
-         // TODO add your handling code here:
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         Date date = DateChooser.getDate();
@@ -650,6 +651,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         String age = txtAge.getText();
         String petName = txtPetName.getText();
         
+        Role role = (Role) roleComboBox.getSelectedItem();
+        
         if(!userName.isBlank() && !password.isBlank() && !city.isBlank() &&  
                 !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank()
                 && !animalType.isBlank() && !breed.isBlank() && !age.isBlank() && !petName.isBlank()
@@ -661,12 +664,13 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             
             for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
                 if (org instanceof PetOwnerOrganization) {
+                    if (!role.equals(Role.RoleType.Adopter)) {
+                        JOptionPane.showMessageDialog(null, "Please select the correct role!", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
                     UserAccount ua = org.getUserAccountDirectory()
                             .createUserAccount(userName, password, employee, new PetOwnerRole());
                     ua.setState(userAccount.getState());
-//                                ua.setEnterprise(enterprise);
-//                                ua.setOrg(org);
-
                     petOwner.setPetOwnerAccount(ua);
                     petOwner.setFirstName(firstName);
                     petOwner.setLastName(lastName);
@@ -687,6 +691,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                     petOwner.setImagePath(imagePath);
 
                     org.getWorkQueue().getWorkRequestList().add(petOwner);
+                    ua.getWorkQueue().getWorkRequestList().add(petOwner);
                 }
             }
         
@@ -721,6 +726,9 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select any row!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        orgComboBox.setEnabled(false);
+        roleComboBox.setEnabled(false);
+        typeComboBox.setEnabled(false);
         
         txtFirstName.setEditable(false);
         txtLastName.setEditable(false);
@@ -740,70 +748,84 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         
         btnUpload.setEnabled(false);
 
-        WorkRequest user = (WorkRequest)userJTable.getValueAt(row, 0);
-        if (user instanceof AdopterRegistrationRequest ) {
-            txtFirstName.setText(((AdopterRegistrationRequest) user).getFirstName());
-            txtLastName.setText(((AdopterRegistrationRequest) user).getLastName());
+        UserAccount user = (UserAccount)userJTable.getValueAt(row, 0);
+        for (WorkRequest wq : user.getWorkQueue().getWorkRequestList()) {
+            if (wq instanceof AdopterRegistrationRequest ) {
+            txtFirstName.setText(((AdopterRegistrationRequest) wq).getFirstName());
+            txtLastName.setText(((AdopterRegistrationRequest) wq).getLastName());
             try {
                 Date dob = new SimpleDateFormat("MM-dd-yyyy").parse(
-                        ((AdopterRegistrationRequest) user).getDoB());
+                        ((AdopterRegistrationRequest) wq).getDoB());
                 DateChooser.setDate(dob);
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null, ex, "Warning", JOptionPane.WARNING_MESSAGE);
             }
             
-            txtNumber.setText(((AdopterRegistrationRequest) user).getNumber());
-            txtEmail.setText(((AdopterRegistrationRequest) user).getEmail());
-            txtUserName.setText(((AdopterRegistrationRequest) user).getAdopterAccount().getUsername());
-            txtPassword.setText(((AdopterRegistrationRequest) user).getAdopterAccount().getPassword());
-            txtCity.setText(((AdopterRegistrationRequest) user).getCity());
-            txtStreet.setText(((AdopterRegistrationRequest) user).getStreet());
-            txtApt.setText(((AdopterRegistrationRequest) user).getApt());
-            txtZipCode.setText(((AdopterRegistrationRequest) user).getZipCode());
+            orgComboBox.setSelectedItem(adopterOrg);
+            roleComboBox.setSelectedItem(Role.RoleType.Adopter);
+            
+            txtNumber.setText(((AdopterRegistrationRequest) wq).getNumber());
+            txtEmail.setText(((AdopterRegistrationRequest) wq).getEmail());
+            txtUserName.setText(((AdopterRegistrationRequest) wq).getAdopterAccount().getUsername());
+            txtPassword.setText(((AdopterRegistrationRequest) wq).getAdopterAccount().getPassword());
+            txtCity.setText(((AdopterRegistrationRequest) wq).getCity());
+            txtStreet.setText(((AdopterRegistrationRequest) wq).getStreet());
+            txtApt.setText(((AdopterRegistrationRequest) wq).getApt());
+            txtZipCode.setText(((AdopterRegistrationRequest) wq).getZipCode());
             
             txtBreed.setText("--");
             txtAge.setText("--");
             txtPetName.setText("--");
             pictureLabel.setIcon(null);
-        }
-        
-        if (user instanceof PetOwnerRegistrationRequest ) {
-            txtFirstName.setText(((PetOwnerRegistrationRequest) user).getFirstName());
-            txtLastName.setText(((PetOwnerRegistrationRequest) user).getLastName());
+            }
+            
+            if (wq instanceof PetOwnerRegistrationRequest ) {
+            txtFirstName.setText(((PetOwnerRegistrationRequest) wq).getFirstName());
+            txtLastName.setText(((PetOwnerRegistrationRequest) wq).getLastName());
             try {
                 Date dob = new SimpleDateFormat("MM-dd-yyyy").parse(
-                        ((PetOwnerRegistrationRequest) user).getDoB());
+                        ((PetOwnerRegistrationRequest) wq).getDoB());
                 DateChooser.setDate(dob);
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null, ex, "Warning", JOptionPane.WARNING_MESSAGE);
             }
             
-            txtNumber.setText(((PetOwnerRegistrationRequest) user).getNumber());
-            txtEmail.setText(((PetOwnerRegistrationRequest) user).getEmail());
-            txtUserName.setText(((PetOwnerRegistrationRequest) user).getPetOwnerAccount().getUsername());
-            txtPassword.setText(((PetOwnerRegistrationRequest) user).getPetOwnerAccount().getPassword());
-            txtCity.setText(((PetOwnerRegistrationRequest) user).getCity());
-            txtStreet.setText(((PetOwnerRegistrationRequest) user).getStreet());
-            txtApt.setText(((PetOwnerRegistrationRequest) user).getApt());
-            txtZipCode.setText(((PetOwnerRegistrationRequest) user).getZipCode());
+            orgComboBox.setSelectedItem(petOwnerOrg);
+            roleComboBox.setSelectedItem(Role.RoleType.PetOwner);
             
-            txtBreed.setText(((PetOwnerRegistrationRequest) user).getBreed());
-            txtAge.setText(((PetOwnerRegistrationRequest) user).getAge());
-            txtPetName.setText(((PetOwnerRegistrationRequest) user).getPetName());
+            txtNumber.setText(((PetOwnerRegistrationRequest) wq).getNumber());
+            txtEmail.setText(((PetOwnerRegistrationRequest) wq).getEmail());
+            txtUserName.setText(((PetOwnerRegistrationRequest) wq).getPetOwnerAccount().getUsername());
+            txtPassword.setText(((PetOwnerRegistrationRequest) wq).getPetOwnerAccount().getPassword());
+            txtCity.setText(((PetOwnerRegistrationRequest) wq).getCity());
+            txtStreet.setText(((PetOwnerRegistrationRequest) wq).getStreet());
+            txtApt.setText(((PetOwnerRegistrationRequest) wq).getApt());
+            txtZipCode.setText(((PetOwnerRegistrationRequest) wq).getZipCode());
             
-            imagePath = ((PetOwnerRegistrationRequest) user).getImagePath();
+            txtBreed.setText(((PetOwnerRegistrationRequest) wq).getBreed());
+            txtAge.setText(((PetOwnerRegistrationRequest) wq).getAge());
+            txtPetName.setText(((PetOwnerRegistrationRequest) wq).getPetName());
+            
+            imagePath = ((PetOwnerRegistrationRequest) wq).getImagePath();
             Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
             im = im.getScaledInstance(pictureLabel.getWidth(), pictureLabel.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon ii = new ImageIcon(im);
             pictureLabel.setIcon(ii);
+            }
         }
     }//GEN-LAST:event_btnViewDetailActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
+        orgComboBox.setEnabled(true);
+        orgComboBox.setSelectedItem(Organization.Type.PetOwner);
+        roleComboBox.setEnabled(true);
+        typeComboBox.setEnabled(true);
+        
         txtFirstName.setText("");
         txtLastName.setText("");
         DateChooser.setDate(null);
+        DateChooser.setEnabled(true);
         txtNumber.setText("");
         txtEmail.setText("");
         txtUserName.setText("");
@@ -863,7 +885,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtNumber;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPetName;
-    private javax.swing.JTextField txtPetName1;
     private javax.swing.JTextField txtState;
     private javax.swing.JTextField txtStreet;
     private javax.swing.JTextField txtUserName;
