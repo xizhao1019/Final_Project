@@ -81,15 +81,6 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblRequest);
-        if (tblRequest.getColumnModel().getColumnCount() > 0) {
-            tblRequest.getColumnModel().getColumn(0).setResizable(false);
-            tblRequest.getColumnModel().getColumn(1).setResizable(false);
-            tblRequest.getColumnModel().getColumn(2).setResizable(false);
-            tblRequest.getColumnModel().getColumn(3).setResizable(false);
-            tblRequest.getColumnModel().getColumn(4).setResizable(false);
-            tblRequest.getColumnModel().getColumn(5).setResizable(false);
-            tblRequest.getColumnModel().getColumn(6).setResizable(false);
-        }
 
         btnApprove.setText("Approve");
         btnApprove.addActionListener(new java.awt.event.ActionListener() {
@@ -144,24 +135,23 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(74, 74, 74))
+                                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(comboStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(63, 63, 63)))
-                        .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                        .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +179,7 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -270,6 +260,11 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
+        
+        if (ar.getShelterRequest().getStatus() != "Shelter Admin Approved") {
+            JOptionPane.showMessageDialog(null, "Please approve before assign to staff", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         UserAccount ua = (UserAccount)comboStaff.getSelectedItem();
         if (ua == null) {

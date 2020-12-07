@@ -5,6 +5,7 @@
  */
 package userinterface.WitnessRole;
 
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AnimalRecord;
@@ -232,6 +233,10 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);  
             return;
         }
+        if (txtMessage.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Please write a message to volunteer", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         animalRecord.getReportingRequest().setCity(txtCity.getText());
         animalRecord.getReportingRequest().setAnimalType(comboAnimalType.getSelectedItem().toString());
         String message = txtMessage.getText();
@@ -267,6 +272,7 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
             lblPath.setText("Image Path: " + imagePath);
             
             animalRecord.getReportingRequest().setImagePath(imagePath);
+            animalRecord.setImagePath(imagePath);
                    
             Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
             im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);

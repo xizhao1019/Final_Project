@@ -5,8 +5,17 @@
  */
 package userinterface.PetOwnerRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.RescueEnterprise;
+import Business.Organization.Organization;
+import Business.Organization.AnimalShelterOrganization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AnimalRecord;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,15 +23,52 @@ import javax.swing.JPanel;
  */
 public class FindMyMissingPetJPanel extends javax.swing.JPanel {
 
-    JPanel container;
+    private JPanel container;
+    private UserAccount ua;
     /**
      * Creates new form PetOwnerWorkAreaJPanel
      */
-    public FindMyMissingPetJPanel(JPanel container) {
+    public FindMyMissingPetJPanel(JPanel container,UserAccount ua) {
         initComponents();
         this.container = container;
+        this.ua = ua;
+    }
+    
+    public void populateTable(String type, String breed, String age) {
+        DefaultTableModel model = (DefaultTableModel)animalTable.getModel();
+        model.setRowCount(0);
+        
+        boolean found = false;
+        for (Enterprise e : ua.getState().getEnterpriseDirectory().getEnterpriseList()) {
+            if (e instanceof RescueEnterprise) {
+                for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof AnimalShelterOrganization) {
+                        for(WorkRequest animal : org.getWorkQueue().getWorkRequestList()){
+                            if (animal instanceof AnimalRecord) {
+                                if (((AnimalRecord) animal).getReportingRequest().getAnimalType().equals(type)
+                                        && ((AnimalRecord) animal).getBreed().contains(breed)
+                                        && ((AnimalRecord) animal).getAge().contains(age)) {
+                                    Object row[] = new Object[6];
+                                    row[0] = animal;
+                                    row[1] = ((AnimalRecord) animal).getReportingRequest().getAnimalType();
+                                    row[2] = ((AnimalRecord) animal).getBreed();
+                                    row[3] = ((AnimalRecord) animal).getAge();
+                                    row[4] = ((AnimalRecord) animal).getShelterRequest().getShelterOrg();
+                                    row[5] = ((AnimalRecord) animal).getStatus();
+                                    found = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (!found) {
+            JOptionPane.showMessageDialog(null, "No matched animal found!");
+        }
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,15 +82,15 @@ public class FindMyMissingPetJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        typeComboBox = new javax.swing.JComboBox<>();
+        btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        animalTable = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtAge = new javax.swing.JTextField();
         btnViewDetail = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        txtBreed = new javax.swing.JTextField();
 
         jLabel1.setText("Find My Missing Pet");
 
@@ -54,13 +100,16 @@ public class FindMyMissingPetJPanel extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Breed:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dog", "Cat", "Other" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Search");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        animalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -79,14 +128,14 @@ public class FindMyMissingPetJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane1.setViewportView(animalTable);
+        if (animalTable.getColumnModel().getColumnCount() > 0) {
+            animalTable.getColumnModel().getColumn(0).setResizable(false);
+            animalTable.getColumnModel().getColumn(1).setResizable(false);
+            animalTable.getColumnModel().getColumn(2).setResizable(false);
+            animalTable.getColumnModel().getColumn(3).setResizable(false);
+            animalTable.getColumnModel().getColumn(4).setResizable(false);
+            animalTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -122,24 +171,28 @@ public class FindMyMissingPetJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(144, 144, 144)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(btnBack)
-                        .addGap(164, 164, 164)
-                        .addComponent(jLabel1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addGap(164, 164, 164)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(btnSearch))
+                                .addComponent(txtBreed, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
@@ -160,14 +213,14 @@ public class FindMyMissingPetJPanel extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(4, 4, 4)
+                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addComponent(btnSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnViewDetail)))
@@ -182,27 +235,44 @@ public class FindMyMissingPetJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnViewDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailActionPerformed
-        // TODO add your handling code here:
-        PetOwnerViewDetailJPanel jp = new PetOwnerViewDetailJPanel(container);
+        int row = animalTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(null, "Please select any row!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord animal = (AnimalRecord) animalTable.getValueAt(row, 0);
+        PetOwnerViewDetailJPanel jp = new PetOwnerViewDetailJPanel(container,ua,animal);
         container.add("PetOwnerViewDetailJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
     }//GEN-LAST:event_btnViewDetailActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String type = (String) typeComboBox.getSelectedItem();
+        String breed = txtBreed.getText();
+        String age = txtAge.getText();
+        
+        if (type.isBlank() || breed.isBlank() || age.isBlank()) {
+              JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else{
+            populateTable(type, breed, age);
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable animalTable;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnViewDetail;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtAge;
+    private javax.swing.JTextField txtBreed;
+    private javax.swing.JComboBox<String> typeComboBox;
     // End of variables declaration//GEN-END:variables
 }

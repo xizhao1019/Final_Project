@@ -170,7 +170,7 @@ public class AssignTaskToVetJPanel extends javax.swing.JPanel {
                         .addGap(151, 151, 151)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -225,6 +225,7 @@ public class AssignTaskToVetJPanel extends javax.swing.JPanel {
         ar.addMessage(message);
         ar.getHospitalRequest().setAssignedVet(ua);
         ar.getHospitalRequest().setStatus("Vet Assigned");
+        ar.getVetRequest().setStatus("Vet Assigned");
         ua.getWorkQueue().getWorkRequestList().add(ar);
         JOptionPane.showMessageDialog(null, "Vet assigned");
         popTable();

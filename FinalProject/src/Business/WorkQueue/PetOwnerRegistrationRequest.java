@@ -178,5 +178,9 @@ public class PetOwnerRegistrationRequest extends WorkRequest{
         this.petName = petName;
     }
     
+    @Override
+    public String toString(){
+        return ID;
+    }
     
 }

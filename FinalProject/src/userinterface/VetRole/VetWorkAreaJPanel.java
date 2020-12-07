@@ -56,17 +56,17 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
 
         tblVetWork.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Case ID", "Animal Type", "Message", "Status"
+                "Case ID", "Animal Type", "Message", "Status", "Able To Shelter"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -129,8 +129,8 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,8 +143,8 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,7 +159,7 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
         
         for (WorkRequest wr : userAccount.getWorkQueue().getWorkRequestList()) {
             if (wr instanceof AnimalRecord) {                             
-                Object row[] = new Object[4];
+                Object row[] = new Object[5];
                 row[0] = wr;
                 row[1] = ((AnimalRecord) wr).getReportingRequest().getAnimalType();
                 if (((AnimalRecord) wr).getVetRequest().getLatestMessage() == null) {
@@ -173,6 +173,7 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
                 } else {
                     row[3] = ((AnimalRecord) wr).getVetRequest().getStatus();
                 }          
+                row[4] = ((AnimalRecord) wr).getVetRequest().isAbleForShelter();
                 ((DefaultTableModel) tblVetWork.getModel()).addRow(row);
             }
         }
