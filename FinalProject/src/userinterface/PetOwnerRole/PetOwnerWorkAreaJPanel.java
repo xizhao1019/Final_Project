@@ -5,6 +5,7 @@
  */
 package userinterface.PetOwnerRole;
 
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -14,14 +15,15 @@ import javax.swing.JPanel;
  */
 public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
 
-    JPanel container;
+    private JPanel container;
+    private UserAccount ua;
     /**
      * Creates new form PetOwnerWorkAreaJPanel
      */
-    public PetOwnerWorkAreaJPanel(JPanel container) {
+    public PetOwnerWorkAreaJPanel(JPanel container,UserAccount ua) {
         initComponents();
-        
         this.container = container;
+        this.ua = ua;
     }
 
     /**
@@ -91,7 +93,7 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnFindPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindPetActionPerformed
         // TODO add your handling code here:
-        FindMyMissingPetJPanel jp = new FindMyMissingPetJPanel(container);
+        FindMyMissingPetJPanel jp = new FindMyMissingPetJPanel(container,ua);
         container.add("FindMyMissingPetJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -99,7 +101,7 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnYourRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYourRequestActionPerformed
         // TODO add your handling code here:
-        YourRequestsJPanel jp = new YourRequestsJPanel(container);
+        YourRequestsJPanel jp = new YourRequestsJPanel(container,ua);
         container.add("YourRequestsJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);

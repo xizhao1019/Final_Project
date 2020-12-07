@@ -123,5 +123,10 @@ public class AdopterRegistrationRequest extends WorkRequest{
         this.zipCode = zipCode;
     }
     
+    @Override
+    public String toString(){
+        return ID;
+    }
+    
     
 }

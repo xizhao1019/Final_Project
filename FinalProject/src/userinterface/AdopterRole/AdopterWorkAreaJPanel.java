@@ -5,6 +5,7 @@
  */
 package userinterface.AdopterRole;
 
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -15,13 +16,14 @@ import javax.swing.JPanel;
 public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    private UserAccount ua;
     /**
      * Creates new form AdopterWorkAreaJPanel
      */
-    public AdopterWorkAreaJPanel(JPanel userProcessContainer) {
+    public AdopterWorkAreaJPanel(JPanel userProcessContainer, UserAccount ua) {
         initComponents();
-        
         this.container = userProcessContainer;
+        this.ua = ua;
     }
 
     /**
@@ -80,7 +82,7 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnViewAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAnimalsActionPerformed
         // TODO add your handling code here:
-        ViewAnimalsJPanel jp = new ViewAnimalsJPanel(container);
+        ViewAnimalsJPanel jp = new ViewAnimalsJPanel(container,ua);
         container.add("ViewAnimalsJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -88,7 +90,7 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnYourRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYourRequestsActionPerformed
         // TODO add your handling code here:
-        YourRequestsJPanel jp = new YourRequestsJPanel(container);
+        YourRequestsJPanel jp = new YourRequestsJPanel(container,ua);
         container.add("YourRequestsJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);

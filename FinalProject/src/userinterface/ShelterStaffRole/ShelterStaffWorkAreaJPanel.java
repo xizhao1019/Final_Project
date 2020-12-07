@@ -65,17 +65,17 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
 
         tblAnimals.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Animal ID", "Type", "Breed", "Age", "Name", "Health Condition", "Status", "Message"
+                "Animal ID", "Type", "Breed", "Age", "Name", "Status", "Message"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -110,24 +110,22 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                 .addGap(151, 151, 151))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(97, 97, 97)
-                                .addComponent(jLabel2))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(btnUpdateInfo)
-                        .addGap(39, 39, 39)
-                        .addComponent(btnProcess)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(170, 170, 170)
+                    .addComponent(jLabel3)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(97, 97, 97)
+                    .addComponent(jLabel2))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(240, 240, 240)
+                    .addComponent(btnUpdateInfo)
+                    .addGap(39, 39, 39)
+                    .addComponent(btnProcess))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(265, 265, 265)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,16 +158,15 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         
         for (WorkRequest wr : userAccount.getWorkQueue().getWorkRequestList()) {
             if (wr instanceof AnimalRecord) {                             
-                Object row[] = new Object[8];
+                Object row[] = new Object[7];
                 row[0] = wr;
                 row[1] = ((AnimalRecord) wr).getReportingRequest().getAnimalType();
                 row[2] = ((AnimalRecord) wr).getBreed() ==null?"--": ((AnimalRecord) wr).getBreed();
                 row[3] = ((AnimalRecord) wr).getAge() ==null?"--": ((AnimalRecord) wr).getAge();
                 row[4] = ((AnimalRecord) wr).getPetName() ==null?"--": ((AnimalRecord) wr).getPetName();
-                row[5] = ((AnimalRecord) wr).getHealthCondition() ==null?"--": ((AnimalRecord) wr).getHealthCondition();
-                row[6] = ((AnimalRecord) wr).getShelterRequest().getStatus() ==null?"--": ((AnimalRecord) wr).getShelterRequest().getStatus();             
-                row[7] = ((AnimalRecord) wr).getShelterRequest().getLatestMessage()==null?"--": ((AnimalRecord) wr).getShelterRequest().getLatestMessage();
-                         
+                row[5] = ((AnimalRecord) wr).getShelterRequest().getStatus() ==null?"--": ((AnimalRecord) wr).getShelterRequest().getStatus();             
+                row[6] = ((AnimalRecord) wr).getShelterRequest().getLatestMessage()==null?"--": ((AnimalRecord) wr).getShelterRequest().getLatestMessage();
+        
                 ((DefaultTableModel) tblAnimals.getModel()).addRow(row);
             }
         }
