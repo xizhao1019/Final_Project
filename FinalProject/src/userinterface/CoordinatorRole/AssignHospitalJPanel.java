@@ -98,6 +98,8 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnAdmin = new javax.swing.JButton();
         comboAdmin = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        txtMessage = new javax.swing.JTextField();
 
         btnAssign.setText("Assgin Hospital");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +145,8 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("Message to hospital:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,14 +164,19 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                         .addGap(122, 122, 122)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
+                        .addGap(227, 227, 227)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(327, 327, 327)
                         .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
+                .addContainerGap(83, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(26, 26, 26)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(741, Short.MAX_VALUE)))
+                    .addContainerGap(774, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,14 +188,18 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdmin)
                     .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(18, 18, 18)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(423, Short.MAX_VALUE)))
+                    .addContainerGap(443, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -206,11 +219,16 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tblHospital.getSelectedRow();
         if(row<0) {
-             JOptionPane.showMessageDialog(null, "Please select a volunteer from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+             JOptionPane.showMessageDialog(null, "Please select a hosptail from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         Organization org = (Organization)tblHospital.getValueAt(row, 0);        
         UserAccount ua = (UserAccount)comboAdmin.getSelectedItem();
+        
+        if (txtMessage.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Please write a message to hospital", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         if (ua == null) {
             JOptionPane.showMessageDialog(null, "Please select an hospital admin", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -223,6 +241,8 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         
         animalRecord.getHospitalRequest().setHospitalOrg(org);
         animalRecord.getHospitalRequest().setStatus("Hospital Assigned");
+        animalRecord.addMessage("Coordinator assign hospital. Message: " + txtMessage.getText());
+        animalRecord.getHospitalRequest().setLatestMessage(txtMessage.getText());
         ua.getWorkQueue().getWorkRequestList().add(animalRecord);
         org.getWorkQueue().getWorkRequestList().add(animalRecord);
         
@@ -234,7 +254,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tblHospital.getSelectedRow();
         if(row<0) {
-            JOptionPane.showMessageDialog(null, "Please select a volunteer from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select a hospital from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -254,7 +274,9 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JComboBox comboAdmin;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblHospital;
+    private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 }

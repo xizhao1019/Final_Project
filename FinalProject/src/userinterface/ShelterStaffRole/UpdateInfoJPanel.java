@@ -311,9 +311,12 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
         animalRecord.setBreed(txtBreed.getText());
         animalRecord.setAge(txtAge.getText());
         animalRecord.setPetName(txtName.getText());
-        animalRecord.addMecialRecord(txtMedicalRecord.getText());
-        animalRecord.addMessage(txtMessage.getText());
-        
+        if (!txtMedicalRecord.getText().isBlank()) {
+            animalRecord.addMecialRecord(txtMedicalRecord.getText());
+        }
+        if (!txtMessage.getText().isBlank()) {
+            animalRecord.addMessage(txtMessage.getText());
+        }     
         JOptionPane.showMessageDialog(null, "Animal Information Uploaded Successfully");
         popInfo();
         txtMessage.setText("");
@@ -361,6 +364,7 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
     private void btnPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostActionPerformed
         // TODO add your handling code here:
         animalRecord.getShelterRequest().setPost(true);
+        animalRecord.getShelterRequest().setStatus("Posted");
         JOptionPane.showMessageDialog(null, "Animal Posted For Adoption!");
     }//GEN-LAST:event_btnPostActionPerformed
 

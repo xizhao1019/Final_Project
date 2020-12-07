@@ -125,7 +125,7 @@ public class AdopterRegistrationRequest extends WorkRequest{
     
     @Override
     public String toString(){
-        return ID;
+        return firstName + " " + lastName;
     }
     
     

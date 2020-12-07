@@ -180,6 +180,10 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblAnimals.getValueAt(row, 0);
+        if (!ar.getShelterRequest().getStatus().equals("Pet transferred to shelter")) {
+            JOptionPane.showMessageDialog(null, "Pls do pick up process first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         UpdateInfoJPanel jp = new UpdateInfoJPanel(container, ar);
         container.add("UpdateInfoJPanel",jp);

@@ -46,9 +46,9 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
                 System.out.println(e.getName());
             }
         }
-        //System.out.println("enterprise size in current network :" + network.getEnterpriseDirectory().getEnterpriseList().size());
         
         valueLabel.setText(userAccount.getEmployee().getName());
+        //System.out.println(userAccount.getState());
         
     }
 
@@ -134,7 +134,7 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnViewAllAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAllAnimalsActionPerformed
         // TODO add your handling code here:
-        ViewAllAnimals jp = new ViewAllAnimals(container);
+        ViewAllAnimals jp = new ViewAllAnimals(container, system, userAccount);
         container.add("ViewAllAnimals",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);

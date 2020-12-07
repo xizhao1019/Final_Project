@@ -119,7 +119,7 @@ public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnViewYourAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewYourAnimalsActionPerformed
         // TODO add your handling code here:
-        ViewYourAnimals jp = new ViewYourAnimals(container);
+        ViewYourAnimals jp = new ViewYourAnimals(container, userAccount);
         container.add("ViewYourAnimals",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
