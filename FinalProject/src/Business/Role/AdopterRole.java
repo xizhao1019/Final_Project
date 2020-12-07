@@ -28,7 +28,7 @@ public class AdopterRole extends Role {
             Enterprise enterprise, 
             Network network,
             EcoSystem business) {
-        return new AdopterWorkAreaJPanel(userProcessContainer);
+        return new AdopterWorkAreaJPanel(userProcessContainer,account);
     }
     
     public JPanel processAdoptionRequestWorkArea(

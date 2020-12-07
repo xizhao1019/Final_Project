@@ -18,31 +18,31 @@ public class PetOwnerAdoptionRequest extends WorkRequest{
     private String ID;
     private Random random;
     private String id;
-    private boolean adopted;
+    private boolean approved;
 
     public PetOwnerAdoptionRequest() {
         id = String.format("%04d", random.nextInt(10000));
         ID = "R" + id ;
-        this.adopted = false;
+        this.approved = false;
     }
 
     public String getID() {
         return ID;
     }
 
-    public boolean isAdopted() {
-        return adopted;
+    public boolean isApproved() {
+        return approved;
     }
 
-    public void setAdopted(boolean adopted) {
-        this.adopted = adopted;
+    public void setApproved() {
+        this.approved = true;
     }
 
-    public PetOwnerRegistrationRequest getArr() {
+    public PetOwnerRegistrationRequest setAdopter() {
         return petOwner;
     }
 
-    public void setArr(PetOwnerRegistrationRequest petOwner) {
+    public void setAdopter(PetOwnerRegistrationRequest petOwner) {
         this.petOwner = petOwner;
     }
 
@@ -52,6 +52,11 @@ public class PetOwnerAdoptionRequest extends WorkRequest{
 
     public void setAnimal(AnimalRecord animal) {
         this.animal = animal;
+    }
+    
+    @Override
+    public String toString(){
+        return ID;
     }
     
 }

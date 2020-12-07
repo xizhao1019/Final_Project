@@ -5,8 +5,25 @@
  */
 package userinterface.AdopterRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.RescueEnterprise;
+import Business.Organization.AnimalShelterOrganization;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AdopterAdoptionRequest;
+import Business.WorkQueue.AdopterRegistrationRequest;
+import Business.WorkQueue.AnimalRecord;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,14 +31,83 @@ import javax.swing.JPanel;
  */
 public class ViewAnimalsJPanel extends javax.swing.JPanel {
 
-    JPanel container;
+    private JPanel container;
+    private UserAccount ua;
+    private AdopterAdoptionRequest adoption;
     /**
      * Creates new form AdopterWorkAreaJPanel
      */
-    public ViewAnimalsJPanel(JPanel userProcessContainer) {
+    public ViewAnimalsJPanel(JPanel userProcessContainer, UserAccount ua) {
         initComponents();
-        
+        this.ua = ua;
         this.container = userProcessContainer;
+        
+        txtName.setEditable(false);
+        txtType.setEnabled(false);
+        txtAge.setEditable(false);
+        txtBreed.setEditable(false);
+        
+        popTable();
+        displayInfo();
+    }
+    
+    public void popTable(){
+        DefaultTableModel model = (DefaultTableModel) animalTable.getModel();
+        model.setRowCount(0);
+        for (Enterprise enterprise : ua.getState().getEnterpriseDirectory().getEnterpriseList()) {
+           if (enterprise instanceof RescueEnterprise) {
+                for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof AnimalShelterOrganization) {
+                        for (WorkRequest animal : org.getWorkQueue().getWorkRequestList()) {
+                            if (animal instanceof AnimalRecord) {
+                            Object row[] = new Object[7]; 
+                            row[0] = animal;
+                            row[1] = ua.getState();
+                            row[2] = ((AnimalRecord) animal).getReportingRequest().getAnimalType();
+                            row[3]= ((AnimalRecord) animal).getBreed();
+                            row[4] = ((AnimalRecord) animal).getPetName();
+                            row[5] = ((AnimalRecord) animal).getAge();
+                            row[6] = ((AnimalRecord) animal).getShelterRequest();
+                            ((DefaultTableModel) animalTable.getModel()).addRow(row);
+                            }
+                        }
+                    }
+                   
+                }
+                
+           }
+           
+        }
+    }
+    
+    public void displayInfo(){
+        ListSelectionModel model = animalTable.getSelectionModel();
+        model.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        model.addListSelectionListener(new ListSelectionListener() {
+          @Override
+          public void valueChanged(ListSelectionEvent e) {
+            int row = animalTable.getSelectedRow();
+            if(row>=0) {
+                AnimalRecord animal = (AnimalRecord) animalTable.getValueAt(row, 0);
+                idLabel.setText(animal.getID());
+                txtName.setText(animal.getPetName());
+                txtType.setText(animal.getReportingRequest().getAnimalType());
+                txtAge.setText(animal.getAge());
+                txtBreed.setText(animal.getBreed());
+                
+                for (String record : animal.getMedicalRecord()) {
+                    txtMedicalRecord.append(record);
+                }
+                
+                String imagePath = animal.getImagePath();
+                Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                im = im.getScaledInstance(pictureLabel.getWidth(), pictureLabel.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon ii = new ImageIcon(im);
+                pictureLabel.setIcon(ii);
+            }
+          }
+        });
     }
 
     /**
@@ -35,53 +121,55 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        animalTable = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtType = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtBreed = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtAge = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel11 = new javax.swing.JLabel();
+        txtMedicalRecord = new javax.swing.JTextArea();
+        idLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        btnRequest = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        pictureLabel = new javax.swing.JLabel();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("View Animals");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        animalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Animal ID", "Type", "Breed", "Name", "Age"
+                "Animal ID", "State", "Type", "Breed", "Pet Name", "Age", "Shelter"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane1.setViewportView(animalTable);
+        if (animalTable.getColumnModel().getColumnCount() > 0) {
+            animalTable.getColumnModel().getColumn(0).setResizable(false);
+            animalTable.getColumnModel().getColumn(1).setResizable(false);
+            animalTable.getColumnModel().getColumn(2).setResizable(false);
+            animalTable.getColumnModel().getColumn(3).setResizable(false);
+            animalTable.getColumnModel().getColumn(4).setResizable(false);
+            animalTable.getColumnModel().getColumn(5).setResizable(false);
+            animalTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
         btnBack.setText("<< Back");
@@ -95,71 +183,76 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Age:");
 
-        jLabel4.setText("Health Condition:");
+        jLabel4.setText("Medical Record:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtMedicalRecord.setColumns(20);
+        txtMedicalRecord.setRows(5);
+        jScrollPane2.setViewportView(txtMedicalRecord);
 
-        jLabel11.setText("<AnimalID>");
+        idLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        idLabel.setText("<AnimalID>");
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel6.setText("Animal ID");
 
         jLabel5.setText("Name:");
 
-        jButton2.setText("I Want This Cute");
-
-        jTextField5.setText("jTextField1");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        btnRequest.setText("I Want This Cute");
+        btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                btnRequestActionPerformed(evt);
             }
         });
 
         jLabel8.setText("Breed:");
 
+        pictureLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pictureLabel.setText("Animal Picture");
+        pictureLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(262, 262, 262))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel8))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(120, 120, 120)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(115, 115, 115)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel5)
+                                                .addComponent(jLabel2)
+                                                .addComponent(jLabel3)
+                                                .addComponent(jLabel8))
+                                            .addGap(27, 27, 27)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtBreed, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(idLabel)))
+                                    .addGap(119, 119, 119)
+                                    .addComponent(pictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBack))))
+                            .addComponent(btnBack)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
@@ -167,43 +260,40 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(btnBack)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel11))
+                            .addComponent(idLabel))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pictureLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56))
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,16 +303,35 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
+        
+        int row = animalTable.getSelectedRow();
+            if(row<0) {
+                JOptionPane.showMessageDialog(null, "Please select any row!", "Warning",JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            AnimalRecord animal = (AnimalRecord) animalTable.getValueAt(row, 0);
+            adoption = new AdopterAdoptionRequest();
+            adoption.setAnimal(animal);
+            
+            for (WorkRequest adopter : ua.getWorkQueue().getWorkRequestList()) {
+                if (adopter instanceof AdopterRegistrationRequest) {
+                    adoption.setAdopter((AdopterRegistrationRequest) adopter);
+                    break;
+                }
+            }
+            
+            ua.getWorkQueue().getWorkRequestList().add(adoption);
+            JOptionPane.showMessageDialog(null, "Thanks for your efforts in saving lives, you request has been sent to the shelter!");
+    }//GEN-LAST:event_btnRequestActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable animalTable;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnRequest;
+    private javax.swing.JLabel idLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -231,12 +340,11 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel pictureLabel;
+    private javax.swing.JTextField txtAge;
+    private javax.swing.JTextField txtBreed;
+    private javax.swing.JTextArea txtMedicalRecord;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtType;
     // End of variables declaration//GEN-END:variables
 }
