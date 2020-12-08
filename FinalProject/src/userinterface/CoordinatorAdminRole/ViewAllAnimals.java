@@ -106,9 +106,16 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 txtReportDate.setText(ar.getRequestDate().toString());
                 txtReportBy.setText(ar.getReportingRequest().getWitness().getEmployee().getName());
                 
+                txtCaseID.setEditable(false);
+                txtReportDate.setEditable(false);
+                txtReportBy.setEditable(false);
+                
                 // transportation
                 txtCoordinator.setText(ar.getReportingRequest().getAssignedCoordinator()==null?"-":ar.getReportingRequest().getAssignedCoordinator().getEmployee().getName());                
                 txtVolunteer.setText(ar.getVolunteerRequest().getVolunteer() ==null?"-": ar.getVolunteerRequest().getVolunteer().getEmployee().getName());               
+                
+                txtCoordinator.setEditable(false);
+                txtVolunteer.setEditable(false);    
                 
                 // medical info
                 txtType.setText(ar.getReportingRequest().getAnimalType());
@@ -151,6 +158,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                     txtAdopterStreet.setEnabled(false);
                     txtAdopterApt.setEnabled(false);
                     txtAdopterZip.setEnabled(false);
+                    
                 } else {
                     txtAdopterName.setEnabled(false);
                     txtAdopterDOB.setEnabled(false);
@@ -204,10 +212,8 @@ public class ViewAllAnimals extends javax.swing.JPanel {
         txtReportBy = new javax.swing.JTextField();
         Shelter = new javax.swing.JPanel();
         txtShelterStaff = new javax.swing.JTextField();
-        txtShelterAdmin = new javax.swing.JTextField();
         txtShelterName = new javax.swing.JTextField();
         jLabel57 = new javax.swing.JLabel();
-        jLabel58 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -343,15 +349,10 @@ public class ViewAllAnimals extends javax.swing.JPanel {
 
         txtShelterStaff.setEnabled(false);
 
-        txtShelterAdmin.setEnabled(false);
-
         txtShelterName.setEnabled(false);
 
         jLabel57.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel57.setText("Shelter Name");
-
-        jLabel58.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel58.setText("Shelter Admin");
 
         jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel59.setText("Shelter Staff");
@@ -370,12 +371,10 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 .addGroup(ShelterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ShelterLayout.createSequentialGroup()
                         .addGroup(ShelterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel58, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel57, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel59, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(ShelterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtShelterAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtShelterStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtShelterName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(ShelterLayout.createSequentialGroup()
@@ -392,11 +391,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 .addGroup(ShelterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtShelterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel57))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(ShelterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtShelterAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel58))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(50, 50, 50)
                 .addGroup(ShelterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtShelterStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel59))
@@ -777,7 +772,6 @@ public class ViewAllAnimals extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
@@ -805,7 +799,6 @@ public class ViewAllAnimals extends javax.swing.JPanel {
     private javax.swing.JTextField txtReportBy;
     private javax.swing.JTextField txtReportDate;
     private javax.swing.JTextField txtSex;
-    private javax.swing.JTextField txtShelterAdmin;
     private javax.swing.JTextField txtShelterName;
     private javax.swing.JTextField txtShelterStaff;
     private javax.swing.JTextField txtType;

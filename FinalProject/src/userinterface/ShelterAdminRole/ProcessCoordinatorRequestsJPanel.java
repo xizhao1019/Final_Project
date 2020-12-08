@@ -81,15 +81,6 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblRequest);
-        if (tblRequest.getColumnModel().getColumnCount() > 0) {
-            tblRequest.getColumnModel().getColumn(0).setResizable(false);
-            tblRequest.getColumnModel().getColumn(1).setResizable(false);
-            tblRequest.getColumnModel().getColumn(2).setResizable(false);
-            tblRequest.getColumnModel().getColumn(3).setResizable(false);
-            tblRequest.getColumnModel().getColumn(4).setResizable(false);
-            tblRequest.getColumnModel().getColumn(5).setResizable(false);
-            tblRequest.getColumnModel().getColumn(6).setResizable(false);
-        }
 
         btnApprove.setText("Approve");
         btnApprove.addActionListener(new java.awt.event.ActionListener() {
@@ -195,11 +186,11 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
     public void popTable() {
         DefaultTableModel model = (DefaultTableModel) tblRequest.getModel();
         model.setRowCount(0);
-        System.out.println(userAccount.getWorkQueue().getWorkRequestList().size()); // test
+        //System.out.println(userAccount.getWorkQueue().getWorkRequestList().size()); // test
         for (WorkRequest wr : userAccount.getWorkQueue().getWorkRequestList() ) {
-           System.out.println("in workrequest"); //test
+           //System.out.println("in workrequest"); //test
            if (wr instanceof AnimalRecord) {
-                System.out.println("in animalrecord"); //test
+                //System.out.println("in animalrecord"); //test
                 Object row[] = new Object[7]; 
                 row[0] = wr;
                 row[1] = ((AnimalRecord) wr).getReportingRequest().getAnimalType();
@@ -236,10 +227,20 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
-        ar.getShelterRequest().setStatus("Shelter Admin Approved");
-        JOptionPane.showMessageDialog(null, "Approved, Animal will arrive soon");
-        popTable();
+        
+        if (ar.getShelterRequest().getStatus().equals("Shelter Admin Approved")) {
+            JOptionPane.showMessageDialog(null, "Already approved", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }else if (ar.getShelterRequest().getStatus().equals("Shelter Admin Declined")) {
+            JOptionPane.showMessageDialog(null, "Already declined", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            ar.getShelterRequest().setStatus("Shelter Admin Approved");
+            JOptionPane.showMessageDialog(null, "Approved, Animal will arrive soon");
+            popTable();
+        }
     }//GEN-LAST:event_btnApproveActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -256,7 +257,13 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
+        if (ar.getShelterRequest().getStatus().equals("Shelter Admin Approved")) {
+             JOptionPane.showMessageDialog(null, "Already approved, cannot decline", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         ar.getShelterRequest().setStatus("Shelter Admin Declined");
+        userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
+        organization.getWorkQueue().deleteRequest((WorkRequest)ar);
         JOptionPane.showMessageDialog(null, "Declined");
         popTable();
     }//GEN-LAST:event_btnDeclineActionPerformed
@@ -270,7 +277,7 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
         
-        if (ar.getShelterRequest().getStatus() != "Shelter Admin Approved") {
+        if (!ar.getShelterRequest().getStatus().equals("Shelter Admin Approved") ) {
             JOptionPane.showMessageDialog(null, "Please approve before assign to staff", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -280,6 +287,11 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a Staff to assign", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        if (ar.getShelterRequest().getStatus().equals("Staff Assigned")) {
+             JOptionPane.showMessageDialog(null, "Already assigned.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         ar.getShelterRequest().setLatestMessage(txtMessage.getText());
         String message = "Shelter admin assign staff: " + txtMessage.getText();
         ar.addMessage(message);

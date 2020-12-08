@@ -5,8 +5,13 @@
  */
 package userinterface.ShelterAdminRole;
 
+import Business.Organization.Organization;
+import Business.WorkQueue.AdopterAdoptionRequest;
+import Business.WorkQueue.AnimalRecord;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,12 +20,41 @@ import javax.swing.JPanel;
 public class ManageAdoptionsJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    Organization organization;
     /**
      * Creates new form RequestFromPetOwner
      */
-    public ManageAdoptionsJPanel(JPanel container) {
+    public ManageAdoptionsJPanel(JPanel container, Organization org) {
         initComponents();
         this.container = container;
+        this.organization = org;
+        
+        popTable();
+    }
+    
+    public void popTable() {
+        DefaultTableModel model = (DefaultTableModel) tblAdoptions.getModel();
+        model.setRowCount(0);
+        System.out.println(organization.getWorkQueue().getWorkRequestList().size()); // test
+        for (WorkRequest wr : organization.getWorkQueue().getWorkRequestList() ) {
+           System.out.println("in workrequest"); //test
+           if (wr instanceof AdopterAdoptionRequest) {
+                System.out.println("in animalrecord"); //test
+                Object row[] = new Object[8]; 
+                row[0] = wr;
+                row[1] = ((AdopterAdoptionRequest) wr).getAnimal().getID();
+                row[2] = ((AdopterAdoptionRequest) wr).getAnimal().getReportingRequest().getAnimalType();
+                row[3] = ((AdopterAdoptionRequest) wr).getAnimal().getBreed() ==null ? "--": ((AdopterAdoptionRequest) wr).getAnimal().getBreed();
+                row[4] = ((AdopterAdoptionRequest) wr).getAnimal().getPetName() ==null ? "--": ((AdopterAdoptionRequest) wr).getAnimal().getPetName();
+                row[5] = ((AdopterAdoptionRequest) wr).getAnimal().getShelterRequest().getAssignedStaff();
+                row[6] = ((AdopterAdoptionRequest) wr).getAnimal().getStatus();
+                row[7] = ((AdopterAdoptionRequest) wr).getAdopter();
+                       
+                ((DefaultTableModel) tblAdoptions.getModel()).addRow(row);
+           }
+           
+        }       
+   
     }
 
     /**
@@ -33,35 +67,31 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblAdoptions = new javax.swing.JTable();
         btnProcess = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblAdoptions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Request ID", "Animal ID", "Type", "Breed", "Age", "Staff", "Status"
+                "Request ID", "Animal ID", "Type", "Breed", "Name", "Staff", "Status", "Requested By"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblAdoptions);
 
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
@@ -81,10 +111,6 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Adoption Request ");
 
-        jLabel2.setText("Request by:");
-
-        jLabel3.setText("Request date:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,24 +121,15 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
                         .addGap(36, 36, 36)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(124, 124, 124))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(365, 365, 365)
+                        .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,19 +138,11 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jLabel8)
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -154,12 +163,8 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnProcess;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tblAdoptions;
     // End of variables declaration//GEN-END:variables
 }

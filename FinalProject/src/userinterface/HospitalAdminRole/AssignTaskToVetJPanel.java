@@ -228,6 +228,8 @@ public class AssignTaskToVetJPanel extends javax.swing.JPanel {
         ar.getVetRequest().setStatus("Vet Assigned");
         ua.getWorkQueue().getWorkRequestList().add(ar);
         JOptionPane.showMessageDialog(null, "Vet assigned");
+        
+        txtMessage.setEnabled(false);
         popTable();
     }//GEN-LAST:event_btnAssignActionPerformed
 

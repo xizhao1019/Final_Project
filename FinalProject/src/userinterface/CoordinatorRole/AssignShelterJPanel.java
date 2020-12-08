@@ -216,6 +216,7 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
         }
 
         Organization org = (Organization)tblShelter.getValueAt(row, 0);
+        comboAdmin.removeAllItems();;
         for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
             //System.out.println("combo role: " + ua.getRole()); //test
             if (ua.getRole().toString().equals("ShelterAdmin") ) {
@@ -241,6 +242,7 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
         animalRecord.getShelterRequest().setShelterOrg(org);
         animalRecord.addMessage("Coordinator assign shelter. Message to shelter: " + txtMessage.getText());
         animalRecord.getShelterRequest().setLatestMessage(txtMessage.getText());
+        animalRecord.getShelterRequest().setStatus("Shelter Assigned");
         org.getWorkQueue().getWorkRequestList().add(animalRecord);
         ua.getWorkQueue().getWorkRequestList().add(animalRecord);
         

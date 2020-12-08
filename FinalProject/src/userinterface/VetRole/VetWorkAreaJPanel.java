@@ -47,7 +47,6 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
         tblVetWork = new javax.swing.JTable();
         btnAccept = new javax.swing.JButton();
         btnProcess = new javax.swing.JButton();
-        btnDecline = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
@@ -96,13 +95,6 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnDecline.setText("Decline");
-        btnDecline.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeclineActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Hello,");
 
         jLabel2.setText("Role: Veterinarian");
@@ -116,17 +108,13 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(171, 171, 171)
-                                .addComponent(jLabel1))))
+                        .addGap(190, 190, 190)
+                        .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111)
+                        .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(306, 306, 306)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(137, 137, 137)
                         .addComponent(jLabel3)
@@ -154,8 +142,7 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(137, 137, 137))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -233,27 +220,9 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
         popTable();
     }//GEN-LAST:event_btnAcceptActionPerformed
 
-    private void btnDeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineActionPerformed
-        // TODO add your handling code here:
-        int row = tblVetWork.getSelectedRow();
-        if(row<0) {
-             JOptionPane.showMessageDialog(null, "Please select a task from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        AnimalRecord ar = (AnimalRecord)tblVetWork.getValueAt(row, 0);
-        if (ar.getVetRequest().getStatus().equals("Vet Completed")) {
-            JOptionPane.showMessageDialog(null, "Already completed!", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-        ar.getVetRequest().setStatus("Vet Declined");
-        ar.addMessage("Vet rejected the task.");
-        JOptionPane.showMessageDialog(null, "Task declined");
-        popTable();
-    }//GEN-LAST:event_btnDeclineActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
-    private javax.swing.JButton btnDecline;
     private javax.swing.JButton btnProcess;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

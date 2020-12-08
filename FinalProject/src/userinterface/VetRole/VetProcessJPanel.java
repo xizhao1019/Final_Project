@@ -333,9 +333,15 @@ public class VetProcessJPanel extends javax.swing.JPanel {
         btnUpdate.setEnabled(true);
         
         txtMedicalHistory.setText("");
-        for (String msg : animalRecord.getMedicalRecord()) {
-            txtMedicalHistory.append(msg);
+        
+        String medical = "";
+        for (int i = 0; i < animalRecord.getMedicalRecord().size(); i++) {
+            medical += animalRecord.getMedicalRecord().get(i);          
         }
+        txtMedicalHistory.setText(medical);
+        
+        txtMedicalRecord.setText("");
+        checkboxAble.setEnabled(false);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnUpdatePictureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePictureActionPerformed
@@ -367,6 +373,7 @@ public class VetProcessJPanel extends javax.swing.JPanel {
         btnUpdatePicture.setEnabled(true);
         
         btnUpdate.setEnabled(false);
+        checkboxAble.setEnabled(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 

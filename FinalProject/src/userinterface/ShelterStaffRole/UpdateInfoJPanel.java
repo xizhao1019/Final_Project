@@ -314,9 +314,11 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
         txtName.setText(animalRecord.getPetName() ==null?"--": animalRecord.getPetName());
         sexComboBox.setSelectedItem(animalRecord.getSex() ==null ? "--" : animalRecord.getSex());
         
-        for (String s : animalRecord.getMedicalRecord()) {
-            txtMedicalHistory.append(s);
-        }        
+        String medical = "";
+        for (int i = 0; i < animalRecord.getMedicalRecord().size(); i++) {
+            medical += animalRecord.getMedicalRecord().get(i) + "\n";
+        }
+        txtMedicalHistory.setText(medical);
         
         String messageList = "";
         for(int i = 1; i < animalRecord.getMsgList().size(); i++) {

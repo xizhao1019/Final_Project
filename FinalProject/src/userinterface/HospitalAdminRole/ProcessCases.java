@@ -70,6 +70,11 @@ public class ProcessCases extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblRequest);
 
         jButton1.setText("Decline");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Process Cases");
 
@@ -165,10 +170,34 @@ public class ProcessCases extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
-        ar.getHospitalRequest().setStatus("Hospital Accepted");
-        JOptionPane.showMessageDialog(null, "Task Accepted, Animal will arrive soon");
-        popTable();
+        if (ar.getHospitalRequest().getStatus().equals("Hospital Accepted") || ar.getHospitalRequest().getStatus().equals("Vet Assigned")) {
+            JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {        
+            ar.getHospitalRequest().setStatus("Hospital Accepted");
+            JOptionPane.showMessageDialog(null, "Task Accepted, Animal will arrive soon");
+            popTable();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int row = tblRequest.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
+        if (ar.getHospitalRequest().getStatus().equals("Hospital Accepted") || ar.getHospitalRequest().getStatus().equals("Vet Assigned")) {
+            JOptionPane.showMessageDialog(null, "Can not decline this accepted request.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {        
+            ar.getHospitalRequest().setStatus("Hospital Declined");
+            JOptionPane.showMessageDialog(null, "Task Declined");
+            userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
+            popTable();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

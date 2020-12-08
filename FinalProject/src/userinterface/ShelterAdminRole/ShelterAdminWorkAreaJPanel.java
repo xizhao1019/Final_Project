@@ -138,7 +138,7 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageAdoptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAdoptionsActionPerformed
         // TODO add your handling code here:
-        ManageAdoptionsJPanel jp = new ManageAdoptionsJPanel(container);
+        ManageAdoptionsJPanel jp = new ManageAdoptionsJPanel(container, organization);
         container.add("ManageAdoptionsJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);

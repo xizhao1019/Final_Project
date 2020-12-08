@@ -257,7 +257,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a hospital from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        comboAdmin.removeAllItems();
         Organization org = (Organization)tblHospital.getValueAt(row, 0);
         for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
             System.out.println("combo role: " + ua.getRole()); //test

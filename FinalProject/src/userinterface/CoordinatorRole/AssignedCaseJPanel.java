@@ -309,9 +309,33 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
                                         row[1] = ((AnimalRecord)wq).getReportingRequest().getAnimalType();
                                         row[2] = "";
                                         row[3] = ((AnimalRecord)wq).getReportingRequest().getRequestDate();
-                                        row[4] = ((AnimalRecord)wq).getVolunteerRequest().getVolunteer()==null ? "--":((AnimalRecord)wq).getVolunteerRequest().getVolunteer();
-                                        row[5] = ((AnimalRecord)wq).getHospitalRequest().getHospitalOrg()==null ? "--" :((AnimalRecord)wq).getHospitalRequest().getHospitalOrg();
-                                        row[6] = ((AnimalRecord)wq).getShelterRequest().getShelterOrg()==null? "--" : ((AnimalRecord)wq).getShelterRequest().getShelterOrg();
+                                        //row[4] = ((AnimalRecord)wq).getVolunteerRequest().getVolunteer()==null ? "--":((AnimalRecord)wq).getVolunteerRequest().getVolunteer();
+                                        if ( ((AnimalRecord)wq).getVolunteerRequest().getVolunteer()==null) {
+                                            row[4] = "not assigned";
+                                        } else if (((AnimalRecord) wq).getVolunteerRequest().getStatus().equals("Volunteer Declined")) {
+                                            row[4] = "Declined";
+                                        } else {
+                                            row[4] = ((AnimalRecord)wq).getVolunteerRequest().getVolunteer();
+                                        }
+                                        
+                                        //row[5] = ((AnimalRecord)wq).getHospitalRequest().getHospitalOrg()==null ? "--" :((AnimalRecord)wq).getHospitalRequest().getHospitalOrg();
+                                        if (((AnimalRecord) wq).getHospitalRequest().getHospitalOrg() == null) {
+                                            row[5] = "not assigned";
+                                        } else if ( ((AnimalRecord) wq).getHospitalRequest().getStatus().equals("Hospital Declined")) {
+                                           row[5] = "Declined";
+                                        } else {
+                                            row[5] = ((AnimalRecord)wq).getHospitalRequest().getHospitalOrg();
+                                        }
+                                        
+                                        //row[6] = ((AnimalRecord)wq).getShelterRequest().getShelterOrg()==null? "--" : ((AnimalRecord)wq).getShelterRequest().getShelterOrg();
+                                        if (((AnimalRecord)wq).getShelterRequest().getShelterOrg()==null) {
+                                            row[6] = "not assigned";
+                                        } else if (((AnimalRecord) wq).getShelterRequest().getStatus().equals("Shelter Admin Declined")) {
+                                            row[6] = "Declined";
+                                        } else {
+                                            row[6] =((AnimalRecord)wq).getShelterRequest().getShelterOrg();
+                                        }
+                                        
                                         row[7] = ((AnimalRecord)wq).getLatestMessage();
                                         row[8] = ((AnimalRecord)wq).getStatus();
                                         ((DefaultTableModel) tblNewAssigned.getModel()).addRow(row);
@@ -338,7 +362,7 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
-        if (ar.getShelterRequest().getShelterOrg()==null) {
+        if (ar.getShelterRequest().getShelterOrg()==null || ar.getShelterRequest().getStatus().equals("Shelter Admin Declined")) {
             AssignShelterJPanel jp = new AssignShelterJPanel(container, system, ar);
             container.add("AssignShelterJPanel",jp);
             CardLayout layout = (CardLayout)container.getLayout();
@@ -358,7 +382,7 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
         
-        if (ar.getVolunteerRequest().getVolunteer()==null) {
+        if (ar.getVolunteerRequest().getVolunteer()==null || ar.getVolunteerRequest().getStatus().equals("Volunteer Declined")) {
             AssignVolunteerJPanel jp = new AssignVolunteerJPanel(container, system, ar);
             container.add("AssignVolunteerJPanel",jp);
             CardLayout layout = (CardLayout)container.getLayout();
@@ -378,14 +402,14 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
         
-        if (ar.getHospitalRequest().getHospitalOrg()==null) {
-        AssignHospitalJPanel jp = new AssignHospitalJPanel(container, system, ar);
-        container.add("AssignHospitalJPanel",jp);
-        CardLayout layout = (CardLayout)container.getLayout();
-        layout.next(container);
-        }
-        else
+        if (ar.getHospitalRequest().getHospitalOrg()==null || ar.getHospitalRequest().getStatus().equals("Hospital Declined")) {
+            AssignHospitalJPanel jp = new AssignHospitalJPanel(container, system, ar);
+            container.add("AssignHospitalJPanel",jp);
+            CardLayout layout = (CardLayout)container.getLayout();
+            layout.next(container);
+        } else {
             JOptionPane.showMessageDialog(null, "Hospital already assigned!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnAssignHospitalActionPerformed
 
