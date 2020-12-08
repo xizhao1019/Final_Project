@@ -62,7 +62,7 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Case ID", "Animal Type", "Message", "Status", "Able To Shelter"
+                "Case ID", "Animal Type", "Message", "Status", "Able to Shelter"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -74,6 +74,13 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblVetWork);
+        if (tblVetWork.getColumnModel().getColumnCount() > 0) {
+            tblVetWork.getColumnModel().getColumn(0).setResizable(false);
+            tblVetWork.getColumnModel().getColumn(1).setResizable(false);
+            tblVetWork.getColumnModel().getColumn(2).setResizable(false);
+            tblVetWork.getColumnModel().getColumn(3).setResizable(false);
+            tblVetWork.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         btnAccept.setText("Accept");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +137,7 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(74, 74, 74))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

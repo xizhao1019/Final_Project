@@ -81,6 +81,15 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblRequest);
+        if (tblRequest.getColumnModel().getColumnCount() > 0) {
+            tblRequest.getColumnModel().getColumn(0).setResizable(false);
+            tblRequest.getColumnModel().getColumn(1).setResizable(false);
+            tblRequest.getColumnModel().getColumn(2).setResizable(false);
+            tblRequest.getColumnModel().getColumn(3).setResizable(false);
+            tblRequest.getColumnModel().getColumn(4).setResizable(false);
+            tblRequest.getColumnModel().getColumn(5).setResizable(false);
+            tblRequest.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         btnApprove.setText("Approve");
         btnApprove.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +160,7 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(61, 61, 61))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +188,7 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGap(124, 124, 124))
         );
     }// </editor-fold>//GEN-END:initComponents
 

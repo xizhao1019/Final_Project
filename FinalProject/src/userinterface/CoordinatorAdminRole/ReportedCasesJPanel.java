@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author suoxiyue
  */
-public class NewReportedCasesJPanel extends javax.swing.JPanel {
+public class ReportedCasesJPanel extends javax.swing.JPanel {
     
     private JPanel container;
     
@@ -40,7 +40,7 @@ public class NewReportedCasesJPanel extends javax.swing.JPanel {
     /**
      * Creates new form NewReportedCaseJPanel
      */
-    public NewReportedCasesJPanel(JPanel container, Enterprise enterprise, Organization org, EcoSystem sys) {
+    public ReportedCasesJPanel(JPanel container, Enterprise enterprise, Organization org, EcoSystem sys) {
         initComponents();
         this.container = container;
         this.enterprise = enterprise;
