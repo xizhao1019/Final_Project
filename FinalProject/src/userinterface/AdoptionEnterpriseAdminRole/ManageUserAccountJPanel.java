@@ -19,10 +19,13 @@ import Business.WorkQueue.AnimalRecord;
 import Business.WorkQueue.PetOwnerRegistrationRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -224,10 +227,18 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                         txtPetName.setText(((PetOwnerRegistrationRequest) wq).getPetName());
 
                         imagePath = ((PetOwnerRegistrationRequest) wq).getImagePath();
-                        Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                        Image im;
+                            if (row <= 3) {
+                                im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
+                            }else{
+                                im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                            }
                         im = im.getScaledInstance(pictureLabel.getWidth(), pictureLabel.getHeight(), Image.SCALE_SMOOTH);
                         ImageIcon ii = new ImageIcon(im);
+                        
                         pictureLabel.setIcon(ii);
+                        
+                        btnUpload.setEnabled(false);
                         }
                     }
                 }

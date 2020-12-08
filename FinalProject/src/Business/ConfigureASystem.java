@@ -112,7 +112,7 @@ public class ConfigureASystem {
             hospitalOrg1.setName("MA_HospitalOrg");
             
             Employee employee6 = hospitalOrg1.getEmployeeDirectory().createEmployee("David");
-            UserAccount ua6 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin", "a", employee6, new HospitalAdminRole());
+            UserAccount ua6 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin1", "a", employee6, new HospitalAdminRole());
             ua6.setState(state);
             
             Employee employee7 = hospitalOrg1.getEmployeeDirectory().createEmployee("Ella");
@@ -240,7 +240,7 @@ public class ConfigureASystem {
                 petOwner1.setBreed("Golden Retrevier");
                 petOwner1.setAge("5 Month");
                 petOwner1.setPetName("Jeffery");
-                petOwner1.setImagePath("./Golden_Jeffery");
+                petOwner1.setImagePath("/images/Golden_Jeffery.jpg");
                 perOwnerOrg.getWorkQueue().getWorkRequestList().add(petOwner1);
                 ua25.getWorkQueue().getWorkRequestList().add(petOwner1);
                 
@@ -264,7 +264,7 @@ public class ConfigureASystem {
                 petOwner2.setBreed("Labrado");
                 petOwner2.setAge("12 Month");
                 petOwner2.setPetName("Rocco");
-                petOwner2.setImagePath("./Lab_Rocco");
+                petOwner2.setImagePath("/images/Lab_Rocco.png");
                 perOwnerOrg.getWorkQueue().getWorkRequestList().add(petOwner2);
                 ua26.getWorkQueue().getWorkRequestList().add(petOwner2);
             

@@ -19,20 +19,19 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
-                      <Component id="btnViewAllAnimals" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
-                      <Component id="btnNewReportedCases" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="valueLabel" min="-2" pref="180" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnReportedCases" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnViewAllAnimals" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
@@ -49,7 +48,7 @@
                   <Component id="valueLabel" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-              <Component id="btnNewReportedCases" min="-2" max="-2" attributes="0"/>
+              <Component id="btnReportedCases" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Component id="btnViewAllAnimals" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
@@ -68,12 +67,12 @@
         <Property name="text" type="java.lang.String" value="Role: Coordinator Administrator"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnNewReportedCases">
+    <Component class="javax.swing.JButton" name="btnReportedCases">
       <Properties>
-        <Property name="text" type="java.lang.String" value="New Reported Cases"/>
+        <Property name="text" type="java.lang.String" value="Reported Cases"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewReportedCasesActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportedCasesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnViewAllAnimals">
