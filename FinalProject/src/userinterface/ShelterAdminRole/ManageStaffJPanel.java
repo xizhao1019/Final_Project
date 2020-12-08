@@ -51,7 +51,7 @@ public class ManageStaffJPanel extends javax.swing.JPanel {
         txtUser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         txtName = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
@@ -94,7 +94,12 @@ public class ManageStaffJPanel extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("New Staff Name:");
 
-        jButton1.setText("Delete This Staff");
+        btnDelete.setText("Delete This Staff");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +142,7 @@ public class ManageStaffJPanel extends javax.swing.JPanel {
                                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(106, 106, 106)
-                        .addComponent(jButton1))
+                        .addComponent(btnDelete))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -158,7 +163,7 @@ public class ManageStaffJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnDelete)
                         .addGap(188, 188, 188))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -220,11 +225,25 @@ public class ManageStaffJPanel extends javax.swing.JPanel {
         txtPass.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int row = tblStaff.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a staff account from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        UserAccount selected = (UserAccount)tblStaff.getValueAt(row, 0);       
+       
+        organization.getUserAccountDirectory().deleteUserAccount(selected.getUsername(), selected.getPassword());
+        JOptionPane.showMessageDialog(null, "Vet deleted.");
+        popTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

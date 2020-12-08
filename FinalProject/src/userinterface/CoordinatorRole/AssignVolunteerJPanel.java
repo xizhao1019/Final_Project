@@ -182,7 +182,7 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
         container.remove(this);
         Component[] componentArray = container.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        NewAssignedCaseJPanel nacjp = (NewAssignedCaseJPanel) component;
+        AssignedCaseJPanel nacjp = (AssignedCaseJPanel) component;
         nacjp.popTable();
         
         CardLayout layout = (CardLayout) container.getLayout();

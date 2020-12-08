@@ -142,7 +142,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +161,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGap(195, 195, 195))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -197,9 +197,11 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblVolunteerCase.getValueAt(row, 0);
         if (ar.getVolunteerRequest().getStatus().equals("Volunteer Declined")) {
-            JOptionPane.showMessageDialog(null, "You cannot handle a rejected case");
+            JOptionPane.showMessageDialog(null, "You cannot handle a rejected case", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (ar.getVolunteerRequest().getStatus().equals("Volunteer Completed")) {
+            JOptionPane.showMessageDialog(null, "Already completed, cannot process again!", "Warning", JOptionPane.WARNING_MESSAGE);
         } else if (!(ar.getVolunteerRequest().getStatus().equals("Volunteer Accepted"))) {
-            JOptionPane.showMessageDialog(null, "Please accept case first");
+            JOptionPane.showMessageDialog(null, "Please accept case first", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             VolunteerProcessJPanel jp = new VolunteerProcessJPanel(container, ar);
             container.add("VolunteerProcessJPanel",jp);
@@ -246,6 +248,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         }
         ar.getVolunteerRequest().setStatus("Volunteer Declined");
         JOptionPane.showMessageDialog(null, "Request Declined");
+        userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
         popTable();
     }//GEN-LAST:event_btnDeclineActionPerformed
 
