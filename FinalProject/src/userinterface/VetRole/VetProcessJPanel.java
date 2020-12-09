@@ -314,7 +314,7 @@ public class VetProcessJPanel extends javax.swing.JPanel {
         animalRecord.setBreed(txtBreed.getText());
         animalRecord.setAge(ageComboBox.getSelectedItem().toString());
         animalRecord.setSex(sexComboBox.getSelectedItem().toString());
-        animalRecord.addMecialRecord(txtMedicalRecord.getText());
+        animalRecord.addMedicalRecord(txtMedicalRecord.getText());
         animalRecord.getVetRequest().setStatus("Vet Completed");
         animalRecord.addMessage("Vet updated the information and health condotion: " + txtMedicalRecord.getText());
         if (checkboxAble.isSelected()) {

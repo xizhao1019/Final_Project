@@ -180,7 +180,7 @@ public class AnimalRecord extends WorkRequest{
        return ID;   
     }
     
-    public void addMecialRecord(String string){
+    public void addMedicalRecord(String string){
         Date time = new Date();
         string = time + " " + string;
         medicalRecord.add(string);

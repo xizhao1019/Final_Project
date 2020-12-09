@@ -38,7 +38,7 @@ public class PetOwnerAdoptionRequest extends WorkRequest{
         this.approved = true;
     }
 
-    public PetOwnerRegistrationRequest setAdopter() {
+    public PetOwnerRegistrationRequest getAdopter() {
         return petOwner;
     }
 

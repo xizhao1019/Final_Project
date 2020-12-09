@@ -329,6 +329,11 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
         //txtMessage.setText(animalRecord.getShelterRequest().getLatestMessage() ==null?"": animalRecord.getShelterRequest().getLatestMessage());
         
         //picture
+        String imagePath = animalRecord.getReportingRequest().getImagePath();
+        Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
+        im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon ii = new ImageIcon(im);
+        lblPicture.setIcon(ii);
         
     }
     
@@ -339,7 +344,7 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
         animalRecord.setSex(sexComboBox.getSelectedItem().toString());
         animalRecord.setPetName(txtName.getText());
         if (!txtMedicalRecord.getText().isBlank()) {
-            animalRecord.addMecialRecord(txtMedicalRecord.getText());
+            animalRecord.addMedicalRecord(txtMedicalRecord.getText());
         }
         if (!txtMessage.getText().isBlank()) {
             animalRecord.addMessage(txtMessage.getText());

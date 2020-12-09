@@ -21,8 +21,8 @@ public class AdopterAdoptionRequest extends WorkRequest{
     private boolean approved;
 
     public AdopterAdoptionRequest() {
-        this.id = String.format("%04d", random.nextInt(10000));
-        this.ID = "R" + id ;
+        id = String.format("%04d", random.nextInt(10000));
+        ID = "R" + id ;
         this.approved = false;
     }
 

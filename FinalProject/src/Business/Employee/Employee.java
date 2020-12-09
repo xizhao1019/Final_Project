@@ -4,6 +4,10 @@
  */
 package Business.Employee;
 
+import java.util.Random;
+
+
+
 /**
  *
  * @author raunak
@@ -12,15 +16,20 @@ public class Employee {
     
     private String name;
     private String id;
-    private static int count = 1;
+    private String ID;
+    
+    private int count = 0;
+    private Random random = new Random();
 
     public Employee() {
-        id = "E"+count;
         count++;
+        ID = "E" + count;
+        id = String.format("%04d",random.nextInt(10000));
+        ID = "E" + id;
     }
 
     public String getId() {
-        return id;
+        return ID;
     }
 
     public void setName(String name) {

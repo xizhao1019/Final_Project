@@ -35,6 +35,28 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
         this.container = container;
         this.userAccount = ua;
         
+        
+        txtType.setEditable(false);
+        txtAge.setEditable(false);
+        txtBreed.setEditable(false);
+        txtSex.setEditable(false);
+        txtHospitalname.setEditable(false);
+        txtVetname.setEditable(false);
+        txtHealth.setEditable(false);
+        
+        txtShelterName.setEditable(false);
+        txtShelterStaff.setEditable(false);
+        
+        txtAdopterName.setEditable(false);
+        txtAdopterDOB.setEditable(false);
+        txtAdopterEmail.setEditable(false);
+        txtAdopterNumber.setEditable(false);
+        txtAdopterState.setEditable(false);
+        txtAdopterCity.setEditable(false);
+        txtAdopterStreet.setEditable(false);
+        txtAdopterApt.setEditable(false);
+        txtAdopterZip.setEditable(false);
+        
         popTable();
         displayInfo();
     }
@@ -100,7 +122,7 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtMessageList = new javax.swing.JTextArea();
-        btnShowPicture = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -137,10 +159,6 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
 
         jTabbedPane4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane4.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-
-        txtShelterStaff.setEnabled(false);
-
-        txtShelterName.setEnabled(false);
 
         jLabel57.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel57.setText("Shelter Name");
@@ -195,26 +213,44 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
 
         jTabbedPane4.addTab("Shelter Information", jPanel10);
 
+        txtAdopterName.setEnabled(false);
+
         jLabel16.setText("Adopter Name");
 
         jLabel17.setText("DOB(MM/DD/YY)");
 
+        txtAdopterDOB.setEnabled(false);
+
+        txtAdopterZip.setEnabled(false);
+
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel19.setText("Zip Code");
+
+        txtAdopterApt.setEnabled(false);
 
         jLabel20.setText("Apt");
 
         jLabel21.setText("Street Line");
 
+        txtAdopterStreet.setEnabled(false);
+
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("Email");
+
+        txtAdopterEmail.setEnabled(false);
 
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel24.setText("Number");
 
+        txtAdopterNumber.setEnabled(false);
+
+        txtAdopterState.setEnabled(false);
+
         jLabel26.setText("State");
 
         jLabel27.setText("City");
+
+        txtAdopterCity.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -262,7 +298,7 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtAdopterState, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtAdopterCity, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(107, 107, 107))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,12 +359,8 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
 
         jButton2.setText("View On Map");
 
-        txtVetname.setEnabled(false);
-
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Hospital Location");
-
-        txtHospitalname.setEnabled(false);
 
         jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel43.setText("Hospital");
@@ -377,8 +409,8 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel15))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtHospitalname, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtVetname, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHospitalname, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtVetname, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
@@ -437,12 +469,8 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
         txtMessageList.setRows(5);
         jScrollPane3.setViewportView(txtMessageList);
 
-        btnShowPicture.setText("Show Animal Picture");
-        btnShowPicture.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowPictureActionPerformed(evt);
-            }
-        });
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel23.setText("Message History");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -463,9 +491,7 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(btnShowPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,14 +510,14 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(btnShowPicture))
+                        .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(13, 13, 13)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -554,33 +580,22 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                     txtAdopterNumber.setText(ar.getAdopterAdoptionRequest().getAdopter().getNumber());
                     txtAdopterState.setText(ar.getAdopterAdoptionRequest().getAdopter().getState().getName());
                     txtAdopterCity.setText(ar.getAdopterAdoptionRequest().getAdopter().getCity());                                                                  
-                    txtAdopterStreet.setText(ar.getAdopterAdoptionRequest().getAdopter().getNumber());  
+                    txtAdopterStreet.setText(ar.getAdopterAdoptionRequest().getAdopter().getStreet());  
                     txtAdopterApt.setText(ar.getAdopterAdoptionRequest().getAdopter().getApt());
                     txtAdopterZip.setText(ar.getAdopterAdoptionRequest().getAdopter().getZipCode());
                     
                 }
                 if (ar.getPetOwnerAdoptionRequest() != null) {
-                    txtAdopterName.setText("Pet owner claimed");
-                    txtAdopterDOB.setEnabled(false);
-                    txtAdopterEmail.setEnabled(false);
-                    txtAdopterNumber.setEnabled(false);
-                    txtAdopterState.setEnabled(false);
-                    txtAdopterCity.setEnabled(false);
-                    txtAdopterStreet.setEnabled(false);
-                    txtAdopterApt.setEnabled(false);
-                    txtAdopterZip.setEnabled(false);
-                } else {
-                    txtAdopterName.setEnabled(false);
-                    txtAdopterDOB.setEnabled(false);
-                    txtAdopterEmail.setEnabled(false);
-                    txtAdopterNumber.setEnabled(false);
-                    txtAdopterState.setEnabled(false);
-                    txtAdopterCity.setEnabled(false);
-                    txtAdopterStreet.setEnabled(false);
-                    txtAdopterApt.setEnabled(false);
-                    txtAdopterZip.setEnabled(false);                   
-                }
-                
+                    txtAdopterName.setText(ar.getPetOwnerAdoptionRequest().getAdopter().toString());
+                    txtAdopterDOB.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getDoB());
+                    txtAdopterEmail.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getEmail());
+                    txtAdopterNumber.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getNumber());
+                    txtAdopterState.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getState().getName());
+                    txtAdopterCity.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getCity());
+                    txtAdopterStreet.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getStreet());
+                    txtAdopterApt.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getApt());
+                    txtAdopterZip.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getZipCode());
+                } 
                 
                 String s = "";
                 for (String message : ar.getMsgList()) {
@@ -590,7 +605,12 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                 
                 //show picture
                 String imagePath = ar.getImagePath();
-                Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                Image im;
+                if (row <= 1) {
+                    im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
+                }else{
+                    im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                }
                 im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
                 ImageIcon ii = new ImageIcon(im);
                 lblPicture.setIcon(ii);
@@ -606,26 +626,9 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnShowPictureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowPictureActionPerformed
-        // TODO add your handling code here:
-//        int row = tblAnimals.getSelectedRow();
-//        if(row<0) {
-//            JOptionPane.showMessageDialog(null, "Please select a task from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//        AnimalRecord ar = (AnimalRecord)tblAnimals.getValueAt(row, 0);
-//
-//        String imagePath = ar.getReportingRequest().getImagePath();
-//        Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
-//        im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
-//        ImageIcon ii = new ImageIcon(im);
-//        lblPicture.setIcon(ii);
-    }//GEN-LAST:event_btnShowPictureActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnShowPicture;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel11;
@@ -640,6 +643,7 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;

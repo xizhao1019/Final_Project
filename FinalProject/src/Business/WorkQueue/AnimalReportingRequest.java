@@ -21,22 +21,7 @@ public class AnimalReportingRequest extends WorkRequest{
     private String animalType;
     private String imagePath;
     private UserAccount AssignedCoordinator;
-    private boolean isNewReported;
     private UserAccount witness;
-    
-    
-
-    public AnimalReportingRequest() {
-        isNewReported = true;
-    }
-
-    public boolean isIsNewReported() {
-        return isNewReported;
-    }
-
-    public void setIsNewReported(boolean isNewReported) {
-        this.isNewReported = isNewReported;
-    }
 
     public UserAccount getAssignedCoordinator() {
         return AssignedCoordinator;

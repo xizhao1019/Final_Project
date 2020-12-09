@@ -34,10 +34,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblPicture" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="btnShowPicture" min="-2" pref="160" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel23" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -64,16 +61,17 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="lblPicture" min="-2" pref="220" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      <Component id="btnShowPicture" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jTabbedPane4" min="-2" pref="250" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-              <Component id="jScrollPane3" min="-2" pref="130" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane3" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -236,14 +234,8 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtShelterStaff">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtShelterName">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel57">
               <Properties>
@@ -339,7 +331,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="107" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -407,6 +399,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtAdopterName">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
@@ -419,8 +414,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAdopterDOB">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAdopterZip">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
               <Properties>
@@ -429,6 +430,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAdopterApt">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
@@ -441,6 +445,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAdopterStreet">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
@@ -449,6 +456,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAdopterEmail">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel24">
               <Properties>
@@ -457,8 +467,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAdopterNumber">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAdopterState">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel26">
               <Properties>
@@ -471,6 +487,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtAdopterCity">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -525,8 +544,8 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtHospitalname" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="txtVetname" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="txtHospitalname" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="txtVetname" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                   <Component id="jButton2" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -629,9 +648,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtVetname">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
@@ -640,9 +656,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtHospitalname">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel43">
               <Properties>
@@ -707,13 +720,11 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnShowPicture">
+    <Component class="javax.swing.JLabel" name="jLabel23">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Show Animal Picture"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Message History"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowPictureActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

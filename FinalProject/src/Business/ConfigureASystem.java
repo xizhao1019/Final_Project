@@ -2,6 +2,7 @@ package Business;
 
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Location.LocationPoint;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.AdopterRole;
@@ -20,9 +21,18 @@ import Business.Role.VetRole;
 import Business.Role.VolunteerRole;
 import Business.Role.WitnessRole;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AdopterAdoptionRequest;
 import Business.WorkQueue.AdopterRegistrationRequest;
+import Business.WorkQueue.AnimalRecord;
+import Business.WorkQueue.AnimalReportingRequest;
+import Business.WorkQueue.HospitalRequest;
+import Business.WorkQueue.PetOwnerAdoptionRequest;
 import Business.WorkQueue.PetOwnerRegistrationRequest;
+import Business.WorkQueue.ShelterRequest;
+import Business.WorkQueue.VetRequest;
+import Business.WorkQueue.VolunteerRequest;
 import Business.WorkQueue.WitnessRegistrationRequest;
+import java.util.List;
 
 /**
  *
@@ -145,7 +155,7 @@ public class ConfigureASystem {
             shelterOrg1.setName("MA_ShelterOrg");
             
             Employee employee9 = shelterOrg1.getEmployeeDirectory().createEmployee("Gigi");
-            UserAccount ua9 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin", "a", employee9, new ShelterAdminRole());
+            UserAccount ua9 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin1", "a", employee9, new ShelterAdminRole());
             ua9.setState(state);
           
             Employee employee10 = shelterOrg1.getEmployeeDirectory().createEmployee("Helen");
@@ -267,6 +277,83 @@ public class ConfigureASystem {
                 petOwner2.setImagePath("/images/Lab_Rocco.png");
                 perOwnerOrg.getWorkQueue().getWorkRequestList().add(petOwner2);
                 ua26.getWorkQueue().getWorkRequestList().add(petOwner2);
+            
+        /*
+         *initilize some animal cases
+         */
+        AnimalRecord ar1 = new AnimalRecord();
+
+            //Witness report
+            AnimalReportingRequest reportingRequest = new AnimalReportingRequest();
+            reportingRequest.setState(state);
+            reportingRequest.setCity("Boston");
+            //TBD:LocationPoint animalLocationPoint;
+            reportingRequest.setAnimalType("Cat");
+            ar1.setImagePath("/images/DS_Coco.jpg");
+            reportingRequest.setAssignedCoordinator(ua14);
+            reportingRequest.setWitness(ua2);
+            ar1.addMessage("Tue Dec 01 12:53:01 EST 2020 Please help this cat!");
+            ar1.setReportingRequest(reportingRequest);
+            ua2.getWorkQueue().getWorkRequestList().add(ar1);
+            ua14.getWorkQueue().getWorkRequestList().add(ar1);
+            
+        
+            //Volunteer info
+            VolunteerRequest volunteerRequest = new VolunteerRequest(); 
+            //TBD:LocationPoint volunteerLocationPoint/hospitalLocationPoint
+            volunteerRequest.setVolunteer(ua4);
+            ar1.addMessage("Tue Dec 01 13:03:30 EST 2020 Waiting for Volunteer response");
+            ar1.addMessage("Tue Dec 01 13:03:32 EST 2020 Hi, would you like to help pick up this cat?");
+            ar1.setVolunteerRequest(volunteerRequest);
+            ua4.getWorkQueue().getWorkRequestList().add(ar1);
+            
+            //HospitalRequest hospitalRequest;
+            HospitalRequest hospitalRequest = new HospitalRequest();
+            hospitalRequest.setHospitalOrg(hospitalOrg1);
+            hospitalRequest.setOrgAdmin(ua6);
+            hospitalRequest.setAssignedVet(ua7);
+            ar1.addMessage("Tue Dec 01 13:04:18 EST 2020 Waiting for Hospital response");
+            ar1.addMessage("Tue Dec 01 13:04:19 EST 2020 Hi, please help save this cat!");
+            ar1.setHospitalRequest(hospitalRequest);
+            ua6.getWorkQueue().getWorkRequestList().add(ar1);
+            ua7.getWorkQueue().getWorkRequestList().add(ar1);
+            
+            //ShelterRequest shelterRequest;
+            ShelterRequest shelterRequest = new ShelterRequest();
+            shelterRequest.setShelterOrg(shelterOrg1);
+            shelterRequest.setOrgAdmin(ua9);
+            shelterRequest.setAssignedStaff(ua10);
+            //TBD:LocationPoint hospitalLocationPoint
+            ar1.addMessage("Tue Dec 01 13:05:13 EST 2020 Waiting for Shelter response");
+            ar1.addMessage("Tue Dec 01 13:05:15 EST 2020 Hi there, please help shelter this cat!");
+            ar1.setShelterRequest(shelterRequest);
+            shelterOrg1.getWorkQueue().getWorkRequestList().add(ar1);
+            ua9.getWorkQueue().getWorkRequestList().add(ar1);
+            ua10.getWorkQueue().getWorkRequestList().add(ar1);
+            
+            //TBD:LocationPoint shelterLocationPoint;
+            //Add message:
+            ar1.addMessage("Tue Dec 01 13:05:23 EST 2020 Hospital Accepted");
+            ar1.addMessage("Tue Dec 01 13:05:25 EST 2020 Volunteer Accepted");
+            ar1.addMessage("Tue Dec 01 13:35:23 EST 2020 The cat arrived at the hospital!");
+            
+            //VetRequest vetRequest;
+            VetRequest vetRequest = new VetRequest();
+            vetRequest.setHospitalOrg(hospitalOrg1);
+            ar1.setVetRequest(vetRequest);
+            ar1.setAge("Young");
+            ar1.setBreed("Domestic Shor");
+            ar1.setSex("Female");
+            ar1.addMedicalRecord("Tue Dec 01 13:59:32 EST 2020 Examination completed, in good condition");
+            ar1.getVetRequest().setAbleForShelter(true);
+            ar1.addMedicalRecord("Wed Dec 02 10:32:42 EST 2020 Ready to shelter!");
+            
+            //ShelterRequest
+            ar1.addMessage("Wed Dec 02 12:42:42 EST 2020 Shelter Accepted!");
+            ar1.setPetName("Coco");
+            ar1.getShelterRequest().setPost(true);
+            
+            ar1.setStatus("Adoptable");
             
         return system;
     }
