@@ -34,6 +34,7 @@ public class PetOwnerRegistrationRequest extends WorkRequest{
     private String animalType;
     private String breed;
     private String age;
+    private String sex;
     private String petName;
 
     public PetOwnerRegistrationRequest() {
@@ -170,6 +171,14 @@ public class PetOwnerRegistrationRequest extends WorkRequest{
         this.age = age;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    
     public String getPetName() {
         return petName;
     }
@@ -180,7 +189,7 @@ public class PetOwnerRegistrationRequest extends WorkRequest{
     
     @Override
     public String toString(){
-        return ID;
+        return firstName + lastName;
     }
     
 }

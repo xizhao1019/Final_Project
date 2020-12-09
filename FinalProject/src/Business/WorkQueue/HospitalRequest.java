@@ -15,6 +15,7 @@ import Business.UserAccount.UserAccount;
 public class HospitalRequest extends WorkRequest{
     
     private Organization hospitalOrg;
+    private UserAccount orgAdmin;
     private UserAccount assignedVet;
 
     public Organization getHospitalOrg() {
@@ -25,6 +26,14 @@ public class HospitalRequest extends WorkRequest{
         this.hospitalOrg = hospitalOrg;
     }
 
+    public UserAccount getOrgAdmin() {
+        return orgAdmin;
+    }
+
+    public void setOrgAdmin(UserAccount orgAdmin) {
+        this.orgAdmin = orgAdmin;
+    }
+
     public UserAccount getAssignedVet() {
         return assignedVet;
     }
@@ -32,7 +41,5 @@ public class HospitalRequest extends WorkRequest{
     public void setAssignedVet(UserAccount assignedVet) {
         this.assignedVet = assignedVet;
     }
-    
-    
     
 }

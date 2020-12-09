@@ -19,10 +19,6 @@ public class VolunteerRequest extends WorkRequest {
     
     private UserAccount volunteer;
     
-    public VolunteerRequest() {
-        
-    }
-    
     public LocationPoint getVolunteerLocationPoint() {
         return volunteerLocationPoint;
     }
