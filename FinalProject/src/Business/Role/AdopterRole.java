@@ -31,15 +31,15 @@ public class AdopterRole extends Role {
         return new AdopterWorkAreaJPanel(userProcessContainer,account);
     }
     
-    public JPanel processAdoptionRequestWorkArea(
-            JPanel userProcessContainer, 
-            UserAccount account, 
-            Organization organization, 
-            Enterprise enterprise, 
-            Network network,
-            EcoSystem business) {
-        return new ProcessAdopterRequestJPanel(userProcessContainer);
-    }
+//    public JPanel processAdoptionRequestWorkArea(
+//            JPanel userProcessContainer, 
+//            UserAccount account, 
+//            Organization organization, 
+//            Enterprise enterprise, 
+//            Network network,
+//            EcoSystem business) {
+//        return new ProcessAdopterRequestJPanel(userProcessContainer);
+//    }
     
     @Override
     public String toString(){

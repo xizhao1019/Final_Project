@@ -5,6 +5,7 @@
  */
 package userinterface.ShelterAdminRole;
 
+import Business.WorkQueue.PetOwnerAdoptionRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
@@ -16,10 +17,11 @@ import javax.swing.JPanel;
 public class ProcessPetOwnerRequestJPanel extends javax.swing.JPanel {
 
     private JPanel container;
+    
     /**
      * Creates new form ProcessPetOwnerRequestJPanel
      */
-    public ProcessPetOwnerRequestJPanel(JPanel container) {
+    public ProcessPetOwnerRequestJPanel(JPanel container, PetOwnerAdoptionRequest wr) {
         initComponents();
         this.container = container;
     }

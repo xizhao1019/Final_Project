@@ -58,13 +58,16 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
         txtAgeA.setText(animal.getAge());
         txtBreedA.setText(animal.getBreed());
 
-        for (String record : (animal.getMedicalRecord())) {
-            txtMedicalRecord.append(record);
+        String medical = "";
+        for (int i = 0; i < animal.getMedicalRecord().size(); i++) {
+            medical += animal.getMedicalRecord().get(i) + "\n";
         }
+        txtMedicalRecord.setText(medical);
         
         txtShelter.setText(animal.getShelterRequest().getShelterOrg().getName());
 
         String imagePath1 = animal.getImagePath();
+        //String imagePath1 = animal.getReportingRequest().getImagePath();
         Image imA = Toolkit.getDefaultToolkit().createImage(imagePath1);
         imA= imA.getScaledInstance(pictureLabel.getWidth(), pictureLabel.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon iiA = new ImageIcon(imA);
@@ -167,6 +170,7 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
         lostAnimalPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lostAnimalPicture.setText("Animal Picture");
         lostAnimalPicture.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lostAnimalPicture.setSize(new java.awt.Dimension(213, 161));
 
         idLabel.setText("<AnimalID>");
 
@@ -185,6 +189,7 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
         pictureLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pictureLabel.setText("Animal Picture");
         pictureLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pictureLabel.setSize(new java.awt.Dimension(213, 161));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -210,7 +215,7 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
                                 .addGap(310, 310, 310)
                                 .addComponent(lostAnimalPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
@@ -227,8 +232,7 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
                                                     .addComponent(txtTypeA, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(txtBreedA, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(txtAgeA, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(pictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                            .addComponent(pictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(101, 101, 101)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
@@ -249,7 +253,8 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnViewOnMap, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(149, 149, 149)
-                                        .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(88, 88, 88)))
                 .addGap(33, 33, 33))
         );
@@ -304,18 +309,18 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel16)
                             .addComponent(txtAgeP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(txtShelter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnViewOnMap))
-                    .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRequest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -328,7 +333,7 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
-        PetOwnerAdoptionRequest adoption = new PetOwnerAdoptionRequest();
+            PetOwnerAdoptionRequest adoption = new PetOwnerAdoptionRequest();
             adoption.setAnimal(animal);
             
             for (WorkRequest adopter : ua.getWorkQueue().getWorkRequestList()) {
@@ -338,7 +343,7 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
                 }
             }
             ua.getWorkQueue().getWorkRequestList().add(adoption);
-            JOptionPane.showMessageDialog(null, "Thanks for your efforts in saving lives, you request has been sent to the shelter!");
+            JOptionPane.showMessageDialog(null, "Your request has been sent to the shelter!");
     }//GEN-LAST:event_btnRequestActionPerformed
 
 

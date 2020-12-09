@@ -24,6 +24,8 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
         initComponents();
         this.container = userProcessContainer;
         this.ua = ua;
+        
+        valueLabel.setText(ua.getEmployee().getName());
     }
 
     /**
@@ -38,6 +40,9 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnViewAnimals = new javax.swing.JButton();
         btnYourRequests = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        valueLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setText("Adopter Work Area");
 
@@ -55,6 +60,12 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setText("Role: Adopter");
+
+        valueLabel.setText("<Adopter name>");
+
+        jLabel3.setText("Hello,");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,11 +77,24 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnViewAnimals)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(268, 268, 268))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(jLabel2)
+                .addGap(121, 121, 121))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(btnViewAnimals)
@@ -101,5 +125,8 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnViewAnimals;
     private javax.swing.JButton btnYourRequests;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }

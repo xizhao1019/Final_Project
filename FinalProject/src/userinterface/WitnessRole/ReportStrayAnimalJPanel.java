@@ -229,7 +229,7 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        if (imagePath.isBlank() && txtCity.getText().isBlank() && txtLocation.getText().isBlank()) {
+        if (imagePath.isBlank() || txtCity.getText().isBlank() || txtLocation.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);  
             return;
         }
