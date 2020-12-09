@@ -397,6 +397,7 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         animalRecord.getShelterRequest().setPost(true);
         animalRecord.getShelterRequest().setStatus("Posted");
+        animalRecord.setStatus("Posted For Adoption");
         JOptionPane.showMessageDialog(null, "Animal Posted For Adoption!");
     }//GEN-LAST:event_btnPostActionPerformed
 

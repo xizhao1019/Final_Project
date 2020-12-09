@@ -43,10 +43,10 @@ public class ProcessCases extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRequest = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnDecline = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAccept = new javax.swing.JButton();
 
         tblRequest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,10 +69,10 @@ public class ProcessCases extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblRequest);
 
-        jButton1.setText("Decline");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDecline.setText("Decline");
+        btnDecline.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDeclineActionPerformed(evt);
             }
         });
 
@@ -85,10 +85,10 @@ public class ProcessCases extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Accept");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAccept.setText("Accept");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAcceptActionPerformed(evt);
             }
         });
 
@@ -108,9 +108,9 @@ public class ProcessCases extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(300, 300, 300)
-                        .addComponent(jButton2)
+                        .addComponent(btnAccept)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(btnDecline)))
                 .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
@@ -128,8 +128,8 @@ public class ProcessCases extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnDecline)
+                    .addComponent(btnAccept))
                 .addGap(64, 64, 64))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -162,7 +162,7 @@ public class ProcessCases extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         // TODO add your handling code here:
         int row = tblRequest.getSelectedRow();
         if(row<0) {
@@ -178,9 +178,9 @@ public class ProcessCases extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Task Accepted, Animal will arrive soon");
             popTable();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAcceptActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineActionPerformed
         // TODO add your handling code here:
         int row = tblRequest.getSelectedRow();
         if(row<0) {
@@ -197,13 +197,13 @@ public class ProcessCases extends javax.swing.JPanel {
             userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
             popTable();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnDeclineActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnDecline;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblRequest;

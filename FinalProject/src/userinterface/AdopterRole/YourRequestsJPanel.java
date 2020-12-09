@@ -49,7 +49,7 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
             for (WorkRequest adoption : ua.getWorkQueue().getWorkRequestList()) {
                 if (adoption instanceof AdopterAdoptionRequest) {
-                Object row[] = new Object[8]; 
+                Object row[] = new Object[9]; 
                 row[0] = ((AdopterAdoptionRequest) adoption);
                 row[1] = ((AdopterAdoptionRequest) adoption).getAnimal();
                 row[2] = ua.getState();
@@ -58,6 +58,7 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                 row[5] = ((AdopterAdoptionRequest) adoption).getAnimal().getPetName();
                 row[6] = ((AdopterAdoptionRequest) adoption).getAnimal().getAge();
                 row[7] = ((AdopterAdoptionRequest) adoption).getAnimal().getShelterRequest().getLatestMessage();
+                row[8] = adoption.getStatus();
                 ((DefaultTableModel) requestTable.getModel()).addRow(row);
                 }
             }
@@ -79,16 +80,26 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                 txtAge.setText(((AdopterAdoptionRequest) adoption).getAnimal().getAge());
                 txtBreed.setText(((AdopterAdoptionRequest) adoption).getAnimal().getBreed());
                 
-                for (String record : ((AdopterAdoptionRequest) adoption).getAnimal().getMedicalRecord()) {
-                    txtMedicalRecord.append(record);
+                 String healthRecord = "";
+                for (String s : adoption.getAnimal().getMedicalRecord()) {
+                    healthRecord += s + "\n";
                 }
+                txtMedicalRecord.setText(healthRecord);
                 
+                String message = "";
                 for (String msg : ((AdopterAdoptionRequest) adoption).getMsgList()) {
-                    txtMessageList.append(msg);
+                    message += msg + "\n";
                 }
+                txtMessageList.setText(message);
                 
                 String imagePath = ((AdopterAdoptionRequest) adoption).getAnimal().getImagePath();
-                Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                Image im;
+                if (row<=0) {
+                    im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
+                }else{
+                    im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                }
+                Toolkit.getDefaultToolkit().createImage(imagePath);
                 im = im.getScaledInstance(pictureLabel.getWidth(), pictureLabel.getHeight(), Image.SCALE_SMOOTH);
                 ImageIcon ii = new ImageIcon(im);
                 pictureLabel.setIcon(ii);
@@ -151,17 +162,17 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
 
         requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Request ID", "Animal ID", "State", "Type", "Breed", "Pet Name", "Age", "Message"
+                "Request ID", "Animal ID", "State", "Type", "Breed", "Pet Name", "Age", "Message", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -169,16 +180,6 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(requestTable);
-        if (requestTable.getColumnModel().getColumnCount() > 0) {
-            requestTable.getColumnModel().getColumn(0).setResizable(false);
-            requestTable.getColumnModel().getColumn(1).setResizable(false);
-            requestTable.getColumnModel().getColumn(2).setResizable(false);
-            requestTable.getColumnModel().getColumn(3).setResizable(false);
-            requestTable.getColumnModel().getColumn(4).setResizable(false);
-            requestTable.getColumnModel().getColumn(5).setResizable(false);
-            requestTable.getColumnModel().getColumn(6).setResizable(false);
-            requestTable.getColumnModel().getColumn(7).setResizable(false);
-        }
 
         txtMedicalRecord.setColumns(20);
         txtMedicalRecord.setRows(5);
@@ -204,7 +205,11 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 19, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,36 +222,32 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                                             .addComponent(jLabel3)
                                             .addComponent(jLabel8))
                                         .addGap(27, 27, 27)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtBreed, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                            .addComponent(txtType)
+                                            .addComponent(txtBreed)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(idLabel)))
-                                .addGap(97, 97, 97)
+                                .addGap(43, 43, 43)
                                 .addComponent(pictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(173, 173, 173)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(54, 54, 54))))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(233, 233, 233)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,8 +257,8 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pictureLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()

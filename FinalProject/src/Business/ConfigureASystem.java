@@ -312,6 +312,7 @@ public class ConfigureASystem {
             hospitalRequest.setHospitalOrg(hospitalOrg1);
             hospitalRequest.setOrgAdmin(ua6);
             hospitalRequest.setAssignedVet(ua7);
+            hospitalRequest.setStatus("");
             ar1.addMessage("Tue Dec 01 13:04:18 EST 2020 Waiting for Hospital response");
             ar1.addMessage("Tue Dec 01 13:04:19 EST 2020 Hi, please help save this cat!");
             ar1.setHospitalRequest(hospitalRequest);

@@ -50,7 +50,7 @@ public class AssignTaskToVetJPanel extends javax.swing.JPanel {
         for (WorkRequest wr : userAccount.getWorkQueue().getWorkRequestList() ) {
            //System.out.println("in workrequest"); //test
            if (wr instanceof AnimalRecord) {
-               if((((AnimalRecord) wr).getHospitalRequest().getStatus().equals("Hospital Accepted") )) {
+               if( (((AnimalRecord) wr).getHospitalRequest().getStatus()!=null)  &&  (((AnimalRecord) wr).getHospitalRequest().getStatus().equals("Hospital Accepted"))) {
                    Object row[] = new Object[6]; 
                     row[0] = wr;
                     row[1] = ((AnimalRecord) wr).getReportingRequest().getAnimalType();

@@ -353,7 +353,8 @@ public class VetProcessJPanel extends javax.swing.JPanel {
             File selectedFile = fileChooser.getSelectedFile();
             imagePath = selectedFile.getAbsolutePath();
 
-            animalRecord.getReportingRequest().setImagePath(imagePath);
+            //animalRecord.getReportingRequest().setImagePath(imagePath);
+            animalRecord.setImagePath(imagePath);
 
             Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
             im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);

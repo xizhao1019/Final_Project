@@ -16,13 +16,15 @@ public class PetOwnerAdoptionRequest extends WorkRequest{
     private PetOwnerRegistrationRequest petOwner;
     private AnimalRecord animal;
     private String ID;
-    private Random random;
-    private String id;
+    //private Random random;
+    private int id;
     private boolean approved;
 
     public PetOwnerAdoptionRequest() {
-        id = String.format("%04d", random.nextInt(10000));
-        ID = "R" + id ;
+        //id = String.format("%04d", random.nextInt(10000));
+        Random rand = new Random();
+        id = rand.nextInt(10000);
+        ID = "R" + id;
         this.approved = false;
     }
 
