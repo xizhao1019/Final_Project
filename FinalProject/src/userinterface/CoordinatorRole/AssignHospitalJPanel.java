@@ -61,20 +61,20 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                              //       if (((AnimalRecord)wq).getReportingRequest().getAssignedCoordinator() == userAccount) {
                              //for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
                              //    if (ua.getRole().toString() == "HospitalAdmin") {                             
-                                        Object row[] = new Object[5];
+                                        Object row[] = new Object[4];
                                         row[0] = org;
                                         row[1] = org.getOrganizationID();
                                         row[2] = org.getEmployeeDirectory().getEmployeeList().size(); // this is size of whole organization
-                                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
-                                            System.out.println("ua role: " + ua.getRole()); //test
-                                            if (ua.getRole().toString().equals("HospitalAdmin") ) {
-                                                row[3] = ua;
-                                                break;
-                                            } else {
-                                                row[3] = "Hospital has no administrator";
-                                            }
-                                        }
-                                        row[4] = org.getWorkQueue().getWorkRequestList().size();
+//                                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+//                                            System.out.println("ua role: " + ua.getRole()); //test
+//                                            if (ua.getRole().toString().equals("HospitalAdmin") ) {
+//                                                row[3] = ua;
+//                                                break;
+//                                            } else {
+//                                                row[3] = "Hospital has no administrator";
+//                                            }
+//                                        }
+                                        row[3] = org.getWorkQueue().getWorkRequestList().size();
                                         ((DefaultTableModel)tblHospital.getModel()).addRow(row);
                         }
                     }
@@ -110,17 +110,17 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
 
         tblHospital.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Animal Hospital", "Organization ID", "Number of Available Vets", "Hospital Admin", "# of Task"
+                "Animal Hospital", "Organization ID", "Number of Available Vets", "# of Task"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

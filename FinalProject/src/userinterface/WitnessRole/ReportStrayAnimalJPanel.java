@@ -5,6 +5,7 @@
  */
 package userinterface.WitnessRole;
 
+import Business.Location.LocationPoint;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userinterface.GoogleMap.SetLocationJPanel;
 
 /**
  *
@@ -29,6 +31,7 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
     private String imagePath;
     private UserAccount userAccount;
     private AnimalRecord animalRecord;
+    LocationPoint locationPoint;
     /**
      * Creates new form ReportStrayAnimalJPanel
      */
@@ -70,6 +73,7 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         lblPath = new javax.swing.JLabel();
         lblPicture = new javax.swing.JLabel();
         txtState = new javax.swing.JTextField();
+        btnSetLocation = new javax.swing.JButton();
 
         jLabel1.setText("Additional Message:");
 
@@ -125,6 +129,13 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         lblPicture.setText("Animal Picture");
         lblPicture.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        btnSetLocation.setText("Set Location");
+        btnSetLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetLocationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,7 +173,9 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnUpload))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSetLocation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(131, 131, 131)
@@ -203,7 +216,8 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSetLocation))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboAnimalType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,10 +297,23 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUploadActionPerformed
 
+    private void btnSetLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetLocationActionPerformed
+        // TODO add your handling code here:
+        SetLocationJPanel jp = new SetLocationJPanel(container);
+        container.add("SetLocationJPanel", jp);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnSetLocationActionPerformed
+
+    public void populateLongituteLatitude(LocationPoint locationPoint) {
+        this.locationPoint = locationPoint;
+        txtLocation.setText(locationPoint.getLatitude() + ", " + locationPoint.getLongitude());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReport;
+    private javax.swing.JButton btnSetLocation;
     private javax.swing.JButton btnUpload;
     private javax.swing.JComboBox<String> comboAnimalType;
     private javax.swing.JLabel jLabel1;

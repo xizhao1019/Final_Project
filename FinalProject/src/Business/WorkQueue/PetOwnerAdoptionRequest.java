@@ -36,8 +36,8 @@ public class PetOwnerAdoptionRequest extends WorkRequest{
         return approved;
     }
 
-    public void setApproved() {
-        this.approved = true;
+    public void setApproved(boolean isApproved) {
+        this.approved = isApproved;
     }
 
     public PetOwnerRegistrationRequest getAdopter() {

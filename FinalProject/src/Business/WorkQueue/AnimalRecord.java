@@ -35,6 +35,7 @@ public class AnimalRecord extends WorkRequest{
     private String id;
     private Random random = new Random();
     private boolean adopted;
+    private boolean addedAhead;
     
     public AnimalRecord() {
         this.reportingRequest = new AnimalReportingRequest();
@@ -48,7 +49,18 @@ public class AnimalRecord extends WorkRequest{
         id = String.format("%04d",random.nextInt(10000));
         ID = "A" + id;
         this.adopted = false;
+        this.addedAhead = false;
     }
+
+    public boolean isAddedAhead() {
+        return addedAhead;
+    }
+
+    public void setAddedAhead(boolean addedAhead) {
+        this.addedAhead = addedAhead;
+    }
+    
+    
 
     public boolean isAdopted() {
         return adopted;

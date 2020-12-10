@@ -298,7 +298,7 @@ public class ConfigureASystem {
          *initilize some animal cases
          */
         AnimalRecord ar1 = new AnimalRecord();
-
+            ar1.setAddedAhead(true);
             //Witness report
             AnimalReportingRequest reportingRequest = new AnimalReportingRequest();
             reportingRequest.setState(state);
@@ -333,7 +333,7 @@ public class ConfigureASystem {
             hospitalRequest.setHospitalOrg(hospitalOrg1);
             hospitalRequest.setOrgAdmin(ua6);
             hospitalRequest.setAssignedVet(ua7);
-            hospitalRequest.setStatus("Hosptital Accepted");
+            hospitalRequest.setStatus("Hospital Accepted");
             ar1.addMessage("Tue Dec 01 13:04:18 EST 2020 Waiting for Hospital response");
             ar1.addMessage("Tue Dec 01 13:04:19 EST 2020 Hi, please help save this cat!");
             ar1.setHospitalRequest(hospitalRequest);

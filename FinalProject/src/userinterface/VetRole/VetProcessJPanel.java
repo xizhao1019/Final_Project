@@ -282,6 +282,9 @@ public class VetProcessJPanel extends javax.swing.JPanel {
         if (!(animalRecord.getAge() == null)) {
             ageComboBox.setSelectedItem(animalRecord.getAge());
         }
+        if (animalRecord.getSex() != null ) {
+            sexComboBox.setSelectedItem(animalRecord.getSex());
+        }
         if(!(animalRecord.getMedicalRecord() == null)) {
             for (String s : animalRecord.getMedicalRecord()) {
             txtMedicalHistory.append(s);
