@@ -41,13 +41,20 @@
                                   <Component id="jLabel12" alignment="1" min="-2" pref="66" max="-2" attributes="0"/>
                                   <Component id="jLabel14" min="-2" pref="127" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtID" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="txtBreed" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="typeComboBox" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="ageComboBox" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="sexComboBox" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtBreed" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="typeComboBox" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="ageComboBox" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="sexComboBox" min="-2" pref="140" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Component id="labelID" min="-2" pref="123" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -97,7 +104,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelID" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -208,8 +215,6 @@
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Animal ID:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtID">
     </Component>
     <Component class="javax.swing.JButton" name="backJButton">
       <Properties>
@@ -336,6 +341,12 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelID">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="&lt;Animal ID&gt;"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

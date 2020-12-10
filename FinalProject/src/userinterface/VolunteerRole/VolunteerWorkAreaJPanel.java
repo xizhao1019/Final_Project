@@ -86,6 +86,16 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblVolunteerCase);
+        if (tblVolunteerCase.getColumnModel().getColumnCount() > 0) {
+            tblVolunteerCase.getColumnModel().getColumn(0).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(1).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(2).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(3).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(4).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(5).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(6).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         btnAccept.setText("Accept");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
@@ -141,8 +151,8 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

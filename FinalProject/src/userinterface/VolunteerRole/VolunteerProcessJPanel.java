@@ -43,8 +43,7 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtMessage = new javax.swing.JTextArea();
+        txtMessage = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Volunteer Process");
@@ -71,10 +70,6 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
             }
         });
 
-        txtMessage.setColumns(20);
-        txtMessage.setRows(5);
-        jScrollPane1.setViewportView(txtMessage);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,13 +87,13 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(292, 292, 292))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, 151, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(btnSubmit)))
+                .addGap(249, 249, 249))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,13 +109,13 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125))
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(btnSubmit)
+                .addGap(116, 116, 116))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -141,6 +136,10 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
         animalRecord.getVolunteerRequest().setStatus(status); // == Volunteer Completed
         
         String message = txtMessage.getText();
+        if (message.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Please leave your message", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         animalRecord.setLatestMessage(message);
         animalRecord.addMessage("Volunteer " + status + message);
         animalRecord.getVolunteerRequest().setLatestMessage(message);
@@ -148,6 +147,9 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
         animalRecord.getVolunteerRequest().setStatus("Volunteer " + status);
         animalRecord.addMessage("Vet completed the task.");
         JOptionPane.showMessageDialog(null, "Thank you for your effort in saving life");
+        comboStatus.setEnabled(false);
+        txtMessage.setEnabled(false);
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
@@ -158,7 +160,6 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtMessage;
+    private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 }
