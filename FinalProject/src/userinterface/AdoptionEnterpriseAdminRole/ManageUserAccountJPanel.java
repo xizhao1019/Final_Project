@@ -229,7 +229,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
                         imagePath = ((PetOwnerRegistrationRequest) wq).getImagePath();
                         Image im;
-                            if (row <= 3) {
+                            if (row == 0) {
                                 im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
                             }else{
                                 im = Toolkit.getDefaultToolkit().createImage(imagePath);

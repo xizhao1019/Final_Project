@@ -125,7 +125,7 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnReportedCasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportedCasesActionPerformed
         // TODO add your handling code here:
-        ReportedCasesJPanel jp = new ReportedCasesJPanel(container, enterprise, organization, system);
+        ReportedCasesJPanel jp = new ReportedCasesJPanel(container, enterprise, organization, userAccount);
         container.add("NewReportedCasesJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);

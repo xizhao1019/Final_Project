@@ -20,6 +20,9 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,6 +54,7 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
         txtMessage.setEditable(false);
 
         popTable();
+        displayInfo();
     }
 
     /**
@@ -63,9 +67,8 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblNewAssigned = new javax.swing.JTable();
+        tblAssigned = new javax.swing.JTable();
         btnAssignVolunteer = new javax.swing.JButton();
-        lblPicture = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnAssignHospital = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -84,9 +87,9 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
         txtMessage = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         btnAssignShelter = new javax.swing.JButton();
-        btnView = new javax.swing.JButton();
+        lblPicture = new javax.swing.JLabel();
 
-        tblNewAssigned.setModel(new javax.swing.table.DefaultTableModel(
+        tblAssigned.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -105,7 +108,7 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblNewAssigned);
+        jScrollPane1.setViewportView(tblAssigned);
 
         btnAssignVolunteer.setText("Assgin A Volunteer");
         btnAssignVolunteer.addActionListener(new java.awt.event.ActionListener() {
@@ -113,10 +116,6 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
                 btnAssignVolunteerActionPerformed(evt);
             }
         });
-
-        lblPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPicture.setText("Animal Picture");
-        lblPicture.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -164,12 +163,10 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnView.setText("View");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
-            }
-        });
+        lblPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPicture.setText("Animal Picture");
+        lblPicture.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblPicture.setSize(new java.awt.Dimension(97, 22));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -179,36 +176,19 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 959, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(btnAssignVolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnAssignHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(btnAssignShelter, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(288, 288, 288))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(24, 24, 24)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAnimalType, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAnimalType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(88, 88, 88)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -216,22 +196,29 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtVolunteer)
-                                    .addComponent(txtHospital)
-                                    .addComponent(txtShelter, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtVolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtShelter, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(103, 103, 103)
+                        .addGap(59, 59, 59)
+                        .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnView)
-                                .addGap(95, 95, 95))))))
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 959, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addComponent(btnAssignVolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)
+                                .addComponent(btnAssignHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(btnAssignShelter, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(38, 38, 38))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,13 +259,11 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(82, 82, 82))
+                        .addGap(39, 39, 39))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)))
+                        .addGap(261, 261, 261)
+                        .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAssignVolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAssignHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +273,7 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void popTable() {
-        DefaultTableModel model = (DefaultTableModel) tblNewAssigned.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblAssigned.getModel();
 
         model.setRowCount(0);
         for (Network n : system.getNetworkList()) {        
@@ -338,7 +323,7 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
                                         
                                         row[7] = ((AnimalRecord)wq).getLatestMessage();
                                         row[8] = ((AnimalRecord)wq).getStatus();
-                                        ((DefaultTableModel) tblNewAssigned.getModel()).addRow(row);
+                                        ((DefaultTableModel) tblAssigned.getModel()).addRow(row);
                                     }
                                     
                                 }
@@ -354,14 +339,62 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
     
     }
     
+    public void displayInfo(){
+        ListSelectionModel model = tblAssigned.getSelectionModel();
+        model.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        model.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int row = tblAssigned.getSelectedRow();
+                if(row>=0) {
+                    AnimalRecord ar = (AnimalRecord)tblAssigned.getValueAt(row, 0);
+                    txtAnimalType.setText(ar.getReportingRequest().getAnimalType());
+                    txtID.setText(ar.getID());
+                    txtReportDate.setText(ar.getReportingRequest().getRequestDate().toString());
+                    txtVolunteer.setText(ar.getVolunteerRequest().getVolunteer()==null ? "--":ar.getVolunteerRequest().getVolunteer().getEmployee().getName());
+                    txtHospital.setText(ar.getHospitalRequest().getHospitalOrg() ==null ? "--": ar.getHospitalRequest().getHospitalOrg().getName());
+                    txtShelter.setText(ar.getShelterRequest().getShelterOrg() ==null ? "--": ar.getShelterRequest().getShelterOrg().getName());
+                    String message = "";
+                    for (int i = 0; i < ar.getMsgList().size()-1; i++) {
+                        message += ar.getMsgList().get(i) + "\n";
+                    }
+                    txtMessage.setText(message);
+
+                    String imagePath = ar.getReportingRequest().getImagePath();
+                    Image im;
+                        if (row == 0) {
+                            im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
+                        }else{
+                            im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                        }
+                    im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon ii = new ImageIcon(im);
+                    lblPicture.setIcon(ii);
+                }
+            }
+        });
+    }
+    
+    public void reset(){
+        txtID.setText("");
+        txtAnimalType.setText("");
+        txtID.setText("");
+        txtReportDate.setText("");
+        txtVolunteer.setText("");
+        txtHospital.setText("");
+        txtShelter.setText("");
+        txtMessage.setText("");
+    }
+    
     private void btnAssignShelterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignShelterActionPerformed
         // TODO add your handling code here:
-        int row = tblNewAssigned.getSelectedRow();
+        int row = tblAssigned.getSelectedRow();
         if(row<0) {
              JOptionPane.showMessageDialog(null, "Please select a case from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
+        AnimalRecord ar = (AnimalRecord) tblAssigned.getValueAt(row, 0);
         if (ar.getShelterRequest().getShelterOrg()==null || ar.getShelterRequest().getStatus().equals("Shelter Admin Declined")) {
             AssignShelterJPanel jp = new AssignShelterJPanel(container, system, ar);
             container.add("AssignShelterJPanel",jp);
@@ -375,12 +408,12 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
 
     private void btnAssignVolunteerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignVolunteerActionPerformed
         // TODO add your handling code here:
-        int row = tblNewAssigned.getSelectedRow();
+        int row = tblAssigned.getSelectedRow();
         if(row<0) {
              JOptionPane.showMessageDialog(null, "Please select a case from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
+        AnimalRecord ar = (AnimalRecord) tblAssigned.getValueAt(row, 0);
         
         if (ar.getVolunteerRequest().getVolunteer()==null || ar.getVolunteerRequest().getStatus().equals("Volunteer Declined")) {
             AssignVolunteerJPanel jp = new AssignVolunteerJPanel(container, system, ar);
@@ -395,12 +428,12 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
 
     private void btnAssignHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignHospitalActionPerformed
         // TODO add your handling code here:
-        int row = tblNewAssigned.getSelectedRow();
+        int row = tblAssigned.getSelectedRow();
         if(row<0) {
              JOptionPane.showMessageDialog(null, "Please select a case from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        AnimalRecord ar = (AnimalRecord) tblNewAssigned.getValueAt(row, 0);
+        AnimalRecord ar = (AnimalRecord) tblAssigned.getValueAt(row, 0);
         
         if (ar.getHospitalRequest().getHospitalOrg()==null || ar.getHospitalRequest().getStatus().equals("Hospital Declined")) {
             AssignHospitalJPanel jp = new AssignHospitalJPanel(container, system, ar);
@@ -421,45 +454,12 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
-        int row = tblNewAssigned.getSelectedRow();
-        if(row<0) {
-             JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        AnimalRecord ar = (AnimalRecord)tblNewAssigned.getValueAt(row, 0);
-        txtAnimalType.setText(ar.getReportingRequest().getAnimalType());
-        txtID.setText(ar.getID());
-        txtReportDate.setText(ar.getReportingRequest().getRequestDate().toString());
-        txtVolunteer.setText(ar.getVolunteerRequest().getVolunteer()==null ? "--":ar.getVolunteerRequest().getVolunteer().getEmployee().getName());
-        txtHospital.setText(ar.getHospitalRequest().getHospitalOrg() ==null ? "--": ar.getHospitalRequest().getHospitalOrg().getName());
-        txtShelter.setText(ar.getShelterRequest().getShelterOrg() ==null ? "--": ar.getShelterRequest().getShelterOrg().getName());
-        String message = "";
-        for (int i = 0; i < ar.getMsgList().size()-1; i++) {
-            message += ar.getMsgList().get(i) + "\n";
-        }
-        txtMessage.setText(message);
-        
-        String imagePath = ar.getReportingRequest().getImagePath();
-        Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
-        im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon ii = new ImageIcon(im);
-        lblPicture.setIcon(ii);
-        
-        //wq.setStatus("Waiting For Coordinator");
-        //JOptionPane.showMessageDialog(null, "Coordinator assigned!");
-        
-        popTable();
-    }//GEN-LAST:event_btnViewActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssignHospital;
     private javax.swing.JButton btnAssignShelter;
     private javax.swing.JButton btnAssignVolunteer;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnView;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
@@ -470,7 +470,7 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblPicture;
-    private javax.swing.JTable tblNewAssigned;
+    private javax.swing.JTable tblAssigned;
     private javax.swing.JTextField txtAnimalType;
     private javax.swing.JTextField txtHospital;
     private javax.swing.JTextField txtID;

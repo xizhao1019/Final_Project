@@ -134,6 +134,9 @@ public class StaffProcessJPanel extends javax.swing.JPanel {
         animalRecord.setStatus("Animal arrived shelter");
         animalRecord.addMessage("Shelter Staff completed the task. __Message: " + message);
         JOptionPane.showMessageDialog(null, "Thank you, process completed");
+        
+        comboStatus.setEnabled(false);
+        txtMessage.setEnabled(false);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

@@ -116,14 +116,18 @@ public class ConfigureASystem {
             UserAccount ua5 = volunteerOrg.getUserAccountDirectory().createUserAccount("volunteer2", "a", employee5, new VolunteerRole());
             ua5.setState(state);
             
-            //initialize a hospital organization, 1 hospital admin and 2 vets
+            //initialize a hospital organization, 2 hospital admins and 2 vets
             //hospitalorg1
             Organization hospitalOrg1 =  rescueEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.AnimalHospital);
             hospitalOrg1.setName("MA_HospitalOrg");
             
             Employee employee6 = hospitalOrg1.getEmployeeDirectory().createEmployee("David");
-            UserAccount ua6 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin1", "a", employee6, new HospitalAdminRole());
+            UserAccount ua6 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin1-1", "a", employee6, new HospitalAdminRole());
             ua6.setState(state);
+            
+            Employee employee27 = hospitalOrg1.getEmployeeDirectory().createEmployee("Quintus");
+            UserAccount ua27 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin1-2", "a", employee27, new HospitalAdminRole());
+            ua27.setState(state);
             
             Employee employee7 = hospitalOrg1.getEmployeeDirectory().createEmployee("Ella");
             UserAccount ua7 = hospitalOrg1.getUserAccountDirectory().createUserAccount("vet1", "a", employee7, new VetRole());
@@ -138,8 +142,12 @@ public class ConfigureASystem {
             hospitalOrg2.setName("MA_HospitalOrg2");
             
             Employee employee16 = hospitalOrg2.getEmployeeDirectory().createEmployee("Jack");
-            UserAccount ua16 = hospitalOrg2.getUserAccountDirectory().createUserAccount("hospitaladmin2", "a", employee16, new HospitalAdminRole());
+            UserAccount ua16 = hospitalOrg2.getUserAccountDirectory().createUserAccount("hospitaladmin2-1", "a", employee16, new HospitalAdminRole());
             ua16.setState(state);
+            
+            Employee employee28 = hospitalOrg2.getEmployeeDirectory().createEmployee("Roy");
+            UserAccount ua28 = hospitalOrg2.getUserAccountDirectory().createUserAccount("hospitaladmin2-2", "a", employee28, new HospitalAdminRole());
+            ua28.setState(state);
             
             Employee employee17 = hospitalOrg2.getEmployeeDirectory().createEmployee("Kevin");
             UserAccount ua17 = hospitalOrg2.getUserAccountDirectory().createUserAccount("vet3", "a", employee17, new VetRole());
@@ -149,14 +157,18 @@ public class ConfigureASystem {
             UserAccount ua18 = hospitalOrg2.getUserAccountDirectory().createUserAccount("vet4", "a", employee18, new VetRole());
             ua18.setState(state);
             
-            //initialize a shelter organization, 1 shelter admin and 2 staff
+            //initialize a shelter organization, 2 shelter admins and 2 staff
             //shelterorg1
             Organization shelterOrg1 =  rescueEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.AnimalShelter);
             shelterOrg1.setName("MA_ShelterOrg");
             
             Employee employee9 = shelterOrg1.getEmployeeDirectory().createEmployee("Gigi");
-            UserAccount ua9 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin1", "a", employee9, new ShelterAdminRole());
+            UserAccount ua9 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin1-1", "a", employee9, new ShelterAdminRole());
             ua9.setState(state);
+            
+            Employee employee29 = shelterOrg1.getEmployeeDirectory().createEmployee("Sara");
+            UserAccount ua29 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin1-2", "a", employee29, new ShelterAdminRole());
+            ua29.setState(state);
           
             Employee employee10 = shelterOrg1.getEmployeeDirectory().createEmployee("Helen");
             UserAccount ua10 = shelterOrg1.getUserAccountDirectory().createUserAccount("staff1", "a", employee10, new ShelterStaffRole());
@@ -171,8 +183,12 @@ public class ConfigureASystem {
             shelterOrg2.setName("MA_ShelterOrg2");
             
             Employee employee19 = shelterOrg2.getEmployeeDirectory().createEmployee("Mike");
-            UserAccount ua19 = shelterOrg2.getUserAccountDirectory().createUserAccount("shelteradmin2", "a", employee19, new ShelterAdminRole());
+            UserAccount ua19 = shelterOrg2.getUserAccountDirectory().createUserAccount("shelteradmin2-1", "a", employee19, new ShelterAdminRole());
             ua19.setState(state);
+            
+            Employee employee30 = shelterOrg2.getEmployeeDirectory().createEmployee("Tess");
+            UserAccount ua30 = shelterOrg2.getUserAccountDirectory().createUserAccount("shelteradmin2-2", "a", employee30, new ShelterAdminRole());
+            ua30.setState(state);
             
             Employee employee20 = shelterOrg2.getEmployeeDirectory().createEmployee("Nicole");
             UserAccount ua20 = shelterOrg2.getUserAccountDirectory().createUserAccount("staff3", "a", employee20, new ShelterStaffRole());
@@ -289,30 +305,35 @@ public class ConfigureASystem {
             reportingRequest.setCity("Boston");
             //TBD:LocationPoint animalLocationPoint;
             reportingRequest.setAnimalType("Cat");
+            reportingRequest.setImagePath("/images/DS_Coco_Help.jpeg");
             ar1.setImagePath("/images/DS_Coco.jpg");
             reportingRequest.setAssignedCoordinator(ua14);
             reportingRequest.setWitness(ua2);
             ar1.addMessage("Tue Dec 01 12:53:01 EST 2020 Please help this cat!");
             ar1.setReportingRequest(reportingRequest);
+            
+            incidentReportingOrg.getWorkQueue().getWorkRequestList().add(ar1);
             ua2.getWorkQueue().getWorkRequestList().add(ar1);
             ua14.getWorkQueue().getWorkRequestList().add(ar1);
-            
+            incidentManagementOrg.getWorkQueue().getWorkRequestList().add(ar1);
         
             //Volunteer info
             VolunteerRequest volunteerRequest = new VolunteerRequest(); 
             //TBD:LocationPoint volunteerLocationPoint/hospitalLocationPoint
             volunteerRequest.setVolunteer(ua4);
+            volunteerRequest.setStatus("Volunteer Accepted");
             ar1.addMessage("Tue Dec 01 13:03:30 EST 2020 Waiting for Volunteer response");
             ar1.addMessage("Tue Dec 01 13:03:32 EST 2020 Hi, would you like to help pick up this cat?");
             ar1.setVolunteerRequest(volunteerRequest);
             ua4.getWorkQueue().getWorkRequestList().add(ar1);
+            
             
             //HospitalRequest hospitalRequest;
             HospitalRequest hospitalRequest = new HospitalRequest();
             hospitalRequest.setHospitalOrg(hospitalOrg1);
             hospitalRequest.setOrgAdmin(ua6);
             hospitalRequest.setAssignedVet(ua7);
-            hospitalRequest.setStatus("");
+            hospitalRequest.setStatus("Hosptital Accepted");
             ar1.addMessage("Tue Dec 01 13:04:18 EST 2020 Waiting for Hospital response");
             ar1.addMessage("Tue Dec 01 13:04:19 EST 2020 Hi, please help save this cat!");
             ar1.setHospitalRequest(hospitalRequest);
@@ -322,14 +343,15 @@ public class ConfigureASystem {
             //ShelterRequest shelterRequest;
             ShelterRequest shelterRequest = new ShelterRequest();
             shelterRequest.setShelterOrg(shelterOrg1);
-            shelterRequest.setOrgAdmin(ua9);
+            shelterRequest.setOrgAdmin(ua29);
             shelterRequest.setAssignedStaff(ua10);
+            shelterRequest.setStatus("Shelter Accepted");
             //TBD:LocationPoint hospitalLocationPoint
             ar1.addMessage("Tue Dec 01 13:05:13 EST 2020 Waiting for Shelter response");
             ar1.addMessage("Tue Dec 01 13:05:15 EST 2020 Hi there, please help shelter this cat!");
             ar1.setShelterRequest(shelterRequest);
             shelterOrg1.getWorkQueue().getWorkRequestList().add(ar1);
-            ua9.getWorkQueue().getWorkRequestList().add(ar1);
+            ua29.getWorkQueue().getWorkRequestList().add(ar1);
             ua10.getWorkQueue().getWorkRequestList().add(ar1);
             
             //TBD:LocationPoint shelterLocationPoint;
@@ -341,9 +363,10 @@ public class ConfigureASystem {
             //VetRequest vetRequest;
             VetRequest vetRequest = new VetRequest();
             vetRequest.setHospitalOrg(hospitalOrg1);
+            vetRequest.setAbleForShelter(true);
             ar1.setVetRequest(vetRequest);
             ar1.setAge("Young");
-            ar1.setBreed("Domestic Shor");
+            ar1.setBreed("Domestic Short");
             ar1.setSex("Female");
             ar1.addMedicalRecord("Tue Dec 01 13:59:32 EST 2020 Examination completed, in good condition");
             ar1.getVetRequest().setAbleForShelter(true);
