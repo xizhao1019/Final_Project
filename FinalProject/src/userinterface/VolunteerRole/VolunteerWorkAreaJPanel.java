@@ -112,7 +112,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Hello,");
 
-        valueLabel.setText("<Coordinator>");
+        valueLabel.setText("<Volunteer>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -141,8 +141,8 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,13 +155,13 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGap(195, 195, 195))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -178,8 +178,8 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                 row[3] = ((AnimalRecord) wq).getHospitalRequest() ==null ? "--": ((AnimalRecord) wq).getHospitalRequest().getHospitalOrg().getName();
                 row[4] = ((AnimalRecord) wq).getReportingRequest().getWitness();
                 row[5] = ((AnimalRecord) wq).getLatestMessage();
-                row[6] = ((AnimalRecord) wq).getVolunteerRequest().getStatus();
-                row[7] = ((AnimalRecord) wq).getHospitalRequest().getStatus();
+                row[6] = ((AnimalRecord) wq).getVolunteerRequest().getStatus() ==null ? "--": ((AnimalRecord) wq).getVolunteerRequest().getStatus();
+                row[7] = ((AnimalRecord) wq).getHospitalRequest().getStatus() ==null ? "--": ((AnimalRecord) wq).getHospitalRequest().getStatus();
                 ((DefaultTableModel) tblVolunteerCase.getModel()).addRow(row);
            }
            
@@ -197,9 +197,11 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblVolunteerCase.getValueAt(row, 0);
         if (ar.getVolunteerRequest().getStatus().equals("Volunteer Declined")) {
-            JOptionPane.showMessageDialog(null, "You cannot handle a rejected case");
+            JOptionPane.showMessageDialog(null, "You cannot handle a rejected case", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (ar.getVolunteerRequest().getStatus().equals("Volunteer Completed")) {
+            JOptionPane.showMessageDialog(null, "Already completed, cannot process again!", "Warning", JOptionPane.WARNING_MESSAGE);
         } else if (!(ar.getVolunteerRequest().getStatus().equals("Volunteer Accepted"))) {
-            JOptionPane.showMessageDialog(null, "Please accept case first");
+            JOptionPane.showMessageDialog(null, "Please accept case first", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             VolunteerProcessJPanel jp = new VolunteerProcessJPanel(container, ar);
             container.add("VolunteerProcessJPanel",jp);
@@ -219,11 +221,15 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblVolunteerCase.getValueAt(row, 0);
         System.out.println(ar.getHospitalRequest().getStatus()); // test
+        if (ar.getVolunteerRequest().getStatus().equals("Volunteer Completed") || ar.getVolunteerRequest().getStatus().equals("Volunteer Accepted") ) {
+            JOptionPane.showMessageDialog(null, "Already accepted", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         if ((ar.getHospitalRequest().getStatus().equals("Hospital Accepted")) || (ar.getHospitalRequest().getStatus().equals("Vet Assigned") )) {
             ar.getVolunteerRequest().setStatus("Volunteer Accepted");
             JOptionPane.showMessageDialog(null, "Accept case, please go pick up animal");
             popTable();
-        } else {
+        }else {
             JOptionPane.showMessageDialog(null, "Wait for hospital administrator accept");
         }
     }//GEN-LAST:event_btnAcceptActionPerformed
@@ -236,8 +242,13 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblVolunteerCase.getValueAt(row, 0);
+        if (ar.getVolunteerRequest().getStatus().equals("Volunteer Completed") || ar.getVolunteerRequest().getStatus().equals("Volunteer Accepted") ) {
+            JOptionPane.showMessageDialog(null, "Already accepted, can not decline.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         ar.getVolunteerRequest().setStatus("Volunteer Declined");
         JOptionPane.showMessageDialog(null, "Request Declined");
+        userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
         popTable();
     }//GEN-LAST:event_btnDeclineActionPerformed
 

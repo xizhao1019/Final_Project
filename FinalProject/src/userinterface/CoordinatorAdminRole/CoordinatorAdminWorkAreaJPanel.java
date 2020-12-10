@@ -46,9 +46,9 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
                 System.out.println(e.getName());
             }
         }
-        //System.out.println("enterprise size in current network :" + network.getEnterpriseDirectory().getEnterpriseList().size());
         
         valueLabel.setText(userAccount.getEmployee().getName());
+        //System.out.println(userAccount.getState());
         
     }
 
@@ -63,7 +63,7 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnNewReportedCases = new javax.swing.JButton();
+        btnReportedCases = new javax.swing.JButton();
         btnViewAllAnimals = new javax.swing.JButton();
         valueLabel = new javax.swing.JLabel();
 
@@ -71,10 +71,10 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Role: Coordinator Administrator");
 
-        btnNewReportedCases.setText("New Reported Cases");
-        btnNewReportedCases.addActionListener(new java.awt.event.ActionListener() {
+        btnReportedCases.setText("Reported Cases");
+        btnReportedCases.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewReportedCasesActionPerformed(evt);
+                btnReportedCasesActionPerformed(evt);
             }
         });
 
@@ -94,18 +94,17 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(btnViewAllAnimals))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(btnNewReportedCases))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnReportedCases)
+                            .addComponent(btnViewAllAnimals))))
                 .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
@@ -117,24 +116,24 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69)
-                .addComponent(btnNewReportedCases)
+                .addComponent(btnReportedCases)
                 .addGap(36, 36, 36)
                 .addComponent(btnViewAllAnimals)
                 .addGap(96, 96, 96))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNewReportedCasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewReportedCasesActionPerformed
+    private void btnReportedCasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportedCasesActionPerformed
         // TODO add your handling code here:
-        NewReportedCasesJPanel jp = new NewReportedCasesJPanel(container, enterprise, organization, system);
+        ReportedCasesJPanel jp = new ReportedCasesJPanel(container, enterprise, organization, userAccount);
         container.add("NewReportedCasesJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
-    }//GEN-LAST:event_btnNewReportedCasesActionPerformed
+    }//GEN-LAST:event_btnReportedCasesActionPerformed
 
     private void btnViewAllAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAllAnimalsActionPerformed
         // TODO add your handling code here:
-        ViewAllAnimals jp = new ViewAllAnimals(container);
+        ViewAllAnimals jp = new ViewAllAnimals(container, system, userAccount);
         container.add("ViewAllAnimals",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -142,7 +141,7 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNewReportedCases;
+    private javax.swing.JButton btnReportedCases;
     private javax.swing.JButton btnViewAllAnimals;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

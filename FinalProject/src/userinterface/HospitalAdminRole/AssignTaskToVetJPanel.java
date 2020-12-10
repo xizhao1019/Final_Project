@@ -50,7 +50,7 @@ public class AssignTaskToVetJPanel extends javax.swing.JPanel {
         for (WorkRequest wr : userAccount.getWorkQueue().getWorkRequestList() ) {
            //System.out.println("in workrequest"); //test
            if (wr instanceof AnimalRecord) {
-               if((((AnimalRecord) wr).getHospitalRequest().getStatus().equals("Hospital Accepted") )) {
+               if( (((AnimalRecord) wr).getHospitalRequest().getStatus()!=null)  &&  (((AnimalRecord) wr).getHospitalRequest().getStatus().equals("Hospital Accepted"))) {
                    Object row[] = new Object[6]; 
                     row[0] = wr;
                     row[1] = ((AnimalRecord) wr).getReportingRequest().getAnimalType();
@@ -163,18 +163,18 @@ public class AssignTaskToVetJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addGap(18, 18, 18)
                             .addComponent(vetCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +195,7 @@ public class AssignTaskToVetJPanel extends javax.swing.JPanel {
                     .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(60, 60, 60))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -225,8 +225,11 @@ public class AssignTaskToVetJPanel extends javax.swing.JPanel {
         ar.addMessage(message);
         ar.getHospitalRequest().setAssignedVet(ua);
         ar.getHospitalRequest().setStatus("Vet Assigned");
+        ar.getVetRequest().setStatus("Vet Assigned");
         ua.getWorkQueue().getWorkRequestList().add(ar);
         JOptionPane.showMessageDialog(null, "Vet assigned");
+        
+        txtMessage.setEnabled(false);
         popTable();
     }//GEN-LAST:event_btnAssignActionPerformed
 

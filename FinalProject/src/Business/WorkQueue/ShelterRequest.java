@@ -17,6 +17,7 @@ public class ShelterRequest extends WorkRequest{
     
     private Organization shelterOrg;
     private LocationPoint hospitalLocationPoint;
+    private UserAccount orgAdmin;
     private UserAccount assignedStaff;
     private boolean post;
     
@@ -32,7 +33,14 @@ public class ShelterRequest extends WorkRequest{
         this.post = post;
     }
 
-    
+    public UserAccount getOrgAdmin() {
+        return orgAdmin;
+    }
+
+    public void setOrgAdmin(UserAccount orgAdmin) {
+        this.orgAdmin = orgAdmin;
+    }
+
     public UserAccount getAssignedStaff() {
         return assignedStaff;
     }

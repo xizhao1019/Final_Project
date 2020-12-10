@@ -71,11 +71,11 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Animal ID", "Type", "Breed", "Age", "Name", "Health Condition", "Status", "Message"
+                "Animal ID", "Type", "Breed", "Age", "Name", "Shelter Status", "Message", "Hospital Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -93,7 +93,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
 
         valueLabel.setText("<Shelter Staff>");
 
-        btnProcess.setText("Process");
+        btnProcess.setText("Pick Up Pet!");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProcessActionPerformed(evt);
@@ -106,28 +106,28 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 957, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(151, 151, 151))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(97, 97, 97)
-                                .addComponent(jLabel2))))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(btnUpdateInfo)
-                        .addGap(39, 39, 39)
-                        .addComponent(btnProcess)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(236, 236, 236)
+                        .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(btnUpdateInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,20 +137,21 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jLabel7))
+                        .addComponent(jLabel7)
+                        .addGap(142, 142, 142))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdateInfo)
-                    .addComponent(btnProcess))
-                .addContainerGap())
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnProcess, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(btnUpdateInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -166,10 +167,9 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                 row[2] = ((AnimalRecord) wr).getBreed() ==null?"--": ((AnimalRecord) wr).getBreed();
                 row[3] = ((AnimalRecord) wr).getAge() ==null?"--": ((AnimalRecord) wr).getAge();
                 row[4] = ((AnimalRecord) wr).getPetName() ==null?"--": ((AnimalRecord) wr).getPetName();
-                row[5] = ((AnimalRecord) wr).getHealthCondition() ==null?"--": ((AnimalRecord) wr).getHealthCondition();
-                row[6] = ((AnimalRecord) wr).getShelterRequest().getStatus() ==null?"--": ((AnimalRecord) wr).getShelterRequest().getStatus();             
-                row[7] = ((AnimalRecord) wr).getShelterRequest().getLatestMessage()==null?"--": ((AnimalRecord) wr).getShelterRequest().getLatestMessage();
-                         
+                row[5] = ((AnimalRecord) wr).getShelterRequest().getStatus() ==null?"--": ((AnimalRecord) wr).getShelterRequest().getStatus();             
+                row[6] = ((AnimalRecord) wr).getShelterRequest().getLatestMessage()==null?"--": ((AnimalRecord) wr).getShelterRequest().getLatestMessage();
+                row[7] = ((AnimalRecord) wr).getHospitalRequest().getStatus()==null?"--":((AnimalRecord) wr).getHospitalRequest().getStatus();
                 ((DefaultTableModel) tblAnimals.getModel()).addRow(row);
             }
         }
@@ -183,11 +183,21 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblAnimals.getValueAt(row, 0);
+
+        if (ar.getShelterRequest().getStatus().equals("Pet transferred to shelter")) {
+            UpdateInfoJPanel jp = new UpdateInfoJPanel(container, ar);
+            container.add("UpdateInfoJPanel",jp);
+            CardLayout layout = (CardLayout)container.getLayout();
+            layout.next(container);            
+        } else if (ar.getShelterRequest().getStatus().equals("Staff Assigned")) {
+            JOptionPane.showMessageDialog(null, "Pls do pick up process first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+             JOptionPane.showMessageDialog(null, "Something wrong, you cannot update now!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
-        UpdateInfoJPanel jp = new UpdateInfoJPanel(container, ar);
-        container.add("UpdateInfoJPanel",jp);
-        CardLayout layout = (CardLayout)container.getLayout();
-        layout.next(container);
+        
     }//GEN-LAST:event_btnUpdateInfoActionPerformed
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed

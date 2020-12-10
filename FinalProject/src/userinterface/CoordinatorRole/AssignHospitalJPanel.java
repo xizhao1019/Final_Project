@@ -61,20 +61,20 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                              //       if (((AnimalRecord)wq).getReportingRequest().getAssignedCoordinator() == userAccount) {
                              //for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
                              //    if (ua.getRole().toString() == "HospitalAdmin") {                             
-                                        Object row[] = new Object[5];
+                                        Object row[] = new Object[4];
                                         row[0] = org;
                                         row[1] = org.getOrganizationID();
                                         row[2] = org.getEmployeeDirectory().getEmployeeList().size(); // this is size of whole organization
-                                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
-                                            System.out.println("ua role: " + ua.getRole()); //test
-                                            if (ua.getRole().toString().equals("HospitalAdmin") ) {
-                                                row[3] = ua;
-                                                break;
-                                            } else {
-                                                row[3] = "Hospital has no administrator";
-                                            }
-                                        }
-                                        row[4] = org.getWorkQueue().getWorkRequestList().size();
+//                                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+//                                            System.out.println("ua role: " + ua.getRole()); //test
+//                                            if (ua.getRole().toString().equals("HospitalAdmin") ) {
+//                                                row[3] = ua;
+//                                                break;
+//                                            } else {
+//                                                row[3] = "Hospital has no administrator";
+//                                            }
+//                                        }
+                                        row[3] = org.getWorkQueue().getWorkRequestList().size();
                                         ((DefaultTableModel)tblHospital.getModel()).addRow(row);
                         }
                     }
@@ -98,6 +98,8 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnAdmin = new javax.swing.JButton();
         comboAdmin = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        txtMessage = new javax.swing.JTextField();
 
         btnAssign.setText("Assgin Hospital");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
@@ -108,17 +110,17 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
 
         tblHospital.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Animal Hospital", "Organization ID", "Number of Available Vets", "Hospital Admin", "# of Task"
+                "Animal Hospital", "Organization ID", "Number of Available Vets", "# of Task"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -143,6 +145,8 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("Message to hospital:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,14 +164,19 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                         .addGap(122, 122, 122)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
+                        .addGap(227, 227, 227)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(327, 327, 327)
                         .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
+                .addGap(83, 83, 83))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(26, 26, 26)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(741, Short.MAX_VALUE)))
+                    .addGap(774, 774, 774)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,14 +188,18 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdmin)
                     .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                .addGap(70, 70, 70))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(18, 18, 18)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(423, Short.MAX_VALUE)))
+                    .addGap(443, 443, 443)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -195,9 +208,9 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         container.remove(this);
         Component[] componentArray = container.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        NewAssignedCaseJPanel nacjp = (NewAssignedCaseJPanel) component;
+        AssignedCaseJPanel nacjp = (AssignedCaseJPanel) component;
         nacjp.popTable();
-        
+        nacjp.reset();
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -206,11 +219,16 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tblHospital.getSelectedRow();
         if(row<0) {
-             JOptionPane.showMessageDialog(null, "Please select a volunteer from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+             JOptionPane.showMessageDialog(null, "Please select a hosptail from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         Organization org = (Organization)tblHospital.getValueAt(row, 0);        
         UserAccount ua = (UserAccount)comboAdmin.getSelectedItem();
+        
+        if (txtMessage.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Please write a message to hospital", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         if (ua == null) {
             JOptionPane.showMessageDialog(null, "Please select an hospital admin", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -223,6 +241,8 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         
         animalRecord.getHospitalRequest().setHospitalOrg(org);
         animalRecord.getHospitalRequest().setStatus("Hospital Assigned");
+        animalRecord.addMessage("Coordinator assign hospital. Message: " + txtMessage.getText());
+        animalRecord.getHospitalRequest().setLatestMessage(txtMessage.getText());
         ua.getWorkQueue().getWorkRequestList().add(animalRecord);
         org.getWorkQueue().getWorkRequestList().add(animalRecord);
         
@@ -234,10 +254,10 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tblHospital.getSelectedRow();
         if(row<0) {
-            JOptionPane.showMessageDialog(null, "Please select a volunteer from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select a hospital from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        comboAdmin.removeAllItems();
         Organization org = (Organization)tblHospital.getValueAt(row, 0);
         for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
             System.out.println("combo role: " + ua.getRole()); //test
@@ -254,7 +274,9 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JComboBox comboAdmin;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblHospital;
+    private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 }

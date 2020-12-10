@@ -5,6 +5,9 @@
 package Business.WorkQueue;
 
 import Business.Location.LocationPoint;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -24,13 +27,15 @@ public class AnimalRecord extends WorkRequest{
     private LocationPoint shelterLocationPoint;
     private String petName;
     private String breed;
+    private String sex;
     private String age;
-    private String healthCondition;
+    private List<String> medicalRecord;
     private String imagePath;
     private String ID;
     private String id;
     private Random random = new Random();
     private boolean adopted;
+    private boolean addedAhead;
     
     public AnimalRecord() {
         this.reportingRequest = new AnimalReportingRequest();
@@ -40,10 +45,22 @@ public class AnimalRecord extends WorkRequest{
         this.shelterRequest = new ShelterRequest();
         //this.shelterStaffRequest = new ShelterStaffRequest();
         this.shelterLocationPoint = new LocationPoint();
+        this.medicalRecord = new ArrayList<>();
         id = String.format("%04d",random.nextInt(10000));
         ID = "A" + id;
         this.adopted = false;
+        this.addedAhead = false;
     }
+
+    public boolean isAddedAhead() {
+        return addedAhead;
+    }
+
+    public void setAddedAhead(boolean addedAhead) {
+        this.addedAhead = addedAhead;
+    }
+    
+    
 
     public boolean isAdopted() {
         return adopted;
@@ -126,12 +143,20 @@ public class AnimalRecord extends WorkRequest{
         this.age = age;
     }
 
-    public String getHealthCondition() {
-        return healthCondition;
+    public String getSex() {
+        return sex;
     }
 
-    public void setHealthCondition(String healthStatus) {
-        this.healthCondition = healthStatus;
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public List<String> getMedicalRecord() {
+        return medicalRecord;
+    }
+
+    public void setMedicalRecord(List<String> healthCondition) {
+        this.medicalRecord = healthCondition;
     }
 
     public String getImagePath() {
@@ -167,4 +192,9 @@ public class AnimalRecord extends WorkRequest{
        return ID;   
     }
     
+    public void addMedicalRecord(String string){
+        Date time = new Date();
+        string = time + " " + string;
+        medicalRecord.add(string);
+    }
 }

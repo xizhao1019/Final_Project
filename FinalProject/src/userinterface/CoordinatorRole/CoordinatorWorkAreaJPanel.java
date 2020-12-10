@@ -48,7 +48,7 @@ public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Coordinator Work Area");
 
-        btnNewAssignedCases.setText("New Assigned Cases");
+        btnNewAssignedCases.setText("Assigned Cases");
         btnNewAssignedCases.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewAssignedCasesActionPerformed(evt);
@@ -75,9 +75,9 @@ public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
+                        .addGap(110, 110, 110)
                         .addComponent(btnNewAssignedCases)
-                        .addGap(170, 170, 170)
+                        .addGap(150, 150, 150)
                         .addComponent(btnViewYourAnimals))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(272, 272, 272)
@@ -111,7 +111,7 @@ public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnNewAssignedCasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAssignedCasesActionPerformed
         // TODO add your handling code here:
-        NewAssignedCaseJPanel jp = new NewAssignedCaseJPanel(container, system, userAccount);
+        AssignedCaseJPanel jp = new AssignedCaseJPanel(container, system, userAccount);
         container.add("NewAssignedCaseJPanel",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
@@ -119,7 +119,7 @@ public class CoordinatorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnViewYourAnimalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewYourAnimalsActionPerformed
         // TODO add your handling code here:
-        ViewYourAnimals jp = new ViewYourAnimals(container);
+        ViewYourAnimals jp = new ViewYourAnimals(container, userAccount);
         container.add("ViewYourAnimals",jp);
         CardLayout layout = (CardLayout)container.getLayout();
         layout.next(container);
