@@ -71,17 +71,17 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
 
         tblShelter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Animal Shelter", "Organization ID", "Shelter Admin", "# of Task"
+                "Animal Shelter", "Organization ID", "# of Task"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -175,19 +175,19 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
                     //System.out.println("in rescue enterprise"); //test
                     for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
                         if (org instanceof AnimalShelterOrganization) {                             
-                                        Object row[] = new Object[5];
+                                        Object row[] = new Object[3];
                                         row[0] = org;
                                         row[1] = org.getOrganizationID();
-                                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
-                                            //System.out.println("ua role: " + ua.getRole()); //test
-                                            if (ua.getRole().toString().equals("ShelterAdmin") ) {
-                                                row[2] = ua;
-                                                break;
-                                            } else {
-                                                row[2] = "Shelter has no administrator";
-                                            }
-                                        }
-                                        row[3] = org.getWorkQueue().getWorkRequestList().size();
+//                                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+//                                            //System.out.println("ua role: " + ua.getRole()); //test
+//                                            if (ua.getRole().toString().equals("ShelterAdmin") ) {
+//                                                row[2] = ua;
+//                                                break;
+//                                            } else {
+//                                                row[2] = "Shelter has no administrator";
+//                                            }
+//                                        }
+                                        row[2] = org.getWorkQueue().getWorkRequestList().size();
                                         ((DefaultTableModel)tblShelter.getModel()).addRow(row);
                         }
                     }
@@ -237,7 +237,11 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
             return;
         }
         Organization org = (Organization)tblShelter.getValueAt(row, 0);        
-        UserAccount ua = (UserAccount)comboAdmin.getSelectedItem();      
+        UserAccount ua = (UserAccount)comboAdmin.getSelectedItem();  
+        if (ua == null) {
+             JOptionPane.showMessageDialog(null, "Please select a shelter administrator to request", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         animalRecord.getShelterRequest().setShelterOrg(org);
         animalRecord.addMessage("Coordinator assign shelter. Message to shelter: " + txtMessage.getText());

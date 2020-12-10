@@ -314,7 +314,7 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
             imagePath = animalRecord.getImagePath();
         }
         Image im;
-            if (animalRecord.getPetName().equals("Coco")) {
+            if (animalRecord.isAddedAhead() == true) {
                 im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
             }else{
                 im = Toolkit.getDefaultToolkit().createImage(imagePath);
@@ -322,6 +322,11 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
         im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon ii = new ImageIcon(im);
         lblPicture.setIcon(ii);
+        
+        // post btn
+        if (animalRecord.getShelterRequest().isPost() == true) {
+            btnPost.setEnabled(false);
+        }
         
     }
     
@@ -341,7 +346,7 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Animal Information Uploaded Successfully");
         txtName.setEnabled(false);
         txtMessage.setEnabled(false);
-        btnPost.setEnabled(false);
+        //btnPost.setEnabled(false);
         btnUpdate.setEnabled(false);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -379,6 +384,7 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
         animalRecord.getShelterRequest().setPost(true);
         animalRecord.getShelterRequest().setStatus("Posted");
         animalRecord.setStatus("Posted For Adoption");
+        btnPost.setEnabled(false);
         JOptionPane.showMessageDialog(null, "Animal Posted For Adoption!");
     }//GEN-LAST:event_btnPostActionPerformed
 

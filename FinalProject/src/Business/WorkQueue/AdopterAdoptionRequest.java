@@ -36,8 +36,8 @@ public class AdopterAdoptionRequest extends WorkRequest{
         return approved;
     }
 
-    public void setApproved() {
-        this.approved = true;
+    public void setApproved(boolean shelterResponse) {
+        this.approved = shelterResponse;
     } 
 
     public AdopterRegistrationRequest getAdopter() {

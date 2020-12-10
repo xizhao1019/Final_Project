@@ -633,7 +633,7 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                     imagePath = ar.getImagePath();
                 }
                 Image im;
-                if (row <= 0) {
+                if (ar.isAddedAhead() == true) {
                     im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
                 }else{
                     im = Toolkit.getDefaultToolkit().createImage(imagePath);

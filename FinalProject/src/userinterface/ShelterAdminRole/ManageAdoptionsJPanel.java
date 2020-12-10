@@ -40,8 +40,8 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
         this.organization = org;
         this.userAccount = ua;
         
+        
         popTable();
-        //popTablePetOwner();
     }
     
     public void popTable() {
@@ -115,6 +115,8 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
         btnProcess = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        btnDisplayAdopterRequest = new javax.swing.JButton();
+        btnDisplayPetOwnerRequest = new javax.swing.JButton();
 
         tblAdoptions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,14 +157,24 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Adoption Request ");
 
+        btnDisplayAdopterRequest.setText("Display Adopter Requests");
+        btnDisplayAdopterRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisplayAdopterRequestActionPerformed(evt);
+            }
+        });
+
+        btnDisplayPetOwnerRequest.setText("Display Pet Owner Requests");
+        btnDisplayPetOwnerRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisplayPetOwnerRequestActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 44, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 937, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -172,9 +184,17 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
                         .addGap(241, 241, 241)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(429, 429, 429)
+                        .addGap(254, 254, 254)
+                        .addComponent(btnDisplayAdopterRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(btnDisplayPetOwnerRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 937, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(442, 442, 442)
                         .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,10 +204,14 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDisplayAdopterRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDisplayPetOwnerRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -199,6 +223,7 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
               return;
           } 
           WorkRequest wr = (WorkRequest)tblAdoptions.getValueAt(row, 0);
+          
           if (wr instanceof AdopterAdoptionRequest) {
               ProcessAdopterRequestJPanel jp = new ProcessAdopterRequestJPanel(container, (AdopterAdoptionRequest)wr);
               container.add("ProcessAdopterRequestJPanel",jp);
@@ -221,9 +246,83 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnDisplayAdopterRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayAdopterRequestActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tblAdoptions.getModel();
+        model.setRowCount(0);
+        
+        for (Enterprise enterprise : userAccount.getState().getEnterpriseDirectory().getEnterpriseList()) {
+            if (enterprise instanceof AdoptionEnterprise) {
+                for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                    
+                    if (org instanceof AdopterOrganization) {                        
+                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList() ) {
+                           for (WorkRequest wr : ua.getWorkQueue().getWorkRequestList()) {
+                                if (wr instanceof AdopterAdoptionRequest) {
+                                     //System.out.println("in animalrecord"); //test
+                                     Object row[] = new Object[9]; 
+                                     row[0] = wr;
+                                     row[1] = ((AdopterAdoptionRequest) wr).getAnimal().getID();
+                                     row[2] = ((AdopterAdoptionRequest) wr).getAnimal().getReportingRequest().getAnimalType();
+                                     row[3] = ((AdopterAdoptionRequest) wr).getAnimal().getBreed() ==null ? "--": ((AdopterAdoptionRequest) wr).getAnimal().getBreed();
+                                     row[4] = ((AdopterAdoptionRequest) wr).getAnimal().getPetName() ==null ? "--": ((AdopterAdoptionRequest) wr).getAnimal().getPetName();
+                                     row[5] = ((AdopterAdoptionRequest) wr).getAnimal().getShelterRequest().getAssignedStaff();
+                                     row[6] = ((AdopterAdoptionRequest) wr).getAnimal().getStatus();
+                                     row[7] = ((AdopterAdoptionRequest) wr).getAdopter();
+                                     row[8] = "Adopter";
+
+                                     ((DefaultTableModel) tblAdoptions.getModel()).addRow(row);
+                                }
+                            }                           
+                        }
+                    }
+                                    
+                    
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDisplayAdopterRequestActionPerformed
+
+    private void btnDisplayPetOwnerRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayPetOwnerRequestActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tblAdoptions.getModel();
+        model.setRowCount(0);
+        
+        for (Enterprise enterprise : userAccount.getState().getEnterpriseDirectory().getEnterpriseList()) {
+            if (enterprise instanceof AdoptionEnterprise) {
+                for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                    
+                    if (org instanceof PetOwnerOrganization) {                        
+                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList() ) {
+                           for (WorkRequest wr : ua.getWorkQueue().getWorkRequestList()) {                               
+                                if (wr instanceof PetOwnerAdoptionRequest) {
+                                    Object row[] = new Object[9]; 
+                                    row[0] = wr;
+                                    row[1] = ((PetOwnerAdoptionRequest) wr).getAnimal().getID();
+                                    row[2] = ((PetOwnerAdoptionRequest) wr).getAnimal().getReportingRequest().getAnimalType();
+                                    row[3] = ((PetOwnerAdoptionRequest) wr).getAnimal().getBreed() ==null ? "--": ((PetOwnerAdoptionRequest) wr).getAnimal().getBreed();
+                                    row[4] = ((PetOwnerAdoptionRequest) wr).getAnimal().getPetName()  ==null ? "--": ((PetOwnerAdoptionRequest) wr).getAnimal().getPetName();
+                                    row[5] = ((PetOwnerAdoptionRequest) wr).getAnimal().getShelterRequest().getAssignedStaff();
+                                    row[6] = ((PetOwnerAdoptionRequest) wr).getAnimal().getStatus();
+                                    row[7] = ((PetOwnerAdoptionRequest) wr).getAdopter();
+                                    row[8] = "Pet Owner";
+                                            
+                                    ((DefaultTableModel) tblAdoptions.getModel()).addRow(row);
+                                }
+                            }                           
+                        }
+                    }                 
+                    
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDisplayPetOwnerRequestActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDisplayAdopterRequest;
+    private javax.swing.JButton btnDisplayPetOwnerRequest;
     private javax.swing.JButton btnProcess;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;

@@ -6,11 +6,17 @@
 package userinterface.GoogleMap;
 
 import Business.Location.LocationPoint;
+import com.teamdev.jxbrowser.browser.Browser;
+import com.teamdev.jxbrowser.engine.Engine;
+import com.teamdev.jxbrowser.engine.EngineOptions;
+import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
+import com.teamdev.jxbrowser.view.swing.BrowserView;
 
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
+import userinterface.WitnessRole.ReportStrayAnimalJPanel;
 
 /**
  *
@@ -20,11 +26,24 @@ public class SetLocationJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     LocationPoint locationPoint;
+    Browser browser;
     /**
      * Creates new form SetLocationJPanel
      */
-    public SetLocationJPanel() {
+    public SetLocationJPanel(JPanel container) {
         initComponents();
+        this.userProcessContainer = container;
+        locationPoint = new LocationPoint();
+        
+        EngineOptions options = 
+                EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("1BNDJDKIKHVL2Q2VI3E34XQZ5G211LU05I6XP5A8BT27CM3NEWADPZS16TNTCXIKJI0G0N").build();
+        Engine engine = Engine.newInstance(options);
+        browser = engine.newBrowser();
+        BrowserView view = BrowserView.newInstance(browser);
+        browser.navigation().loadUrl("https://www.google.com/maps");
+        
+        map.add(view, "a");
+        //map.setVisible(true);
     }
 
     /**
@@ -36,19 +55,91 @@ public class SetLocationJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 694, Short.MAX_VALUE)
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel2 = new javax.swing.JPanel();
+        btnSetLocation = new javax.swing.JButton();
+        map = new javax.swing.JPanel();
+
+        setLayout(new java.awt.BorderLayout());
+
+        btnSetLocation.setText("setLocation ");
+        btnSetLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetLocationActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSetLocation)
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(btnSetLocation)
+                .addContainerGap(294, Short.MAX_VALUE))
         );
+
+        jSplitPane1.setLeftComponent(jPanel2);
+
+        map.setBackground(new java.awt.Color(255, 255, 255));
+        map.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        map.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        map.setPreferredSize(new java.awt.Dimension(0, 0));
+        map.setLayout(new java.awt.CardLayout());
+        jSplitPane1.setRightComponent(map);
+
+        add(jSplitPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSetLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetLocationActionPerformed
+        // TODO add your handling code here:
+        try {
+
+            if (browser.url()!= null) {
+
+                System.out.println(browser.url());
+                String[] a = browser.url().split("!3d", 0);
+                //System.out.println(a.length);
+                String[] b = a[1].split("!4d");
+                System.out.println("Lat" + b[0] + "  " + "Lon" + b[1]);
+                double lat = Double.parseDouble(b[0]);
+                double lon = Double.parseDouble(b[1]);
+                locationPoint.setLatitude(lat);
+                locationPoint.setLongitude(lon);
+            }
+            System.out.println("Lat" + locationPoint.getLatitude() + locationPoint.getLongitude());
+
+            userProcessContainer.remove(this);
+            Component[] componentArray = userProcessContainer.getComponents();
+            
+            if (userProcessContainer.getComponent(componentArray.length - 1) instanceof ReportStrayAnimalJPanel) {
+                ReportStrayAnimalJPanel jp = (ReportStrayAnimalJPanel)userProcessContainer.getComponent(componentArray.length - 1);
+                jp.populateLongituteLatitude(locationPoint);
+            } else {
+                 System.out.println("ELSE LOCATION " + componentArray.length);
+                 System.out.println("ELSE CONTAINER " + userProcessContainer.toString());
+            }
+            
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.previous(userProcessContainer);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Set Position first");         
+        }
+    }//GEN-LAST:event_btnSetLocationActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSetLocation;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JPanel map;
     // End of variables declaration//GEN-END:variables
 }
