@@ -41,7 +41,37 @@ public class ViewAllAnimals extends javax.swing.JPanel {
        this.container = container;
        this.system = sys;
        this.userAccount = ua;
+       
+        txtCaseID.setEditable(false);
+        txtReportDate.setEditable(false);
+        txtReportBy.setEditable(false);
+       
+        txtCoordinator.setEditable(false);
+        txtVolunteer.setEditable(false);   
+       
+        txtType.setEditable(false);
+        txtAnimalAge.setEditable(false);
+        txtBreed.setEditable(false);
+        txtSex.setEditable(false);
+        txtHospitalname.setEditable(false);
+        txtVetname.setEditable(false);
+        txtHealth.setEditable(false);
         
+        txtShelterName.setEditable(false);
+        txtShelterStaff.setEditable(false);
+        
+        txtAdopterName.setEditable(false);
+        txtAdopterDOB.setEditable(false);
+        txtAdopterEmail.setEditable(false);
+        txtAdopterNumber.setEditable(false);
+        txtAdopterState.setEditable(false);
+        txtAdopterCity.setEditable(false);
+        txtAdopterStreet.setEditable(false);
+        txtAdopterApt.setEditable(false);
+        txtAdopterZip.setEditable(false);
+       
+        txtMessageList.setEditable(false);
+       
         popTable();
         displayInfo();
     }
@@ -50,10 +80,10 @@ public class ViewAllAnimals extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblAnimals.getModel();
         model.setRowCount(0);
         
-        for (Network n : system.getNetworkList()) {        
+//        for (Network n : system.getNetworkList()) {        
             //System.out.println("in network");
-            if (n.equals(userAccount.getState())) {
-            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+//            if (n.equals(userAccount.getState())) {
+            for (Enterprise e : userAccount.getState().getEnterpriseDirectory().getEnterpriseList()) {
                 //System.out.println(e.getWorkQueue().getWorkRequestList().size()); // test
                 if (e instanceof IncidentEnterprise) {
                     //System.out.println("in incident enterprise");
@@ -73,7 +103,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                                     if(((AnimalRecord) wr).getAdopterAdoptionRequest() != null) {    
                                         row[6] = ((AnimalRecord) wr).getAdopterAdoptionRequest().getAdopter();
                                     } else if (((AnimalRecord) wr).getPetOwnerAdoptionRequest() != null) {
-                                        row[6] = "Pet Owner Claimed";
+                                        row[6] = ((AnimalRecord) wr).getPetOwnerAdoptionRequest().getAdopter();;
                                     } else {
                                         row[6] = "--";
                                     }
@@ -86,8 +116,8 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                     }
                 }
             }
-        }
-        }
+//        }
+//        }
     }
     
     public void displayInfo(){
@@ -106,24 +136,17 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 txtReportDate.setText(ar.getRequestDate().toString());
                 txtReportBy.setText(ar.getReportingRequest().getWitness().getEmployee().getName());
                 
-                txtCaseID.setEditable(false);
-                txtReportDate.setEditable(false);
-                txtReportBy.setEditable(false);
-                
                 // transportation
-                txtCoordinator.setText(ar.getReportingRequest().getAssignedCoordinator()==null?"-":ar.getReportingRequest().getAssignedCoordinator().getEmployee().getName());                
-                txtVolunteer.setText(ar.getVolunteerRequest().getVolunteer() ==null?"-": ar.getVolunteerRequest().getVolunteer().getEmployee().getName());               
-                
-                txtCoordinator.setEditable(false);
-                txtVolunteer.setEditable(false);    
+                txtCoordinator.setText(ar.getReportingRequest().getAssignedCoordinator()==null?"--":ar.getReportingRequest().getAssignedCoordinator().getEmployee().getName());                
+                txtVolunteer.setText(ar.getVolunteerRequest().getVolunteer() ==null?"--": ar.getVolunteerRequest().getVolunteer().getEmployee().getName());               
                 
                 // medical info
                 txtType.setText(ar.getReportingRequest().getAnimalType());
-                txtAnimalAge.setText(ar.getAge());
-                txtBreed.setText(ar.getBreed());
-                txtSex.setText(ar.getSex());
-                txtHospitalname.setText(ar.getHospitalRequest().getHospitalOrg() ==null?"-": ar.getHospitalRequest().getHospitalOrg().getName());
-                txtVetname.setText(ar.getHospitalRequest().getAssignedVet() ==null?"-": ar.getHospitalRequest().getAssignedVet().getEmployee().getName());
+                txtAnimalAge.setText(ar.getAge()==null?"--":ar.getAge());
+                txtBreed.setText(ar.getBreed()==null?"--":ar.getBreed());
+                txtSex.setText(ar.getSex()==null?"--":ar.getSex());
+                txtHospitalname.setText(ar.getHospitalRequest().getHospitalOrg() ==null?"--": ar.getHospitalRequest().getHospitalOrg().getName());
+                txtVetname.setText(ar.getHospitalRequest().getAssignedVet() ==null?"--": ar.getHospitalRequest().getAssignedVet().getEmployee().getName());
                 String healthRecord = "";
                 for (String s : ar.getMedicalRecord()) {
                     healthRecord += s + "\n";
@@ -131,8 +154,8 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 txtHealth.setText(healthRecord);
                 
                 // shelter info
-                txtShelterName.setText(ar.getShelterRequest().getShelterOrg() ==null?"-": ar.getShelterRequest().getShelterOrg().getName());
-                txtShelterStaff.setText(ar.getShelterRequest().getAssignedStaff() ==null?"-": ar.getShelterRequest().getAssignedStaff().getEmployee().getName());
+                txtShelterName.setText(ar.getShelterRequest().getShelterOrg() ==null?"--": ar.getShelterRequest().getShelterOrg().getName());
+                txtShelterStaff.setText(ar.getShelterRequest().getAssignedStaff() ==null?"--": ar.getShelterRequest().getAssignedStaff().getEmployee().getName());
                 
                 
                 //adoptor info
@@ -147,28 +170,38 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                     txtAdopterApt.setText(ar.getAdopterAdoptionRequest().getAdopter().getApt());
                     txtAdopterZip.setText(ar.getAdopterAdoptionRequest().getAdopter().getZipCode());
                     
+                }else{
+                    txtAdopterName.setText("--");
+                    txtAdopterDOB.setText("--");
+                    txtAdopterEmail.setText("--");
+                    txtAdopterNumber.setText("--");
+                    txtAdopterState.setText("--");
+                    txtAdopterCity.setText("--");
+                    txtAdopterStreet.setText("--");
+                    txtAdopterApt.setText("--");
+                    txtAdopterZip.setText("--");            
                 }
+                
                 if (ar.getPetOwnerAdoptionRequest() != null) {
-                    txtAdopterName.setText("Pet owner claimed");
-                    txtAdopterDOB.setEnabled(false);
-                    txtAdopterEmail.setEnabled(false);
-                    txtAdopterNumber.setEnabled(false);
-                    txtAdopterState.setEnabled(false);
-                    txtAdopterCity.setEnabled(false);
-                    txtAdopterStreet.setEnabled(false);
-                    txtAdopterApt.setEnabled(false);
-                    txtAdopterZip.setEnabled(false);
-                    
-                } else {
-                    txtAdopterName.setEnabled(false);
-                    txtAdopterDOB.setEnabled(false);
-                    txtAdopterEmail.setEnabled(false);
-                    txtAdopterNumber.setEnabled(false);
-                    txtAdopterState.setEnabled(false);
-                    txtAdopterCity.setEnabled(false);
-                    txtAdopterStreet.setEnabled(false);
-                    txtAdopterApt.setEnabled(false);
-                    txtAdopterZip.setEnabled(false);                   
+                    txtAdopterName.setText(ar.getPetOwnerAdoptionRequest().getAdopter().toString());
+                    txtAdopterDOB.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getDoB());
+                    txtAdopterEmail.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getEmail());
+                    txtAdopterNumber.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getNumber());
+                    txtAdopterState.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getState().getName());
+                    txtAdopterCity.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getCity());
+                    txtAdopterStreet.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getStreet());
+                    txtAdopterApt.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getApt());
+                    txtAdopterZip.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getZipCode());
+                } else{
+                    txtAdopterName.setText("--");
+                    txtAdopterDOB.setText("--");
+                    txtAdopterEmail.setText("--");
+                    txtAdopterNumber.setText("--");
+                    txtAdopterState.setText("--");
+                    txtAdopterCity.setText("--");
+                    txtAdopterStreet.setText("--");
+                    txtAdopterApt.setText("--");
+                    txtAdopterZip.setText("--");            
                 }
                 
                 
@@ -179,8 +212,18 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 txtMessageList.setText(s);
                 
                 //show picture
-                String imagePath = ar.getImagePath();
-                Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                String imagePath;
+                if (ar.getImagePath()==null) {
+                    imagePath = ar.getReportingRequest().getImagePath();
+                }else{
+                    imagePath = ar.getImagePath();
+                }
+                Image im;
+                    if (row == 0) {
+                        im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
+                    }else{
+                        im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                    }
                 im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
                 ImageIcon ii = new ImageIcon(im);
                 lblPicture.setIcon(ii);
@@ -294,6 +337,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
         lblPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPicture.setText("Animal Picture");
         lblPicture.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblPicture.setSize(new java.awt.Dimension(97, 22));
 
         jTabbedPane4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane4.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -310,22 +354,16 @@ public class ViewAllAnimals extends javax.swing.JPanel {
             ReportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ReportingLayout.createSequentialGroup()
                 .addGap(173, 173, 173)
-                .addGroup(ReportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(ReportingLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtReportBy, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(ReportingLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReportDate, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(142, 142, 142))
-                    .addGroup(ReportingLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCaseID, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(186, 186, 186))))
+                .addGroup(ReportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(ReportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtReportBy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCaseID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtReportDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(142, 142, 142))
         );
         ReportingLayout.setVerticalGroup(
             ReportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,14 +380,10 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 .addGroup(ReportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtReportBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGap(55, 55, 55))
         );
 
         jTabbedPane4.addTab("Reporting Information", Reporting);
-
-        txtShelterStaff.setEnabled(false);
-
-        txtShelterName.setEnabled(false);
 
         jLabel57.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel57.setText("Shelter Name");
@@ -391,7 +425,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 .addGroup(ShelterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtShelterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel57))
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ShelterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtShelterStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel59))
@@ -430,7 +464,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
         AdopterLayout.setHorizontalGroup(
             AdopterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdopterLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(80, 80, 80)
                 .addGroup(AdopterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(AdopterLayout.createSequentialGroup()
                         .addGroup(AdopterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -471,12 +505,12 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                         .addGroup(AdopterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtAdopterState, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtAdopterCity, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(107, 107, 107))
         );
         AdopterLayout.setVerticalGroup(
             AdopterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdopterLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(25, 25, 25)
                 .addGroup(AdopterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AdopterLayout.createSequentialGroup()
                         .addGroup(AdopterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -520,12 +554,8 @@ public class ViewAllAnimals extends javax.swing.JPanel {
 
         jTabbedPane4.addTab("Adopter Information", Adopter);
 
-        txtVolunteer.setEnabled(false);
-
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel23.setText("Transported By");
-
-        txtCoordinator.setEnabled(false);
 
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel25.setText("Assigned By");
@@ -545,7 +575,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                         .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCoordinator, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addGap(207, 207, 207))
         );
         TransportationLayout.setVerticalGroup(
             TransportationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -565,10 +595,6 @@ public class ViewAllAnimals extends javax.swing.JPanel {
 
         jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel43.setText("Hospital");
-
-        txtHospitalname.setEnabled(false);
-
-        txtVetname.setEnabled(false);
 
         jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel54.setText("Vet Name");

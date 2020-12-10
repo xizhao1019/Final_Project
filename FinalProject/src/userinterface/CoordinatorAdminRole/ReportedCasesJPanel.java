@@ -13,7 +13,6 @@ import Business.Organization.IncidentReportingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AnimalRecord;
-import Business.WorkQueue.AnimalReportingRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Image;
@@ -35,17 +34,17 @@ public class ReportedCasesJPanel extends javax.swing.JPanel {
     Enterprise enterprise;
     Organization organization;
     EcoSystem system;
-    
+    UserAccount ua;
     
     /**
      * Creates new form NewReportedCaseJPanel
      */
-    public ReportedCasesJPanel(JPanel container, Enterprise enterprise, Organization org, EcoSystem sys) {
+    public ReportedCasesJPanel(JPanel container, Enterprise enterprise, Organization org, UserAccount ua) {
         initComponents();
         this.container = container;
         this.enterprise = enterprise;
         this.organization = org;
-        this.system = sys;
+        this.ua = ua;
         txtMessage.setEditable(false);
         popTable();
         popCoordinatorComboBox();
@@ -116,6 +115,7 @@ public class ReportedCasesJPanel extends javax.swing.JPanel {
         lblPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPicture.setText("Animal Picture");
         lblPicture.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblPicture.setSize(new java.awt.Dimension(97, 22));
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -206,18 +206,17 @@ public class ReportedCasesJPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tblNewCase.getModel();
         model.setRowCount(0);
-        for (Network n : system.getNetworkList()) {        
+//        for (Network n : system.getNetworkList()) {        
             //System.out.println("in network");
-            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+            for (Enterprise e : ua.getState().getEnterpriseDirectory().getEnterpriseList()) {
                 //System.out.println(e.getWorkQueue().getWorkRequestList().size()); // test
                 if (e instanceof IncidentEnterprise) {
-                    //System.out.println("in incident enterprise");
+                    System.out.println(e.getOrganizationDirectory().getOrganizationList().size());
                     for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
                         if (org instanceof IncidentReportingOrganization) {
+                            System.out.println(org.getName());
                             for (WorkRequest wq : org.getWorkQueue().getWorkRequestList()) {
                                 if (wq instanceof AnimalRecord) {
-                                    
-                                    //if (((AnimalReportingRequest) wq).isIsNewReported()) {
                                         Object row[] = new Object[8];
                                         row[0] = wq;
                                         row[1] = ((AnimalRecord) wq).getReportingRequest().getAnimalType();
@@ -228,19 +227,15 @@ public class ReportedCasesJPanel extends javax.swing.JPanel {
                                         row[6] = ((AnimalRecord) wq).getReportingRequest().getAssignedCoordinator();
                                         row[7] = wq.getStatus();
                                         ((DefaultTableModel) tblNewCase.getModel()).addRow(row);
-                                    //}
-                                    
                                 }
-
                             }
                         }
                     }
                 }
 
             }
-            
         }
-    }
+//    }
     
     public void popCoordinatorComboBox() {
         
@@ -300,7 +295,12 @@ public class ReportedCasesJPanel extends javax.swing.JPanel {
         txtMessage.setText(messageList);
         
         String imagePath = ar.getReportingRequest().getImagePath();
-        Image im = Toolkit.getDefaultToolkit().createImage(imagePath);
+        Image im;
+            if (row == 0) {
+                im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
+            }else{
+                im = Toolkit.getDefaultToolkit().createImage(imagePath);
+            }
         im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon ii = new ImageIcon(im);
         lblPicture.setIcon(ii);
