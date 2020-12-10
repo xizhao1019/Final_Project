@@ -626,7 +626,12 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                 txtMessageList.setText(s);
                 
                 //show picture
-                String imagePath = ar.getImagePath();
+                String imagePath;
+                if (ar.getImagePath()==null) {
+                    imagePath = ar.getReportingRequest().getImagePath();
+                }else{
+                    imagePath = ar.getImagePath();
+                }
                 Image im;
                 if (row <= 0) {
                     im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
