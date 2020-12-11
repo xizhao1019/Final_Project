@@ -175,7 +175,7 @@ public class ProcessCases extends javax.swing.JPanel {
             return;
         } else {        
             ar.getHospitalRequest().setStatus("Hospital Accepted");
-            JOptionPane.showMessageDialog(null, "Task Accepted, Animal will arrive soon");
+            JOptionPane.showMessageDialog(null, "Task Accepted, Pls assign a vet");
             popTable();
         }
     }//GEN-LAST:event_btnAcceptActionPerformed
