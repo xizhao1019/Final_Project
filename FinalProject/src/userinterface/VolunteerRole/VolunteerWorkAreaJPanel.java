@@ -74,7 +74,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Case ID", "Animal Type", "Location", "Destination", "Witness", "Message", "Volunteer Status", "Hospital Status"
+                "Case ID", "Animal Type", "City", "Destination", "Witness", "Message", "Volunteer Status", "Hospital Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -86,16 +86,6 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblVolunteerCase);
-        if (tblVolunteerCase.getColumnModel().getColumnCount() > 0) {
-            tblVolunteerCase.getColumnModel().getColumn(0).setResizable(false);
-            tblVolunteerCase.getColumnModel().getColumn(1).setResizable(false);
-            tblVolunteerCase.getColumnModel().getColumn(2).setResizable(false);
-            tblVolunteerCase.getColumnModel().getColumn(3).setResizable(false);
-            tblVolunteerCase.getColumnModel().getColumn(4).setResizable(false);
-            tblVolunteerCase.getColumnModel().getColumn(5).setResizable(false);
-            tblVolunteerCase.getColumnModel().getColumn(6).setResizable(false);
-            tblVolunteerCase.getColumnModel().getColumn(7).setResizable(false);
-        }
 
         btnAccept.setText("Accept");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
@@ -151,8 +141,8 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,8 +155,8 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,7 +174,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                 Object row[] = new Object[8]; 
                 row[0] = wq;
                 row[1] = ((AnimalRecord) wq).getReportingRequest().getAnimalType();
-                row[2] = "-no";
+                row[2] = ((AnimalRecord) wq).getReportingRequest().getCity();
                 row[3] = ((AnimalRecord) wq).getHospitalRequest() ==null ? "--": ((AnimalRecord) wq).getHospitalRequest().getHospitalOrg().getName();
                 row[4] = ((AnimalRecord) wq).getReportingRequest().getWitness();
                 row[5] = ((AnimalRecord) wq).getLatestMessage();

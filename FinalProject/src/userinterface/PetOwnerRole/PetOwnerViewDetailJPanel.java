@@ -335,7 +335,8 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
             PetOwnerAdoptionRequest adoption = new PetOwnerAdoptionRequest();
             adoption.setAnimal(animal);
-            
+            adoption.setStatus("Pet Owner Requested");
+            animal.setStatus("Adoption Requested");
             for (WorkRequest adopter : ua.getWorkQueue().getWorkRequestList()) {
                 if (adopter instanceof PetOwnerRegistrationRequest) {
                     adoption.setAdopter((PetOwnerRegistrationRequest) adopter);

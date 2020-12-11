@@ -49,16 +49,14 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
             for (WorkRequest adoption : ua.getWorkQueue().getWorkRequestList()) {
                 if (adoption instanceof AdopterAdoptionRequest) {
-                Object row[] = new Object[9]; 
+                Object row[] = new Object[7]; 
                 row[0] = ((AdopterAdoptionRequest) adoption);
                 row[1] = ((AdopterAdoptionRequest) adoption).getAnimal();
                 row[2] = ua.getState();
                 row[3] = ((AdopterAdoptionRequest) adoption).getAnimal().getReportingRequest().getAnimalType();
-                row[4]= ((AdopterAdoptionRequest) adoption).getAnimal().getBreed();
-                row[5] = ((AdopterAdoptionRequest) adoption).getAnimal().getPetName();
-                row[6] = ((AdopterAdoptionRequest) adoption).getAnimal().getAge();
-                row[7] = ((AdopterAdoptionRequest) adoption).getAnimal().getShelterRequest().getLatestMessage();
-                row[8] = adoption.getStatus();
+                row[4] = ((AdopterAdoptionRequest) adoption).getAnimal().getPetName();
+                row[5] = ((AdopterAdoptionRequest) adoption).getAnimal().getStatus();
+                row[6] = adoption.getStatus() ==null?"--": adoption.getStatus();
                 ((DefaultTableModel) requestTable.getModel()).addRow(row);
                 }
             }
@@ -94,7 +92,7 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                 
                 String imagePath = ((AdopterAdoptionRequest) adoption).getAnimal().getImagePath();
                 Image im;
-                if (row<=0) {
+                if (adoption.getAnimal().isAddedAhead() == true) {
                     im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
                 }else{
                     im = Toolkit.getDefaultToolkit().createImage(imagePath);
@@ -162,17 +160,17 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
 
         requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Request ID", "Animal ID", "State", "Type", "Breed", "Pet Name", "Age", "Message", "Status"
+                "Request ID", "Animal ID", "State", "Type", "Pet Name", "Status", "Request Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -180,17 +178,6 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(requestTable);
-        if (requestTable.getColumnModel().getColumnCount() > 0) {
-            requestTable.getColumnModel().getColumn(0).setResizable(false);
-            requestTable.getColumnModel().getColumn(1).setResizable(false);
-            requestTable.getColumnModel().getColumn(2).setResizable(false);
-            requestTable.getColumnModel().getColumn(3).setResizable(false);
-            requestTable.getColumnModel().getColumn(4).setResizable(false);
-            requestTable.getColumnModel().getColumn(5).setResizable(false);
-            requestTable.getColumnModel().getColumn(6).setResizable(false);
-            requestTable.getColumnModel().getColumn(7).setResizable(false);
-            requestTable.getColumnModel().getColumn(8).setResizable(false);
-        }
 
         txtMedicalRecord.setColumns(20);
         txtMedicalRecord.setRows(5);
@@ -252,8 +239,8 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,7 +251,6 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

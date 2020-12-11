@@ -63,17 +63,17 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                     if (org instanceof AnimalShelterOrganization) {
                         //choosenShelterOrg = org;
                         for (WorkRequest animal : org.getWorkQueue().getWorkRequestList()) {
-                            if (animal instanceof AnimalRecord) {
-                                Object row[] = new Object[9]; 
+                            if ( (animal instanceof AnimalRecord) && (animal.getStatus().equals("Posted For Adoption")) ||(animal.getStatus().equals("Adoption Requested")) ) {
+                                Object row[] = new Object[8]; 
                                 row[0] = animal;
                                 row[1] = ua.getState();
                                 row[2] = ((AnimalRecord) animal).getReportingRequest().getAnimalType();
-                                row[3]= ((AnimalRecord) animal).getBreed();
-                                row[4] = ((AnimalRecord) animal).getPetName();
-                                row[5] = ((AnimalRecord) animal).getSex();
-                                row[6] = ((AnimalRecord) animal).getAge();
-                                row[7] = ((AnimalRecord) animal).getShelterRequest().getShelterOrg();
-                                row[8] = animal.getStatus();
+                                row[3]= ((AnimalRecord) animal).getBreed();                               
+                                row[4] = ((AnimalRecord) animal).getSex();
+                                row[5] = ((AnimalRecord) animal).getAge();
+                                row[6] = ((AnimalRecord) animal).getShelterRequest().getShelterOrg();
+                                row[7] = animal.getStatus();
+                                
                                 ((DefaultTableModel) animalTable.getModel()).addRow(row);
                             }
                         }
@@ -111,7 +111,7 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                 
                 String imagePath = animal.getImagePath();
                 Image im;
-                    if (row == 0) {
+                    if (animal.isAddedAhead() == true) {
                         im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
                     }else{
                         im = Toolkit.getDefaultToolkit().createImage(imagePath);
@@ -160,17 +160,17 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
 
         animalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Animal ID", "State", "Type", "Breed", "Pet Name", "Sex", "Age", "Shelter", "Status"
+                "Animal ID", "State", "Type", "Breed", "Sex", "Age", "Shelter", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -178,17 +178,6 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(animalTable);
-        if (animalTable.getColumnModel().getColumnCount() > 0) {
-            animalTable.getColumnModel().getColumn(0).setResizable(false);
-            animalTable.getColumnModel().getColumn(1).setResizable(false);
-            animalTable.getColumnModel().getColumn(2).setResizable(false);
-            animalTable.getColumnModel().getColumn(3).setResizable(false);
-            animalTable.getColumnModel().getColumn(4).setResizable(false);
-            animalTable.getColumnModel().getColumn(5).setResizable(false);
-            animalTable.getColumnModel().getColumn(6).setResizable(false);
-            animalTable.getColumnModel().getColumn(7).setResizable(false);
-            animalTable.getColumnModel().getColumn(8).setResizable(false);
-        }
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -235,47 +224,48 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(233, 233, 233)
-                            .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(85, 85, 85)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel5)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel7)
-                                                    .addComponent(jLabel8)
-                                                    .addComponent(jLabel3))
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                            .addGap(27, 27, 27)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                                .addComponent(txtType)
-                                                .addComponent(txtBreed)
-                                                .addComponent(txtSex)
-                                                .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(idLabel))
-                                        .addComponent(jLabel4))
-                                    .addGap(63, 63, 63)
-                                    .addComponent(pictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(btnBack))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(369, 369, 369)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(74, 74, 74))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel7)
+                                                .addComponent(jLabel8)
+                                                .addComponent(jLabel3))
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(27, 27, 27)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                            .addComponent(txtType)
+                                            .addComponent(txtBreed)
+                                            .addComponent(txtSex)
+                                            .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(idLabel))
+                                    .addComponent(jLabel4))
+                                .addGap(63, 63, 63)
+                                .addComponent(pictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(btnBack))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(369, 369, 369)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +309,7 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -337,9 +327,10 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                 return;
             }
             AnimalRecord animal = (AnimalRecord) animalTable.getValueAt(row, 0);
+            animal.setStatus("Adoption Requested");
             adoption = new AdopterAdoptionRequest();
             adoption.setAnimal(animal);
-            adoption.setStatus("Adoption Request Sent");
+            adoption.setStatus("Adoptor Requested");
             
             for (WorkRequest adopter : ua.getWorkQueue().getWorkRequestList()) {
                 if (adopter instanceof AdopterRegistrationRequest) {
@@ -351,6 +342,13 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
             ua.getWorkQueue().getWorkRequestList().add(adoption);
             //choosenShelterOrg.getWorkQueue().getWorkRequestList().add(adoption);
             JOptionPane.showMessageDialog(null, "Thanks for your efforts in saving lives, you request has been sent to the shelter!");
+            popTable();
+            txtName.setText("");
+            txtType.setText("");
+            txtAge.setText("");
+            txtBreed.setText("");
+            txtSex.setText("");
+            txtMedicalRecord.setText("");
     }//GEN-LAST:event_btnRequestActionPerformed
 
 
