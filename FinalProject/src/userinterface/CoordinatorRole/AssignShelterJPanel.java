@@ -251,6 +251,9 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
         ua.getWorkQueue().getWorkRequestList().add(animalRecord);
         
         JOptionPane.showMessageDialog(null, "Request sent to Shelter Administrator !");
+        txtMessage.setEnabled(false);
+        btnAssign.setEnabled(false);
+        btnAdmin.setEnabled(false);
         popTable();
     }//GEN-LAST:event_btnAssignActionPerformed
 

@@ -277,6 +277,10 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
         
+        if (ar.getShelterRequest().getStatus().equals("Staff Assigned")) {
+             JOptionPane.showMessageDialog(null, "Already assigned.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         if (!ar.getShelterRequest().getStatus().equals("Shelter Admin Approved") ) {
             JOptionPane.showMessageDialog(null, "Please approve before assign to staff", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -287,10 +291,7 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a Staff to assign", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (ar.getShelterRequest().getStatus().equals("Staff Assigned")) {
-             JOptionPane.showMessageDialog(null, "Already assigned.", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        
         
         ar.getShelterRequest().setLatestMessage(txtMessage.getText());
         String message = "Shelter admin assign staff: " + txtMessage.getText();

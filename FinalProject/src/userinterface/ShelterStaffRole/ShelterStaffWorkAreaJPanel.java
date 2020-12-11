@@ -184,7 +184,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblAnimals.getValueAt(row, 0);
 
-        if (ar.getShelterRequest().getStatus().equals("Pet transferred to shelter")) {
+        if (ar.getShelterRequest().getStatus().equals("Pet transferred to shelter") || ar.getShelterRequest().getStatus().equals("Posted")) {
             UpdateInfoJPanel jp = new UpdateInfoJPanel(container, ar);
             container.add("UpdateInfoJPanel",jp);
             CardLayout layout = (CardLayout)container.getLayout();
@@ -214,6 +214,9 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
             return;
         } else if (ar.getShelterRequest().getStatus().equals("Pet transferred to shelter")) {
              JOptionPane.showMessageDialog(null, "Staff pick up process already completed", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }else if (ar.getShelterRequest().getStatus().equals("Posted")) {
+            JOptionPane.showMessageDialog(null, "Already completed!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else {
             StaffProcessJPanel jp = new StaffProcessJPanel(container, ar);

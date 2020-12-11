@@ -74,7 +74,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Case ID", "Animal Type", "Location", "Destination", "Witness", "Message", "Volunteer Status", "Hospital Status"
+                "Case ID", "Animal Type", "City", "Destination", "Witness", "Message", "Volunteer Status", "Hospital Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -174,7 +174,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                 Object row[] = new Object[8]; 
                 row[0] = wq;
                 row[1] = ((AnimalRecord) wq).getReportingRequest().getAnimalType();
-                row[2] = "-no";
+                row[2] = ((AnimalRecord) wq).getReportingRequest().getCity();
                 row[3] = ((AnimalRecord) wq).getHospitalRequest() ==null ? "--": ((AnimalRecord) wq).getHospitalRequest().getHospitalOrg().getName();
                 row[4] = ((AnimalRecord) wq).getReportingRequest().getWitness();
                 row[5] = ((AnimalRecord) wq).getLatestMessage();
