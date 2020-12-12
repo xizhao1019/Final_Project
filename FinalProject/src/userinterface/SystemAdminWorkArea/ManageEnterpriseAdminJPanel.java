@@ -8,11 +8,9 @@ import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
-import Business.Role.AdoptionEnterpriseAdminRole;
 import Business.Role.IncidentEnterpriseAdminRole;
-import Business.Role.OperationEnterpriseAdminRole;
-import Business.Role.RescueEnterpriseAdminRole;
 import Business.UserAccount.UserAccount;
+import Business.Util.InputValidation;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -28,6 +26,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem system;
 
+
     /**
      * Creates new form ManageEnterpriseJPanel
      */
@@ -36,6 +35,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
         this.userProcessContainer = userProcessContainer;
         this.system = system;
+       
 
         populateTable();
         populateNetworkComboBox();
@@ -99,8 +99,10 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         nameJTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        passwordJPasswordField = new javax.swing.JPasswordField();
         backJButton = new javax.swing.JButton();
+        txtPassword = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,40 +169,38 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(165, 165, 165)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(networkJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(enterpriseJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(usernameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(passwordJPasswordField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(backJButton))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(165, 165, 165)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(networkJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(enterpriseJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(usernameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(backJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(271, 271, 271)
-                        .addComponent(submitJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(submitJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
@@ -229,7 +229,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(passwordJPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(submitJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
@@ -251,42 +251,51 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         Enterprise enterprise = (Enterprise) enterpriseJComboBox.getSelectedItem();
         
         String username = usernameJTextField.getText();
-        String password = String.valueOf(passwordJPasswordField.getPassword());
+        String password = String.valueOf(txtPassword.getText());
         String name = nameJTextField.getText();
         if (name.trim().equals("") || username.trim().equals("") || password.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Invalid input!","Warning",JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
+        if (!InputValidation.isValidName(name)) {
+            JOptionPane.showMessageDialog(null, "Please input a valid name starting with a uppercase","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if ( !InputValidation.isValidPassword(password)) {
+            JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!enterprise.getUserAccountDirectory().isUniqueUsername(username)) {
+            JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
+        Employee employee;
+        UserAccount account;
         if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Incident Enterprise")) {
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
+            employee = enterprise.getEmployeeDirectory().createEmployee(name);
+            account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
             account.setState(state);
-//            account.setEnterprise(enterprise);
-//            account.setOrg(enterprise.getOrganizationDirectory().getOrganizationList().get(0));
         } else if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Rescue Enterprise")) {
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new RescueEnterpriseAdminRole());
+            employee = enterprise.getEmployeeDirectory().createEmployee(name);
+            account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
             account.setState(state);
-//            account.setEnterprise(enterprise);
-//            account.setOrg(null);
         } else if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Operation Enterprise")) {
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new OperationEnterpriseAdminRole()); 
+            employee = enterprise.getEmployeeDirectory().createEmployee(name);
+            account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
             account.setState(state);
-//            account.setEnterprise(enterprise);
-//            account.setOrg(null);
         } else if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Adoption Enterprise")) {
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new AdoptionEnterpriseAdminRole()); 
+           employee = enterprise.getEmployeeDirectory().createEmployee(name);
+            account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
             account.setState(state);
-//            account.setEnterprise(enterprise);
-//            account.setOrg(null);
         } else {
-            System.out.println("something wrong: creating enterprise admin");
+            System.out.println("Something wrong with creating a enterprise admin");
         }
         
         populateTable();
         
         usernameJTextField.setText("");
-        passwordJPasswordField.setText("");
+        txtPassword.setText("");
         nameJTextField.setText("");
         
     }//GEN-LAST:event_submitJButtonActionPerformed
@@ -313,8 +322,8 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameJTextField;
     private javax.swing.JComboBox networkJComboBox;
-    private javax.swing.JPasswordField passwordJPasswordField;
     private javax.swing.JButton submitJButton;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField usernameJTextField;
     // End of variables declaration//GEN-END:variables
 }

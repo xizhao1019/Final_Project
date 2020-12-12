@@ -153,6 +153,8 @@ public class ProcessAdopterRequestJPanel extends javax.swing.JPanel {
         txtAdopterState = new javax.swing.JTextField();
         lblPicture = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Name:");
 
@@ -442,7 +444,7 @@ public class ProcessAdopterRequestJPanel extends javax.swing.JPanel {
         adoptRequest.setApproved(false);
         adoptRequest.setStatus("Adoption Rejected");
         //adoptRequest.getAnimal().setStatus("Adoption Rejected");
-        adoptRequest.setLatestMessage(txtMessage.getText());         
+        adoptRequest.addMessage(txtMessage.getText());         
         adoptRequest.getAnimal().addMessage("Shelter Administrrator rejected the adoption request from adopter");
         JOptionPane.showMessageDialog(null, "You rejected the adoption request!");
         btnApprove.setEnabled(false);
@@ -465,7 +467,7 @@ public class ProcessAdopterRequestJPanel extends javax.swing.JPanel {
         adoptRequest.setApproved(true);
         adoptRequest.setStatus("Adoption Approved");
         adoptRequest.getAnimal().setStatus("Adopted");
-        adoptRequest.setLatestMessage(txtMessage.getText());         
+        adoptRequest.addMessage(txtMessage.getText());         
         adoptRequest.getAnimal().addMessage("Shelter Administrrator approved the adoption reqest from adopter");
         JOptionPane.showMessageDialog(null, "You just approved the adoption request!");
         btnReject.setEnabled(false);

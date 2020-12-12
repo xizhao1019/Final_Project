@@ -70,7 +70,7 @@ public class DistanceMap {
             });
             /*browser.mainFrame().ifPresent(frame ->
                             frame.executeJavaScript(setMarkerScript));*/
-            JButton setMarkerButton = new JButton("Show Markers");
+            JButton setMarkerButton = new JButton("Locating");
             setMarkerButton.addActionListener(e ->
                     browser.mainFrame().ifPresent(frame ->
                             frame.executeJavaScript(setMarkerScript)));
@@ -100,6 +100,7 @@ public class DistanceMap {
             frame.setVisible(true);
             
             String rootPath = System.getProperty("user.dir");
+            //System.out.println("get root path here : " + rootPath);
             browser.navigation().loadUrl("file://"+rootPath+"/map.html");
             
         });

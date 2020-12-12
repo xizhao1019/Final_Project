@@ -51,6 +51,8 @@ public class VetWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Vet Work Area");
 
         tblVetWork.setModel(new javax.swing.table.DefaultTableModel(

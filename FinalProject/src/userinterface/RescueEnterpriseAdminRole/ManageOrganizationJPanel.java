@@ -4,6 +4,7 @@
  */
 package userinterface.RescueEnterpriseAdminRole;
 
+import Business.Location.LocationPoint;
 import Business.Organization.Organization;
 import Business.Organization.Organization.Type;
 import Business.Organization.OrganizationDirectory;
@@ -11,6 +12,7 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import userinterface.GoogleMap.SetLocationJPanel;
 
 /**
  *
@@ -20,6 +22,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
     private OrganizationDirectory directory;
     private JPanel userProcessContainer;
+    LocationPoint locationPoint;
     
     /**
      * Creates new form ManageOrganizationJPanel
@@ -49,7 +52,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             Object[] row = new Object[3];
             row[0] = organization.getType();
             row[1] = organization.getName();
-            row[2] = "Nor finish yet";
+            row[2] = organization.getLocationP() ==null?"null":  organization.getLocationP();
             model.addRow(row);
         }
     }
@@ -71,9 +74,11 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtOrgName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        orgLocation = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtLocation = new javax.swing.JTextField();
+        btnSetLocation = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         addJButton.setText("Add Organization");
         addJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -131,13 +136,11 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Location");
 
-        orgLocation.setEditable(false);
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Set Location");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSetLocation.setBackground(new java.awt.Color(255, 255, 255));
+        btnSetLocation.setText("Set Location");
+        btnSetLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSetLocationActionPerformed(evt);
             }
         });
 
@@ -148,40 +151,40 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(193, 193, 193)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(193, 193, 193)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(orgLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton1))
                                 .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtOrgName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(106, 106, 106))
+                            .addGap(334, 334, 334))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(271, 271, 271)
-                            .addComponent(addJButton))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(86, 86, 86)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtLocation)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnSetLocation)
+                            .addGap(113, 113, 113))))
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGap(86, 86, 86)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(backJButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(151, 151, 151)
-                                .addComponent(jLabel4)))
-                        .addGap(68, 68, 68)))
-                .addGap(97, 97, 97))
+                        .addGap(271, 271, 271)
+                        .addComponent(addJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(backJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(jLabel4)))
+                .addGap(101, 101, 101))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,9 +205,9 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(orgLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(btnSetLocation))
                 .addGap(18, 18, 18)
                 .addComponent(addJButton)
                 .addGap(23, 23, 23))
@@ -220,6 +223,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         }
         Organization org = directory.createOrganization(type);
         org.setName(txtOrgName.getText());
+        org.setLocationP(locationPoint);
         populateTable();
     }//GEN-LAST:event_addJButtonActionPerformed
 
@@ -229,26 +233,37 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSetLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetLocationActionPerformed
+        Type type = (Type) organizationJComboBox.getSelectedItem();
+        if (type.toString().equals("Volunteer")){
+            JOptionPane.showMessageDialog(null, "Do Not need location for volunteer creation!");
+            return;
+        }
+        
+        SetLocationJPanel jp = new SetLocationJPanel(userProcessContainer);
+        userProcessContainer.add("SetLocationJPanel", jp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnSetLocationActionPerformed
 
-//        OrganizationLocationJPanel muajp = new OrganizationLocationJPanel(userProcessContainer);
-//        userProcessContainer.add("OrganizationLocationJPanel", muajp);
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    public void populateLongituteLatitude(LocationPoint locationPoint) {
+        this.locationPoint = locationPoint;
+        txtLocation.setText(locationPoint.getLatitude() + ", " + locationPoint.getLongitude());
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addJButton;
     private javax.swing.JButton backJButton;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSetLocation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField orgLocation;
     private javax.swing.JComboBox organizationJComboBox;
     private javax.swing.JTable organizationJTable;
+    private javax.swing.JTextField txtLocation;
     private javax.swing.JTextField txtOrgName;
     // End of variables declaration//GEN-END:variables
 }

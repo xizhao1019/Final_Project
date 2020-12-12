@@ -51,6 +51,8 @@ public class ShelterAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnProcessRequests = new javax.swing.JButton();
         valueLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Shelter Admin Work Area");
 
         jLabel3.setText("Hello,");

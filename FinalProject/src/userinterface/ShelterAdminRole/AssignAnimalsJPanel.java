@@ -43,6 +43,8 @@ public class AssignAnimalsJPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Assign Animals");

@@ -10,6 +10,8 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userinterface.GoogleMap.DistanceMap;
+import userinterface.GoogleMap.FindLocationJPanel;
 
 /**
  *
@@ -26,6 +28,14 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
         initComponents();
         this.container = container;
         this.animalRecord = ar;
+        
+        displayInfo();
+    }
+    
+    public void displayInfo() {
+        txtCity.setText(animalRecord.getReportingRequest().getCity());
+        txtAnimalLocationPoint.setText(animalRecord.getReportingRequest().getAnimalLocationPoint().toString());
+        txtHospitalLocationPoint.setText(animalRecord.getHospitalRequest().getHospitalOrg().getLocationP().toString());
     }
 
     /**
@@ -44,6 +54,15 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         txtMessage = new javax.swing.JTextField();
+        btnViewMap = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtCity = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtAnimalLocationPoint = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtHospitalLocationPoint = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Volunteer Process");
@@ -70,52 +89,108 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnViewMap.setText("View On Map");
+        btnViewMap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewMapActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("City:");
+
+        txtCity.setEditable(false);
+        txtCity.setText("jTextField1");
+
+        jLabel5.setText("Animal Location:");
+
+        txtAnimalLocationPoint.setEditable(false);
+        txtAnimalLocationPoint.setText("jTextField1");
+
+        jLabel6.setText("Hospital Location:");
+
+        txtHospitalLocationPoint.setEditable(false);
+        txtHospitalLocationPoint.setText("jTextField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtAnimalLocationPoint, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHospitalLocationPoint, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(34, 34, 34)
+                        .addComponent(btnViewMap, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(181, 181, 181))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(315, 315, 315)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, 151, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(btnSubmit)))
-                .addGap(249, 249, 249))
+                        .addGap(401, 401, 401)
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAnimalLocationPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHospitalLocationPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
+                        .addGap(4, 4, 4)
+                        .addComponent(btnViewMap, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(btnSubmit)
-                .addGap(116, 116, 116))
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(54, 54, 54)
+                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,7 +208,6 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         String status = (String)comboStatus.getSelectedItem();
-        animalRecord.getVolunteerRequest().setStatus(status); // == Volunteer Completed
         
         String message = txtMessage.getText();
         if (message.isBlank()) {
@@ -145,21 +219,42 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
         animalRecord.getVolunteerRequest().setLatestMessage(message);
         animalRecord.setStatus("Volunteer " + status);
         animalRecord.getVolunteerRequest().setStatus("Volunteer " + status);
-        animalRecord.addMessage("Vet completed the task.");
+        //animalRecord.addMessage("Vet completed the task.");
         JOptionPane.showMessageDialog(null, "Thank you for your effort in saving life");
         comboStatus.setEnabled(false);
         txtMessage.setEnabled(false);
+        btnSubmit.setEnabled(false);
         
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void btnViewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewMapActionPerformed
+        // TODO add your handling code here:
+        String coordinates = "['" + animalRecord.getReportingRequest().getAnimalType() + " Reported',"
+        + animalRecord.getReportingRequest().getAnimalLocationPoint().getLatitude() + ", "
+        + animalRecord.getReportingRequest().getAnimalLocationPoint().getLongitude() + "],\n";
+        
+        coordinates += "['" + animalRecord.getHospitalRequest().getHospitalOrg().getName() + " Location',"
+        + animalRecord.getHospitalRequest().getHospitalOrg().getLocationP().getLatitude() + ", "
+        + animalRecord.getHospitalRequest().getHospitalOrg().getLocationP().getLongitude() + "]";
+
+        DistanceMap.openMap(coordinates);
+    }//GEN-LAST:event_btnViewMapActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnViewMap;
     private javax.swing.JComboBox<String> comboStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField txtAnimalLocationPoint;
+    private javax.swing.JTextField txtCity;
+    private javax.swing.JTextField txtHospitalLocationPoint;
     private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 }

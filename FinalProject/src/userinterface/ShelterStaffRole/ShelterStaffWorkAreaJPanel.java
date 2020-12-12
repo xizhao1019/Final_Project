@@ -52,6 +52,8 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel = new javax.swing.JLabel();
         btnProcess = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -145,8 +147,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnProcess, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
@@ -184,7 +185,7 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblAnimals.getValueAt(row, 0);
 
-        if (ar.getShelterRequest().getStatus().equals("Pet transferred to shelter")) {
+        if (ar.getShelterRequest().getStatus().equals("Pet transferred to shelter") || ar.getShelterRequest().getStatus().equals("Posted")) {
             UpdateInfoJPanel jp = new UpdateInfoJPanel(container, ar);
             container.add("UpdateInfoJPanel",jp);
             CardLayout layout = (CardLayout)container.getLayout();
@@ -214,6 +215,9 @@ public class ShelterStaffWorkAreaJPanel extends javax.swing.JPanel {
             return;
         } else if (ar.getShelterRequest().getStatus().equals("Pet transferred to shelter")) {
              JOptionPane.showMessageDialog(null, "Staff pick up process already completed", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }else if (ar.getShelterRequest().getStatus().equals("Posted")) {
+            JOptionPane.showMessageDialog(null, "Already completed!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else {
             StaffProcessJPanel jp = new StaffProcessJPanel(container, ar);

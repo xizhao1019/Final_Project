@@ -101,6 +101,8 @@ public class PetOwnerRegistrationJPanel extends javax.swing.JPanel {
         txtPetName = new javax.swing.JTextField();
         txtBreed = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +134,7 @@ public class PetOwnerRegistrationJPanel extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("City:");
 
+        DateChooser.setBackground(new java.awt.Color(255, 255, 255));
         DateChooser.setDateFormatString("MM-dd-yyyy");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -388,9 +391,6 @@ public class PetOwnerRegistrationJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
-        Date date = DateChooser.getDate();
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
-        String dob = format.format(date);
         String number = txtNumber.getText();
         String email = txtEmail.getText();
         String stateName = String.valueOf(stateComboBox.getSelectedItem());
@@ -410,7 +410,11 @@ public class PetOwnerRegistrationJPanel extends javax.swing.JPanel {
         if(!userName.isBlank() && !password.isBlank() && !city.isBlank() &&  
                 !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank()
                 && !animalType.isBlank() && !breed.isBlank() && !age.isBlank() && !petName.isBlank()
-                && !imagePath.isBlank()){
+                && !imagePath.isBlank() && DateChooser.getDate() != null){
+            
+            Date date = DateChooser.getDate();
+            SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+            String dob = format.format(date);
             
             Employee employee = new Employee();
             String name = firstName + " " + lastName;

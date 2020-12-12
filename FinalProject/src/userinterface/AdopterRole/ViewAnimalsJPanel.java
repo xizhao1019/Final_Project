@@ -63,7 +63,7 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                     if (org instanceof AnimalShelterOrganization) {
                         //choosenShelterOrg = org;
                         for (WorkRequest animal : org.getWorkQueue().getWorkRequestList()) {
-                            if ( (animal instanceof AnimalRecord) && !(animal.getStatus().equals("Adopted"))) {
+                            if ( (animal instanceof AnimalRecord) && (animal.getStatus().equals("Posted For Adoption")) ||(animal.getStatus().equals("Adoption Requested")) ) {
                                 Object row[] = new Object[8]; 
                                 row[0] = animal;
                                 row[1] = ua.getState();
@@ -111,7 +111,7 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
                 
                 String imagePath = animal.getImagePath();
                 Image im;
-                    if (row == 0) {
+                    if (animal.isAddedAhead() == true) {
                         im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
                     }else{
                         im = Toolkit.getDefaultToolkit().createImage(imagePath);
@@ -154,6 +154,8 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
         pictureLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtSex = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("View Animals");
@@ -343,6 +345,12 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
             //choosenShelterOrg.getWorkQueue().getWorkRequestList().add(adoption);
             JOptionPane.showMessageDialog(null, "Thanks for your efforts in saving lives, you request has been sent to the shelter!");
             popTable();
+            txtName.setText("");
+            txtType.setText("");
+            txtAge.setText("");
+            txtBreed.setText("");
+            txtSex.setText("");
+            txtMedicalRecord.setText("");
     }//GEN-LAST:event_btnRequestActionPerformed
 
 

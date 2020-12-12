@@ -60,6 +60,8 @@ public class ManageVetJPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Vet:");
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         tblVet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

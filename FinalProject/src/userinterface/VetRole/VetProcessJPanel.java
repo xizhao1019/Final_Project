@@ -78,6 +78,8 @@ public class VetProcessJPanel extends javax.swing.JPanel {
         btnUpdate = new javax.swing.JButton();
         labelID = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Animal Information");

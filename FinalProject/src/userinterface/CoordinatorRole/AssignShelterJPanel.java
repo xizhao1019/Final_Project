@@ -62,6 +62,8 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtMessage = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,6 +253,9 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
         ua.getWorkQueue().getWorkRequestList().add(animalRecord);
         
         JOptionPane.showMessageDialog(null, "Request sent to Shelter Administrator !");
+        txtMessage.setEnabled(false);
+        btnAssign.setEnabled(false);
+        btnAdmin.setEnabled(false);
         popTable();
     }//GEN-LAST:event_btnAssignActionPerformed
 

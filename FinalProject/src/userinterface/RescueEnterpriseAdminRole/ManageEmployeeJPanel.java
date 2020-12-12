@@ -7,6 +7,7 @@ package userinterface.RescueEnterpriseAdminRole;
 import Business.Employee.Employee;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import Business.Util.InputValidation;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -82,6 +83,8 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         organizationJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,6 +220,10 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         String name = nameJTextField.getText();
         if (name.equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Invalid Employee Name");
+            return;
+        }
+        if (!InputValidation.isValidName(name)) {
+            JOptionPane.showMessageDialog(null, "Please input a valid name starting with a uppercase","Warning",JOptionPane.WARNING_MESSAGE);
             return;
         }
         organization.getEmployeeDirectory().createEmployee(name);

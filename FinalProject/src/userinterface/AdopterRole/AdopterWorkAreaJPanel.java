@@ -44,6 +44,8 @@ public class AdopterWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Adopter Work Area");
 
         btnViewAnimals.setText("View Animals");
