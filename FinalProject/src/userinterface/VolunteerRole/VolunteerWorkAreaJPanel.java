@@ -40,6 +40,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         this.userAccount = ua;
         
         valueLabel.setText(userAccount.getEmployee().getName());
+        //table.getTableHeader().setOpaque(false);
         
         popTable();
     }
@@ -68,6 +69,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Volunteer Work Area");
 
+        tblVolunteerCase.setBackground(new java.awt.Color(153, 204, 255));
         tblVolunteerCase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -87,6 +89,8 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblVolunteerCase.setOpaque(false);
+        tblVolunteerCase.setSelectionBackground(new java.awt.Color(0, 153, 153));
         jScrollPane1.setViewportView(tblVolunteerCase);
 
         btnAccept.setText("Accept");

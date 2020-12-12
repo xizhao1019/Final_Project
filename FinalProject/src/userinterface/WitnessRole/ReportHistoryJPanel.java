@@ -7,6 +7,7 @@ package userinterface.WitnessRole;
 
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.Util.HeaderColors;
 import Business.WorkQueue.AnimalRecord;
 import Business.WorkQueue.AnimalReportingRequest;
 import Business.WorkQueue.WorkRequest;
@@ -33,6 +34,8 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         this.organization = org;
         this.userAccount = ua;
         
+        tblHistory.getTableHeader().setDefaultRenderer(new HeaderColors());
+               
         populateTable();
     }
 
@@ -50,12 +53,13 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         tblHistory = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Report History");
 
+        tblHistory.setForeground(new java.awt.Color(0, 51, 51));
         tblHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -75,6 +79,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblHistory.setSelectionBackground(new java.awt.Color(153, 204, 255));
         jScrollPane1.setViewportView(tblHistory);
 
         btnBack.setText("Back");
@@ -115,6 +120,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
 
     
     private void populateTable() {
+        tblHistory.getTableHeader().setDefaultRenderer(new HeaderColors());
         DefaultTableModel model = (DefaultTableModel)tblHistory.getModel();
         model.setRowCount(0);
         System.out.println(organization.getWorkQueue().getWorkRequestList().size());

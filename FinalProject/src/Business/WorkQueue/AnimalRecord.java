@@ -24,7 +24,7 @@ public class AnimalRecord extends WorkRequest{
     private AdopterAdoptionRequest adopterAdoptionRequest;
     private PetOwnerAdoptionRequest petOwnerAdoptionRequest;
             
-    private LocationPoint shelterLocationPoint;
+    private LocationPoint locationP;
     private String petName;
     private String breed;
     private String sex;
@@ -44,7 +44,7 @@ public class AnimalRecord extends WorkRequest{
         this.vetRequest = new VetRequest();
         this.shelterRequest = new ShelterRequest();
         //this.shelterStaffRequest = new ShelterStaffRequest();
-        this.shelterLocationPoint = new LocationPoint();
+        this.locationP = new LocationPoint();
         this.medicalRecord = new ArrayList<>();
         id = String.format("%04d",random.nextInt(10000));
         ID = "A" + id;
@@ -167,12 +167,12 @@ public class AnimalRecord extends WorkRequest{
         this.imagePath = imagePath;
     }
 
-    public LocationPoint getShelterLocationPoint() {
-        return shelterLocationPoint;
+    public LocationPoint getLocationP() {
+        return locationP;
     }
 
-    public void setShelterLocationPoint(LocationPoint shelterLocation) {
-        this.shelterLocationPoint = shelterLocation;
+    public void setLocationP(LocationPoint locationP) {
+        this.locationP = locationP;
     }
 
     public AnimalReportingRequest getReportingRequest() {

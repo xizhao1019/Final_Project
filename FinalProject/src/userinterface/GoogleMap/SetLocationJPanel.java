@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
+import userinterface.RescueEnterpriseAdminRole.ManageOrganizationJPanel;
 import userinterface.WitnessRole.ReportStrayAnimalJPanel;
 
 /**
@@ -140,6 +141,9 @@ public class SetLocationJPanel extends javax.swing.JPanel {
             
             if (userProcessContainer.getComponent(componentArray.length - 1) instanceof ReportStrayAnimalJPanel) {
                 ReportStrayAnimalJPanel jp = (ReportStrayAnimalJPanel)userProcessContainer.getComponent(componentArray.length - 1);
+                jp.populateLongituteLatitude(locationPoint);
+            }else if (userProcessContainer.getComponent(componentArray.length - 1) instanceof ManageOrganizationJPanel) {
+                ManageOrganizationJPanel jp = (ManageOrganizationJPanel)userProcessContainer.getComponent(componentArray.length - 1);
                 jp.populateLongituteLatitude(locationPoint);
             } else {
                  System.out.println("ELSE LOCATION " + componentArray.length);
