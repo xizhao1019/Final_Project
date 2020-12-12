@@ -95,6 +95,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
+        jSplitPane.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("FindaPet");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("colors");
         javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("blue");
@@ -150,6 +154,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         );
 
         jSplitPane.setLeftComponent(jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Selected Node:");
 

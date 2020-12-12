@@ -63,6 +63,8 @@ public class ManageStateJPanel extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
         stateComboBox = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         networkJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -167,21 +169,7 @@ public class ManageStateJPanel extends javax.swing.JPanel {
         Network state = system.createAndAddNetwork();
         state.setName(name);
         populateNetworkTable();
-        
-//        //initialize incident incidentEnterprise and the only incident reporting incidentOrg
-//        String incidentEnterprise = name + "_incident";
-//        Enterprise incident = state.getEnterpriseDirectory().createAndAddEnterprise(incidentEnterprise, Enterprise.EnterpriseType.Incident);
-//        String incidentOrg = name + "_IncidentReportingOrg";
-//        incident.getOrganizationDirectory().createOrganization(Organization.Type.IncidentReporting).setName(incidentOrg);
-//        
-//        //initialize adoption incidentEnterprise and the only adopter incidentOrg and the only petowner incidentOrg
-//        String adoptionEnterprise = name + "_adoption";
-//        Enterprise adoption = state.getEnterpriseDirectory().createAndAddEnterprise(adoptionEnterprise, Enterprise.EnterpriseType.Adoption);
-//        String adopterOrg = name + "_AdopterOrg";
-//        adoption.getOrganizationDirectory().createOrganization(Organization.Type.Adopter).setName(adopterOrg);
-//        String petownerOrg = name + "_PetownerOrg";
-//        adoption.getOrganizationDirectory().createOrganization(Organization.Type.PetOwner).setName(petownerOrg);
-//        
+
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed

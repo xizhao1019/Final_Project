@@ -186,6 +186,8 @@ public class ProcessPetOwnerRequestJPanel extends javax.swing.JPanel {
         lblLostPicture = new javax.swing.JLabel();
         lblPicture = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Type:");
 

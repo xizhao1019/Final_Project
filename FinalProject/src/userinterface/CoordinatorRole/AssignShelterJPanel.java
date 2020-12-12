@@ -62,6 +62,8 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtMessage = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -56,6 +56,8 @@ public class ManageStaffJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         tblStaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

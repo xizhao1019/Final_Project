@@ -92,6 +92,8 @@ public class AssignVolunteerJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtMessage = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         tblVolunteer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},

@@ -63,6 +63,8 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Volunteer Work Area");
 

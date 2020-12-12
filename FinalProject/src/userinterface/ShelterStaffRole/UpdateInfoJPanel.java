@@ -74,6 +74,8 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
         sexComboBox = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

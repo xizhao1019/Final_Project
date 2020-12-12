@@ -138,6 +138,8 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
         txtMessageList = new javax.swing.JTextArea();
         pictureLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

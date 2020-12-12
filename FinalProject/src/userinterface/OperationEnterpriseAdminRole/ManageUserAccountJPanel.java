@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import Business.Util.InputValidation;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -102,6 +103,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         roleJComboBox = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         createUserJButton.setText("Create");
         createUserJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -239,17 +242,28 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createUserJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserJButtonActionPerformed
-        String userName = nameJTextField.getText();
-        String password = passwordJTextField.getText();
-        if(!userName.isEmpty() && !password.isEmpty()){
         Organization organization = (Organization) organizationJComboBox.getSelectedItem();
         Employee employee = (Employee) employeeJComboBox.getSelectedItem();
         Role role = (Role) roleJComboBox.getSelectedItem();
         
+        String userName = nameJTextField.getText();
+        String password = passwordJTextField.getText();
+        if(userName.isEmpty() || password.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Invalid input!");
+            return;
+        }
+        if (!organization.getUserAccountDirectory().isUniqueUsername(userName)) {
+            JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!InputValidation.isValidPassword(password)) {
+            JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
         
-        popData();}
-        else JOptionPane.showMessageDialog(null, "Invalid input!");
+        popData();
     }//GEN-LAST:event_createUserJButtonActionPerformed
 
     private void backjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButton1ActionPerformed

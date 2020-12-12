@@ -101,6 +101,8 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtMessage = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnAssign.setText("Assgin Hospital");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

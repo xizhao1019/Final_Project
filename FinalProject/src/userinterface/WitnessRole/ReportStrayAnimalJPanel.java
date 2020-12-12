@@ -75,6 +75,8 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         txtState = new javax.swing.JTextField();
         btnSetLocation = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Additional Message:");
 
         comboAnimalType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dog", "Cat", "Other" }));

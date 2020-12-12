@@ -93,6 +93,8 @@ public class FindMyMissingPetJPanel extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         sexComboBox = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Find My Missing Pet");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

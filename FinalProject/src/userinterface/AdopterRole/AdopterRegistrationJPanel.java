@@ -80,6 +80,8 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         DateChooser = new com.toedter.calendar.JDateChooser();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +138,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("User Name:");
 
+        DateChooser.setBackground(new java.awt.Color(255, 255, 255));
         DateChooser.setDateFormatString("MM-dd-yyyy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -292,9 +295,6 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
-        Date date = DateChooser.getDate();
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
-        String dob = format.format(date);
         String number = txtNumber.getText();
         String email = txtEmail.getText();
         String stateName = String.valueOf(stateComboBox.getSelectedItem());
@@ -308,7 +308,11 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
         
         
         if(!userName.isBlank() && !password.isBlank() && !city.isBlank() &&  
-                !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank()){
+                !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank() &&  DateChooser.getDate() != null){
+            
+            Date date = DateChooser.getDate();
+            SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+            String dob = format.format(date);
             
             Employee employee = new Employee();
             String name = firstName + lastName;

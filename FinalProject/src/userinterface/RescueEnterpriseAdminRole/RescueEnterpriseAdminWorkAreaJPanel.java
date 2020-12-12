@@ -37,6 +37,7 @@ public class RescueEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         userJButton.setText("Manage User Account");

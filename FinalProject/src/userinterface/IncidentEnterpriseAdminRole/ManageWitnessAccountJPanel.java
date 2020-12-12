@@ -11,12 +11,14 @@ import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.Role.WitnessRole;
 import Business.UserAccount.UserAccount;
+import Business.Util.InputValidation;
 import Business.WorkQueue.WitnessRegistrationRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -106,6 +108,8 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
         txtStreetline = new javax.swing.JTextField();
         backJButton = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         userJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -344,8 +348,31 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
         String apt = txtApartment.getText();
         String zipcode = txtZipcode.getText();
 
-        if(!userName.isBlank() && !password.isBlank() && !city.isBlank() && !name.isBlank() &&
-            !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank()){
+        if(userName.isBlank() || password.isBlank() || city.isBlank() || name.isBlank() || 
+            streetline.isBlank() || apt.isBlank() || zipcode.isBlank()){
+            JOptionPane.showMessageDialog(null, "Invalid input!");
+            return;
+        }
+        if (!InputValidation.isValidName(name)) {
+            JOptionPane.showMessageDialog(null, "Please input a valid name starting with a uppercase","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if ( !InputValidation.isValidPassword(password)) {
+            JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!org.getUserAccountDirectory().isUniqueUsername(userName)) {
+            JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!InputValidation.isValidNumber(apt)) {
+            JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if ( !InputValidation.isValidZipCode(zipcode)) {
+            JOptionPane.showMessageDialog(null, "Invalid zipcode!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
             Employee employee = new Employee();
             employee.setName(name);
@@ -361,8 +388,7 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
             
             org.getWorkQueue().getWorkRequestList().add(witness);
 
-            popData();}
-        else JOptionPane.showMessageDialog(null, "Invalid input!");
+            popData();
     }//GEN-LAST:event_createUserJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed

@@ -89,6 +89,8 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
         btnAssignShelter = new javax.swing.JButton();
         lblPicture = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         tblAssigned.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},

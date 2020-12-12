@@ -75,6 +75,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         addJButton.setText("Add Organization");
         addJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -50,6 +50,8 @@ public class FindLocationJPanel extends javax.swing.JPanel {
         btnViewMap = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("City:");
 
         txtCity.setEditable(false);
@@ -95,7 +97,7 @@ public class FindLocationJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addGap(334, 334, 334))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +114,7 @@ public class FindLocationJPanel extends javax.swing.JPanel {
                     .addComponent(txtLocationPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addComponent(btnViewMap, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addGap(229, 229, 229))
         );
     }// </editor-fold>//GEN-END:initComponents
 

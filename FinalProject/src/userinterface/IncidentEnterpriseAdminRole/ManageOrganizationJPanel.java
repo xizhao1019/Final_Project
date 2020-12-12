@@ -70,6 +70,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         txtOrgName = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

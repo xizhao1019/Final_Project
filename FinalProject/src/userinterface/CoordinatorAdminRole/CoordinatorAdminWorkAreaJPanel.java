@@ -67,6 +67,8 @@ public class CoordinatorAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnViewAllAnimals = new javax.swing.JButton();
         valueLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Hello,");
 
         jLabel2.setText("Role: Coordinator Administrator");
