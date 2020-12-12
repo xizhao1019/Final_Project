@@ -279,6 +279,7 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
         txtMessage.setEnabled(false);
         
         btnReport.setEnabled(false);
+        System.out.println(animalRecord.getReportingRequest().getAnimalLocationPoint());
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed

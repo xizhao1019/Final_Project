@@ -165,7 +165,7 @@
                 <Column editable="false" title="Volunteer" type="java.lang.Object"/>
                 <Column editable="false" title="Hospital" type="java.lang.Object"/>
                 <Column editable="false" title="Shelter" type="java.lang.Object"/>
-                <Column editable="false" title="Message" type="java.lang.Object"/>
+                <Column editable="false" title="Witness Message" type="java.lang.Object"/>
                 <Column editable="false" title="Statusl" type="java.lang.Object"/>
               </Table>
             </Property>

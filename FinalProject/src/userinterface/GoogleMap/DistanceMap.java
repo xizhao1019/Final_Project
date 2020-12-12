@@ -70,7 +70,7 @@ public class DistanceMap {
             });
             /*browser.mainFrame().ifPresent(frame ->
                             frame.executeJavaScript(setMarkerScript));*/
-            JButton setMarkerButton = new JButton("Locate Animal");
+            JButton setMarkerButton = new JButton("Locating");
             setMarkerButton.addActionListener(e ->
                     browser.mainFrame().ifPresent(frame ->
                             frame.executeJavaScript(setMarkerScript)));

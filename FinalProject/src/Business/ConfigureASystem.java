@@ -120,6 +120,9 @@ public class ConfigureASystem {
             //hospitalorg1
             Organization hospitalOrg1 =  rescueEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.AnimalHospital);
             hospitalOrg1.setName("MA_HospitalOrg");
+            hospitalOrg1.getLocationP().setLatitude(42.3645213);
+            hospitalOrg1.getLocationP().setLongitude(-71.0640255);
+            
             
             Employee employee6 = hospitalOrg1.getEmployeeDirectory().createEmployee("David");
             UserAccount ua6 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin1-1", "a", employee6, new HospitalAdminRole());
@@ -140,6 +143,9 @@ public class ConfigureASystem {
             //hospitalorg2
             Organization hospitalOrg2 =  rescueEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.AnimalHospital);
             hospitalOrg2.setName("MA_HospitalOrg2");
+
+            hospitalOrg2.getLocationP().setLatitude(42.3663684);
+            hospitalOrg2.getLocationP().setLongitude(-71.0589105);           
             
             Employee employee16 = hospitalOrg2.getEmployeeDirectory().createEmployee("Jack");
             UserAccount ua16 = hospitalOrg2.getUserAccountDirectory().createUserAccount("hospitaladmin2-1", "a", employee16, new HospitalAdminRole());
@@ -161,6 +167,9 @@ public class ConfigureASystem {
             //shelterorg1
             Organization shelterOrg1 =  rescueEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.AnimalShelter);
             shelterOrg1.setName("MA_ShelterOrg");
+
+            shelterOrg1.getLocationP().setLatitude(42.2943364);
+            shelterOrg1.getLocationP().setLongitude(-71.1215279);
             
             Employee employee9 = shelterOrg1.getEmployeeDirectory().createEmployee("Gigi");
             UserAccount ua9 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin1-1", "a", employee9, new ShelterAdminRole());
@@ -181,6 +190,9 @@ public class ConfigureASystem {
             //shelterorg2
             Organization shelterOrg2 =  rescueEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.AnimalShelter);
             shelterOrg2.setName("MA_ShelterOrg2");
+            
+            shelterOrg2.getLocationP().setLatitude(42.3470486);
+            shelterOrg2.getLocationP().setLongitude(-71.0697693);           
             
             Employee employee19 = shelterOrg2.getEmployeeDirectory().createEmployee("Mike");
             UserAccount ua19 = shelterOrg2.getUserAccountDirectory().createUserAccount("shelteradmin2-1", "a", employee19, new ShelterAdminRole());

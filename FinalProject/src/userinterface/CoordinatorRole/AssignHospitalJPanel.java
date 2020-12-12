@@ -19,6 +19,7 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import userinterface.GoogleMap.DistanceMap;
 
 /**
  *
@@ -39,7 +40,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         this.system = sys;
         this.animalRecord = ar;
         
-        popTable();
+        popTable();       
     }
 
         public void popTable(){
@@ -54,28 +55,15 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                     //System.out.println("in rescue enterprise"); //test
                     for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
                         if (org instanceof AnimalHospitalOrganization) {
-                            //for (WorkRequest wq : org.getWorkQueue().getWorkRequestList()) {
-                             //   System.out.println("in workrequest"); //test
-                             //   if (wq instanceof AnimalRecord) {
-                             //       System.out.println("in animal record"); //test
-                             //       if (((AnimalRecord)wq).getReportingRequest().getAssignedCoordinator() == userAccount) {
-                             //for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
-                             //    if (ua.getRole().toString() == "HospitalAdmin") {                             
-                                        Object row[] = new Object[4];
-                                        row[0] = org;
-                                        row[1] = org.getOrganizationID();
-                                        row[2] = org.getEmployeeDirectory().getEmployeeList().size(); // this is size of whole organization
-//                                        for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
-//                                            System.out.println("ua role: " + ua.getRole()); //test
-//                                            if (ua.getRole().toString().equals("HospitalAdmin") ) {
-//                                                row[3] = ua;
-//                                                break;
-//                                            } else {
-//                                                row[3] = "Hospital has no administrator";
-//                                            }
-//                                        }
-                                        row[3] = org.getWorkQueue().getWorkRequestList().size();
-                                        ((DefaultTableModel)tblHospital.getModel()).addRow(row);
+                            
+                            System.out.println("assign hos: " + org.getLocationP());  //test
+                             
+                                   Object row[] = new Object[4];
+                                   row[0] = org;
+                                   row[1] = org.getOrganizationID();
+                                   row[2] = org.getEmployeeDirectory().getEmployeeList().size(); // this is size of whole organization
+                                   row[3] = org.getWorkQueue().getWorkRequestList().size();
+                                   ((DefaultTableModel)tblHospital.getModel()).addRow(row);
                         }
                     }
                 }
@@ -94,7 +82,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         btnAssign = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHospital = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        txtViewMap = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnAdmin = new javax.swing.JButton();
         comboAdmin = new javax.swing.JComboBox();
@@ -131,7 +119,12 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblHospital);
 
-        jButton2.setText("View on Map");
+        txtViewMap.setText("View on Map");
+        txtViewMap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtViewMapActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +157,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(122, 122, 122)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtViewMap, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(227, 227, 227)
                         .addComponent(jLabel1)
@@ -187,7 +180,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtViewMap, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdmin)
                     .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -244,12 +237,14 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         animalRecord.getHospitalRequest().setHospitalOrg(org);
         animalRecord.getHospitalRequest().setStatus("Hospital Assigned");
         animalRecord.addMessage("Coordinator assign hospital. Message: " + txtMessage.getText());
-        animalRecord.getHospitalRequest().setLatestMessage(txtMessage.getText());
+        animalRecord.getHospitalRequest().setLatestMessage(txtMessage.getText());        
         ua.getWorkQueue().getWorkRequestList().add(animalRecord);
         org.getWorkQueue().getWorkRequestList().add(animalRecord);
         
         JOptionPane.showMessageDialog(null, "Request sent to Hospital Administrator !");
         popTable();
+        System.out.println(org.getLocationP());
+        //System.out.println(org.getLocationP().getLatitude());
     }//GEN-LAST:event_btnAssignActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
@@ -269,16 +264,33 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAdminActionPerformed
 
+    private void txtViewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtViewMapActionPerformed
+        // TODO add your handling code here:
+        int row = tblHospital.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a hospital from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+       Organization hos = (Organization) tblHospital.getValueAt(row, 0);
+        
+        String coordinates = "['" + hos.getName() + " Location'," 
+                + hos.getLocationP().getLatitude() + ", " 
+                + hos.getLocationP().getLongitude() + "]";
+        
+        //System.out.println("===---->>> coordinates is " + coordinates.substring(0, coordinates.length()-1));
+        DistanceMap.openMap(coordinates);
+    }//GEN-LAST:event_txtViewMapActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnBack;
     private javax.swing.JComboBox comboAdmin;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblHospital;
     private javax.swing.JTextField txtMessage;
+    private javax.swing.JButton txtViewMap;
     // End of variables declaration//GEN-END:variables
 }
