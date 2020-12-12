@@ -47,6 +47,8 @@ public class VolunteerProcessJPanel extends javax.swing.JPanel {
         txtMessage = new javax.swing.JTextField();
         btnShowMap = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Volunteer Process");
 

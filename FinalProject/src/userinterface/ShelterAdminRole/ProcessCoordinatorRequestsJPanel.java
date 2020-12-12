@@ -57,6 +57,8 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
         txtMessage = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Request From Coordinator");

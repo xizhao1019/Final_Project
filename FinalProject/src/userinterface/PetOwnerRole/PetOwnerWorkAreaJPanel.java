@@ -45,6 +45,8 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setText("Pet Owner Work Area");
 
         btnFindPet.setText("Find My Missing Pet");

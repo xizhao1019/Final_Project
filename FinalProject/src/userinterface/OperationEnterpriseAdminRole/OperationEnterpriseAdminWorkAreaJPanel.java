@@ -40,6 +40,8 @@ public class OperationEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
         manageEmployeeJButton = new javax.swing.JButton();
         userJButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         enterpriseLabel.setText("Hello,");

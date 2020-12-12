@@ -155,6 +155,8 @@ public class ViewAnimalsJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         txtSex = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("View Animals");
 

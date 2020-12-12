@@ -46,6 +46,8 @@ public class StaffProcessJPanel extends javax.swing.JPanel {
         comboStatus = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

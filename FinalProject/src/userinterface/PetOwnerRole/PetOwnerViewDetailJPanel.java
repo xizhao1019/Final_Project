@@ -132,6 +132,8 @@ public class PetOwnerViewDetailJPanel extends javax.swing.JPanel {
         txtTypeP = new javax.swing.JTextField();
         pictureLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnRequest.setText("Request to take back");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

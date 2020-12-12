@@ -118,6 +118,8 @@ public class ManageAdoptionsJPanel extends javax.swing.JPanel {
         btnDisplayAdopterRequest = new javax.swing.JButton();
         btnDisplayPetOwnerRequest = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         tblAdoptions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},

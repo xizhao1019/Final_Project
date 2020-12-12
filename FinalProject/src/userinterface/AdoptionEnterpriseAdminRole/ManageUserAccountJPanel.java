@@ -307,6 +307,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         sexComboBox = new javax.swing.JComboBox<>();
         ageComboBox = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnCreatAdopter.setText("Create Adopter");
         btnCreatAdopter.setEnabled(false);
         btnCreatAdopter.addActionListener(new java.awt.event.ActionListener() {
@@ -379,6 +381,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("DOB(MM/DD/YY):");
 
+        DateChooser.setBackground(new java.awt.Color(255, 255, 255));
         DateChooser.setDateFormatString("MM-dd-yyyy");
 
         jLabel19.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N

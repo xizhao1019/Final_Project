@@ -57,6 +57,8 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnAssignTasks = new javax.swing.JButton();
         valueLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel5.setText("Hello,");
 
         jLabel6.setText("Role: Hospital Administrator");

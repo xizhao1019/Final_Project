@@ -76,6 +76,8 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
         btnRegister = new javax.swing.JButton();
         stateComboBox = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Register to Report");

@@ -153,6 +153,8 @@ public class ProcessAdopterRequestJPanel extends javax.swing.JPanel {
         txtAdopterState = new javax.swing.JTextField();
         lblPicture = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Name:");
 

@@ -73,6 +73,8 @@ public class ReportedCasesJPanel extends javax.swing.JPanel {
         txtMessage = new javax.swing.JTextArea();
         btnView = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnAssignCoord.setText("Assgin To This Coordinator");
         btnAssignCoord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

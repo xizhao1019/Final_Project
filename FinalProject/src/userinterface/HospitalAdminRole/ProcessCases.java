@@ -48,6 +48,8 @@ public class ProcessCases extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnAccept = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         tblRequest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
