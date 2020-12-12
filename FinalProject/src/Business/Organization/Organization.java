@@ -5,6 +5,7 @@
 package Business.Organization;
 
 import Business.Employee.EmployeeDirectory;
+import Business.Location.LocationPoint;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
@@ -22,6 +23,7 @@ public abstract class Organization {
     private UserAccountDirectory userAccountDirectory;
     private int organizationID;
     private static int counter=0;
+    private LocationPoint locationP;
     
     private Type type;
     public ArrayList<Role> roles;
@@ -63,6 +65,7 @@ public abstract class Organization {
         userAccountDirectory = new UserAccountDirectory();
         organizationID = counter;
         ++counter;
+        this.locationP = new LocationPoint();
     }
 
     public abstract ArrayList<Role> getSupportedRole();
@@ -94,6 +97,16 @@ public abstract class Organization {
     public void setWorkQueue(WorkQueue workQueue) {
         this.workQueue = workQueue;
     }
+
+    public LocationPoint getLocationP() {
+        return locationP;
+    }
+
+    public void setLocationP(LocationPoint locationP) {
+        this.locationP = locationP;
+    }
+    
+    
 
     @Override
     public String toString() {

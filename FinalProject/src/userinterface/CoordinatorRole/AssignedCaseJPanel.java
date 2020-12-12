@@ -99,7 +99,7 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Case ID", "Animal Type", "City", "Report Date", "Volunteer", "Hospital", "Shelter", "Message", "Statusl"
+                "Case ID", "Animal Type", "City", "Report Date", "Volunteer", "Hospital", "Shelter", "Witness Message", "Statusl"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -355,7 +355,7 @@ public class AssignedCaseJPanel extends javax.swing.JPanel {
                     txtHospital.setText(ar.getHospitalRequest().getHospitalOrg() ==null ? "--": ar.getHospitalRequest().getHospitalOrg().getName());
                     txtShelter.setText(ar.getShelterRequest().getShelterOrg() ==null ? "--": ar.getShelterRequest().getShelterOrg().getName());
                     String message = "";
-                    for (int i = 0; i < ar.getMsgList().size()-1; i++) {
+                    for (int i = 0; i < ar.getMsgList().size(); i++) {
                         message += ar.getMsgList().get(i) + "\n";
                     }
                     txtMessage.setText(message);

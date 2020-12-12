@@ -18,11 +18,13 @@ import java.awt.CardLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import userinterface.GoogleMap.DistanceMap;
 
 /**
  *
@@ -281,7 +283,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtHealth = new javax.swing.JTextArea();
         jLabel15 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnHospitalViewMap = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         txtSex = new javax.swing.JTextField();
         Shelter = new javax.swing.JPanel();
@@ -290,7 +292,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
         jLabel57 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btnShelterViewMap = new javax.swing.JButton();
         Adopter = new javax.swing.JPanel();
         txtAdopterName = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -474,7 +476,12 @@ public class ViewAllAnimals extends javax.swing.JPanel {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Hospital Location");
 
-        jButton2.setText("View On Map");
+        btnHospitalViewMap.setText("View On Map");
+        btnHospitalViewMap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHospitalViewMapActionPerformed(evt);
+            }
+        });
 
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel18.setText("Sex");
@@ -515,7 +522,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                         .addGroup(MedicalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtHospitalname, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtVetname, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2)))
+                            .addComponent(btnHospitalViewMap)))
                     .addGroup(MedicalLayout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(jLabel13)
@@ -554,7 +561,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                             .addComponent(txtVetname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(MedicalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
+                            .addComponent(btnHospitalViewMap)
                             .addComponent(jLabel15))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(MedicalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,7 +581,12 @@ public class ViewAllAnimals extends javax.swing.JPanel {
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel28.setText("Shelter Location");
 
-        jButton3.setText("View On Map");
+        btnShelterViewMap.setText("View On Map");
+        btnShelterViewMap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShelterViewMapActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ShelterLayout = new javax.swing.GroupLayout(Shelter);
         Shelter.setLayout(ShelterLayout);
@@ -595,7 +607,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnShelterViewMap, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(199, 199, 199))
         );
         ShelterLayout.setVerticalGroup(
@@ -612,7 +624,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ShelterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jButton3))
+                    .addComponent(btnShelterViewMap))
                 .addContainerGap())
         );
 
@@ -791,6 +803,40 @@ public class ViewAllAnimals extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnShelterViewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShelterViewMapActionPerformed
+        // TODO add your handling code here:
+        int row = tblAnimals.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a case from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+       AnimalRecord ar = (AnimalRecord) tblAnimals.getValueAt(row, 0);
+        
+        String coordinates = "['" + ar.getShelterRequest().getShelterOrg().getName() + " Location'," 
+                + ar.getShelterRequest().getShelterOrg().getLocationP().getLatitude() + ", " 
+                + ar.getShelterRequest().getShelterOrg().getLocationP().getLongitude() + "]";
+        
+        //System.out.println("===---->>> coordinates is " + coordinates.substring(0, coordinates.length()-1));
+        DistanceMap.openMap(coordinates);
+    }//GEN-LAST:event_btnShelterViewMapActionPerformed
+
+    private void btnHospitalViewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHospitalViewMapActionPerformed
+        // TODO add your handling code here:
+        int row = tblAnimals.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a case from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+       AnimalRecord ar = (AnimalRecord) tblAnimals.getValueAt(row, 0);
+        
+        String coordinates = "['" + ar.getHospitalRequest().getHospitalOrg().getName() + " Location'," 
+                + ar.getHospitalRequest().getHospitalOrg().getLocationP().getLatitude() + ", " 
+                + ar.getHospitalRequest().getHospitalOrg().getLocationP().getLongitude() + "]";
+        
+        //System.out.println("===---->>> coordinates is " + coordinates.substring(0, coordinates.length()-1));
+        DistanceMap.openMap(coordinates);
+    }//GEN-LAST:event_btnHospitalViewMapActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Adopter;
@@ -799,8 +845,8 @@ public class ViewAllAnimals extends javax.swing.JPanel {
     private javax.swing.JPanel Shelter;
     private javax.swing.JPanel Transportation;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnHospitalViewMap;
+    private javax.swing.JButton btnShelterViewMap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
