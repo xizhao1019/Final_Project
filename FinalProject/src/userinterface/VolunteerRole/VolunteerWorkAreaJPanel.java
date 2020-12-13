@@ -67,9 +67,10 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel1.setText("Volunteer Work Area");
+        jLabel1.setText("VOLUNTEER WORK AREA");
 
-        tblVolunteerCase.setBackground(new java.awt.Color(153, 204, 255));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(454, 300));
+
         tblVolunteerCase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -90,34 +91,69 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         tblVolunteerCase.setOpaque(false);
-        tblVolunteerCase.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tblVolunteerCase.setPreferredSize(new java.awt.Dimension(330, 300));
+        tblVolunteerCase.setSelectionBackground(new java.awt.Color(199, 220, 242));
+        tblVolunteerCase.setSize(new java.awt.Dimension(850, 300));
         jScrollPane1.setViewportView(tblVolunteerCase);
+        if (tblVolunteerCase.getColumnModel().getColumnCount() > 0) {
+            tblVolunteerCase.getColumnModel().getColumn(0).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblVolunteerCase.getColumnModel().getColumn(1).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(1).setPreferredWidth(30);
+            tblVolunteerCase.getColumnModel().getColumn(2).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(2).setPreferredWidth(30);
+            tblVolunteerCase.getColumnModel().getColumn(3).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tblVolunteerCase.getColumnModel().getColumn(4).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(4).setPreferredWidth(40);
+            tblVolunteerCase.getColumnModel().getColumn(5).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(5).setPreferredWidth(50);
+            tblVolunteerCase.getColumnModel().getColumn(6).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(6).setPreferredWidth(50);
+            tblVolunteerCase.getColumnModel().getColumn(7).setResizable(false);
+            tblVolunteerCase.getColumnModel().getColumn(7).setPreferredWidth(60);
+        }
 
-        btnAccept.setText("Accept");
+        btnAccept.setBackground(new java.awt.Color(255, 255, 255));
+        btnAccept.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-checked.png"))); // NOI18N
+        btnAccept.setBorder(null);
+        btnAccept.setBorderPainted(false);
+        btnAccept.setContentAreaFilled(false);
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcceptActionPerformed(evt);
             }
         });
 
-        btnDecline.setText("Decline");
+        btnDecline.setBackground(new java.awt.Color(255, 255, 255));
+        btnDecline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-cancel.png"))); // NOI18N
+        btnDecline.setBorder(null);
+        btnDecline.setBorderPainted(false);
+        btnDecline.setContentAreaFilled(false);
         btnDecline.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeclineActionPerformed(evt);
             }
         });
 
-        btnProcess.setText("Process");
+        btnProcess.setBackground(new java.awt.Color(255, 255, 255));
+        btnProcess.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-edit_row.png"))); // NOI18N
+        btnProcess.setBorder(null);
+        btnProcess.setBorderPainted(false);
+        btnProcess.setContentAreaFilled(false);
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProcessActionPerformed(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel2.setText("Role: Volunteer");
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel3.setText("Hello,");
 
+        valueLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         valueLabel.setText("<Volunteer>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -125,49 +161,47 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(200, 200, 200)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(143, 143, 143))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(470, 470, 470))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(71, 71, 71)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(224, 224, 224)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(8, 8, 8)
+                        .addComponent(valueLabel)
+                        .addGap(134, 134, 134)
+                        .addComponent(jLabel2)
+                        .addGap(396, 396, 396))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnAccept)
+                        .addGap(148, 148, 148)
+                        .addComponent(btnDecline)
+                        .addGap(122, 122, 122)
+                        .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(357, 357, 357))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(195, 195, 195))
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDecline)
+                    .addComponent(btnAccept)
+                    .addComponent(btnProcess))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

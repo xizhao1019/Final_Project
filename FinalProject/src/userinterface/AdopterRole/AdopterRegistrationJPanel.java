@@ -14,6 +14,7 @@ import Business.Organization.AdopterOrganization;
 import Business.Organization.Organization;
 import Business.Role.AdopterRole;
 import Business.UserAccount.UserAccount;
+import Business.Util.InputValidation;
 import Business.WorkQueue.AdopterRegistrationRequest;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
@@ -67,7 +68,6 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         txtCity = new javax.swing.JTextField();
-        stateComboBox = new javax.swing.JComboBox<>();
         txtApt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -79,6 +79,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
         txtUserName = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         DateChooser = new com.toedter.calendar.JDateChooser();
+        stateComboBox = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -102,7 +103,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
         jLabel9.setText("DOB(MM/DD/YY):");
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Number:");
+        jLabel5.setText("Phone Number:");
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("First Name:");
@@ -119,8 +120,6 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
                 btnRegisterActionPerformed(evt);
             }
         });
-
-        stateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virgin Islands", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" }));
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -140,6 +139,8 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
 
         DateChooser.setBackground(new java.awt.Color(255, 255, 255));
         DateChooser.setDateFormatString("MM-dd-yyyy");
+
+        stateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -161,7 +162,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                                         .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
-                                    .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(101, 101, 101)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,9 +202,9 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(stateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(stateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(253, 253, 253)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,7 +214,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btnBack)))
-                .addGap(192, 192, 192))
+                .addGap(196, 196, 196))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +223,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
                 .addComponent(btnBack)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel7)
-                .addGap(38, 38, 38)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -264,7 +265,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(50, 50, 50)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -281,7 +282,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
     public void popStateCombo(){
         stateComboBox.removeAllItems();
         for(Network state : system.getNetworkList()){
-            stateComboBox.addItem(state.getName());
+            stateComboBox.addItem(state);
         }
     }
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -297,7 +298,19 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
         String lastName = txtLastName.getText();
         String number = txtNumber.getText();
         String email = txtEmail.getText();
+        Network s = (Network) stateComboBox.getSelectedItem();
         String stateName = String.valueOf(stateComboBox.getSelectedItem());
+        Organization adoption = null;
+        for (Enterprise e : s.getEnterpriseDirectory().getEnterpriseList()) {
+            if (e instanceof AdoptionEnterprise) {
+                for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof AdopterOrganization) {
+                        adoption = org;
+                    }
+                }
+              break;
+            }
+        }
         String city = txtCity.getText();
         String streetline = txtStreet.getText();
         String apt = txtApt.getText();
@@ -309,7 +322,34 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
         
         if(!userName.isBlank() && !password.isBlank() && !city.isBlank() &&  
                 !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank() &&  DateChooser.getDate() != null){
-            
+            if (!InputValidation.isValidName(firstName) || !InputValidation.isValidName(lastName)) {
+                JOptionPane.showMessageDialog(null, "Please input a name starting with a upper case!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!InputValidation.isValidPhoneNumber(number)) {
+                JOptionPane.showMessageDialog(null, "Please input a valid phone number!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!InputValidation.isValidEmail(email)) {
+                JOptionPane.showMessageDialog(null, "Please input a valid email address!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!InputValidation.isValidNumber(apt)) {
+                JOptionPane.showMessageDialog(null, "Please input a valid apartment number!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!InputValidation.isValidZipCode(zipcode)) {
+                JOptionPane.showMessageDialog(null, "Please input a valid zipcode!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!adoption.getUserAccountDirectory().isUniqueUsername(userName)) {
+                JOptionPane.showMessageDialog(null, "Please input a unique username!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if ( !InputValidation.isValidPassword(password)) {
+            JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+            }
             Date date = DateChooser.getDate();
             SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
             String dob = format.format(date);
@@ -385,7 +425,7 @@ public class AdopterRegistrationJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JComboBox<String> stateComboBox;
+    private javax.swing.JComboBox stateComboBox;
     private javax.swing.JTextField txtApt;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtEmail;
