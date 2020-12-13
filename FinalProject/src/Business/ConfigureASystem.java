@@ -276,7 +276,8 @@ public class ConfigureASystem {
 
                 petOwner1.setAnimalType("Dog");
                 petOwner1.setBreed("Golden Retrevier");
-                petOwner1.setAge("5 Month");
+                petOwner1.setAge("Baby");
+                petOwner1.setSex("Male");
                 petOwner1.setPetName("Jeffery");
                 petOwner1.setImagePath("/images/Golden_Jeffery.jpg");
                 perOwnerOrg.getWorkQueue().getWorkRequestList().add(petOwner1);
@@ -300,7 +301,8 @@ public class ConfigureASystem {
 
                 petOwner2.setAnimalType("Dog");
                 petOwner2.setBreed("Labrado");
-                petOwner2.setAge("12 Month");
+                petOwner2.setAge("Adult");
+                petOwner2.setSex("Male");
                 petOwner2.setPetName("Rocco");
                 petOwner2.setImagePath("/images/Lab_Rocco.png");
                 perOwnerOrg.getWorkQueue().getWorkRequestList().add(petOwner2);

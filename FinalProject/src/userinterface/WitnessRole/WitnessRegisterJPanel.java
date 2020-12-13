@@ -14,6 +14,7 @@ import Business.Organization.IncidentReportingOrganization;
 import Business.Organization.Organization;
 import Business.Role.WitnessRole;
 import Business.UserAccount.UserAccount;
+import Business.Util.InputValidation;
 import Business.WorkQueue.WitnessRegistrationRequest;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -43,7 +44,7 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
     public void popStatecombo(){
         stateComboBox.removeAllItems();
         for (Network state : system.getNetworkList()) {
-            stateComboBox.addItem(state.toString());
+            stateComboBox.addItem(state);
         }
     }
             
@@ -74,7 +75,7 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         btnRegister = new javax.swing.JButton();
-        stateComboBox = new javax.swing.JComboBox<>();
+        stateComboBox = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -120,6 +121,8 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
             }
         });
 
+        stateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,14 +146,6 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
                                     .addComponent(txtApartment, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtZipcode, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCity, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                    .addComponent(stateComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -161,7 +156,15 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(stateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(162, 162, 162)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -227,8 +230,19 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
         String userName = txtUsername.getText();
         String password = txtPassword.getText();
         String name = txtName.getText();
+        Network s = (Network) stateComboBox.getSelectedItem();
         String stateName = String.valueOf(stateComboBox.getSelectedItem());
-        
+        Organization w = null;
+        for (Enterprise e : s.getEnterpriseDirectory().getEnterpriseList()) {
+            if (e instanceof IncidentEnterprise) {
+                for (Organization org : e.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof IncidentReportingOrganization) {
+                        w = org;
+                    }
+                }
+              break;
+            }
+        }
         String city = txtCity.getText();
         String streetline = txtStreetline.getText();
         String apt = txtApartment.getText();
@@ -236,6 +250,28 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
         
         if(!userName.isBlank() && !password.isBlank() && !city.isBlank() && !name.isBlank() && 
                 !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank()){
+            
+            if (!w.getUserAccountDirectory().isUniqueUsername(userName)) {
+                JOptionPane.showMessageDialog(null, "Please input a unique username!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if ( !InputValidation.isValidPassword(password)) {
+            JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+            }
+            if (!InputValidation.isValidName(name)) {
+                JOptionPane.showMessageDialog(null, "Please input a name starting with a upper case!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!InputValidation.isValidNumber(apt)) {
+                JOptionPane.showMessageDialog(null, "Please input a valid apartment number!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!InputValidation.isValidZipCode(zipcode)) {
+                JOptionPane.showMessageDialog(null, "Please input a valid zipcode!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
             
             Employee employee = new Employee();
             employee.setName(name);
@@ -248,8 +284,6 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
                             if (org instanceof IncidentReportingOrganization) {
                                 UserAccount ua = org.getUserAccountDirectory().createUserAccount(userName, password, employee, new WitnessRole());
                                 ua.setState(state);
-//                                ua.setEnterprise(enterprise);
-//                                ua.setOrg(org);
 
                                 witness.setWitnessAccount(ua);
                                 witness.setCity(city);
@@ -292,7 +326,7 @@ public class WitnessRegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JComboBox<String> stateComboBox;
+    private javax.swing.JComboBox stateComboBox;
     private javax.swing.JTextField txtApartment;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtName;
