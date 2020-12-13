@@ -44,11 +44,16 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Pet Owner Work Area");
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("PET OWNER WORK AREA");
 
+        btnFindPet.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btnFindPet.setText("Find My Missing Pet");
         btnFindPet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,6 +61,7 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnYourRequest.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btnYourRequest.setText("Your Requests");
         btnYourRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,55 +69,74 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel3.setText("Hello,");
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel2.setText("Role: Pet Owner");
 
+        valueLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         valueLabel.setText("<Pet Owner>");
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/yourRequest.png"))); // NOI18N
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/findMyPet.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel5)
+                .addGap(250, 250, 250)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFindPet, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(225, 225, 225)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnYourRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(300, 300, 300))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(259, 259, 259)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFindPet)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(btnYourRequest))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(457, 457, 457))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel2)))
-                .addGap(162, 162, 162))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(valueLabel)
+                        .addGap(167, 167, 167)
+                        .addComponent(jLabel2)
+                        .addGap(422, 422, 422))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(btnFindPet)
-                .addGap(18, 18, 18)
-                .addComponent(btnYourRequest)
-                .addGap(30, 30, 30)
+                .addGap(293, 293, 293)
                 .addComponent(jLabel5)
-                .addGap(90, 90, 90))
+                .addGap(354, 354, 354))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnYourRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFindPet, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(135, 135, 135))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -139,6 +164,8 @@ public class PetOwnerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }

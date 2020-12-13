@@ -92,10 +92,16 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnManageNetwork = new javax.swing.JButton();
         btnManageEnterprise = new javax.swing.JButton();
         btnManageAdmin = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
         jSplitPane.setBackground(new java.awt.Color(255, 255, 255));
+        jSplitPane.setDividerLocation(300);
+        jSplitPane.setDividerSize(1);
+        jSplitPane.setEnabled(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -143,14 +149,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 118, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -161,45 +165,68 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         lblSelectedNode.setText("<View_selected_node>");
 
-        btnManageNetwork.setText("Manage State");
+        btnManageNetwork.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        btnManageNetwork.setText("MANAGE STATE");
+        btnManageNetwork.setBorderPainted(false);
+        btnManageNetwork.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnManageNetwork.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageNetworkActionPerformed(evt);
             }
         });
 
-        btnManageEnterprise.setText("Manage Enterprise");
+        btnManageEnterprise.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        btnManageEnterprise.setText("MANAGE ENTERPRISE");
+        btnManageEnterprise.setBorder(null);
+        btnManageEnterprise.setBorderPainted(false);
         btnManageEnterprise.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageEnterpriseActionPerformed(evt);
             }
         });
 
-        btnManageAdmin.setText("Manage Enterprise Admin");
+        btnManageAdmin.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        btnManageAdmin.setText("MANAGE ENTERPRISE ADMIN");
+        btnManageAdmin.setBorderPainted(false);
         btnManageAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageAdminActionPerformed(evt);
             }
         });
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mngstate.png"))); // NOI18N
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mngEnter.png"))); // NOI18N
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/managAdmin.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(100, 100, 100)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnManageNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnManageEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnManageAdmin)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(lblSelectedNode))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnManageAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(239, 239, 239))
+                        .addComponent(lblSelectedNode)))
+                .addGap(101, 101, 101))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,13 +235,21 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblSelectedNode))
-                .addGap(54, 54, 54)
-                .addComponent(btnManageNetwork)
-                .addGap(18, 18, 18)
-                .addComponent(btnManageEnterprise)
-                .addGap(18, 18, 18)
-                .addComponent(btnManageAdmin)
-                .addGap(175, 175, 175))
+                .addGap(149, 149, 149)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnManageNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnManageEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnManageAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jSplitPane.setRightComponent(jPanel2);
@@ -257,6 +292,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnManageEnterprise;
     private javax.swing.JButton btnManageNetwork;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

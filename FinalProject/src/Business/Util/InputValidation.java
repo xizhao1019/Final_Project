@@ -59,5 +59,14 @@ public class InputValidation {
         matcher = pattern.matcher(number);
         return matcher.matches();
     }
+    
+    public static boolean isValidEmail(String email) {
+        Pattern pattern;
+        Matcher matcher;
+        String PHONE_PATTERN = "^([A-Za-z0-9]+)([@]+)(([A-Za-z0-9]+)).com$";
+        pattern = Pattern.compile(PHONE_PATTERN);
+        matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 
 }
