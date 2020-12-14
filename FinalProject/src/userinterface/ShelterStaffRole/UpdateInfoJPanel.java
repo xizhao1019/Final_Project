@@ -349,6 +349,13 @@ public class UpdateInfoJPanel extends javax.swing.JPanel {
             animalRecord.addMessage(txtMessage.getText());
         }
         JOptionPane.showMessageDialog(null, "Animal Information Uploaded Successfully");
+        
+        String messageList = "";
+        for(int i = 1; i < animalRecord.getMsgList().size(); i++) {
+            messageList += animalRecord.getMsgList().get(i) + "\n";
+        }
+        txtMessageList.setText(messageList);
+        
         txtName.setEnabled(false);
         txtMessage.setEnabled(false);
         //btnPost.setEnabled(false);

@@ -83,10 +83,8 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             int row = tblHospital.getSelectedRow();
-        if(row<0) {
-            JOptionPane.showMessageDialog(null, "Please select a hospital from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        if(row>=0) {
+
         comboAdmin.removeAllItems();
         Organization org = (Organization)tblHospital.getValueAt(row, 0);
         for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
@@ -94,6 +92,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
             if (ua.getRole().toString().equals("HospitalAdmin") ) {
                 comboAdmin.addItem(ua);
             }
+        }
         }
       }
     });

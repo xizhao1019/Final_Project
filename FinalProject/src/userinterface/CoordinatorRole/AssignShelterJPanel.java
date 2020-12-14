@@ -185,10 +185,7 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int row = tblShelter.getSelectedRow();
-                if(row<0) {
-                    JOptionPane.showMessageDialog(null, "Please select a shelter from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
+                if(row>=0) {
 
                 Organization org = (Organization)tblShelter.getValueAt(row, 0);
                 comboAdmin.removeAllItems();;
@@ -198,6 +195,7 @@ public class AssignShelterJPanel extends javax.swing.JPanel {
                         comboAdmin.addItem(ua);
                     }
                 }
+            }
             }
         });
     }

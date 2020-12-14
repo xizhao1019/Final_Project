@@ -127,9 +127,9 @@ public class ManageStaffJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(btnBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(36, 350, Short.MAX_VALUE)
+                .addGap(350, 350, 350)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -208,19 +208,22 @@ public class ManageStaffJPanel extends javax.swing.JPanel {
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        String name = txtName.getText();
-        String username = txtUser.getText();
-        String password = txtPass.getText();
-        
-        Employee employee = new Employee();
-        employee.setName(name);
-        Role role = new ShelterStaffRole();
-        organization.getUserAccountDirectory().createUserAccount(username, password, employee, role);
-        JOptionPane.showMessageDialog(null, "New Staff Added");
-        popTable();
-        txtName.setText("");
-        txtUser.setText("");
-        txtPass.setText("");
+            String name = txtName.getText();
+            String username = txtUser.getText();
+            String password = txtPass.getText();
+        if ( !name.isBlank() && !username.isBlank() && !password.isBlank()) {
+            Employee employee = new Employee();
+            employee.setName(name);
+            Role role = new ShelterStaffRole();
+            organization.getUserAccountDirectory().createUserAccount(username, password, employee, role);
+            JOptionPane.showMessageDialog(null, "New Staff Added");
+            popTable();
+            txtName.setText("");
+            txtUser.setText("");
+            txtPass.setText("");
+        } else {
+        JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

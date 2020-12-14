@@ -131,7 +131,6 @@ public class FindLocationJPanel extends javax.swing.JPanel {
                 + animalRecord.getReportingRequest().getAnimalLocationPoint().getLatitude() + ", " 
                 + animalRecord.getReportingRequest().getAnimalLocationPoint().getLongitude() + "]";
         
-        //System.out.println("===---->>> coordinates is " + coordinates.substring(0, coordinates.length()-1));
         DistanceMap.openMap(coordinates);
     }//GEN-LAST:event_btnViewMapActionPerformed
 

@@ -219,17 +219,20 @@ public class ManageVetJPanel extends javax.swing.JPanel {
         String name = txtName.getText();
         String username = txtUser.getText();
         String password = txtPass.getText();
-        
-        Employee employee = new Employee();
-        employee.setName(name);
-        Role role = new VetRole();
-        organization.getUserAccountDirectory().createUserAccount(username, password, employee, role);
-        JOptionPane.showMessageDialog(null, "New vet added.");
-        
-        txtName.setText("");
-        txtUser.setText("");
-        txtPass.setText("");
-        popTable();
+        if (!name.isBlank() && !username.isBlank() && !password.isBlank()) {
+            Employee employee = new Employee();
+            employee.setName(name);
+            Role role = new VetRole();
+            organization.getUserAccountDirectory().createUserAccount(username, password, employee, role);
+            JOptionPane.showMessageDialog(null, "New vet added.");
+
+            txtName.setText("");
+            txtUser.setText("");
+            txtPass.setText("");
+            popTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
