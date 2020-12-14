@@ -119,7 +119,7 @@ public class ConfigureASystem {
             //initialize a hospital organization, 2 hospital admins and 2 vets
             //hospitalorg1
             Organization hospitalOrg1 =  rescueEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.AnimalHospital);
-            hospitalOrg1.setName("MA_HospitalOrg");
+            hospitalOrg1.setName("MA_HospitalOrg1");
             hospitalOrg1.getLocationP().setLatitude(42.3645213);
             hospitalOrg1.getLocationP().setLongitude(-71.0640255);
             
@@ -166,7 +166,7 @@ public class ConfigureASystem {
             //initialize a shelter organization, 2 shelter admins and 2 staff
             //shelterorg1
             Organization shelterOrg1 =  rescueEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.AnimalShelter);
-            shelterOrg1.setName("MA_ShelterOrg");
+            shelterOrg1.setName("MA_ShelterOrg1");
 
             shelterOrg1.getLocationP().setLatitude(42.2943364);
             shelterOrg1.getLocationP().setLongitude(-71.1215279);
@@ -357,7 +357,7 @@ public class ConfigureASystem {
             //ShelterRequest shelterRequest;
             ShelterRequest shelterRequest = new ShelterRequest();
             shelterRequest.setShelterOrg(shelterOrg1);
-            shelterRequest.setOrgAdmin(ua29);
+            shelterRequest.setOrgAdmin(ua9);
             shelterRequest.setAssignedStaff(ua10);
             shelterRequest.setStatus("Shelter Accepted");
             //TBD:LocationPoint hospitalLocationPoint
@@ -365,7 +365,7 @@ public class ConfigureASystem {
             ar1.addMessage("Tue Dec 01 13:05:15 EST 2020 Hi there, please help shelter this cat!");
             ar1.setShelterRequest(shelterRequest);
             shelterOrg1.getWorkQueue().getWorkRequestList().add(ar1);
-            ua29.getWorkQueue().getWorkRequestList().add(ar1);
+            ua9.getWorkQueue().getWorkRequestList().add(ar1);
             ua10.getWorkQueue().getWorkRequestList().add(ar1);
             
             //TBD:LocationPoint shelterLocationPoint;
@@ -391,7 +391,8 @@ public class ConfigureASystem {
             ar1.setPetName("Coco");
             ar1.getShelterRequest().setPost(true);
             
-            ar1.setStatus("Adoptable");
+            
+            ar1.setStatus("Posted For Adoption");
             
         return system;
     }

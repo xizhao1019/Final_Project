@@ -50,12 +50,13 @@ public class UserAccountDirectory {
         return true;
     }
     
-    public void deleteUserAccount(String username, String password) {
-        UserAccount ua = new UserAccount();
-        for (int i = 0; i <userAccountList.size(); i++ )
-            ua = userAccountList.get(i);
-            if (ua.getUsername().equals(username) && ua.getPassword().equals(password)){
-                userAccountList.remove(ua);
+    public void deleteUserAccount(UserAccount ua) {
+        for (int i = 0; i <userAccountList.size(); i++ ){
+            if (userAccountList.get(i).equals(ua)){
+                userAccountList.remove(i);
+                break;
             }
+        }
     }
+    
 }

@@ -234,9 +234,11 @@ public class ManageStaffJPanel extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Please select a staff account from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        UserAccount selected = (UserAccount)tblStaff.getValueAt(row, 0);       
+        UserAccount selected = (UserAccount)tblStaff.getValueAt(row, 0); 
+        Employee selectedEmployee = selected.getEmployee();
        
-        organization.getUserAccountDirectory().deleteUserAccount(selected.getUsername(), selected.getPassword());
+        organization.getUserAccountDirectory().deleteUserAccount(selected);
+        organization.getEmployeeDirectory().deleteEmployee(selectedEmployee);
         JOptionPane.showMessageDialog(null, "Vet deleted.");
         popTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
