@@ -21,18 +21,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="788" max="-2" attributes="0"/>
-                      <Component id="jLabel10" min="-2" pref="66" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                      <Component id="backJButton" min="-2" pref="50" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="788" max="-2" attributes="0"/>
+              <Component id="jLabel10" min="-2" pref="66" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Component id="backJButton" min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
@@ -54,49 +49,44 @@
                           </Group>
                       </Group>
                       <Component id="jLabel1" min="-2" pref="250" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel7" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jLabel12" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jLabel14" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labelID" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel7" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="jLabel12" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="jLabel14" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="typeComboBox" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="txtBreed" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="ageComboBox" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="sexComboBox" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="labelID" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="typeComboBox" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="txtBreed" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="ageComboBox" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="sexComboBox" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="lblPicture" min="-2" pref="220" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel13" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtMedicalRecord" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
-                              <Component id="btnUpdatePicture" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
-                              <Component id="jLabel8" min="-2" pref="268" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="lblPicture" min="-2" pref="220" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel13" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtMedicalRecord" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
+                      <Component id="btnUpdatePicture" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" pref="268" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -156,7 +146,6 @@
                           <Component id="btnSubmit" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="btnUpdate" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" pref="208" max="-2" attributes="0"/>
@@ -164,6 +153,7 @@
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

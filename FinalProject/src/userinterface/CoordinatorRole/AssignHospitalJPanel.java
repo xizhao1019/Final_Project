@@ -278,11 +278,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         if (ua == null) {
             JOptionPane.showMessageDialog(null, "Please select an hospital admin", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        }
-        
-        //HospitalRequest hr = new HospitalRequest();
-        //hr.setHospitalOrg(org);
-        //ua.getWorkQueue().getWorkRequestList().add(hr);       
+        }     
         
         animalRecord.getHospitalRequest().setHospitalOrg(org);
         animalRecord.getHospitalRequest().setStatus("Hospital Assigned");
@@ -293,7 +289,7 @@ public class AssignHospitalJPanel extends javax.swing.JPanel {
         
         JOptionPane.showMessageDialog(null, "Request sent to Hospital Administrator !");
         popTable();
-        System.out.println(org.getLocationP());
+        //System.out.println(org.getLocationP());
         //System.out.println(org.getLocationP().getLatitude());
     }//GEN-LAST:event_btnAssignActionPerformed
 

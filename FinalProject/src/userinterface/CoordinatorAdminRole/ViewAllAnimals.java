@@ -140,7 +140,7 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 txtReportDate.setText(ar.getRequestDate().toString());
                 txtReportBy.setText(ar.getReportingRequest().getWitness().getEmployee().getName());
                 txtCity.setText(ar.getReportingRequest().getCity());
-                txtLocationPoint.setText(ar.getReportingRequest().getAnimalLocationPoint().toString());
+                txtLocationPoint.setText(ar.getReportingRequest().getAnimalLocationPoint() ==null?"--":ar.getReportingRequest().getAnimalLocationPoint().toString());
                                
                 // transportation
                 txtCoordinator.setText(ar.getReportingRequest().getAssignedCoordinator()==null?"--":ar.getReportingRequest().getAssignedCoordinator().getEmployee().getName());                
@@ -165,49 +165,38 @@ public class ViewAllAnimals extends javax.swing.JPanel {
                 
                 
                 //adoptor info
-                if (ar.getAdopterAdoptionRequest() != null) {
-                    txtAdopterName.setText(ar.getAdopterAdoptionRequest().getAdopter().toString());
-                    txtAdopterDOB.setText(ar.getAdopterAdoptionRequest().getAdopter().getDoB());
-                    txtAdopterEmail.setText(ar.getAdopterAdoptionRequest().getAdopter().getEmail());
-                    txtAdopterNumber.setText(ar.getAdopterAdoptionRequest().getAdopter().getNumber());
-                    txtAdopterState.setText(ar.getAdopterAdoptionRequest().getAdopter().getState().getName());
-                    txtAdopterCity.setText(ar.getAdopterAdoptionRequest().getAdopter().getCity());                                                                  
-                    txtAdopterStreet.setText(ar.getAdopterAdoptionRequest().getAdopter().getNumber());  
-                    txtAdopterApt.setText(ar.getAdopterAdoptionRequest().getAdopter().getApt());
-                    txtAdopterZip.setText(ar.getAdopterAdoptionRequest().getAdopter().getZipCode());
-                    
-                }else{
-                    txtAdopterName.setText("--");
-                    txtAdopterDOB.setText("--");
-                    txtAdopterEmail.setText("--");
-                    txtAdopterNumber.setText("--");
-                    txtAdopterState.setText("--");
-                    txtAdopterCity.setText("--");
-                    txtAdopterStreet.setText("--");
-                    txtAdopterApt.setText("--");
-                    txtAdopterZip.setText("--");            
-                }
-                
-                if (ar.getPetOwnerAdoptionRequest() != null) {
-                    txtAdopterName.setText(ar.getPetOwnerAdoptionRequest().getAdopter().toString());
-                    txtAdopterDOB.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getDoB());
-                    txtAdopterEmail.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getEmail());
-                    txtAdopterNumber.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getNumber());
-                    txtAdopterState.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getState().getName());
-                    txtAdopterCity.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getCity());
-                    txtAdopterStreet.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getStreet());
-                    txtAdopterApt.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getApt());
-                    txtAdopterZip.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getZipCode());
-                } else{
-                    txtAdopterName.setText("--");
-                    txtAdopterDOB.setText("--");
-                    txtAdopterEmail.setText("--");
-                    txtAdopterNumber.setText("--");
-                    txtAdopterState.setText("--");
-                    txtAdopterCity.setText("--");
-                    txtAdopterStreet.setText("--");
-                    txtAdopterApt.setText("--");
-                    txtAdopterZip.setText("--");            
+                if (ar.getStatus().equals("Adopted")) {
+                    if (ar.getAdopterAdoptionRequest().isApproved() == true) {
+                        txtAdopterName.setText(ar.getAdopterAdoptionRequest().getAdopter().toString());
+                        txtAdopterDOB.setText(ar.getAdopterAdoptionRequest().getAdopter().getDoB());
+                        txtAdopterEmail.setText(ar.getAdopterAdoptionRequest().getAdopter().getEmail());
+                        txtAdopterNumber.setText(ar.getAdopterAdoptionRequest().getAdopter().getNumber());
+                        txtAdopterState.setText(ar.getAdopterAdoptionRequest().getAdopter().getState().getName());
+                        txtAdopterCity.setText(ar.getAdopterAdoptionRequest().getAdopter().getCity());                                                                  
+                        txtAdopterStreet.setText(ar.getAdopterAdoptionRequest().getAdopter().getNumber());  
+                        txtAdopterApt.setText(ar.getAdopterAdoptionRequest().getAdopter().getApt());
+                        txtAdopterZip.setText(ar.getAdopterAdoptionRequest().getAdopter().getZipCode());
+                    } else if (ar.getPetOwnerAdoptionRequest().isApproved() == true) {
+                        txtAdopterName.setText(ar.getPetOwnerAdoptionRequest().getAdopter().toString());
+                        txtAdopterDOB.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getDoB());
+                        txtAdopterEmail.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getEmail());
+                        txtAdopterNumber.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getNumber());
+                        txtAdopterState.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getState().getName());
+                        txtAdopterCity.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getCity());
+                        txtAdopterStreet.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getStreet());
+                        txtAdopterApt.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getApt());
+                        txtAdopterZip.setText(ar.getPetOwnerAdoptionRequest().getAdopter().getZipCode());
+                    } else {
+                        txtAdopterName.setText("--");
+                        txtAdopterDOB.setText("--");
+                        txtAdopterEmail.setText("--");
+                        txtAdopterNumber.setText("--");
+                        txtAdopterState.setText("--");
+                        txtAdopterCity.setText("--");
+                        txtAdopterStreet.setText("--");
+                        txtAdopterApt.setText("--");
+                        txtAdopterZip.setText("--");        
+                    }
                 }
                 
                 
