@@ -473,6 +473,7 @@ public class ProcessAdopterRequestJPanel extends javax.swing.JPanel {
         btnReject.setEnabled(false);
         btnApprove.setEnabled(false);
         adoptRequest.getAnimal().setAdopterAdoptionRequest(adoptRequest);
+        adoptRequest.getAnimal().setAdopterAdoptionRequest(adoptRequest);
     }//GEN-LAST:event_btnApproveActionPerformed
 
 

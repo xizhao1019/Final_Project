@@ -7,7 +7,6 @@ package userinterface.WitnessRole;
 
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import Business.Util.HeaderColors;
 import Business.WorkQueue.AnimalRecord;
 import Business.WorkQueue.AnimalReportingRequest;
 import Business.WorkQueue.WorkRequest;
@@ -34,7 +33,6 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         this.organization = org;
         this.userAccount = ua;
         
-        tblHistory.getTableHeader().setDefaultRenderer(new HeaderColors());
                
         populateTable();
     }
@@ -143,7 +141,6 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
 
     
     private void populateTable() {
-        tblHistory.getTableHeader().setDefaultRenderer(new HeaderColors());
         DefaultTableModel model = (DefaultTableModel)tblHistory.getModel();
         model.setRowCount(0);
         System.out.println(organization.getWorkQueue().getWorkRequestList().size());
