@@ -84,7 +84,7 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblRequest);
 
-        btnApprove.setText("Approve");
+        btnApprove.setText("Accept");
         btnApprove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApproveActionPerformed(evt);
@@ -232,15 +232,15 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
         
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
         
-        if (ar.getShelterRequest().getStatus().equals("Shelter Admin Approved")) {
-            JOptionPane.showMessageDialog(null, "Already approved", "Warning", JOptionPane.WARNING_MESSAGE);
+        if (ar.getShelterRequest().getStatus().equals("Shelter Accepted")) {
+            JOptionPane.showMessageDialog(null, "Already accepted", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        }else if (ar.getShelterRequest().getStatus().equals("Shelter Admin Declined")) {
+        }else if (ar.getShelterRequest().getStatus().equals("Shelter Declined")) {
             JOptionPane.showMessageDialog(null, "Already declined", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else {
-            ar.getShelterRequest().setStatus("Shelter Admin Approved");
-            JOptionPane.showMessageDialog(null, "Approved, Animal will arrive soon");
+            ar.getShelterRequest().setStatus("Shelter Accepted");
+            JOptionPane.showMessageDialog(null, "Accepetd, Animal will arrive soon");
             popTable();
         }
     }//GEN-LAST:event_btnApproveActionPerformed
@@ -259,11 +259,11 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
-        if (ar.getShelterRequest().getStatus().equals("Shelter Admin Approved")) {
-             JOptionPane.showMessageDialog(null, "Already approved, cannot decline", "Warning", JOptionPane.WARNING_MESSAGE);
+        if (ar.getShelterRequest().getStatus().equals("Shelter Accepted")) {
+             JOptionPane.showMessageDialog(null, "Already accepted, cannot decline", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        ar.getShelterRequest().setStatus("Shelter Admin Declined");
+        ar.getShelterRequest().setStatus("Shelter Declined");
         userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
         organization.getWorkQueue().deleteRequest((WorkRequest)ar);
         JOptionPane.showMessageDialog(null, "Declined");
@@ -283,8 +283,8 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Already assigned.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (!ar.getShelterRequest().getStatus().equals("Shelter Admin Approved") ) {
-            JOptionPane.showMessageDialog(null, "Please approve before assign to staff", "Warning", JOptionPane.WARNING_MESSAGE);
+        if (!ar.getShelterRequest().getStatus().equals("Shelter Accepted") ) {
+            JOptionPane.showMessageDialog(null, "Please accept before assign to staff", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         

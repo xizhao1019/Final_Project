@@ -40,7 +40,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setSize(1300, 780);
         this.setLocation(100, 40);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        labelLogout.setVisible(false);
+        btnLogout.setVisible(false);
         logoLabel.setVisible(false);
         
         //ImageIcon icon = new ImageIcon("2.png");
@@ -58,8 +58,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        labelLogout = new javax.swing.JLabel();
         logoLabel = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         container = new javax.swing.JPanel();
         loginjPanel = new javax.swing.JPanel();
         userNameJTextField = new javax.swing.JTextField();
@@ -83,17 +83,18 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        labelLogout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shutdown.png"))); // NOI18N
-        labelLogout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelLogoutMouseClicked(evt);
-            }
-        });
-
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo2.png"))); // NOI18N
         logoLabel.setText("jLabel1");
+
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shutdown.png"))); // NOI18N
+        btnLogout.setBorderPainted(false);
+        btnLogout.setContentAreaFilled(false);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,16 +103,16 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1174, Short.MAX_VALUE)
-                .addComponent(labelLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1178, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2))
         );
@@ -317,9 +318,7 @@ public class MainJFrame extends javax.swing.JFrame {
             layout.next(container);
         }
         
-        loginJButton.setEnabled(false);
-//        logoutJButton.setEnabled(true);
-        labelLogout.setVisible(true);
+        btnLogout.setVisible(true);
         logoLabel.setVisible(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
@@ -349,9 +348,8 @@ public class MainJFrame extends javax.swing.JFrame {
         layout.next(container);
     }//GEN-LAST:event_btnWitnessRegisterActionPerformed
 
-    private void labelLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLogoutMouseClicked
-//        logoutJButton.setEnabled(false);
-        labelLogout.setVisible(false);
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        btnLogout.setVisible(false);
         logoLabel.setVisible(false);
         userNameJTextField.setEnabled(true);
         passwordField.setEnabled(true);
@@ -365,7 +363,7 @@ public class MainJFrame extends javax.swing.JFrame {
         CardLayout crdLyt = (CardLayout) container.getLayout();
         crdLyt.next(container);
         dB4OUtil.storeSystem(system);
-    }//GEN-LAST:event_labelLogoutMouseClicked
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,6 +402,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdopterRegister;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOwnerRegister;
     private javax.swing.JButton btnWitnessRegister;
     private javax.swing.JPanel container;
@@ -414,7 +413,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel labelLogin;
-    private javax.swing.JLabel labelLogout;
     private javax.swing.JButton loginJButton;
     private javax.swing.JPanel loginjPanel;
     private javax.swing.JLabel logoLabel;
