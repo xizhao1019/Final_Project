@@ -11,6 +11,7 @@ import Business.WorkQueue.PetOwnerAdoptionRequest;
 import Business.WorkQueue.PetOwnerRegistrationRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;

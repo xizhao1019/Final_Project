@@ -27,12 +27,8 @@ public class DistanceMap {
 
     private static final int MIN_ZOOM = 0;
     private static final int MAX_ZOOM = 21;
-    //private static final String setMarkerScript = "var locations = [\n  ['Bondi Beach', -33.890542, 151.274856, 4],\n  ['Coogee Beach', -33.923036, 151.259052, 5],\n  ['Cronulla Beach', -34.028249, 151.157507, 3],\n  ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],\n  ['Maroubra Beach', -33.950198, 151.259302, 1]\n];\n\nvar marker, i;\n\nfor (i = 0; i < locations.length; i++) {  \n  marker = new google.maps.Marker({\n\tposition: new google.maps.LatLng(locations[i][1], locations[i][2]),\n\tmap: map,\n\ttitle: locations[i][0]\n  });\n}";
     
     
-    /**
-     * In map.html file default zoom value is set to 5.
-     */
     private static int zoomValue = 5;
 
     public static void openMap(String coordinates) {
@@ -68,25 +64,12 @@ public class DistanceMap {
                                     --zoomValue + ")"));
                 }
             });
-            /*browser.mainFrame().ifPresent(frame ->
-                            frame.executeJavaScript(setMarkerScript));*/
+            
             JButton setMarkerButton = new JButton("Locating");
             setMarkerButton.addActionListener(e ->
                     browser.mainFrame().ifPresent(frame ->
                             frame.executeJavaScript(setMarkerScript)));
             
-            /*JButton setMarkerButton = new JButton("Set Marker");
-       setMarkerButton.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               
-               browser.executeJavaScript("var myLatlng = new google.maps.LatLng(48.4431727,23.0488126);\n" +
-                       "var marker = new google.maps.Marker({\n" +
-                       "    position: myLatlng,\n" +
-                       "    map: map,\n" +
-                       "    title: 'Hello World!'\n" +
-                       "});");
-           }
-       });*/
 
             JPanel toolBar = new JPanel();
             toolBar.add(zoomInButton);

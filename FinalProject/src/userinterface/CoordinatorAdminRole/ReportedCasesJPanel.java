@@ -266,30 +266,29 @@ public class ReportedCasesJPanel extends javax.swing.JPanel {
           @Override
           public void valueChanged(ListSelectionEvent e) {
             int row = tblNewCase.getSelectedRow();
-            if(row<0) {
-                 JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            AnimalRecord ar = (AnimalRecord)tblNewCase.getValueAt(row, 0);
+            if(row >= 0) {
 
-            String messageList = "";
-            for (String s : ar.getMsgList()) {
-                messageList += s + "\n";
-            }
-            txtMessage.setText(messageList);
+                AnimalRecord ar = (AnimalRecord)tblNewCase.getValueAt(row, 0);
 
-            String imagePath = ar.getReportingRequest().getImagePath();
-            Image im;
-                if (ar.isAddedAhead()) {
-                    im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
-                }else{
-                    im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                String messageList = "";
+                for (String s : ar.getMsgList()) {
+                    messageList += s + "\n";
                 }
-            im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon ii = new ImageIcon(im);
-            lblPicture.setIcon(ii);
+                txtMessage.setText(messageList);
+
+                String imagePath = ar.getReportingRequest().getImagePath();
+                Image im;
+                    if (ar.isAddedAhead()) {
+                        im = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
+                    }else{
+                        im = Toolkit.getDefaultToolkit().createImage(imagePath);
+                    }
+                im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon ii = new ImageIcon(im);
+                lblPicture.setIcon(ii);
+          } 
           }
-        });
+          });
     }
     
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

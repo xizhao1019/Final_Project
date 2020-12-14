@@ -467,12 +467,11 @@ public class ProcessAdopterRequestJPanel extends javax.swing.JPanel {
         adoptRequest.setApproved(true);
         adoptRequest.setStatus("Adoption Approved");
         adoptRequest.getAnimal().setStatus("Adopted");
-        adoptRequest.addMessage(txtMessage.getText());         
+        adoptRequest.setLatestMessage(txtMessage.getText());         
         adoptRequest.getAnimal().addMessage("Shelter Administrrator approved the adoption reqest from adopter");
         JOptionPane.showMessageDialog(null, "You just approved the adoption request!");
         btnReject.setEnabled(false);
         btnApprove.setEnabled(false);
-        adoptRequest.getAnimal().setAdopterAdoptionRequest(adoptRequest);
         adoptRequest.getAnimal().setAdopterAdoptionRequest(adoptRequest);
     }//GEN-LAST:event_btnApproveActionPerformed
 

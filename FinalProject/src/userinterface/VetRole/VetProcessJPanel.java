@@ -303,7 +303,7 @@ public class VetProcessJPanel extends javax.swing.JPanel {
             }
             txtMedicalHistory.setText(med);
         }
-        sexComboBox.setSelectedIndex(0);
+        //sexComboBox.setSelectedIndex(0);
         
         if (animalRecord.getVetRequest().isAbleForShelter()) {
             checkboxAble.setSelected(true);
@@ -342,7 +342,7 @@ public class VetProcessJPanel extends javax.swing.JPanel {
         txtMedicalHistory.setText("");
         String medical = "";
         for (int i = 0; i < animalRecord.getMedicalRecord().size(); i++) {
-            medical += animalRecord.getMedicalRecord().get(i);          
+            medical += animalRecord.getMedicalRecord().get(i) + "\n";          
         }
         txtMedicalHistory.setText(medical);
         
@@ -355,7 +355,8 @@ public class VetProcessJPanel extends javax.swing.JPanel {
         btnSubmit.setEnabled(true);
         btnUpdatePicture.setEnabled(true);
         
-        btnUpdate.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        btnSubmit.setEnabled(false);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnUpdatePictureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePictureActionPerformed
@@ -374,7 +375,7 @@ public class VetProcessJPanel extends javax.swing.JPanel {
             im = im.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon ii = new ImageIcon(im);
             lblPicture.setIcon(ii);
-            JOptionPane.showMessageDialog(null, "Animal Picture Uploaded Successfully");
+            JOptionPane.showMessageDialog(null, "Animal Picture Uploaded Successfully");            
         }
     }//GEN-LAST:event_btnUpdatePictureActionPerformed
 

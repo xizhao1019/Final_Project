@@ -136,16 +136,10 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
                         .addGap(14, 14, 14)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(431, 431, 431)
                         .addComponent(btnApprove, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)
                         .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(395, 395, 395)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(415, 415, 415)
                         .addComponent(jLabel2)
@@ -157,17 +151,24 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(79, 79, 79))
+                        .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 926, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(94, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(438, 438, 438))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(56, 56, 56)
                 .addComponent(jLabel8)
-                .addGap(30, 30, 30)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +187,7 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -270,16 +271,21 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tblRequest.getSelectedRow();
         if(row<0) {
-            JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+             JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
-        if (ar.getHospitalRequest().getStatus().equals("Hospital Accepted") || ar.getHospitalRequest().getStatus().equals("Vet Assigned")) {
-            JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+        
+        if (ar.getShelterRequest().getStatus().equals("Shelter Accepted")) {
+            JOptionPane.showMessageDialog(null, "Already accepted", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }else if (ar.getShelterRequest().getStatus().equals("Shelter Admin Declined")) {
+            JOptionPane.showMessageDialog(null, "Already declined", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else {
-            ar.getHospitalRequest().setStatus("Hospital Accepted");
-            JOptionPane.showMessageDialog(null, "Task Accepted, Pls assign a vet");
+            ar.getShelterRequest().setStatus("Shelter Accepted");
+            JOptionPane.showMessageDialog(null, "Accepted, Animal will arrive soon");
             popTable();
         }
     }//GEN-LAST:event_btnApproveActionPerformed
@@ -288,19 +294,19 @@ public class ProcessCoordinatorRequestsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tblRequest.getSelectedRow();
         if(row<0) {
-            JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+             JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
-        if (ar.getHospitalRequest().getStatus().equals("Hospital Accepted") || ar.getHospitalRequest().getStatus().equals("Vet Assigned")) {
-            JOptionPane.showMessageDialog(null, "Can not decline this accepted request.", "Warning", JOptionPane.WARNING_MESSAGE);
+        if (ar.getShelterRequest().getStatus().equals("Shelter Admin Approved")) {
+             JOptionPane.showMessageDialog(null, "Already approved, cannot decline", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
-        } else {
-            ar.getHospitalRequest().setStatus("Hospital Declined");
-            JOptionPane.showMessageDialog(null, "Task Declined");
-            userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
-            popTable();
         }
+        ar.getShelterRequest().setStatus("Shelter Admin Declined");
+        userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
+        organization.getWorkQueue().deleteRequest((WorkRequest)ar);
+        JOptionPane.showMessageDialog(null, "Declined");
+        popTable();
     }//GEN-LAST:event_btnDeclineActionPerformed
 
 

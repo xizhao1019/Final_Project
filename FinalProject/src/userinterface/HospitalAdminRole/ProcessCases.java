@@ -183,11 +183,12 @@ public class ProcessCases extends javax.swing.JPanel {
         }
         AnimalRecord ar = (AnimalRecord)tblRequest.getValueAt(row, 0);
         if (ar.getHospitalRequest().getStatus().equals("Hospital Accepted") || ar.getHospitalRequest().getStatus().equals("Vet Assigned")) {
-            JOptionPane.showMessageDialog(null, "Please select a request from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Cannot accept!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else {        
             ar.getHospitalRequest().setStatus("Hospital Accepted");
             JOptionPane.showMessageDialog(null, "Task Accepted, Pls assign a vet");
+            ar.addMessage("Hospital admin accepted case");
             popTable();
         }
     }//GEN-LAST:event_btnAcceptActionPerformed
@@ -206,6 +207,7 @@ public class ProcessCases extends javax.swing.JPanel {
         } else {        
             ar.getHospitalRequest().setStatus("Hospital Declined");
             JOptionPane.showMessageDialog(null, "Task Declined");
+            ar.addMessage("Hospital admin declined case");
             userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
             popTable();
         }

@@ -50,7 +50,7 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
             for (WorkRequest adoption : ua.getWorkQueue().getWorkRequestList()) {
                 if (adoption instanceof PetOwnerAdoptionRequest) {
-                Object row[] = new Object[8]; 
+                Object row[] = new Object[9]; 
                 row[0] = ((PetOwnerAdoptionRequest) adoption);
                 row[1] = ((PetOwnerAdoptionRequest) adoption).getAnimal();
                 row[2] = ua.getState();
@@ -61,6 +61,7 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                 row[7] = ((PetOwnerAdoptionRequest) adoption).getAnimal().getStatus();
                 if (adoption.getStatus().equals("Pet Owner Requested") && ((PetOwnerAdoptionRequest) adoption).getAnimal().getStatus().equals("Adopted")) {
                     row[8] = "Not Approved";
+                    adoption.setLatestMessage("Your request has been denied, if this is your lost pet, pls contact us directly.");
                 }else {
                     row[8] = adoption.getStatus();
                 }
@@ -90,11 +91,7 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                 }
                 txtMedicalRecord.setText(med);
                 
-                String message = "";
-                for (String msg : ((PetOwnerAdoptionRequest) adoption).getMsgList()) {
-                    message += msg + "\n";
-                }
-                txtMessageList.setText(message);
+                txtMessageList.setText(adoption.getLatestMessage());
                               
                 String imagePath = ((PetOwnerAdoptionRequest) adoption).getAnimal().getImagePath();
                 Image im = Toolkit.getDefaultToolkit().createImage(imagePath);

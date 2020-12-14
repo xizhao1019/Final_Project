@@ -541,7 +541,7 @@ public class ProcessPetOwnerRequestJPanel extends javax.swing.JPanel {
         petownerRequest.setStatus("Adoption Approved");
         petownerRequest.getAnimal().setStatus("Adopted");
         petownerRequest.addMessage(txtMessage.getText());
-        petownerRequest.getAnimal().addMessage("Shelter Administrrator approved the adoption reqest from adopter");
+        petownerRequest.getAnimal().addMessage("Shelter Administrrator approved the adoption reqest from pet owner.");
         JOptionPane.showMessageDialog(null, "You just approved the adoption request!");
         btnReject.setEnabled(false);
         btnApprove.setEnabled(false);

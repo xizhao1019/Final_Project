@@ -58,6 +58,7 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                 row[5] = ((AdopterAdoptionRequest) adoption).getAnimal().getStatus();
                 if (adoption.getStatus().equals("Adoptor Requested") && ((AdopterAdoptionRequest) adoption).getAnimal().getStatus().equals("Adopted")) {
                     row[6] = "Not Approved";
+                    adoption.setLatestMessage("Thank you for your interests, this pet has been found by its owner.");
                 } else {
                     row[6] = adoption.getStatus() ==null?"--": adoption.getStatus();
                 }
@@ -87,12 +88,8 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                     healthRecord += s + "\n";
                 }
                 txtMedicalRecord.setText(healthRecord);
-                
-                String message = "";
-                for (String msg : ((AdopterAdoptionRequest) adoption).getMsgList()) {
-                    message += msg + "\n";
-                }
-                txtMessageList.setText(message);
+
+                txtMessageList.setText(adoption.getLatestMessage());
                 
                 String imagePath = ((AdopterAdoptionRequest) adoption).getAnimal().getImagePath();
                 Image im;
@@ -219,7 +216,7 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(430, 430, 430)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +249,8 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                                         .addGap(111, 111, 111)
                                         .addComponent(pictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(325, 325, 325))))))
+                                .addGap(325, 325, 325)))))
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +296,7 @@ public class YourRequestsJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
