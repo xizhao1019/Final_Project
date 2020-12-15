@@ -94,8 +94,6 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             }
         });
 
-        organizationJTable.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        organizationJTable.setForeground(new java.awt.Color(25, 56, 82));
         organizationJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -130,9 +128,6 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         jLabel6.setText("Organization Type ");
 
         jLabel7.setText("Organization Name");
-
-        txtOrgName.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        txtOrgName.setForeground(new java.awt.Color(25, 56, 82));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/incidentOrg.png"))); // NOI18N
@@ -214,6 +209,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             Organization org = directory.createOrganization(type);
             org.setName(txtOrgName.getText());
             populateTable();
+            txtOrgName.setText("");
         }
         else {
             JOptionPane.showMessageDialog(null, "The incident enterprise only has one organizaiton.","information",JOptionPane.INFORMATION_MESSAGE);

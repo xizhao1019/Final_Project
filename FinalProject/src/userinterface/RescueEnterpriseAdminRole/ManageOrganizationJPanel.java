@@ -102,8 +102,6 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             }
         });
 
-        organizationJTable.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        organizationJTable.setForeground(new java.awt.Color(25, 56, 82));
         organizationJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -134,9 +132,6 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(organizationJTable);
 
         jLabel3.setText("Organization Name");
-
-        txtOrgName.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        txtOrgName.setForeground(new java.awt.Color(25, 56, 82));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Location");
@@ -197,7 +192,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                         .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(408, 408, 408)
                         .addComponent(jLabel4)))
-                .addGap(226, 226, 226))
+                .addGap(192, 192, 192))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,16 +235,24 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
-
         Type type = (Type) organizationJComboBox.getSelectedItem();
         if (txtOrgName.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Please enter organization name!");
             return;
         }
+        if (type.equals(Organization.Type.AnimalHospital) || type.equals(Organization.Type.AnimalShelter)) {
+            if (locationPoint == null) {
+            JOptionPane.showMessageDialog(null, "Please set the location!","Warning", JOptionPane.WARNING_MESSAGE);   
+            return;
+            }
+        }
         Organization org = directory.createOrganization(type);
         org.setName(txtOrgName.getText());
         org.setLocationP(locationPoint);
         populateTable();
+        txtOrgName.setText("");
+        txtLocation.setText("");
+        locationPoint=null;
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -261,7 +264,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     private void btnSetLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetLocationActionPerformed
         Type type = (Type) organizationJComboBox.getSelectedItem();
         if (type.toString().equals("Volunteer")){
-            JOptionPane.showMessageDialog(null, "Do Not need location for volunteer creation!");
+            JOptionPane.showMessageDialog(null, "Location is not required for volunteer creation!");
             return;
         }
         

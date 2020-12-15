@@ -5,8 +5,11 @@
  */
 package userinterface.IncidentEnterpriseAdminRole;
 
+import Business.EcoSystem;
 import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
 import Business.Enterprise.IncidentEnterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.Role.WitnessRole;
@@ -32,26 +35,24 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     Organization org;
     UserAccount userAccount;
-    IncidentEnterprise enterprise;
-    
+    Enterprise enterprise;
+    EcoSystem system;
     /**
      * Creates new form ManageWitnessAccount
      */
-    public ManageWitnessAccountJPanel(JPanel userProcessContainer,IncidentEnterprise enterprise, UserAccount userAccount) {
+    public ManageWitnessAccountJPanel(JPanel userProcessContainer,Enterprise enterprise, UserAccount userAccount, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
-        this.org = enterprise.getOrganizationDirectory().getOrganizationList().get(0);
         this.enterprise = enterprise;
+        this.system = system;
         
-        
+        popOrganizationComboBox() ;
         popData();
         displayInfo();
         
         txtState.setText(userAccount.getState().getName());
         txtState.setEditable(false);
-        txtOrg.setText(org.getName());
-        txtOrg.setEditable(false);
         txtRole.setText(Role.RoleType.Witness.getValue());
         txtRole.setEditable(false);
         
@@ -64,6 +65,14 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
         txtZipcode.setEditable(false);
         
         btnSubmit.setEnabled(false);
+    }
+    
+    public void popOrganizationComboBox() {
+        organizationJComboBox.removeAllItems();
+
+        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            organizationJComboBox.addItem(organization);
+        }
     }
 
     public void popData() {
@@ -139,12 +148,12 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
         txtRole = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtOrg = new javax.swing.JTextField();
         txtState = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtStreetline = new javax.swing.JTextField();
         backJButton = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        organizationJComboBox = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -225,6 +234,8 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
             }
         });
 
+        organizationJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -237,47 +248,45 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
                                 .addGap(5, 5, 5)
                                 .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(320, 320, 320)
+                                .addGap(266, 266, 266)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtRole, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtCity, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtOrg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtRole, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtCity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(67, 67, 67)
+                                        .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtStreetline, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtApartment, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtZipcode, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(96, 96, 96)
-                                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtStreetline, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtApartment, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtZipcode, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(446, 446, 446)
+                                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(96, 96, 96)
+                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(300, 300, 300))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,8 +313,8 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
                             .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtOrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -356,26 +365,35 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
         String streetline = txtStreetline.getText();
         String apt = txtApartment.getText();
         String zipcode = txtZipcode.getText();
+        org = (Organization) organizationJComboBox.getSelectedItem();
 
         if(userName.isBlank() || password.isBlank() || city.isBlank() || name.isBlank() || 
             streetline.isBlank() || apt.isBlank() || zipcode.isBlank()){
-            JOptionPane.showMessageDialog(null, "Invalid input!");
+            JOptionPane.showMessageDialog(null, "Invalid input!","Warning",JOptionPane.WARNING_MESSAGE);
             return;
         }
         if (!InputValidation.isValidName(name)) {
             JOptionPane.showMessageDialog(null, "Please input a valid name starting with a uppercase","Warning",JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        for (Network state : system.getNetworkList()) {
+            for(Enterprise enterprise : state.getEnterpriseDirectory().getEnterpriseList()){
+                for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+                        if (!organization.getUserAccountDirectory().isUniqueUsername(userName)) {
+                        JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
+            }
+        }
+        
         if ( !InputValidation.isValidPassword(password)) {
             JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (!org.getUserAccountDirectory().isUniqueUsername(userName)) {
-            JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
-            return;
-        }
         if (!InputValidation.isValidNumber(apt)) {
-            JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please input a valid apartment number!","Warning",JOptionPane.WARNING_MESSAGE);
             return;
         }
         if ( !InputValidation.isValidZipCode(zipcode)) {
@@ -396,6 +414,7 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
             witness.setZipCode(zipcode);
             
             org.getWorkQueue().getWorkRequestList().add(witness);
+            JOptionPane.showMessageDialog(null, "Witness account created successfully!");
 
             popData();
             
@@ -458,10 +477,10 @@ public class ManageWitnessAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox organizationJComboBox;
     private javax.swing.JTextField txtApartment;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtOrg;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtState;

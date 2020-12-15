@@ -5,6 +5,7 @@
  */
 package userinterface.HospitalAdminRole;
 
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.AnimalRecord;
 import Business.WorkQueue.WorkRequest;
@@ -21,13 +22,15 @@ public class ProcessCases extends javax.swing.JPanel {
 
     private JPanel container;
     UserAccount userAccount;
+    Organization org;
     /**
      * Creates new form RequestFromVet
      */
-    public ProcessCases(JPanel container, UserAccount ua) {
+    public ProcessCases(JPanel container, UserAccount ua,Organization org) {
         initComponents();
         this.container = container;
         this.userAccount = ua;
+        this.org = org;
         
         popTable();
     }
@@ -116,7 +119,7 @@ public class ProcessCases extends javax.swing.JPanel {
                         .addGap(5, 5, 5)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
+                        .addGap(280, 280, 280)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
@@ -125,7 +128,7 @@ public class ProcessCases extends javax.swing.JPanel {
                                 .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addGap(280, 280, 280))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,6 +212,7 @@ public class ProcessCases extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Task Declined");
             ar.addMessage("Hospital admin declined case");
             userAccount.getWorkQueue().deleteRequest((WorkRequest)ar);
+            org.getWorkQueue().deleteRequest((WorkRequest)ar);
             popTable();
         }
     }//GEN-LAST:event_btnDeclineActionPerformed

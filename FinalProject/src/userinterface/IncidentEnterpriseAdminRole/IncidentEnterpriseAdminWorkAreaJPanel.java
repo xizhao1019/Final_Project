@@ -5,6 +5,7 @@
  */
 package userinterface.IncidentEnterpriseAdminRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.IncidentEnterprise;
 import Business.Organization.IncidentReportingOrganization;
 import Business.Organization.Organization;
@@ -22,10 +23,12 @@ public class IncidentEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
     UserAccount userAccount;
     Organization org;
     IncidentEnterprise enterprise;
+    EcoSystem system;
     /** Creates new form AdminWorkAreaJPanel */
-    public IncidentEnterpriseAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, IncidentEnterprise enterprise) {
+    public IncidentEnterpriseAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, IncidentEnterprise enterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.system = system;
         this.enterprise = enterprise;
         this.userAccount = userAccount;
         this.org = org;
@@ -140,7 +143,7 @@ public class IncidentEnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
         // TODO add your handling code here:
-        ManageWitnessAccountJPanel mwajp = new ManageWitnessAccountJPanel(userProcessContainer, enterprise, userAccount);
+        ManageWitnessAccountJPanel mwajp = new ManageWitnessAccountJPanel(userProcessContainer, enterprise, userAccount, system);
         userProcessContainer.add("ManageWitnessAccountJPanel", mwajp);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();

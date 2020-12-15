@@ -4,8 +4,10 @@
  */
 package userinterface.RescueEnterpriseAdminRole;
 
+import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
@@ -26,11 +28,13 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
      */
     private JPanel container;
     private Enterprise enterprise;
+    private EcoSystem system;
 
-    public ManageUserAccountJPanel(JPanel container, Enterprise enterprise) {
+    public ManageUserAccountJPanel(JPanel container, Enterprise enterprise, EcoSystem system) {
         initComponents();
         this.enterprise = enterprise;
         this.container = container;
+        this.system = system;
 
         popOrganizationComboBox();
         popData();
@@ -68,7 +72,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
                 Object row[] = new Object[5];
-                row[0] = ua.getEmployee();
+                row[0] = ua;
                 row[1] = ua.getEmployee().getId();
                 row[2] = ua.getRole();
                 row[3] = ua.getUsername();
@@ -291,16 +295,23 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int row = userJTable.getSelectedRow();
-        if (row <= 0) {
+        if (row < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row!","Warning",JOptionPane.WARNING_MESSAGE);
             return;
         }
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to delete this account?", "Warning", dialogButton);
         if(dialogResult == JOptionPane.YES_OPTION){
-            UserAccount ua = (UserAccount) userJTable.getValueAt(row, 0);
-            Organization organization = (Organization) organizationJComboBox.getSelectedItem();
-            organization.getUserAccountDirectory().deleteUserAccount(ua);
+            UserAccount selected = (UserAccount) userJTable.getValueAt(row, 0);
+            Organization selectedOrg = null;
+            for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
+                if (selected.equals(ua)) {
+                    selectedOrg = organization;
+                    }
+                }
+            }
+            selectedOrg.getUserAccountDirectory().deleteUserAccount(selected);
             popData();
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -316,9 +327,15 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Invalid input!");
             return;
         }
-        if (!organization.getUserAccountDirectory().isUniqueUsername(userName)) {
-            JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
-            return;
+        for (Network state : system.getNetworkList()) {
+            for(Enterprise enterprise : state.getEnterpriseDirectory().getEnterpriseList()){
+                for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
+                        if (!org.getUserAccountDirectory().isUniqueUsername(userName)) {
+                        JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
+            }
         }
         if (!InputValidation.isValidPassword(password)) {
             JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);

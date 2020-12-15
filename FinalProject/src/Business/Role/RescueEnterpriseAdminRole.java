@@ -25,7 +25,7 @@ public class RescueEnterpriseAdminRole extends Role{
             Enterprise enterprise, 
             Network network, 
             EcoSystem business) {
-        return new RescueEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise);
+        return new RescueEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise, business);
     }
 
     @Override

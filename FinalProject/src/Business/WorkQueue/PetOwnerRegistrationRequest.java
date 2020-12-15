@@ -189,7 +189,7 @@ public class PetOwnerRegistrationRequest extends WorkRequest{
     
     @Override
     public String toString(){
-        return firstName + lastName;
+        return firstName + " " +lastName;
     }
     
 }

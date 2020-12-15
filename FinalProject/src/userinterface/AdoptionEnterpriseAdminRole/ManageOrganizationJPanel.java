@@ -106,8 +106,6 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             }
         });
 
-        organizationJTable.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        organizationJTable.setForeground(new java.awt.Color(25, 56, 82));
         organizationJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -139,8 +137,6 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Organization Name");
 
-        txtOrgName.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        txtOrgName.setForeground(new java.awt.Color(25, 56, 82));
         txtOrgName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtOrgNameFocusLost(evt);
@@ -218,6 +214,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         Organization org = directory.createOrganization(type);
         org.setName(txtOrgName.getText());
         populateTable();
+        txtOrgName.setText("");
         
     }//GEN-LAST:event_addJButtonActionPerformed
 

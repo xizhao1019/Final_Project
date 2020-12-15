@@ -162,7 +162,7 @@ public class HospitalAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnProcessRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessRequestsActionPerformed
         // TODO add your handling code here:
-        ProcessCases jp = new ProcessCases(container, userAccount);
+        ProcessCases jp = new ProcessCases(container, userAccount,organization);
         container.add("ProcessRequestFromVet", jp);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.next(container);

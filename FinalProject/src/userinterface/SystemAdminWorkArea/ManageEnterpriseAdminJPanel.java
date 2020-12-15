@@ -8,7 +8,10 @@ import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Role.AdoptionEnterpriseAdminRole;
 import Business.Role.IncidentEnterpriseAdminRole;
+import Business.Role.OperationEnterpriseAdminRole;
+import Business.Role.RescueEnterpriseAdminRole;
 import Business.UserAccount.UserAccount;
 import Business.Util.InputValidation;
 import java.awt.CardLayout;
@@ -51,7 +54,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                     Object[] row = new Object[5];
                     row[0] = enterprise.getName();
                     row[1] = network.getName();
-                    row[2] = userAccount.getEmployee();
+                    row[2] = userAccount;
                     row[3] = userAccount.getUsername();
                     row[4] = userAccount.getPassword();
 
@@ -174,6 +177,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/admin.png"))); // NOI18N
@@ -293,31 +301,42 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (!enterprise.getUserAccountDirectory().isUniqueUsername(username)) {
-            JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
-            return;
+        
+        for (Network network : system.getNetworkList()) {
+            for (Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()) {
+                if (!e.getUserAccountDirectory().isUniqueUsername(username)) {
+                    JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
         }
         
         Employee employee;
         UserAccount account;
-        if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Incident Enterprise")) {
-            employee = enterprise.getEmployeeDirectory().createEmployee(name);
-            account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
-            account.setState(state);
-        } else if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Rescue Enterprise")) {
-            employee = enterprise.getEmployeeDirectory().createEmployee(name);
-            account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
-            account.setState(state);
-        } else if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Operation Enterprise")) {
-            employee = enterprise.getEmployeeDirectory().createEmployee(name);
-            account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
-            account.setState(state);
-        } else if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Adoption Enterprise")) {
-           employee = enterprise.getEmployeeDirectory().createEmployee(name);
-            account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());   
-            account.setState(state);
-        } else {
-            System.out.println("Something wrong with creating a enterprise admin");
+        switch (enterprise.getEnterpriseType()) {
+            case Incident:
+                employee = enterprise.getEmployeeDirectory().createEmployee(name);
+                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new IncidentEnterpriseAdminRole());
+                account.setState(state);
+                break;
+            case Rescue:
+                employee = enterprise.getEmployeeDirectory().createEmployee(name);
+                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new RescueEnterpriseAdminRole());
+                account.setState(state);
+                break;
+            case Operation:
+                employee = enterprise.getEmployeeDirectory().createEmployee(name);
+                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new OperationEnterpriseAdminRole());
+                account.setState(state);
+                break;
+            case Adoption:
+                employee = enterprise.getEmployeeDirectory().createEmployee(name);
+                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new AdoptionEnterpriseAdminRole());
+                account.setState(state);
+                break;
+            default:
+                System.out.println("Something wrong with creating a enterprise admin");
+                break;
         }
         
         populateTable();
@@ -337,6 +356,31 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int row = enterpriseJTable.getSelectedRow();
+        if (row <= 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row!","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to delete this account?", "Warning", dialogButton);
+        if(dialogResult == JOptionPane.YES_OPTION){
+            UserAccount ua = (UserAccount) enterpriseJTable.getValueAt(row, 2);
+            for (Network network : system.getNetworkList()) {
+                for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                    for (UserAccount ua2 : enterprise.getUserAccountDirectory().getUserAccountList()) {
+                        if (ua2.equals(ua)) {
+                            enterprise.getUserAccountDirectory().deleteUserAccount(ua);
+                            enterprise.getEmployeeDirectory().deleteEmployee(ua.getEmployee());
+                            populateTable();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;

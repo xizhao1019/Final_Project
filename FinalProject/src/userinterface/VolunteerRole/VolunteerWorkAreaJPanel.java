@@ -83,7 +83,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                true, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -92,25 +92,16 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         });
         tblVolunteerCase.setOpaque(false);
         tblVolunteerCase.setPreferredSize(new java.awt.Dimension(330, 300));
-        tblVolunteerCase.setSelectionBackground(new java.awt.Color(199, 220, 242));
         tblVolunteerCase.setSize(new java.awt.Dimension(850, 300));
         jScrollPane1.setViewportView(tblVolunteerCase);
         if (tblVolunteerCase.getColumnModel().getColumnCount() > 0) {
-            tblVolunteerCase.getColumnModel().getColumn(0).setResizable(false);
             tblVolunteerCase.getColumnModel().getColumn(0).setPreferredWidth(20);
-            tblVolunteerCase.getColumnModel().getColumn(1).setResizable(false);
             tblVolunteerCase.getColumnModel().getColumn(1).setPreferredWidth(30);
-            tblVolunteerCase.getColumnModel().getColumn(2).setResizable(false);
             tblVolunteerCase.getColumnModel().getColumn(2).setPreferredWidth(30);
-            tblVolunteerCase.getColumnModel().getColumn(3).setResizable(false);
             tblVolunteerCase.getColumnModel().getColumn(3).setPreferredWidth(50);
-            tblVolunteerCase.getColumnModel().getColumn(4).setResizable(false);
             tblVolunteerCase.getColumnModel().getColumn(4).setPreferredWidth(40);
-            tblVolunteerCase.getColumnModel().getColumn(5).setResizable(false);
             tblVolunteerCase.getColumnModel().getColumn(5).setPreferredWidth(50);
-            tblVolunteerCase.getColumnModel().getColumn(6).setResizable(false);
             tblVolunteerCase.getColumnModel().getColumn(6).setPreferredWidth(50);
-            tblVolunteerCase.getColumnModel().getColumn(7).setResizable(false);
             tblVolunteerCase.getColumnModel().getColumn(7).setPreferredWidth(60);
         }
 
@@ -161,38 +152,33 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(405, 405, 405)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel1))
+                .addGap(121, 121, 121)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1010, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAccept)
                         .addGap(148, 148, 148)
                         .addComponent(btnDecline)
                         .addGap(122, 122, 122)
                         .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(valueLabel)
-                        .addGap(134, 134, 134)
+                        .addGap(164, 164, 164)
                         .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 956, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 37, Short.MAX_VALUE))
+                .addGap(167, 167, 167))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(59, 59, 59)
                 .addComponent(jLabel1)
                 .addGap(46, 46, 46)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,7 +187,7 @@ public class VolunteerWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnDecline)
                     .addComponent(btnAccept)
                     .addComponent(btnProcess))
-                .addContainerGap())
+                .addGap(65, 65, 65))
         );
     }// </editor-fold>//GEN-END:initComponents
 

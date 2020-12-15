@@ -197,11 +197,11 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
                             .addComponent(lblPath, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblPicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnUpload)))
+                                        .addComponent(btnUpload))
+                                    .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(30, 30, 30)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
@@ -267,10 +267,16 @@ public class ReportStrayAnimalJPanel extends javax.swing.JPanel {
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        if (imagePath.isBlank() || txtCity.getText().isBlank() || txtLocation.getText().isBlank()) {
+        if (txtCity.getText().isBlank() || txtLocation.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);  
             return;
         }
+        
+        if (imagePath == null) {
+                JOptionPane.showMessageDialog(null, "Please upload the picture!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        
         if (txtMessage.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Please write a message to volunteer", "Warning", JOptionPane.WARNING_MESSAGE);
             return;

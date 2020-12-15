@@ -46,7 +46,7 @@ public class ConfigureASystem {
         
         //Create a system admin
         Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
-        UserAccount ua = system.getUserAccountDirectory().createUserAccount("s", "ss", employee, new SystemAdminRole());
+        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
         
         //Create a network
         Network state = system.createAndAddNetwork();
@@ -55,7 +55,7 @@ public class ConfigureASystem {
         //create an Incident Enterprise and a admin
         Enterprise incidentEnterprise = state.getEnterpriseDirectory().createAndAddEnterprise("MA_incident", Enterprise.EnterpriseType.Incident);
             Employee employee1 = incidentEnterprise.getEmployeeDirectory().createEmployee("IncidnetEnterpriseAdmin");
-            UserAccount ua1 = incidentEnterprise.getUserAccountDirectory().createUserAccount("incidentadmin", "a", employee1, new IncidentEnterpriseAdminRole());
+            UserAccount ua1 = incidentEnterprise.getUserAccountDirectory().createUserAccount("incidentadmin", "123qwe", employee1, new IncidentEnterpriseAdminRole());
             ua1.setState(state);
             
             //initialize incidentreporting organization and a witness
@@ -63,7 +63,7 @@ public class ConfigureASystem {
             incidentReportingOrg.setName("MA_IncidentReportingOrg");
             
             Employee employee2 = incidentReportingOrg.getEmployeeDirectory().createEmployee("Aaron");
-            UserAccount ua2 = incidentReportingOrg.getUserAccountDirectory().createUserAccount("witness", "a", employee2, new WitnessRole());
+            UserAccount ua2 = incidentReportingOrg.getUserAccountDirectory().createUserAccount("witness", "123qwe", employee2, new WitnessRole());
             ua2.setState(state);
             WitnessRegistrationRequest witness = new WitnessRegistrationRequest();
             witness.setWitnessAccount(ua2);
@@ -79,7 +79,7 @@ public class ConfigureASystem {
         //create a Operation Enterprise and a admin
         Enterprise operationEnterprise = state.getEnterpriseDirectory().createAndAddEnterprise("MA_operation", Enterprise.EnterpriseType.Operation);
             Employee employee12 = operationEnterprise.getEmployeeDirectory().createEmployee("OperationEnterpriseAdmin");
-            UserAccount ua12 = operationEnterprise.getUserAccountDirectory().createUserAccount("operationadmin", "a", employee12, new OperationEnterpriseAdminRole());
+            UserAccount ua12 = operationEnterprise.getUserAccountDirectory().createUserAccount("operationadmin", "123qwe", employee12, new OperationEnterpriseAdminRole());
             ua12.setState(state);
             
              //initialize a incident management organization, a admin and 2 coordinators
@@ -87,21 +87,21 @@ public class ConfigureASystem {
             incidentManagementOrg.setName("MA_IncidentManagementOrg");
             
             Employee employee13 = incidentManagementOrg.getEmployeeDirectory().createEmployee("Jane");
-            UserAccount ua13 = incidentManagementOrg.getUserAccountDirectory().createUserAccount("coadmin", "a", employee13, new CoordinatorAdminRole());
+            UserAccount ua13 = incidentManagementOrg.getUserAccountDirectory().createUserAccount("coadmin", "123qwe", employee13, new CoordinatorAdminRole());
             ua13.setState(state);
             
             Employee employee14 = incidentManagementOrg.getEmployeeDirectory().createEmployee("Kim");
-            UserAccount ua14 = incidentManagementOrg.getUserAccountDirectory().createUserAccount("co1", "a", employee14, new CoordinatorRole());
+            UserAccount ua14 = incidentManagementOrg.getUserAccountDirectory().createUserAccount("co1", "123qwe", employee14, new CoordinatorRole());
             ua14.setState(state);
             
             Employee employee15 = incidentManagementOrg.getEmployeeDirectory().createEmployee("Linda");
-            UserAccount ua15 = incidentManagementOrg.getUserAccountDirectory().createUserAccount("co2", "a", employee15, new CoordinatorRole());
+            UserAccount ua15 = incidentManagementOrg.getUserAccountDirectory().createUserAccount("co2", "123qwe", employee15, new CoordinatorRole());
             ua15.setState(state);
             
         //create a Rescue Enterprise and a admin
         Enterprise rescueEnterprise = state.getEnterpriseDirectory().createAndAddEnterprise("MA_rescue", Enterprise.EnterpriseType.Rescue);
             Employee employee3 = rescueEnterprise.getEmployeeDirectory().createEmployee("RescueEnterpriseAdmin");
-            UserAccount ua3 = rescueEnterprise.getUserAccountDirectory().createUserAccount("rescueadmin", "a", employee3, new RescueEnterpriseAdminRole());
+            UserAccount ua3 = rescueEnterprise.getUserAccountDirectory().createUserAccount("rescueadmin", "123qwe", employee3, new RescueEnterpriseAdminRole());
             ua3.setState(state);
             
             //initialize a volunteer organization and 2 volunteers
@@ -109,11 +109,11 @@ public class ConfigureASystem {
             volunteerOrg.setName("MA_VolunteerOrg");
            
             Employee employee4 = volunteerOrg.getEmployeeDirectory().createEmployee("Bob");
-            UserAccount ua4 = volunteerOrg.getUserAccountDirectory().createUserAccount("volunteer1", "a", employee4, new VolunteerRole());
+            UserAccount ua4 = volunteerOrg.getUserAccountDirectory().createUserAccount("volunteer1", "123qwe", employee4, new VolunteerRole());
             ua4.setState(state);
             
             Employee employee5 = volunteerOrg.getEmployeeDirectory().createEmployee("Celia");
-            UserAccount ua5 = volunteerOrg.getUserAccountDirectory().createUserAccount("volunteer2", "a", employee5, new VolunteerRole());
+            UserAccount ua5 = volunteerOrg.getUserAccountDirectory().createUserAccount("volunteer2", "123qwe", employee5, new VolunteerRole());
             ua5.setState(state);
             
             //initialize a hospital organization, 2 hospital admins and 2 vets
@@ -125,19 +125,19 @@ public class ConfigureASystem {
             
             
             Employee employee6 = hospitalOrg1.getEmployeeDirectory().createEmployee("David");
-            UserAccount ua6 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin1-1", "a", employee6, new HospitalAdminRole());
+            UserAccount ua6 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin1-1", "123qwe", employee6, new HospitalAdminRole());
             ua6.setState(state);
             
             Employee employee27 = hospitalOrg1.getEmployeeDirectory().createEmployee("Quintus");
-            UserAccount ua27 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin1-2", "a", employee27, new HospitalAdminRole());
+            UserAccount ua27 = hospitalOrg1.getUserAccountDirectory().createUserAccount("hospitaladmin1-2", "123qwe", employee27, new HospitalAdminRole());
             ua27.setState(state);
             
             Employee employee7 = hospitalOrg1.getEmployeeDirectory().createEmployee("Ella");
-            UserAccount ua7 = hospitalOrg1.getUserAccountDirectory().createUserAccount("vet1", "a", employee7, new VetRole());
+            UserAccount ua7 = hospitalOrg1.getUserAccountDirectory().createUserAccount("vet1", "123qwe", employee7, new VetRole());
             ua7.setState(state);
          
             Employee employee8= hospitalOrg1.getEmployeeDirectory().createEmployee("Frank");
-            UserAccount ua8 = hospitalOrg1.getUserAccountDirectory().createUserAccount("vet2", "a", employee8, new VetRole());
+            UserAccount ua8 = hospitalOrg1.getUserAccountDirectory().createUserAccount("vet2", "123qwe", employee8, new VetRole());
             ua8.setState(state);
             
             //hospitalorg2
@@ -148,19 +148,19 @@ public class ConfigureASystem {
             hospitalOrg2.getLocationP().setLongitude(-71.0589105);           
             
             Employee employee16 = hospitalOrg2.getEmployeeDirectory().createEmployee("Jack");
-            UserAccount ua16 = hospitalOrg2.getUserAccountDirectory().createUserAccount("hospitaladmin2-1", "a", employee16, new HospitalAdminRole());
+            UserAccount ua16 = hospitalOrg2.getUserAccountDirectory().createUserAccount("hospitaladmin2-1", "123qwe", employee16, new HospitalAdminRole());
             ua16.setState(state);
             
             Employee employee28 = hospitalOrg2.getEmployeeDirectory().createEmployee("Roy");
-            UserAccount ua28 = hospitalOrg2.getUserAccountDirectory().createUserAccount("hospitaladmin2-2", "a", employee28, new HospitalAdminRole());
+            UserAccount ua28 = hospitalOrg2.getUserAccountDirectory().createUserAccount("hospitaladmin2-2", "123qwe", employee28, new HospitalAdminRole());
             ua28.setState(state);
             
             Employee employee17 = hospitalOrg2.getEmployeeDirectory().createEmployee("Kevin");
-            UserAccount ua17 = hospitalOrg2.getUserAccountDirectory().createUserAccount("vet3", "a", employee17, new VetRole());
+            UserAccount ua17 = hospitalOrg2.getUserAccountDirectory().createUserAccount("vet3", "123qwe", employee17, new VetRole());
             ua17.setState(state);
             
             Employee employee18= hospitalOrg2.getEmployeeDirectory().createEmployee("Lauran");
-            UserAccount ua18 = hospitalOrg2.getUserAccountDirectory().createUserAccount("vet4", "a", employee18, new VetRole());
+            UserAccount ua18 = hospitalOrg2.getUserAccountDirectory().createUserAccount("vet4", "123qwe", employee18, new VetRole());
             ua18.setState(state);
             
             //initialize a shelter organization, 2 shelter admins and 2 staff
@@ -172,19 +172,19 @@ public class ConfigureASystem {
             shelterOrg1.getLocationP().setLongitude(-71.1215279);
             
             Employee employee9 = shelterOrg1.getEmployeeDirectory().createEmployee("Gigi");
-            UserAccount ua9 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin1-1", "a", employee9, new ShelterAdminRole());
+            UserAccount ua9 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin1-1", "123qwe", employee9, new ShelterAdminRole());
             ua9.setState(state);
             
             Employee employee29 = shelterOrg1.getEmployeeDirectory().createEmployee("Sara");
-            UserAccount ua29 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin1-2", "a", employee29, new ShelterAdminRole());
+            UserAccount ua29 = shelterOrg1.getUserAccountDirectory().createUserAccount("shelteradmin1-2", "123qwe", employee29, new ShelterAdminRole());
             ua29.setState(state);
           
             Employee employee10 = shelterOrg1.getEmployeeDirectory().createEmployee("Helen");
-            UserAccount ua10 = shelterOrg1.getUserAccountDirectory().createUserAccount("staff1", "a", employee10, new ShelterStaffRole());
+            UserAccount ua10 = shelterOrg1.getUserAccountDirectory().createUserAccount("staff1", "123qwe", employee10, new ShelterStaffRole());
             ua10.setState(state);
             
             Employee employee11 = shelterOrg1.getEmployeeDirectory().createEmployee("Isabella");
-            UserAccount ua11 = shelterOrg1.getUserAccountDirectory().createUserAccount("staff2", "a", employee11, new ShelterStaffRole());
+            UserAccount ua11 = shelterOrg1.getUserAccountDirectory().createUserAccount("staff2", "123qwe", employee11, new ShelterStaffRole());
             ua11.setState(state);
             
             //shelterorg2
@@ -195,32 +195,32 @@ public class ConfigureASystem {
             shelterOrg2.getLocationP().setLongitude(-71.0697693);           
             
             Employee employee19 = shelterOrg2.getEmployeeDirectory().createEmployee("Mike");
-            UserAccount ua19 = shelterOrg2.getUserAccountDirectory().createUserAccount("shelteradmin2-1", "a", employee19, new ShelterAdminRole());
+            UserAccount ua19 = shelterOrg2.getUserAccountDirectory().createUserAccount("shelteradmin2-1", "123qwe", employee19, new ShelterAdminRole());
             ua19.setState(state);
             
             Employee employee30 = shelterOrg2.getEmployeeDirectory().createEmployee("Tess");
-            UserAccount ua30 = shelterOrg2.getUserAccountDirectory().createUserAccount("shelteradmin2-2", "a", employee30, new ShelterAdminRole());
+            UserAccount ua30 = shelterOrg2.getUserAccountDirectory().createUserAccount("shelteradmin2-2", "123qwe", employee30, new ShelterAdminRole());
             ua30.setState(state);
             
             Employee employee20 = shelterOrg2.getEmployeeDirectory().createEmployee("Nicole");
-            UserAccount ua20 = shelterOrg2.getUserAccountDirectory().createUserAccount("staff3", "a", employee20, new ShelterStaffRole());
+            UserAccount ua20 = shelterOrg2.getUserAccountDirectory().createUserAccount("staff3", "123qwe", employee20, new ShelterStaffRole());
             ua20.setState(state);
             
             Employee employee21 = shelterOrg2.getEmployeeDirectory().createEmployee("Oscar");
-            UserAccount ua21 = shelterOrg2.getUserAccountDirectory().createUserAccount("staff4", "a", employee21, new ShelterStaffRole());
+            UserAccount ua21 = shelterOrg2.getUserAccountDirectory().createUserAccount("staff4", "123qwe", employee21, new ShelterStaffRole());
             ua21.setState(state);
             
         //create a Adoption Enterprise and a admin
         Enterprise adoptionEnterprise = state.getEnterpriseDirectory().createAndAddEnterprise("MA_adoption", Enterprise.EnterpriseType.Adoption);
             Employee employee22 = adoptionEnterprise.getEmployeeDirectory().createEmployee("AdoptionEnterpriseAdmin");
-            UserAccount ua22 = adoptionEnterprise.getUserAccountDirectory().createUserAccount("adoptionadmin", "a", employee22, new AdoptionEnterpriseAdminRole());
+            UserAccount ua22 = adoptionEnterprise.getUserAccountDirectory().createUserAccount("adoptionadmin", "123qwe", employee22, new AdoptionEnterpriseAdminRole());
             ua22.setState(state);
             //initialize 1 adopter organization, 2 adopters
             Organization adopterOrg =  adoptionEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.Adopter);
             adopterOrg.setName("MA_AdopterOrg");
             
             Employee employee23 = adopterOrg.getEmployeeDirectory().createEmployee("Peter Pearson");
-            UserAccount ua23 = adopterOrg.getUserAccountDirectory().createUserAccount("adopter1", "a", employee23, new AdopterRole());
+            UserAccount ua23 = adopterOrg.getUserAccountDirectory().createUserAccount("adopter1", "123qwe", employee23, new AdopterRole());
             ua23.setState(state);
             AdopterRegistrationRequest adopter1 = new AdopterRegistrationRequest();
                 adopter1.setAdopterAccount(ua23);
@@ -238,7 +238,7 @@ public class ConfigureASystem {
             ua23.getWorkQueue().getWorkRequestList().add(adopter1);
             
             Employee employee24 = adopterOrg.getEmployeeDirectory().createEmployee("James C.Bean");
-            UserAccount ua24 = adopterOrg.getUserAccountDirectory().createUserAccount("adopter2", "a", employee24, new AdopterRole());
+            UserAccount ua24 = adopterOrg.getUserAccountDirectory().createUserAccount("adopter2", "123qwe", employee24, new AdopterRole());
             ua24.setState(state);
             AdopterRegistrationRequest adopter2 = new AdopterRegistrationRequest();
                 adopter2.setAdopterAccount(ua24);
@@ -259,7 +259,7 @@ public class ConfigureASystem {
             Organization perOwnerOrg =  adoptionEnterprise.getOrganizationDirectory().createOrganization(Organization.Type.PetOwner);
             perOwnerOrg.setName("MA_PetOwnerOrg");
             Employee employee25 = perOwnerOrg.getEmployeeDirectory().createEmployee("Gail Serra");
-            UserAccount ua25 = perOwnerOrg.getUserAccountDirectory().createUserAccount("petowner1", "a", employee25, new PetOwnerRole());
+            UserAccount ua25 = perOwnerOrg.getUserAccountDirectory().createUserAccount("petowner1", "123qwe", employee25, new PetOwnerRole());
             ua25.setState(state);
             PetOwnerRegistrationRequest petOwner1 = new PetOwnerRegistrationRequest();
                 petOwner1.setPetOwnerAccount(ua25);
@@ -284,7 +284,7 @@ public class ConfigureASystem {
                 ua25.getWorkQueue().getWorkRequestList().add(petOwner1);
                 
             Employee employee26 = perOwnerOrg.getEmployeeDirectory().createEmployee("Ayush Jain");
-            UserAccount ua26 = perOwnerOrg.getUserAccountDirectory().createUserAccount("petowner2", "a", employee26, new PetOwnerRole());
+            UserAccount ua26 = perOwnerOrg.getUserAccountDirectory().createUserAccount("petowner2", "123qwe", employee26, new PetOwnerRole());
             ua26.setState(state);
             PetOwnerRegistrationRequest petOwner2 = new PetOwnerRegistrationRequest();
                 petOwner2.setPetOwnerAccount(ua26);
@@ -335,7 +335,7 @@ public class ConfigureASystem {
             VolunteerRequest volunteerRequest = new VolunteerRequest(); 
             //TBD:LocationPoint volunteerLocationPoint/hospitalLocationPoint
             volunteerRequest.setVolunteer(ua4);
-            volunteerRequest.setStatus("Volunteer Accepted");
+            volunteerRequest.setStatus("Volunteer Completed");
             ar1.addMessage("Tue Dec 01 13:03:30 EST 2020 Waiting for Volunteer response");
             ar1.addMessage("Tue Dec 01 13:03:32 EST 2020 Hi, would you like to help pick up this cat?");
             ar1.setVolunteerRequest(volunteerRequest);
@@ -347,7 +347,7 @@ public class ConfigureASystem {
             hospitalRequest.setHospitalOrg(hospitalOrg1);
             hospitalRequest.setOrgAdmin(ua6);
             hospitalRequest.setAssignedVet(ua7);
-            hospitalRequest.setStatus("Hospital Accepted");
+            hospitalRequest.setStatus("Vet Assigned");
             ar1.addMessage("Tue Dec 01 13:04:18 EST 2020 Waiting for Hospital response");
             ar1.addMessage("Tue Dec 01 13:04:19 EST 2020 Hi, please help save this cat!");
             ar1.setHospitalRequest(hospitalRequest);

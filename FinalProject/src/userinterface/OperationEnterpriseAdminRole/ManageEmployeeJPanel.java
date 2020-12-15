@@ -315,7 +315,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to delete this employee?", "Warning", dialogButton);
         if(dialogResult == JOptionPane.YES_OPTION){
             Employee employee = (Employee) organizationJTable.getValueAt(row, 1);
-            Organization organization = (Organization) organizationEmpJComboBox.getSelectedItem();
+            Organization organization = (Organization) organizationJComboBox.getSelectedItem();
             organization.getEmployeeDirectory().deleteEmployee(employee);
             populateTable(organization);
         }

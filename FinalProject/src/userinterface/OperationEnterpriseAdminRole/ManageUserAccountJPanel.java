@@ -4,8 +4,10 @@
  */
 package userinterface.OperationEnterpriseAdminRole;
 
+import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
@@ -26,11 +28,13 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
      */
     private JPanel container;
     private Enterprise enterprise;
+    private EcoSystem system;
 
-    public ManageUserAccountJPanel(JPanel container, Enterprise enterprise) {
+    public ManageUserAccountJPanel(JPanel container, Enterprise enterprise,EcoSystem system) {
         initComponents();
         this.enterprise = enterprise;
         this.container = container;
+        this.system = system;
 
         popOrganizationComboBox();
         popData();
@@ -293,13 +297,20 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         String userName = nameJTextField.getText();
         String password = passwordJTextField.getText();
         if(userName.isEmpty() || password.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Invalid input!");
+            JOptionPane.showMessageDialog(null, "Invalid input!","Warning",JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (!organization.getUserAccountDirectory().isUniqueUsername(userName)) {
-            JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
-            return;
+        for (Network state : system.getNetworkList()) {
+            for(Enterprise enterprise : state.getEnterpriseDirectory().getEnterpriseList()){
+                for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
+                        if (!org.getUserAccountDirectory().isUniqueUsername(userName)) {
+                        JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
+            }
         }
+        
         if (!InputValidation.isValidPassword(password)) {
             JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
             return;

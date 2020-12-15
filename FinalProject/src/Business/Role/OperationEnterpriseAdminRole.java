@@ -25,7 +25,7 @@ public class OperationEnterpriseAdminRole extends Role{
             Enterprise enterprise, 
             Network network, 
             EcoSystem business) {
-        return new OperationEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise);
+        return new OperationEnterpriseAdminWorkAreaJPanel(userProcessContainer, enterprise, business);
     }
 
     @Override

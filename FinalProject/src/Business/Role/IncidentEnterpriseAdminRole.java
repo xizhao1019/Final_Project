@@ -27,7 +27,7 @@ public class IncidentEnterpriseAdminRole extends Role{
             Network network, 
             EcoSystem business) {
         return new IncidentEnterpriseAdminWorkAreaJPanel(userProcessContainer,account, 
-                (IncidentEnterprise) enterprise);
+                (IncidentEnterprise) enterprise, business);
     }
 
     @Override

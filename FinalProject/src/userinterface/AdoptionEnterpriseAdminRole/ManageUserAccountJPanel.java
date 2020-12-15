@@ -5,8 +5,10 @@
 package userinterface.AdoptionEnterpriseAdminRole;
 
 //import userinterface.RescueEnterpriseAdminRole.*;
+import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.AdopterOrganization;
 import Business.Organization.Organization;
 import Business.Organization.PetOwnerOrganization;
@@ -53,12 +55,14 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private AdopterRegistrationRequest adopter;
     private PetOwnerRegistrationRequest petOwner;
     private String imagePath;
+    private EcoSystem system;
 
-    public ManageUserAccountJPanel(JPanel container, Enterprise enterprise, UserAccount userAccount) {
+    public ManageUserAccountJPanel(JPanel container, Enterprise enterprise, UserAccount userAccount,EcoSystem system) {
         initComponents();
         this.container = container;
         this.userAccount = userAccount;
         this.enterprise = enterprise;
+        this.system = system;
         this.adopter = new AdopterRegistrationRequest();
         this.petOwner = new PetOwnerRegistrationRequest();
         initOrg();
@@ -166,6 +170,33 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         model.addListSelectionListener(new ListSelectionListener() {
           @Override
           public void valueChanged(ListSelectionEvent e) {
+            orgComboBox.setEnabled(false);
+            roleComboBox.setEnabled(false);
+
+            txtCity.setEditable(false);
+            txtFirstName.setEditable(false);
+            txtLastName.setEditable(false);
+            DateChooser.setEnabled(false);
+            txtNumber.setEditable(false);
+            txtEmail.setEditable(false);
+            txtStreet.setEditable(false);
+            txtApt.setEditable(false);
+            txtZipCode.setEditable(false);
+
+            txtUserName.setEditable(false);
+            txtPassword.setEditable(false);
+
+            typeComboBox.setEnabled(false);
+            txtBreed.setEditable(false);
+            ageComboBox.setEnabled(false);
+            sexComboBox.setEnabled(false);
+            txtPetName.setEditable(false);
+
+            btnUpload.setEnabled(false);
+            btnCreateNew.setEnabled(true);
+            btnCreateAdopter.setEnabled(false);
+            btnCreatePetOwner.setEnabled(false);
+            
             int row = userJTable.getSelectedRow();
             if(row>=0) {
                 UserAccount ua = (UserAccount) userJTable.getValueAt(row, 0);
@@ -242,8 +273,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                         ImageIcon ii = new ImageIcon(im);
                         
                         pictureLabel.setIcon(ii);
-                        
-                        btnUpload.setEnabled(false);
                         }
                     }
                 }
@@ -260,7 +289,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnCreatAdopter = new javax.swing.JButton();
+        btnCreateAdopter = new javax.swing.JButton();
         backjButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -313,11 +342,11 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        btnCreatAdopter.setText("Create Adopter");
-        btnCreatAdopter.setEnabled(false);
-        btnCreatAdopter.addActionListener(new java.awt.event.ActionListener() {
+        btnCreateAdopter.setText("Create Adopter");
+        btnCreateAdopter.setEnabled(false);
+        btnCreateAdopter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreatAdopterActionPerformed(evt);
+                btnCreateAdopterActionPerformed(evt);
             }
         });
 
@@ -458,7 +487,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel25.setText("Sex:");
 
-        sexComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Please Select...", "Male", "Female" }));
+        sexComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
 
         ageComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baby", "Young", "Adult", "Senoir" }));
 
@@ -522,7 +551,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(btnCreateNew, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnCreatAdopter)))
+                                        .addComponent(btnCreateAdopter)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -665,17 +694,16 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreatePetOwner)
-                    .addComponent(btnCreatAdopter)
+                    .addComponent(btnCreateAdopter)
                     .addComponent(btnCreateNew))
                 .addGap(60, 60, 60))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCreatAdopterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatAdopterActionPerformed
+    private void btnCreateAdopterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAdopterActionPerformed
            // TODO add your handling code here:
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
-        Date date = DateChooser.getDate();
         String number = txtNumber.getText();
         String email = txtEmail.getText();
         
@@ -689,38 +717,53 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         
         Role.RoleType role = (Role.RoleType) roleComboBox.getSelectedItem();
         
-        if(!userName.isBlank() && !password.isBlank() && !city.isBlank() &&  
-                !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank()
-                && date.toString().isBlank()){
+        if (role==null || !role.equals(Role.RoleType.Adopter)) {
+            JOptionPane.showMessageDialog(null, "Please select the correct role!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(firstName.isBlank() || lastName.isBlank() || userName.isBlank() || password.isBlank() || city.isBlank() ||  
+                streetline.isBlank() || apt.isBlank() || zipcode.isBlank() || DateChooser.getDate() == null){     
+            JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
             if (!InputValidation.isValidName(firstName) || !InputValidation.isValidName(lastName)) {
                 JOptionPane.showMessageDialog(null, "Please input a name starting with a upper case!", "Warning", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            if (!InputValidation.isValidEmail(email)) {
-                JOptionPane.showMessageDialog(null, "Please input a valid email address!", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             if (!InputValidation.isValidPhoneNumber(number)) {
                 JOptionPane.showMessageDialog(null, "Please input a valid phone number!", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            if (!InputValidation.isValidEmail(email)) {
+                JOptionPane.showMessageDialog(null, "Please input a valid email address!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             if (!InputValidation.isValidNumber(apt)) {
-                JOptionPane.showMessageDialog(null, "Please input a valid number!", "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please input a valid apartment number!", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             if (!InputValidation.isValidZipCode(zipcode)) {
                 JOptionPane.showMessageDialog(null, "Please input a valid zipcode!", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            if (!enterprise.getUserAccountDirectory().isUniqueUsername(userName)) {
-                JOptionPane.showMessageDialog(null, "Please input a unique username!", "Warning", JOptionPane.WARNING_MESSAGE);
-                return;
+            for (Network state : system.getNetworkList()) {
+                for(Enterprise e : state.getEnterpriseDirectory().getEnterpriseList()){
+                    for(Organization organization : e.getOrganizationDirectory().getOrganizationList()){
+                        if (!organization.getUserAccountDirectory().isUniqueUsername(userName)) {
+                        JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+                        return;
+                        }
+                    }
+                }
             }
             if ( !InputValidation.isValidPassword(password)) {
             JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
             return;
             }
             
+            Date date = DateChooser.getDate();
             SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
             String dob = format.format(date);
             
@@ -730,10 +773,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
          
             for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
                 if (org instanceof AdopterOrganization) {
-                    if (!role.equals(Role.RoleType.Adopter)) {
-                        JOptionPane.showMessageDialog(null, "Please select the correct role!", "Warning", JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
                     UserAccount ua = org.getUserAccountDirectory().createUserAccount(userName, password, employee, new AdopterRole());
                     ua.setState(userAccount.getState());
                     adopter.setAdopterAccount(ua);
@@ -769,34 +808,34 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             popData();
             
             orgComboBox.setEnabled(false);
-        roleComboBox.setEnabled(false);
+            roleComboBox.setEnabled(false);
 
-        txtCity.setEditable(false);
-        txtFirstName.setEditable(false);
-        txtLastName.setEditable(false);
-        DateChooser.setEnabled(false);
-        txtNumber.setEditable(false);
-        txtEmail.setEditable(false);
-        txtStreet.setEditable(false);
-        txtApt.setEditable(false);
-        txtZipCode.setEditable(false);
+            txtCity.setEditable(false);
+            txtFirstName.setEditable(false);
+            txtLastName.setEditable(false);
+            DateChooser.setEnabled(false);
+            txtNumber.setEditable(false);
+            txtEmail.setEditable(false);
+            txtStreet.setEditable(false);
+            txtApt.setEditable(false);
+            txtZipCode.setEditable(false);
+
+            txtUserName.setEditable(false);
+            txtPassword.setEditable(false);
+
+            typeComboBox.setEnabled(false);
+            txtBreed.setEditable(false);
+            ageComboBox.setEnabled(false);
+            sexComboBox.setEnabled(false);
+            txtPetName.setEditable(false);
+
+            btnUpload.setEnabled(false);
+
+            btnCreateAdopter.setEnabled(false);
+            btnCreatePetOwner.setEnabled(false);
+            btnCreateNew.setEnabled(true);
         
-        txtUserName.setEditable(false);
-        txtPassword.setEditable(false);
-
-        typeComboBox.setEnabled(false);
-        txtBreed.setEditable(false);
-        ageComboBox.setEnabled(false);
-        sexComboBox.setEnabled(false);
-        txtPetName.setEditable(false);
-
-        btnUpload.setEnabled(false);
-            
-        btnCreatAdopter.setEnabled(false);
-        }
-        else JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
-        
-    }//GEN-LAST:event_btnCreatAdopterActionPerformed
+    }//GEN-LAST:event_btnCreateAdopterActionPerformed
 
     private void backjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButton1ActionPerformed
         // TODO add your handling code here:
@@ -823,7 +862,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private void btnCreatePetOwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatePetOwnerActionPerformed
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
-        Date date = DateChooser.getDate();
         
         String number = txtNumber.getText();
         String email = txtEmail.getText();
@@ -844,12 +882,17 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         
         Role.RoleType role = (Role.RoleType) roleComboBox.getSelectedItem();
         
+        if (role==null || !role.equals(Role.RoleType.PetOwner)) {
+            JOptionPane.showMessageDialog(null, "Please select the correct role!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
-        if(!userName.isBlank() && !password.isBlank() && !city.isBlank() &&  
-                !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank()
+        if(!firstName.isBlank() && !lastName.isBlank() && !userName.isBlank() && !password.isBlank() && !city.isBlank() &&  
+                !number.isBlank() && !email.isBlank()
+                && !streetline.isBlank() && !apt.isBlank() && !zipcode.isBlank()
                 && !animalType.isBlank() && !breed.isBlank() && !age.isBlank() && !sex.isBlank()
                 && !petName.isBlank()
-                 && date.toString().isBlank()){
+                 && DateChooser.getDate()!=null){
             if (imagePath == null) {
                 JOptionPane.showMessageDialog(null, "Please upload your pet picture!", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -867,22 +910,29 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 return;
             }
             if (!InputValidation.isValidNumber(apt)) {
-                JOptionPane.showMessageDialog(null, "Please input a valid number!", "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please input a valid apartment number!", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             if (!InputValidation.isValidZipCode(zipcode)) {
                 JOptionPane.showMessageDialog(null, "Please input a valid zipcode!", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            if (!enterprise.getUserAccountDirectory().isUniqueUsername(userName)) {
-                JOptionPane.showMessageDialog(null, "Please input a unique username!", "Warning", JOptionPane.WARNING_MESSAGE);
-                return;
+            for (Network state : system.getNetworkList()) {
+                for(Enterprise e : state.getEnterpriseDirectory().getEnterpriseList()){
+                    for(Organization organization : e.getOrganizationDirectory().getOrganizationList()){
+                        if (!organization.getUserAccountDirectory().isUniqueUsername(userName)) {
+                        JOptionPane.showMessageDialog(null, "Username should be unique!","Warning",JOptionPane.WARNING_MESSAGE);
+                        return;
+                        }
+                    }
+                }
             }
             if ( !InputValidation.isValidPassword(password)) {
             JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit!","Warning",JOptionPane.WARNING_MESSAGE);
             return;
             }
             
+            Date date = DateChooser.getDate();
             SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
             String dob = format.format(date);
         
@@ -892,10 +942,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             
             for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
                 if (org instanceof PetOwnerOrganization) {
-                    if (!role.equals(Role.RoleType.Adopter)) {
-                        JOptionPane.showMessageDialog(null, "Please select the correct role!", "Warning", JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
                     UserAccount ua = org.getUserAccountDirectory()
                             .createUserAccount(userName, password, employee, new PetOwnerRole());
                     ua.setState(userAccount.getState());
@@ -969,14 +1015,17 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
             btnUpload.setEnabled(false);
             btnCreatePetOwner.setEnabled(false);
+            btnCreateAdopter.setEnabled(false);
+            btnCreateNew.setEnabled(true);
         }
-        
         else JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
+        
     }//GEN-LAST:event_btnCreatePetOwnerActionPerformed
 
     private void btnCreateNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewActionPerformed
+        userJTable.clearSelection();
         
-        btnCreatAdopter.setEnabled(true);
+        btnCreateAdopter.setEnabled(true);
         btnCreatePetOwner.setEnabled(true);
         btnUpload.setEnabled(true);
         
@@ -1021,13 +1070,15 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         sexComboBox.setSelectedIndex(0);
         txtPetName.setText("");
         pictureLabel.setIcon(null);
+        
+        btnCreateNew.setEnabled(false);
     }//GEN-LAST:event_btnCreateNewActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateChooser;
     private javax.swing.JComboBox<String> ageComboBox;
     private javax.swing.JButton backjButton1;
-    private javax.swing.JButton btnCreatAdopter;
+    private javax.swing.JButton btnCreateAdopter;
     private javax.swing.JButton btnCreateNew;
     private javax.swing.JButton btnCreatePetOwner;
     private javax.swing.JButton btnUpload;

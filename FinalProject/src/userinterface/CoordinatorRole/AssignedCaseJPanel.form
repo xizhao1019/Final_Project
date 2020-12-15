@@ -142,7 +142,7 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnAssignVolunteer" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="btnAssignHospital" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="btnAssignShelter" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
